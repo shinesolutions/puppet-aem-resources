@@ -11,7 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 =end
 
-require 'extensions/all'
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_bundle).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
@@ -24,6 +23,12 @@ Puppet::Type.type(:aem_bundle).provide(:aem, :parent => PuppetX::ShineSolutions:
   # Stop a bundle.
   def stop
     aem_client().bundle(resource[:name]).stop()
+  end
+
+  # Existence check defaults to true in order to simulate that the bundle exists.
+  # ruby_aem does not currently provide bundle resource existence check.
+  def exists?
+    true
   end
 
 end
