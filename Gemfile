@@ -4,7 +4,6 @@ gem 'ruby_aem', '>= 1.0.0'
 
 group :lint do
   gem 'puppet-lint', require: false
-  gem 'rubocop', require: false
 end
 
 if puppetversion = ENV['PUPPET_VERSION']
