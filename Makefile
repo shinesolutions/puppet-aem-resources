@@ -1,10 +1,12 @@
-ci: tools deps clean lint validate
+ci: tools deps clean lint
 
 deps:
-	echo "TODO"
+	gem install bundler
+	rm -rf .bundle
+	bundle install
 
 clean:
-	echo "TODO"
+	rm -rf test/integration/modules/
 
 lint:
 	puppet-lint \
@@ -16,7 +18,13 @@ lint:
 		--no-selector_inside_resource-check \
 		test/integration/*.pp
 
+test-integration:
+	mkdir -p test/integration/modules/aem/
+	cp -R lib test/integration/modules/aem/
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_bundle_stopped.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_bundle_started.pp
+
 tools:
 	gem install puppet puppet-lint
 
-.PHONY: ci clean deps lint tools
+.PHONY: ci clean deps lint test-integration tools
