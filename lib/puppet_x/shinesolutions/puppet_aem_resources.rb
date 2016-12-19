@@ -4,7 +4,7 @@ module PuppetX
   module ShineSolutions
     class PuppetAemResources < Puppet::Provider
 
-      label = '[puppet-aem-resources]'
+      @@label = '[puppet-aem-resources]'
 
       def self.aem_client()
         config_file = File.join([ File.dirname(Puppet.settings[:config]), 'aem.yaml' ])
@@ -24,7 +24,7 @@ module PuppetX
           elsif config != nil and config[field.to_sym] != nil
             params[field.to_sym] = config[field.to_sym]
           else
-            Puppet.debug("#{label} AEM #{field} field is not specified, using default value from RubyAem::Aem")
+            Puppet.debug("#{@@label} AEM #{field} field is not specified, using default value from RubyAem::Aem")
           end
         }
 
@@ -36,10 +36,10 @@ module PuppetX
       end
 
       def handle_result(result)
-        Puppet.debug("#{label} Response status code: #{result.response.status_code}")
-        Puppet.debug("#{label} Response body:\n#{result.response.body[0..500]}")
-        Puppet.debug("#{label} Response headers:\n#{result.response.headers}")
-        Puppet.info("#{label} #{result.message}")
+        Puppet.debug("#{@@label} Response status code: #{result.response.status_code}")
+        Puppet.debug("#{@@label} Response body:\n#{result.response.body[0..500]}")
+        Puppet.debug("#{@@label} Response headers:\n#{result.response.headers}")
+        Puppet.info("#{@@label} #{result.message}")
       end
 
     end
