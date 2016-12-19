@@ -1,3 +1,8 @@
+[![Build Status](https://img.shields.io/travis/shinesolutions/puppet-aem-resources.svg)](http://travis-ci.org/shinesolutions/puppet-aem-resources)
+
+Puppet AEM Resources
+--------------------
+
 Usage
 -----
 
