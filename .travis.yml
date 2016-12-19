@@ -1,0 +1,4 @@
+sudo: false
+language: ruby
+script:
+  - make ci
