@@ -18,7 +18,8 @@ Puppet::Type.type(:aem_replication_agent).provide(:aem, :parent => PuppetX::Shin
   # Create a replication agent.
   def create
     replication_agent = client().replication_agent(resource[:run_mode], resource[:name])
-    result = replication_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url])
+    opts = { transport_user: resource[:transport_user], transport_password: resource[:transport_password], log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
+    result = replication_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
   end
 
