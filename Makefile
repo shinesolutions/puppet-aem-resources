@@ -23,6 +23,7 @@ test-integration:
 	cp -R lib test/integration/modules/aem/
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_bundle_stopped.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_bundle_started.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_repository.pp
 
 tools:
 	gem install puppet puppet-lint

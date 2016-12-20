@@ -17,3 +17,13 @@ Bundle
       ensure => started,
       name   => 'org.apache.sling.jcr.webdav',
     }
+
+Repository
+
+    aem_repository { 'Block repository writes':
+      ensure => writes_blocked,
+    }
+
+    aem_repository { 'Unblock repository writes':
+      ensure => writes_unblocked,
+    }
