@@ -18,7 +18,8 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolut
   # Create a flush agent.
   def create
     flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
-    result = flush_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url])
+    opts = { log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
+    result = flush_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
   end
 

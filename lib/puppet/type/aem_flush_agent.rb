@@ -50,6 +50,20 @@ Puppet::Type.newtype(:aem_flush_agent)do
     end
   end
 
+  newparam :log_level do
+    desc 'AEM flush agent log level'
+    validate do |value|
+      value = nil
+    end
+  end
+
+  newparam :retry_delay do
+    desc 'AEM flush agent retry delay in milliseconds'
+    validate do |value|
+      value = nil
+    end
+  end
+
   newparam :force do
     desc 'Set to true to force flush agent to be created if it doesn\'t exist or updated if it already exists'
     validate do |value|
