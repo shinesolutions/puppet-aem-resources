@@ -35,9 +35,13 @@ module PuppetX
         self.class.aem_client()
       end
 
-      def handle_result(result)
+      def handle(result)
         Puppet.debug("#{@@label} Response status code: #{result.response.status_code}")
-        Puppet.debug("#{@@label} Response body:\n#{result.response.body[0..500]}")
+
+        if (result.response.body != nil)
+          Puppet.debug("#{@@label} Response body:\n#{result.response.body[0..500]}")
+        end
+
         Puppet.debug("#{@@label} Response headers:\n#{result.response.headers}")
         Puppet.info("#{@@label} #{result.message}")
       end
