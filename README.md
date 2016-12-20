@@ -36,6 +36,24 @@ Flush agent
       run_mode => 'author',
     }
 
+Replication agent
+
+    aem_replication_agent { 'Create replication agent':
+      ensure        => present,
+      name          => 'some-replication-agent',
+      run_mode      => 'author',
+      title         => 'Some Replication Agent Title',
+      description   => 'Some replication agent description',
+      dest_base_url => 'http://somehost:8080',
+      force         => true,
+    }
+
+    aem_replication_agent { 'Delete replication agent':
+      ensure   => absent,
+      name     => 'some-replication-agent',
+      run_mode => 'author',
+    }
+
 Repository
 
     aem_repository { 'Block repository writes':
