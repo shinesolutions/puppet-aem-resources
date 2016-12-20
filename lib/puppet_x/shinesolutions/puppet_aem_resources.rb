@@ -6,7 +6,7 @@ module PuppetX
 
       @@label = '[puppet-aem-resources]'
 
-      def self.aem_client()
+      def self.client()
         config_file = File.join([ File.dirname(Puppet.settings[:config]), 'aem.yaml' ])
         if File.exist?(config_file)
           config = YAML.load_file(config_file)
@@ -24,15 +24,15 @@ module PuppetX
           elsif config != nil and config[field.to_sym] != nil
             params[field.to_sym] = config[field.to_sym]
           else
-            Puppet.debug("#{@@label} AEM #{field} field is not specified, using default value from RubyAem::Aem")
+            Puppet.debug("#{@@label} AEM #{field} field is not specified, using default value from ruby_aem")
           end
         }
 
         RubyAem::Aem.new(params)
       end
 
-      def aem_client()
-        self.class.aem_client()
+      def client()
+        self.class.client()
       end
 
       def handle(result)

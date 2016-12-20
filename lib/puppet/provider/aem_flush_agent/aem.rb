@@ -17,14 +17,14 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolut
 
   # Create a flush agent.
   def create
-    flush_agent = aem_client().flush_agent(resource[:run_mode], resource[:name])
+    flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
     result = flush_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url])
     handle(result)
   end
 
   # Delete the flush agent.
   def destroy
-    flush_agent = aem_client().flush_agent(resource[:run_mode], resource[:name])
+    flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
     result = flush_agent.delete()
     handle(result)
   end
@@ -35,7 +35,7 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolut
     if resource[:force] == true
       return false
     else
-      flush_agent = aem_client().flush_agent(resource[:run_mode], resource[:name])
+      flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
       flush_agent.exists().data
     end
   end
