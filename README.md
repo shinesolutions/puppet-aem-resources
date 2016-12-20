@@ -18,6 +18,24 @@ Bundle
       name   => 'org.apache.sling.jcr.webdav',
     }
 
+Flush agent
+
+    aem_flush_agent { 'Create flush agent':
+      ensure        => present,
+      name          => 'some-flush-agent',
+      run_mode      => 'author',
+      title         => 'Some Flush Agent Title',
+      description   => 'Some flush agent description',
+      dest_base_url => 'http://somehost:8080',
+      force         => true,
+    }
+
+    aem_flush_agent { 'Delete flush agent':
+      ensure   => absent,
+      name     => 'some-flush-agent',
+      run_mode => 'author',
+    }
+
 Repository
 
     aem_repository { 'Block repository writes':
