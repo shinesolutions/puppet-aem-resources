@@ -25,6 +25,8 @@ test-integration:
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_bundle_started.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_flush_agent_present.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_flush_agent_absent.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_group_present.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_group_absent.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_replication_agent_present.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_replication_agent_absent.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_repository.pp

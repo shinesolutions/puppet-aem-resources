@@ -38,6 +38,26 @@ Flush agent
       run_mode => 'author',
     }
 
+Group
+
+    aem_group { 'Create staff group':
+      ensure => present,
+      name   => 'staff',
+      path   => '/home/groups/s',
+    }
+
+    aem_group { 'Create contractor group':
+      ensure => present,
+      name   => 'contractor',
+      path   => '/home/groups/c',
+    }
+
+    aem_group { 'Delete staff group':
+      ensure => absent,
+      name   => 'staff',
+      path   => '/home/groups/s',
+    }
+
 Replication agent
 
     aem_replication_agent { 'Create replication agent':
