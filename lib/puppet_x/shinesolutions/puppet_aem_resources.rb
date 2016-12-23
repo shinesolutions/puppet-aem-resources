@@ -46,6 +46,10 @@ module PuppetX
         Puppet.info("#{@@label} #{result.message}")
       end
 
+      def handle_multi(results)
+        results.each { |result| handle(result) }
+      end
+
     end
   end
 end
