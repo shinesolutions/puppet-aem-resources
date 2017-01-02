@@ -32,6 +32,9 @@ test-integration:
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_replication_agent_present.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_replication_agent_absent.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_repository.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_user_present.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_user_password_changed.pp
+	puppet apply --modulepath=test/integration/modules/ test/integration/aem_user_absent.pp
 
 tools:
 	gem install puppet puppet-lint

@@ -102,3 +102,25 @@ Repository
     aem_repository { 'Unblock repository writes':
       ensure => writes_unblocked,
     }
+
+User
+
+    aem_user { 'Create user':
+      ensure => present,
+      name   => 'bob',
+      path   => '/home/users/b',
+    }
+
+    aem_user { 'Change user password':
+      ensure       => password_changed,
+      name         => 'bob',
+      path         => '/home/users/b',
+      old_password => 'someoldpassword',
+      new_password => 'somenewpassword'
+    }
+
+    aem_user { 'Delete user':
+      ensure => absent,
+      name   => 'bob',
+      path   => '/home/users/b',
+    }
