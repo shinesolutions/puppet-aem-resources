@@ -3,5 +3,5 @@ aem_user { 'Change user password':
   name         => 'bob',
   path         => '/home/users/b',
   old_password => 'somepassword',
-  new_password => 'somepassword'
+  new_password => 'somenewpassword'
 }
