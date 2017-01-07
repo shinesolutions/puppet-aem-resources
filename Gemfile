@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'ruby_aem', '>= 1.0.2'
+gem 'ruby_aem', '>= 1.0.3'
 
 group :lint do
   gem 'puppet-lint', require: false
