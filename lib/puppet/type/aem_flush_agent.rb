@@ -25,7 +25,9 @@ Puppet::Type.newtype(:aem_flush_agent)do
   newparam :run_mode do
     desc 'AEM run mode where the flush agent is'
     validate do |value|
-      fail 'Run mode must be provided' if value == ''
+      unless ['author', 'publish'].include? value
+        raise ArgumentError, 'run_mode should be author or publish'
+      end
     end
   end
 

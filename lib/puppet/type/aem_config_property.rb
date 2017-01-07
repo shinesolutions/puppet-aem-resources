@@ -39,7 +39,9 @@ Puppet::Type.newtype(:aem_config_property)do
   newparam :run_mode do
     desc 'AEM run mode where the config property is'
     validate do |value|
-      fail 'AEM run mode must be provided' if value == ''
+      unless ['author', 'publish'].include? value
+        raise ArgumentError, 'run_mode should be author or publish'
+      end
     end
   end
 

@@ -25,7 +25,9 @@ Puppet::Type.newtype(:aem_replication_agent)do
   newparam :run_mode do
     desc 'AEM run mode where the replication agent is'
     validate do |value|
-      fail 'Run mode must be provided' if value == ''
+      unless ['author', 'publish'].include? value
+        raise ArgumentError, 'run_mode should be author or publish'
+      end
     end
   end
 
