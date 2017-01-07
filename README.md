@@ -96,6 +96,13 @@ Package
       force     => true,
     }
 
+Path
+
+    aem_path { 'Activate /etc/designs/cloudservices/':
+      ensure => is_activated,
+      name   => '/etc/designs/cloudservices/',
+    }
+
 Replication agent
 
     aem_replication_agent { 'Create replication agent':
