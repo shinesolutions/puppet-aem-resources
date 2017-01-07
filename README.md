@@ -68,6 +68,21 @@ Group
       path   => '/home/groups/s',
     }
 
+Node
+
+    aem_node { 'Create http OSGI config node':
+      ensure => present,
+      name   => 'org.apache.felix.http',
+      path   => '/apps/system/config.author',
+      type   => 'sling:OsgiConfig',
+    }
+
+    aem_node { 'Delete http OSGI config node':
+      ensure => absent,
+      name   => 'org.apache.felix.http',
+      path   => '/apps/system/config.author',
+    }
+
 Package
 
     aem_package { 'Install AEM6.2 hotfix 12785':
