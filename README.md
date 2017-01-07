@@ -18,6 +18,16 @@ Bundle
       name   => 'org.apache.sling.jcr.webdav',
     }
 
+Config property
+
+    aem_config_property { 'Create https.enable property':
+      ensure   => present,
+      name     => 'org.apache.felix.https.enable',
+      type     => 'Boolean',
+      value    => true,
+      run_mode => 'author',
+    }
+
 Flush agent
 
     aem_flush_agent { 'Create flush agent':
