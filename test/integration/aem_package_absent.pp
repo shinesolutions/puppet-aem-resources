@@ -1,6 +1,6 @@
-aem_package { 'Delete AEM6.2 hotfix 12785':
+aem_package { 'Delete package':
   ensure  => absent,
-  name    => 'cq-6.2.0-hotfix-12785',
-  group   => 'adobe/cq620/hotfix',
-  version => '7.0',
+  name    => 'somepackage',
+  version => '1.2.3',
+  group   => 'somegroup',
 }
