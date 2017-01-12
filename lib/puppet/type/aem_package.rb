@@ -15,7 +15,6 @@ Puppet::Type.newtype(:aem_package)do
 
   ensurable
 
-
     newparam :name, :namevar => false do
       desc 'AEM package name'
       validate do |value|
