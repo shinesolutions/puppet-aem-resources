@@ -6,6 +6,12 @@ Puppet AEM Resources
 Usage
 -----
 
+AEM
+
+    aem_aem { 'Wait until login page is ready':
+      ensure => login_page_is_ready,
+    }
+
 Bundle
 
     aem_bundle { 'Stop webdav bundle':
