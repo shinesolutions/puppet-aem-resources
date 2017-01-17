@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'ruby_aem', '~> 1.0.5'
-gem 'nokogiri', '~> 1.6.8'
+gem 'ruby_aem', '~> 1.0.6'
+gem 'nokogiri', '~> 1.6.8.1'
 
 group :lint do
   gem 'puppet-lint', require: false
