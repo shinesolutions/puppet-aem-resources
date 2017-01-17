@@ -46,7 +46,7 @@ Configuration file should be named `aem.yaml` and be placed under [Puppet config
     :port: 4502
     :debug: False
 
-If a configuration property is not set, then it will use the default value set by [ruby_aem](https://github.com/shinesolutions/ruby_aem).
+If a configuration property is not set, then it will use the default value set in [ruby_aem](https://github.com/shinesolutions/ruby_aem).
 
 Usage
 -----
