@@ -2,17 +2,16 @@
   "name": "shinesolutions-aem_resources",
   "version": "0.9.0",
   "author": "Shine Solutions (opensource@shinesolutions.com)",
-  "summary": "Puppet module for provisioning Adobe Experience Manager (AEM) resources",
   "license": "Apache 2.0",
+  "summary": "Puppet module for provisioning Adobe Experience Manager (AEM) resources",
   "source": "http://github.com/shinesolutions/puppet-aem-resources",
-  "project_page": "https://github.com/shinesolutions/puppet-aem-resources",
-  "issues_url": "https://github.com/shinesolutions/puppet-aem-resources/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
       "version_requirement": ">= 1.0.0"
     }
   ],
+  "project_page": "https://github.com/shinesolutions/puppet-aem-resources",
   "tags": [
     "adobe experience manager",
     "aem",
