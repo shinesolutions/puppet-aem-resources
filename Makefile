@@ -6,6 +6,7 @@ deps:
 	bundle install
 
 clean:
+	rm -rf pkg
 	rm -rf test/integration/modules/
 
 lint:
@@ -42,7 +43,10 @@ test-integration:
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_config_property_present.pp
 	puppet apply --modulepath=test/integration/modules/ test/integration/aem_node_absent.pp
 
+build:
+	puppet module build .
+
 tools:
 	gem install puppet puppet-lint
 
-.PHONY: ci clean deps lint test-integration tools
+.PHONY: ci clean deps lint test-integration build tools
