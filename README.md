@@ -3,6 +3,32 @@
 Puppet AEM Resources
 --------------------
 
+A Puppet module for provisioning [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) resources.
+
+Install
+-------
+
+    puppet module install shinesolutions-aem_resources
+
+Or via a Puppetfile:
+
+    mod 'shinesolutions/aem_resources'
+
+If you want to use the master version:
+
+    mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
+
+And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module. [nokogiri](http://www.nokogiri.org/) needs to be installed explicitly to version 1.6.8.1 only if you are using ruby 1.9 or 2.0 .
+
+    package { 'nokogiri':
+      ensure   => '1.6.8.1',
+      provider => 'puppet_gem',
+    } ->
+    package { 'ruby_aem':
+      ensure   => '1.0.6',
+      provider => 'puppet_gem',
+    }
+
 Usage
 -----
 
@@ -163,3 +189,20 @@ User
       name   => 'bob',
       path   => '/home/users/b',
     }
+
+Configuration
+-------------
+
+AEM username, password, protocol, host, port, and debug can be set via environment variables or a configuration file.
+
+Environment variables have `aem_` prefix, e.g. `aem_username`, `aem_password`, `aem_protocol`, `aem_host`, `aem_port`, and `aem_debug`.
+
+Configuration file should be named `aem.yaml` and be placed under [Puppet config directory](https://docs.puppet.com/puppet/latest/dirs_confdir.html). Example config file:
+
+    ---
+    aem_username: admin
+    aem_password: admin
+    aem_protocol: http
+    aem_host: localhost
+    aem_port: 4502
+    aem_debug: false
