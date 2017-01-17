@@ -200,9 +200,9 @@ Environment variables have `aem_` prefix, e.g. `aem_username`, `aem_password`, `
 Configuration file should be named `aem.yaml` and be placed under [Puppet config directory](https://docs.puppet.com/puppet/latest/dirs_confdir.html). Example config file:
 
     ---
-    aem_username: admin
-    aem_password: admin
-    aem_protocol: http
-    aem_host: localhost
-    aem_port: 4502
-    aem_debug: false
+    :username: 'admin'
+    :password: 'admin'
+    :port: 'http'
+    :host: 'localhost'
+    :port: 4502
+    :debug: False
