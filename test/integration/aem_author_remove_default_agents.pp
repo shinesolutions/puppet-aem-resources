@@ -1,0 +1,1 @@
+include aem_resources::author_remove_default_agents

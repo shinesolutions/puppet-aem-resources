@@ -208,3 +208,13 @@ User
       name   => 'bob',
       path   => '/home/users/b',
     }
+
+Other than single AEM resource, this module also provides predefined classes for common AEM provisioning tasks.
+
+Remove default agents on AEM Author:
+
+    include aem_resources::author_remove_default_agents
+
+Remove default agents on AEM Publish:
+
+    include aem_resources::publish_remove_default_agents
