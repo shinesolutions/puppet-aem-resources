@@ -222,8 +222,8 @@ Remove default agents on AEM Publish:
 Set AEM Author Standby configuration:
 
     class { 'aem_resources::author_set_as_standby':
-      crx_quickstart_dir => '/tmp',
-      primary_host       => 'somehost',
+      install_dir  => '/opt/aem/crx-quickstart/install',
+      primary_host => 'somehost',
     }
 
 Create system users (orchestrator, replicator, deployer, exporter, importer):
