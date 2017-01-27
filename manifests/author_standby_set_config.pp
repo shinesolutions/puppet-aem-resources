@@ -1,4 +1,4 @@
-class aem_resources::author_set_as_standby(
+class aem_resources::author_standby_set_config(
   $install_dir,
   $primary_host,
 ) {
