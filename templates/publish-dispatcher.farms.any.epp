@@ -1,0 +1,112 @@
+/farms
+  {
+  /website
+    {
+    /clientheaders
+      {
+      "*"
+      }
+
+    /virtualhosts
+      {
+      "*"
+      }
+
+    /renders
+      {
+      /rend01
+        {
+        /hostname "<%= $publish_host %>"
+        /port "<%= $publish_port %>"
+        /timeout "5000"
+		    /secure "0"
+        }
+      }
+
+    /filter
+      {
+      /0001 { /type "deny" /glob "*" }
+      /0022 { /type "allow" /url "/system/health"    }
+      /0023 { /type "allow" /url "/content*" }
+      /0024 { /type "allow" /url "/libs/*"   }
+      /0041 { /type "allow" /url "*.css"   }
+      /0042 { /type "allow" /url "*.gif"   }
+      /0043 { /type "allow" /url "*.ico"   }
+      /0044 { /type "allow" /url "*.js"    }
+      /0045 { /type "allow" /url "*.png"   }
+      /0046 { /type "allow" /url "*.swf"   }
+      /0047 { /type "allow" /url "*.jpg"   }
+      /0048 { /type "allow" /url "*.jpeg"  }
+      /0062 { /type "allow" /url "/libs/cq/personalization/*"  }  # enable personalization
+      /0081 { /type "deny"  /url "*.infinity.json" }
+      /0082 { /type "deny"  /url "*.tidy.json"     }
+      /0083 { /type "deny"  /url "*.sysview.xml"   }
+      /0084 { /type "deny"  /url "*.docview.json"  }
+      /0085 { /type "deny"  /url "*.docview.xml"  }
+      /0086 { /type "deny"  /url "*.*[0-9].json" }
+      /0090 { /type "deny"  /url "*.query.json" }
+      }
+
+    /cache
+      {
+      /docroot "<%= $docroot_dir %>"
+      /statfileslevel "0"
+      /serveStaleOnError "0"
+      /rules
+        {
+        /0000
+          {
+          /glob "*"
+          /type "allow"
+          }
+        }
+      /invalidate
+        {
+        /0000
+          {
+          /glob "*"
+          /type "deny"
+          }
+        /0001
+          {
+          /glob "*.html"
+          /type "allow"
+          }
+        /0002
+          {
+          /glob "/etc/segmentation.segment.js"
+          /type "allow"
+          }
+        /0003
+          {
+          /glob "*/analytics.sitecatalyst.js"
+          /type "allow"
+          }
+        }
+
+      /allowedClients
+        {
+        }
+
+      /ignoreUrlParams
+        {
+        }
+
+      }
+
+    /statistics
+      {
+      /categories
+        {
+        /html
+          {
+          /glob "*.html"
+          }
+        /others
+          {
+          /glob "*"
+          }
+        }
+      }
+    }
+  }

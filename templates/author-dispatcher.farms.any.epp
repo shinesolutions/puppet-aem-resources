@@ -1,0 +1,136 @@
+/farms
+  {
+
+  /author
+    {
+
+    /clientheaders
+      {
+      "*"
+      }
+
+    /virtualhosts
+      {
+      "*"
+      }
+
+    /renders
+      {
+      /rend01
+        {
+        /hostname "<%= $author_host %>"
+        /port "<%= $author_port %>"
+        /timeout "5000"
+    		/secure "0"
+        }
+      }
+
+    /filter
+      {
+      /0000
+        {
+        /url "/*"
+        /type "allow"
+        }
+      /0001
+        {
+        /url "/system/*"
+        /type "deny"
+        }
+      /0002
+        {
+        /url "/crx*"
+        /type "deny"
+        }
+      /0003
+        {
+        /url "/admin/*"
+        /type "deny"
+        }
+      /0004
+        {
+        /url "/system/sling/logout*"
+        /type "allow"
+        }
+      }
+
+    /cache
+      {
+      /docroot "<%= $docroot_dir %>"
+      /statfileslevel "0"
+      /allowAuthorized "1"
+      /serveStaleOnError "0"
+      /rules
+        {
+        /0000
+          {
+          /glob "*"
+          /type "deny"
+          }
+        /0001
+          {
+          /glob "/libs/*"
+          /type "allow"
+          }
+        /0002
+          {
+          /glob "/libs/cq/security/userinfo.*"
+          /type "deny"
+          }
+        /0003
+          {
+          /glob "/libs/cq/core/content/welcome.*"
+          /type "deny"
+          }
+        }
+
+      /invalidate
+        {
+        /0000
+          {
+          /glob "*"
+          /type "deny"
+          }
+        /0001
+          {
+          /glob "*.html"
+          /type "allow"
+          }
+        /0002
+          {
+          /glob "/etc/segmentation.segment.js"
+          /type "allow"
+          }
+        /0003
+          {
+          /glob "*/analytics.sitecatalyst.js"
+          /type "allow"
+          }
+        }
+
+    /allowedClients
+        {
+        }
+
+    /ignoreUrlParams
+        {
+        }
+
+      }
+
+    /statistics
+      {
+      /categories
+        {
+        /html
+          {
+          /glob "*.html"
+          }
+        /others
+          {
+          /glob "*"
+          }
+        }
+      }
+    }
+  }
