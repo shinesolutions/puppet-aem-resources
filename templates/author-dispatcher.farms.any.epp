@@ -86,7 +86,7 @@
       /0002 { /type "allow" /url "/system/sling/logout*" }
 
       # allow  access to Shine Solutions AEM Healthcheck
-      /0003 { /type "allow" /url "/system/health*" }
+      /0003 { /type "allow" /method "GET" /url "/system/health*" }
       }
 
     # The cache section regulates what responses will be cached and where.

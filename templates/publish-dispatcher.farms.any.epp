@@ -81,7 +81,7 @@
 #     /0012 { /type "allow" /url "/crx/*"    }  # allow content repository
 #     /0013 { /type "allow" /url "/system/*" }  # allow OSGi console
 
-      /0014 { /type "allow" /url "/system/health*" }  # allow access to Shine Solutions AEM Healthcheck
+      /0014 { /type "allow" /method "GET" /url "/system/health*" }  # allow access to Shine Solutions AEM Healthcheck
 
       # Allow non-public content directories
 #     /0021 { /type "allow" /url "/apps/*"   }  # allow apps access
