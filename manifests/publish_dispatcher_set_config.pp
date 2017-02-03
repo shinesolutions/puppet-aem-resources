@@ -11,7 +11,11 @@ class aem_resources::publish_dispatcher_set_config(
   } ->
   file { "${dispatcher_conf_dir}/dispatcher.farms.any":
     ensure  => file,
-    content => epp('aem_resources/publish-dispatcher.farms.any.epp', { publish_host => "${publish_host}", publish_port => "${publish_port}", docroot_dir => "${docroot_dir}" }),
+    content => epp('aem_resources/publish-dispatcher.farms.any.epp', {
+      publish_host => "${publish_host}",
+      publish_port => "${publish_port}",
+      docroot_dir  => "${docroot_dir}"
+    }),
     mode    => '0664',
   }
 
