@@ -41,7 +41,7 @@ Configuration file should be named `aem.yaml` and be placed under [Puppet config
     ---
     :username: 'admin'
     :password: 'admin'
-    :port: 'http'
+    :protocol: 'http'
     :host: 'localhost'
     :port: 4502
     :debug: False
