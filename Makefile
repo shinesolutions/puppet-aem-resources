@@ -27,11 +27,14 @@ lint:
 test-integration:
 	mkdir -p stage
 	mkdir -p test/integration/modules/aem_resources/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/somepackage/1.2.3/
 	cp -R files test/integration/modules/aem_resources/
 	cp -R lib test/integration/modules/aem_resources/
 	cp -R manifests test/integration/modules/aem_resources/
 	cp -R templates test/integration/modules/aem_resources/
-	cp test/fixtures/somepackage-1.2.3.zip /tmp/
+	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/
+	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/somepackage/1.2.3/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/

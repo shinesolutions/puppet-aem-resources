@@ -13,5 +13,5 @@ $packages = [
 
 class { 'aem_resources::deploy_packages':
   packages => $packages,
-  path     => '/tmp/puppet-aem-resources',
+  path     => '/tmp/shinesolutions/puppet-aem-resources/',
 }
