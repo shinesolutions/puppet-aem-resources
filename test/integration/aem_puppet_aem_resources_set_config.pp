@@ -3,5 +3,5 @@ class { 'aem_resources::puppet_aem_resources_set_config':
   protocol => 'http',
   host     => 'localhost',
   port     => 4502,
-  debug    => 'False',
+  debug    => false,
 }

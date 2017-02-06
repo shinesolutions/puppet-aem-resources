@@ -229,3 +229,15 @@ Set AEM Author Standby configuration:
 Create system users (orchestrator, replicator, deployer, exporter, importer):
 
     include aem_resources::create_system_users
+
+Create Puppet AEM Resources' configuration file:
+
+    class { 'aem_resources::puppet_aem_resources_set_config':
+      conf_dir => '/tmp/puppet-aem-resources/',
+      username => 'admin',
+      password => 'admin',
+      protocol => 'http',
+      host     => 'localhost',
+      port     => 4502,
+      debug    => false,
+    }
