@@ -1,4 +1,4 @@
 class { 'aem_resources::author_standby_set_config':
-  install_dir  => '/tmp/puppet-aem-resources/',
-  primary_host => 'somehost',
+  crx_quickstart_dir => '/tmp/shinesolutions/puppet-aem-resources/author-standby/',
+  primary_host       => 'somehost',
 }

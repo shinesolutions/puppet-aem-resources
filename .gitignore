@@ -1,4 +1,6 @@
 .DS_Store
 pkg
+test/integration/.librarian
+test/integration/.tmp
 test/integration/modules
 .idea/
