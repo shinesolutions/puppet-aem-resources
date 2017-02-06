@@ -1,0 +1,19 @@
+---
+<% if $username != '' { -%>
+:username: '<%= $username %>'
+<% } -%>
+<% if $password != '' { -%>
+:password: '<%= $password %>'
+<% } -%>
+<% if $protocol != '' { -%>
+:protocol: '<%= $protocol %>'
+<% } -%>
+<% if $host != '' { -%>
+:host: '<%= $host %>'
+<% } -%>
+<% if $port != '' { -%>
+:port: <%= $port %>
+<% } -%>
+<% if $debug != '' { -%>
+:debug: <%= $debug %>
+<% } -%>
