@@ -18,7 +18,14 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
   # Get the login page and wait until it's ready.
   # This is handy when AEM restarts Jetty and the next operation needs to wait.
   def get_login_page_wait_until_ready
-    client().aem().get_login_page_wait_until_ready()
+    opts = {
+      _retries: {
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds],
+      }
+    }
+    client().aem().get_login_page_wait_until_ready(opts)
   end
 
   # Existence check defaults to true in order to simulate that aem always exists.

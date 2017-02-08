@@ -25,4 +25,31 @@ Puppet::Type.newtype(:aem_aem)do
     desc 'Description'
   end
 
+  newparam :retries_max_tries do
+    desc 'Maximum number of tries'
+    validate do |value|
+      if value == ''
+        value = 30
+      end
+    end
+  end
+
+  newparam :retries_base_sleep_seconds do
+    desc 'Starting sleep duration in seconds'
+    validate do |value|
+      if value == ''
+        value = 2
+      end
+    end
+  end
+
+  newparam :retries_max_sleep_seconds do
+    desc 'Maximum sleep duration in seconds'
+    validate do |value|
+      if value == ''
+        value = 2
+      end
+    end
+  end
+
 end
