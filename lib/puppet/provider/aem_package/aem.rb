@@ -36,9 +36,14 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
 
   # Check whether the package exists or not.
   # The definition of an existing package is one that is installed.
+  # When force is set to true, package will be created if it doesn't exist or overwritten if it already exists.
   def exists?
-    package = client().package(resource[:group], resource[:name], resource[:version])
-    package.is_installed().data
+    if resource[:force] == true
+      return false
+    else
+      package = client().package(resource[:group], resource[:name], resource[:version])
+      package.is_installed().data
+    end
   end
 
 end
