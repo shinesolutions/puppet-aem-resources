@@ -25,7 +25,7 @@ And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't be
       provider => 'puppet_gem',
     } ->
     package { 'ruby_aem':
-      ensure   => '1.0.6',
+      ensure   => '1.0.7',
       provider => 'puppet_gem',
     }
 
