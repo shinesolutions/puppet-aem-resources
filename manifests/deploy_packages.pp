@@ -6,7 +6,7 @@ class aem_resources::deploy_packages(
   $packages.each | Integer $index, Hash $package| {
 
       aem_package { "Deploy package ${package['group']}/${package['name']}-${package['version']}" :
-        ensure    => $package[ensure],
+        ensure    => present,
         name      => $package[name],
         group     => $package[group],
         version   => $package[version],

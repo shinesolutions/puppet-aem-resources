@@ -1,5 +1,5 @@
 ### 0.9.2
-*
+* deploy_packages enforces state present
 
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish
