@@ -1,3 +1,6 @@
+### 0.9.2
+*
+
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish
 * Add classes for setting AEM Author Primary and Standby configuration
