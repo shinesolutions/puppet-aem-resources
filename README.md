@@ -150,6 +150,15 @@ Package
       force     => true,
     }
 
+    aem_package { 'Archive Geometrixx apps':
+      ensure  => archived,
+      name    => 'somearchivedpackage',
+      group   => 'somepackagegroup',
+      version => '1.2.3',
+      path    => '/tmp/',
+      filter  => '[{"root":"/apps/geometrixx","rules":[]},{"root":"/apps/geometrixx-common","rules":[]}]',
+    }
+
 Path
 
     aem_path { 'Activate /etc/designs/cloudservices/':

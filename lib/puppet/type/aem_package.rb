@@ -13,62 +13,89 @@ limitations under the License.
 
 Puppet::Type.newtype(:aem_package)do
 
-  ensurable
+  ensurable do
 
-    newparam :name, :namevar => false do
-      desc 'AEM package name'
-      validate do |value|
-        fail 'Name must be provided' if value == ''
-      end
+    newvalue(:archived) do
+      provider.archive
     end
 
-    newparam :version do
-      desc 'AEM package version'
-      validate do |value|
-        fail 'Version must be provided' if value == ''
+    newvalue(:present) do
+      if @resource.provider and @resource.provider.respond_to?(:create)
+        @resource.provider.create
+      else
+        @resource.create
       end
+      nil
     end
 
-    newparam :group do
-      desc 'AEM package group'
-      validate do |value|
-        fail 'Group must be provided' if value == ''
+    newvalue(:absent) do
+      if @resource.provider and @resource.provider.respond_to?(:destroy)
+        @resource.provider.destroy
+      else
+        @resource.destroy
       end
+      nil
     end
 
-    newparam :path do
-      desc 'Path where the package file to be uploaded is located at'
-      validate do |value|
-        fail 'Package file path must be provided' if value == ''
+  end
+
+  newparam :name, :namevar => false do
+    desc 'AEM package name'
+    validate do |value|
+      fail 'Name must be provided' if value == ''
+    end
+  end
+
+  newparam :version do
+    desc 'AEM package version'
+    validate do |value|
+      fail 'Version must be provided' if value == ''
+    end
+  end
+
+  newparam :group do
+    desc 'AEM package group'
+    validate do |value|
+      fail 'Group must be provided' if value == ''
+    end
+  end
+
+  newparam :path do
+    desc 'Path where the package file to be uploaded is located at'
+    validate do |value|
+      fail 'Package file path must be provided' if value == ''
+    end
+  end
+
+  newparam :force do
+    desc 'Set to true to force package installation even if it is already installed, default to false'
+    validate do |value|
+      if value == ''
+        value = false
       end
     end
+  end
 
-    newparam :force do
-      desc 'Set to true to force package installation even if it is already installed, default to false'
-      validate do |value|
-        if value == ''
-          value = false
-        end
+  newparam :replicate do
+    desc 'Set to true to replicate package after installation, default to false'
+    validate do |value|
+      if value == ''
+        value = false
       end
     end
+  end
 
-    newparam :replicate do
-      desc 'Set to true to replicate package after installation, default to false'
-      validate do |value|
-        if value == ''
-          value = false
-        end
+  newparam :activate do
+    desc 'Set to true to activate all filters in the package after installation, default to false'
+    validate do |value|
+      if value == ''
+        value = false
       end
     end
+  end
 
-    newparam :activate do
-      desc 'Set to true to activate all filters in the package after installation, default to false'
-      validate do |value|
-        if value == ''
-          value = false
-        end
-      end
-    end
-
+  newparam :filter do
+    desc 'AEM package filter'
+  end
 
 end

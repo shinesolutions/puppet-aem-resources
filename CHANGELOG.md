@@ -1,6 +1,7 @@
 ### 0.9.2
 * deploy_packages enforces state present
 * Package download debugging no longer attempts to print response body
+* Add package archived ensurable
 
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish

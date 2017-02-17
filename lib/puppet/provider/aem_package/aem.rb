@@ -15,6 +15,18 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
 
+  # Archive a package by building a new package and downloading in to the specified path.
+  def archive
+    package = client().package(resource[:group], resource[:name], resource[:version])
+    results = []
+    results.push(package.delete_wait_until_ready()) if package.is_uploaded().data == true
+    results.push(package.create())
+    results.push(package.update(resource[:filter]))
+    results.push(package.build())
+    results.push(package.download(resource[:path]))
+    handle_multi(results)
+  end
+
   # Create a package.
   def create
     package = client().package(resource[:group], resource[:name], resource[:version])
