@@ -1,5 +1,6 @@
 ### 0.9.2
 * deploy_packages enforces state present
+* Package download debugging no longer attempts to print response body
 
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish

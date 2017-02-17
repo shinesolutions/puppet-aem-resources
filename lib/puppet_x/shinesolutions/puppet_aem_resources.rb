@@ -38,7 +38,7 @@ module PuppetX
       def handle(result)
         Puppet.debug("#{@@label} Response status code: #{result.response.status_code}")
 
-        if (result.response.body != nil)
+        if (result.response.body.is_a? String)
           Puppet.debug("#{@@label} Response body:\n#{result.response.body[0..500]}")
         end
 
