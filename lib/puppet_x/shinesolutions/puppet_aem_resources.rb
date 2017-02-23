@@ -20,8 +20,8 @@ module PuppetX
         params = {}
         ['username', 'password', 'protocol', 'host', 'port', 'debug'].each { |field|
           env_field = 'aem_%s' % [field]
-          if opts != nil and opts[field] != nil
-            params[field.to_sym] = opts[field]
+          if opts != nil and opts[field.to_sym] != nil
+            params[field.to_sym] = opts[field.to_sym]
           elsif ENV[env_field] != nil
             params[field.to_sym] = ENV[env_field]
           elsif config != nil and config[field.to_sym] != nil
@@ -34,8 +34,8 @@ module PuppetX
         RubyAem::Aem.new(params)
       end
 
-      def client()
-        self.class.client()
+      def client(opts = nil)
+        self.class.client(opts)
       end
 
       def handle(result)

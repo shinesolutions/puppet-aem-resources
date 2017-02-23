@@ -15,10 +15,6 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
 
-  def change_password
-    client().user(resource[:path], resource[:name]).change_password(resource[:old_password], resource[:new_password])
-  end
-
   # Create a user.
   def create
     user = client().user(resource[:path], resource[:name])
@@ -40,7 +36,7 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   end
 
   def change_password
-    user = client().user(resource[:path], resource[:name])
+    user = client({ username: resource[:name], password: resource[:old_password] }).user(resource[:path], resource[:name])
     result = user.change_password(resource[:old_password], resource[:new_password])
     handle(result)
   end

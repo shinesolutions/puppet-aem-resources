@@ -4,6 +4,7 @@
 * Add package archived ensurable
 * Relax stdlib dependency to >= 4.14.0
 * Add client opts to override environment variable and config file
+* Fix aem_user change_password to create client using the details from the user whose password is to be changed
 
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish
