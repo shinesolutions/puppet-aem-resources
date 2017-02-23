@@ -3,6 +3,7 @@
 * Package download debugging no longer attempts to print response body
 * Add package archived ensurable
 * Relax stdlib dependency to >= 4.14.0
+* Add client opts to override environment variable and config file
 
 ### 0.9.1
 * Add classes for removing default agents on AEM Author and Publish
