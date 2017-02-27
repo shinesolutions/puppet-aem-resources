@@ -1,3 +1,6 @@
+### 0.9.3
+*
+
 ### 0.9.2
 * deploy_packages enforces state present
 * Package download debugging no longer attempts to print response body
