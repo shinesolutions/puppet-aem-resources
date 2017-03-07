@@ -1,5 +1,5 @@
 ### 0.9.3
-*
+* Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
 
 ### 0.9.2
 * deploy_packages enforces state present

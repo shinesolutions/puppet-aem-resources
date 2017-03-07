@@ -17,4 +17,7 @@
   ErrorLog "/var/log/httpd/default_error.log"
   ServerSignature Off
   CustomLog "/var/log/httpd/access_log" combined
+
+  # Security
+  Header always append X-Frame-Options SAMEORIGIN
 </VirtualHost>
