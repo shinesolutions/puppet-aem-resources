@@ -10,8 +10,6 @@
       # Forward all request headers that are end-to-end. If you want
       # to forward a specific set of headers, you'll have to list
       # them here.
-      # If you list a specific set of headers instead of using a wildcard,
-      # ensure that CSRF-Token header is on the list.
       "*"
       }
 
@@ -124,9 +122,6 @@
         }
 
 #     /0087 { /type "allow" /method "GET" /extension 'json' "*.1.json" }  # allow one-level json requests
-
-      # Security - CSRF attacks prevention
-      /0100 { /type "allow"  /url "/libs/granite/csrf/token.json" }
 
       }
 
