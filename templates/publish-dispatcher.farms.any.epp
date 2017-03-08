@@ -10,6 +10,8 @@
       # Forward all request headers that are end-to-end. If you want
       # to forward a specific set of headers, you'll have to list
       # them here.
+      # If you list a specific set of headers instead of using a wildcard,
+      # ensure that CSRF-Token header is on the list.
       "*"
       }
 
@@ -94,6 +96,9 @@
 #     /0026 { /type "allow" /url "/home/*"   }
 #     /0027 { /type "allow" /url "/tmp/*"    }
 #     /0028 { /type "allow" /url "/var/*"    }
+
+      # Security - CSRF attacks prevention
+      /0025 { /type "allow"  /url "/libs/granite/csrf/token.json" }
 
       # Enable extensions in non-public content directories, using a regular expression
       /0041

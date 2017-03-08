@@ -18,6 +18,6 @@
   ServerSignature Off
   CustomLog "/var/log/httpd/access_log" combined
 
-  # Security
+  # Security - Prevent clickjacking
   Header always append X-Frame-Options SAMEORIGIN
 </VirtualHost>
