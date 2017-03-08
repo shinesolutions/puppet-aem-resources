@@ -97,9 +97,6 @@
 #     /0027 { /type "allow" /url "/tmp/*"    }
 #     /0028 { /type "allow" /url "/var/*"    }
 
-      # Security - CSRF attacks prevention
-      /0025 { /type "allow"  /url "/libs/granite/csrf/token.json" }
-
       # Enable extensions in non-public content directories, using a regular expression
       /0041
         {
@@ -127,6 +124,10 @@
         }
 
 #     /0087 { /type "allow" /method "GET" /extension 'json' "*.1.json" }  # allow one-level json requests
+
+      # Security - CSRF attacks prevention
+      /0100 { /type "allow"  /url "/libs/granite/csrf/token.json" }
+
       }
 
     # The cache section regulates what responses will be cached and where.
