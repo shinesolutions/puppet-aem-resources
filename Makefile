@@ -39,14 +39,11 @@ test-integration:
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
-	# for test in aem_author_remove_default_agents aem_publish_remove_default_agents aem_author_primary_set_config aem_author_standby_set_config aem_author_set_osgi_config aem_create_system_users aem_author_dispatcher_set_config aem_publish_set_osgi_config aem_publish_dispatcher_set_config aem_deploy_packages aem_puppet_aem_resources_set_config; do \
-  #   puppet apply --modulepath=test/integration/modules/ test/integration/$$test.pp; \
-  # done
-	# for test in aem_aem_get_login_page_wait_until_ready aem_bundle_stopped aem_bundle_started aem_flush_agent_present aem_flush_agent_absent aem_group_present aem_group_absent aem_package_archived aem_package_present aem_package_absent aem_replication_agent_present aem_replication_agent_absent aem_repository aem_user_present aem_user_password_changed aem_user_absent aem_path_activate aem_node_present aem_config_property_present aem_node_absent ; do \
-  #   puppet apply --modulepath=test/integration/modules/ test/integration/$$test.pp; \
-  # done
-	for test in aem_author_set_osgi_config aem_publish_set_osgi_config aem_config_property_present; do \
-    aem_debug=true puppet apply --modulepath=test/integration/modules/ test/integration/$$test.pp; \
+	for test in aem_author_remove_default_agents aem_publish_remove_default_agents aem_author_primary_set_config aem_author_standby_set_config aem_author_set_osgi_config aem_create_system_users aem_author_dispatcher_set_config aem_publish_set_osgi_config aem_publish_dispatcher_set_config aem_deploy_packages aem_puppet_aem_resources_set_config; do \
+    puppet apply --modulepath=test/integration/modules/ test/integration/$$test.pp; \
+  done
+	for test in aem_aem_get_login_page_wait_until_ready aem_bundle_stopped aem_bundle_started aem_flush_agent_present aem_flush_agent_absent aem_group_present aem_group_absent aem_package_archived aem_package_present aem_package_absent aem_replication_agent_present aem_replication_agent_absent aem_repository aem_user_present aem_user_password_changed aem_user_absent aem_path_activate aem_node_present aem_config_property_present aem_node_absent ; do \
+    puppet apply --modulepath=test/integration/modules/ test/integration/$$test.pp; \
   done
 
 build:
