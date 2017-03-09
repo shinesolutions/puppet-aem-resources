@@ -124,6 +124,54 @@
 
 #     /0087 { /type "allow" /method "GET" /extension 'json' "*.1.json" }  # allow one-level json requests
 
+      # Security - Make Sure Access to Administrative URLs is Denied
+      /0100 { /type "deny"  /url "/admin" }
+      /0101 { /type "deny"  /url "/system/console" }
+      /0102 { /type "deny"  /url "/dav/crx.default" }
+      /0103 { /type "deny"  /url "/crx" }
+      /0104 { /type "deny"  /url "/bin/crxde/logs" }
+      /0105 { /type "deny"  /url "/jcr:system/jcr:versionStorage.json" }
+      /0106 { /type "deny"  /url "/_jcr_system/_jcr_versionStorage.json" }
+      /0107 { /type "deny"  /url "/libs/wcm/core/content/siteadmin.html" }
+      /0108 { /type "deny"  /url "/libs/collab/core/content/admin.html" }
+      /0109 { /type "deny"  /url "/libs/cq/ui/content/dumplibs.html" }
+      /0110 { /type "deny"  /url "/var/linkchecker.html" }
+      /0111 { /type "deny"  /url "/etc/linkchecker.html" }
+      /0112 { /type "deny"  /url "/home/users/a/admin/profile.json" }
+      /0113 { /type "deny"  /url "/home/users/a/admin/profile.xml" }
+      /0114 { /type "deny"  /url "/libs/cq/core/content/login.json" }
+      /0115 { /type "deny"  /url "/content/../libs/foundation/components/text/text.jsp" }
+      /0116 { /type "deny"  /url "/content/.{.}/libs/foundation/components/text/text.jsp" }
+      /0117 { /type "deny"  /url "/apps/sling/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config/jcr%3acontent/jcr%3adata" }
+      /0118 { /type "deny"  /url "/libs/foundation/components/primary/cq/workflow/components/participants/json.GET.servlet" }
+      /0119 { /type "deny"  /url "/content.pages.json" }
+      /0120 { /type "deny"  /url "/content.languages.json" }
+      /0121 { /type "deny"  /url "/content.blueprint.json" }
+      /0122 { /type "deny"  /url "/content.-1.json" }
+      /0123 { /type "deny"  /url "/content.10.json" }
+      /0124 { /type "deny"  /url "/content.infinity.json" }
+      /0125 { /type "deny"  /url "/content.tidy.json" }
+      /0126 { /type "deny"  /url "/content.tidy.-1.blubber.json" }
+      /0127 { /type "deny"  /url "/content/dam.tidy.-100.json" }
+      /0128 { /type "deny"  /url "/content/content/geometrixx.sitemap.txt" }
+      /0129 { /type "deny"  /url "/content/*.query.json?statement=//*" }
+      /0130 { /type "deny"  /url "/content/*.qu%65ry.js%6Fn?statement=//*" }
+      /0131 { /type "deny"  /url "/content/*.query.json?statement=//*[@transportPassword]/(@transportPassword%20|%20@transportUri%20|%20@transportUser)" }
+      /0132 { /type "deny"  /url "/content/*/_jcr_content.json" }
+      /0133 { /type "deny"  /url "/content/*/jcr:content.json" }
+      /0134 { /type "deny"  /url "/content/*/_jcr_content.feed" }
+      /0135 { /type "deny"  /url "/content/*/jcr:content.feed" }
+      /0136 { /type "deny"  /url "/content/*/pagename._jcr_content.feed" }
+      /0137 { /type "deny"  /url "/content/*/pagename.jcr:content.feed" }
+      /0138 { /type "deny"  /url "/content/*/pagename.docview.xml" }
+      /0139 { /type "deny"  /url "/content/*/pagename.docview.json" }
+      /0140 { /type "deny"  /url "/content/*/pagename.sysview.xml" }
+      /0141 { /type "deny"  /url "/etc.xml" }
+      /0142 { /type "deny"  /url "/content.feed.xml" }
+      /0143 { /type "deny"  /url "/content.rss.xml" }
+      /0144 { /type "deny"  /url "/content.feed.html" }
+      /0145 { /type "deny"  /url "/content/add_valid_page.html?debug=layout" }
+
       }
 
     # The cache section regulates what responses will be cached and where.
