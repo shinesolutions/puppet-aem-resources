@@ -74,6 +74,7 @@
     /filter
       {
       # Deny everything first and then allow specific entries
+      # Security - Use whitelists instead of blacklists
       /0001 { /type "deny" /glob "*" }
 
       # Open consoles
