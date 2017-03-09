@@ -75,6 +75,7 @@
       {
       # Deny everything first and then allow specific entries
       # Security - Use whitelists instead of blacklists
+      # Security - Restrict Access
       /0001 { /type "deny" /glob "*" }
 
       # Open consoles
