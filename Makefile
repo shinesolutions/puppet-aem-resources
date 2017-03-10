@@ -25,9 +25,7 @@ lint:
 		manifests/*.pp
 
 test-integration:
-	mkdir -p stage
 	mkdir -p test/integration/modules/aem_resources/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/somepackage/1.2.3/
 	cp -R files test/integration/modules/aem_resources/
 	cp -R lib test/integration/modules/aem_resources/
