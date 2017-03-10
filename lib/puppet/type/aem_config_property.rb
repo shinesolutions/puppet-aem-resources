@@ -45,10 +45,10 @@ Puppet::Type.newtype(:aem_config_property)do
     end
   end
 
-  newparam :node_name do
-    desc 'AEM node name'
+  newparam :config_node_name do
+    desc 'AEM config node name'
     validate do |value|
-      fail 'AEM node_name must be provided' if value == ''
+      fail 'AEM config node name must be provided' if value == ''
     end
   end
 
