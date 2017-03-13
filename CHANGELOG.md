@@ -2,6 +2,7 @@
 * Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
 * Add Apache Sling GET Servlet OSGI config for DoS prevention
 * Add administrative URLs blacklist to publish-dispatcher config
+* Add Apache Sling Referrer Filter OSGI config for CSRF attacks prevention
 
 ### 0.9.2
 * deploy_packages enforces state present
