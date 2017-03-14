@@ -8,8 +8,8 @@ aem_user { 'Create user bob and add to administrators group':
 }
 
 aem_user { 'Create user charlie without any group':
-  ensure     => present,
-  name       => 'charlie',
-  path       => '/home/users/c',
-  password   => 'somepassword',
+  ensure   => present,
+  name     => 'charlie',
+  path     => '/home/users/c',
+  password => 'somepassword',
 }
