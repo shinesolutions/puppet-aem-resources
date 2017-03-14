@@ -5,6 +5,7 @@
 * Add Apache Sling Referrer Filter OSGI config for CSRF attacks prevention
 * Add publish-dispatcher path and header filters for CSRF attacks prevention
 * Add publish-dispatcher allowed_client config for restricting access to flush/activate content
+* Add added_to_group ensurable to aem_user type
 
 ### 0.9.2
 * deploy_packages enforces state present

@@ -19,6 +19,10 @@ Puppet::Type.newtype(:aem_user)do
       provider.change_password
     end
 
+    newvalue(:added_to_group) do
+      provider.add_to_group
+    end
+
     newvalue(:present) do
       if @resource.provider and @resource.provider.respond_to?(:create)
         @resource.provider.create
@@ -63,6 +67,14 @@ Puppet::Type.newtype(:aem_user)do
 
   newparam :new_password do
     desc 'New user password'
+  end
+
+  newparam :group_path do
+    desc 'Group path'
+  end
+
+  newparam :group_name do
+    desc 'Group name'
   end
 
 end

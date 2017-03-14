@@ -41,4 +41,10 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
     handle(result)
   end
 
+  def add_to_group
+    user = client().user(resource[:path], resource[:name])
+    result = user.add_to_group(resource[:group_path], resource[:group_name])
+    handle(result)
+  end
+
 end
