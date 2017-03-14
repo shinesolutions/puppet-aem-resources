@@ -201,14 +201,31 @@ Repository
 
 User
 
-    aem_user { 'Create user':
-      ensure   => present,
-      name     => 'bob',
-      path     => '/home/users/b',
-      password => 'somepassword'
+    aem_user { 'Create user charlie without any group':
+      ensure     => present,
+      name       => 'charlie',
+      path       => '/home/users/c',
+      password   => 'somepassword',
     }
 
-    aem_user { 'Change user password':
+    aem_user { 'Create user bob and add to administrators group':
+      ensure     => present,
+      name       => 'bob',
+      path       => '/home/users/b',
+      password   => 'somepassword',
+      group_name => 'administrators',
+      group_path => '/home/groups/a',
+    }
+
+    aem_user { 'Add user charlie to administrators group':
+      ensure     => added_to_group,
+      name       => 'charlie',
+      path       => '/home/users/c',
+      group_name => 'administrators',
+      group_path => '/home/groups/a'
+    }
+
+    aem_user { 'Change user bob password':
       ensure       => password_changed,
       name         => 'bob',
       path         => '/home/users/b',

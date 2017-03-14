@@ -18,8 +18,12 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   # Create a user.
   def create
     user = client().user(resource[:path], resource[:name])
-    result = user.create(resource[:password])
-    handle(result)
+    results = []
+    results.push(user.create(resource[:password]))
+    if !resource[:group_path].nil? && !resource[:group_name].nil?
+      results.push(user.add_to_group(resource[:group_path], resource[:group_name]))
+    end
+    handle_multi(results)
   end
 
   # Delete the user.

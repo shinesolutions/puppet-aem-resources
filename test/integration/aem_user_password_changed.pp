@@ -1,4 +1,4 @@
-aem_user { 'Change user password':
+aem_user { 'Change user bob password':
   ensure       => password_changed,
   name         => 'bob',
   path         => '/home/users/b',
