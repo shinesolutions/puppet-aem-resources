@@ -7,6 +7,7 @@
 * Add publish-dispatcher allowed_client config for restricting access to flush/activate content
 * Add added_to_group ensurable to aem_user type
 * Add group_name and group_path params to aem_user type's creation
+* Add system users to administrators group
 
 ### 0.9.2
 * deploy_packages enforces state present
