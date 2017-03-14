@@ -3,6 +3,7 @@
 * Add Apache Sling GET Servlet OSGI config for DoS prevention
 * Add administrative URLs blacklist to publish-dispatcher config
 * Add Apache Sling Referrer Filter OSGI config for CSRF attacks prevention
+* Add publish-dispatcher path and header filters for CSRF attacks prevention
 * Add publish-dispatcher allowed_client config for restricting access to flush/activate content
 
 ### 0.9.2

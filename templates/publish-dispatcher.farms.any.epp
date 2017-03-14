@@ -10,6 +10,7 @@
       # Forward all request headers that are end-to-end. If you want
       # to forward a specific set of headers, you'll have to list
       # them here.
+      # Security - CSRF attacks prevention: if client headers is whitelisted (not set to '*'), ensure CSRF-Token is listed
       "*"
       }
 
@@ -124,6 +125,9 @@
         }
 
 #     /0087 { /type "allow" /method "GET" /extension 'json' "*.1.json" }  # allow one-level json requests
+
+      # Security - CSRF attacks prevention
+      /0090 { /type "allow"  /url "/libs/granite/csrf/token.json" }
 
       # Security - Make Sure Access to Administrative URLs is Denied
       /0100 { /type "deny"  /url "/admin" }
