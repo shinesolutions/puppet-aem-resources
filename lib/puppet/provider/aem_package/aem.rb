@@ -34,16 +34,16 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
     upload_opts = {
       force: resource[:force],
       _retries: {
-        max_tries: resource[:max_tries],
-        base_sleep_seconds: resource[:base_sleep_seconds],
-        max_sleep_seconds: resource[:max_sleep_seconds]
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
     install_opts = {
       _retries: {
-        max_tries: resource[:max_tries],
-        base_sleep_seconds: resource[:base_sleep_seconds],
-        max_sleep_seconds: resource[:max_sleep_seconds]
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
     results.push(package.upload_wait_until_ready(resource[:path], upload_opts))
