@@ -20,11 +20,11 @@ GEM
       json_pure (~> 1.8)
     puppet-lint (2.1.0)
     retries (0.0.5)
-    ruby_aem (1.0.10)
+    ruby_aem (1.0.12)
       nokogiri (~> 1.6, < 1.7)
       retries (~> 0.0.5)
-      swagger_aem (~> 0.9.6)
-    swagger_aem (0.9.6)
+      swagger_aem (~> 0.9.8)
+    swagger_aem (0.9.8)
       json (~> 1.8, >= 1.8.3)
       typhoeus (~> 1.0, >= 1.0.1)
     typhoeus (1.1.2)
@@ -37,7 +37,7 @@ DEPENDENCIES
   nokogiri (~> 1.6.8.1)
   puppet
   puppet-lint
-  ruby_aem (~> 1.0.10)
+  ruby_aem (~> 1.0.12)
 
 BUNDLED WITH
    1.14.6
