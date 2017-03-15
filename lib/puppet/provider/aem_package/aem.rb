@@ -31,9 +31,23 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
   def create
     package = client().package(resource[:group], resource[:name], resource[:version])
     results = []
-    opts = { force: resource[:force] }
-    results.push(package.upload_wait_until_ready(resource[:path], opts))
-    results.push(package.install_wait_until_ready())
+    upload_opts = {
+      force: resource[:force],
+      _retries: {
+        max_tries: resource[:max_tries],
+        base_sleep_seconds: resource[:base_sleep_seconds],
+        max_sleep_seconds: resource[:max_sleep_seconds]
+      }
+    }
+    install_opts = {
+      _retries: {
+        max_tries: resource[:max_tries],
+        base_sleep_seconds: resource[:base_sleep_seconds],
+        max_sleep_seconds: resource[:max_sleep_seconds]
+      }
+    }
+    results.push(package.upload_wait_until_ready(resource[:path], upload_opts))
+    results.push(package.install_wait_until_ready(install_opts))
     results.push(package.replicate()) if resource[:replicate] == true
     results.push(package.activate(true, false)) if resource[:activate] == true
     handle_multi(results)

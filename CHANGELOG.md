@@ -8,6 +8,7 @@
 * Add added_to_group ensurable to aem_user type
 * Add group_name and group_path params to aem_user type's creation
 * Add system users to administrators group
+* Add max_tries, base_sleep_seconds, and max_sleep_seconds params to aem_package type, used by package upload and package install
 
 ### 0.9.2
 * deploy_packages enforces state present

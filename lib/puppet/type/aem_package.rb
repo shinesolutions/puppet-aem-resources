@@ -98,4 +98,31 @@ Puppet::Type.newtype(:aem_package)do
     desc 'AEM package filter'
   end
 
+  newparam :max_tries do
+    desc 'Maximum tries when waiting for package to be uploaded/installed'
+    validate do |value|
+      if value == ''
+        value = 30
+      end
+    end
+  end
+
+  newparam :base_sleep_seconds do
+    desc 'Starting wait delay in seconds when waiting for package to be uploaded/installed'
+    validate do |value|
+      if value == ''
+        value = 2
+      end
+    end
+  end
+
+  newparam :max_sleep_seconds do
+    desc 'Maximum wait delay in seconds when waiting for package to be uploaded/installed'
+    validate do |value|
+      if value == ''
+        value = 2
+      end
+    end
+  end
+
 end
