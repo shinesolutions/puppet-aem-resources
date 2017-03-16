@@ -9,6 +9,7 @@
 * Add group_name and group_path params to aem_user type's creation
 * Add system users to administrators group
 * Add retries_max_tries, retries_base_sleep_seconds, and retries_max_sleep_seconds params to aem_package type, used by package upload and package install
+* Add force param to aem_user type's creation, this enforces user to be recreated if it already exists
 
 ### 0.9.2
 * deploy_packages enforces state present

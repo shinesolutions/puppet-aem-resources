@@ -16,9 +16,13 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
 
   # Create a user.
+  # When force is set to true and if the user already exists then it will be deleted before recreated.
   def create
     user = client().user(resource[:path], resource[:name])
     results = []
+    if resource[:force] == true && user.exists().data == true
+      results.push(user.delete())
+    end
     results.push(user.create(resource[:password]))
     if !resource[:group_path].nil? && !resource[:group_name].nil?
       results.push(user.add_to_group(resource[:group_path], resource[:group_name]))
@@ -34,9 +38,14 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   end
 
   # Check whether the user exists or not.
+  # When force is set to true and if the user already exists then it will be deleted before recreated.
   def exists?
-    user = client().user(resource[:path], resource[:name])
-    user.exists().data
+    if resource[:force] == true
+      return false
+    else
+      user = client().user(resource[:path], resource[:name])
+      user.exists().data
+    end
   end
 
   def change_password
