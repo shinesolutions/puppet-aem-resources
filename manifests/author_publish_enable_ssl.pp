@@ -7,9 +7,9 @@ class aem_resources::author_publish_enable_ssl(
   $keystore_key_alias,
   $keystore_private_key,
   $keystore_key_password,
-  $keystore_trustcacerts = false,
   $truststore_cert,
   $truststore_password,
+  $keystore_trustcacerts = false,
   $truststore_trustcacerts = false,
 ) {
 
