@@ -1,8 +1,10 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
+    puppetlabs-java_ks (1.5.0)
     puppetlabs-stdlib (4.15.0)
 
 DEPENDENCIES
+  puppetlabs-java_ks (>= 0)
   puppetlabs-stdlib (>= 0)
 
