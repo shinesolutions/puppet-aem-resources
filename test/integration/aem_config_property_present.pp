@@ -1,12 +1,15 @@
-aem_config_property { 'Create https.enable property':
-  ensure           => present,
-  name             => 'org.apache.felix.https.enable',
-  type             => 'Boolean',
-  value            => true,
-  run_mode         => 'author',
-  config_node_name => 'org.apache.felix.http',
+aem_node { 'Create Apache Sling Referrer Filter config node':
+  ensure => present,
+  name   => 'org.apache.sling.security.impl.ReferrerFilter',
+  path   => '/apps/system/config.publish',
+  type   => 'sling:OsgiConfig',
 }
 
-aem_aem { 'Wait until login page is ready':
-  ensure => login_page_is_ready,
+aem_config_property { 'Do not allow empty referrer':
+  ensure           => present,
+  name             => 'allow.empty',
+  type             => 'Boolean',
+  value            => false,
+  run_mode         => 'publish',
+  config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
 }
