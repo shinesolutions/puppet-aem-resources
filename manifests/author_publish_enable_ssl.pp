@@ -139,6 +139,11 @@ class aem_resources::author_publish_enable_ssl(
     config_node_name => 'org.apache.felix.http',
   }
 
+  exec { 'Wait org.apache.felix.https.nio property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin'],
+  }
+
   aem_aem { 'Wait until org.apache.felix.https.nio property':
     ensure => login_page_is_ready,
   }
@@ -150,6 +155,11 @@ class aem_resources::author_publish_enable_ssl(
     value            => true,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  }
+
+  exec { 'Wait org.apache.felix.https.enable property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin'],
   }
 
   aem_aem { 'Wait until org.apache.felix.https.enable property is set':
