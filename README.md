@@ -189,6 +189,25 @@ Replication agent
       run_mode => 'author',
     }
 
+Outbox replication agent
+
+    aem_outbox_replication_agent { 'Create outbox replication agent':
+      ensure      => present,
+      name        => 'some-outbox-replication-agent',
+      run_mode    => 'publish',
+      title       => 'Some Outbox Replication Agent Title',
+      description => 'Some outbox replication agent description',
+      user_id     => 'admin',
+      log_level   => 'info',
+      force       => true,
+    }
+
+    aem_outbox_replication_agent { 'Delete outbox replication agent':
+      ensure   => absent,
+      name     => 'some-outbox-replication-agent',
+      run_mode => 'publish',
+    }
+
 Repository
 
     aem_repository { 'Block repository writes':
