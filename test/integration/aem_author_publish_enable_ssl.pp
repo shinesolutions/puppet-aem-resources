@@ -1,7 +1,7 @@
 class { 'aem_resources::author_publish_enable_ssl':
   run_mode                => 'author',
   port                    => 5433,
-  crx_quickstart_dir      => '/tmp/shinesolutions/puppet-aem-resources/author-primary/',
+  ssl_dir                 => '/tmp/shinesolutions/puppet-aem-resources/author-primary/',
   keystore_cert           => '/tmp/shinesolutions/puppet-aem-resources/aem.cert',
   keystore_password       => 'somekeystorepassword',
   keystore_key_alias      => 'cqse',

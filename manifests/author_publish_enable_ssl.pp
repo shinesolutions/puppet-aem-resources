@@ -1,7 +1,9 @@
 class aem_resources::author_publish_enable_ssl(
   $run_mode,
   $port,
-  $crx_quickstart_dir,
+  $ssl_dir,
+  $owner,
+  $group,
   $keystore_cert,
   $keystore_password,
   $keystore_key_alias,
@@ -13,14 +15,10 @@ class aem_resources::author_publish_enable_ssl(
   $truststore_trustcacerts = false,
 ) {
 
-  file { "${crx_quickstart_dir}/ssl/":
-    ensure => directory,
-  }
-
   java_ks { 'Set up keystore':
     ensure       => latest,
     certificate  => $keystore_cert,
-    target       => "${crx_quickstart_dir}/ssl/aem.keystore",
+    target       => "${ssl_dir}/aem.keystore",
     private_key  => $keystore_private_key,
     password     => $keystore_password,
     trustcacerts => $keystore_trustcacerts,
@@ -29,7 +27,7 @@ class aem_resources::author_publish_enable_ssl(
   java_ks { 'Set up truststore':
     ensure       => latest,
     certificate  => $truststore_cert,
-    target       => "${crx_quickstart_dir}/ssl/aem.truststore",
+    target       => "${ssl_dir}/aem.truststore",
     password     => $truststore_password,
     trustcacerts => $truststore_trustcacerts,
   }
@@ -58,7 +56,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.keystore',
     type             => 'String',
-    value            => "${crx_quickstart_dir}/ssl/aem.keystore",
+    value            => "${ssl_dir}/aem.keystore",
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
@@ -110,7 +108,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.truststore',
     type             => 'String',
-    value            => "${crx_quickstart_dir}/ssl/aem.truststore",
+    value            => "${ssl_dir}/aem.truststore",
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
