@@ -8,7 +8,6 @@ class aem_resources::author_publish_enable_ssl(
   $keystore_password,
   $keystore_key_alias,
   $keystore_private_key,
-  $keystore_key_password,
   $truststore_cert,
   $truststore_password,
   $keystore_trustcacerts = false,
@@ -17,8 +16,9 @@ class aem_resources::author_publish_enable_ssl(
 
   java_ks { 'Set up keystore':
     ensure       => latest,
+    name         => $keystore_key_alias,
     certificate  => $keystore_cert,
-    target       => "${ssl_dir}/aem.keystore",
+    target       => "${ssl_dir}/aem.ks",
     private_key  => $keystore_private_key,
     password     => $keystore_password,
     trustcacerts => $keystore_trustcacerts,
@@ -26,8 +26,9 @@ class aem_resources::author_publish_enable_ssl(
 
   java_ks { 'Set up truststore':
     ensure       => latest,
+    name         => $keystore_key_alias,
     certificate  => $truststore_cert,
-    target       => "${ssl_dir}/aem.truststore",
+    target       => "${ssl_dir}/aem.ts",
     password     => $truststore_password,
     trustcacerts => $truststore_trustcacerts,
   }
@@ -56,7 +57,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.keystore',
     type             => 'String',
-    value            => "${ssl_dir}/aem.keystore",
+    value            => "${ssl_dir}/aem.ks",
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
@@ -95,7 +96,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.keystore.key.password',
     type             => 'String',
-    value            => $keystore_key_password,
+    value            => $keystore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
@@ -108,7 +109,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.truststore',
     type             => 'String',
-    value            => "${ssl_dir}/aem.truststore",
+    value            => "${ssl_dir}/aem.ts",
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
@@ -141,7 +142,7 @@ class aem_resources::author_publish_enable_ssl(
 
   exec { 'Wait org.apache.felix.https.nio property':
     command => 'sleep 5',
-    path    => ['/usr/bin', '/usr/sbin'],
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   }
 
   aem_aem { 'Wait until org.apache.felix.https.nio property':
@@ -159,7 +160,7 @@ class aem_resources::author_publish_enable_ssl(
 
   exec { 'Wait org.apache.felix.https.enable property':
     command => 'sleep 5',
-    path    => ['/usr/bin', '/usr/sbin'],
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   }
 
   aem_aem { 'Wait until org.apache.felix.https.enable property is set':
