@@ -46,16 +46,19 @@ test-integration:
 
 test-fixtures:
 	rm -f test/fixtures/aem.key test/fixtures/aem.cert
+	# use 'somekeystorepassword' when prompted
+	# this is due to java_ks using the same password for
+	# both keystore and the key inside the keystore
+	# so for integration testing, we're passing the same
+	# password
 	openssl req \
 		-new \
 		-newkey rsa:4096 \
 		-days 365 \
-		-nodes \
 		-x509 \
 		-subj "/C=AU/ST=Victoria/L=Melbourne/O=Sample Organisation/CN=aem.cert" \
 		-keyout test/fixtures/aem.key \
 		-out test/fixtures/aem.cert
-	# keytool -genkeypair -keyalg RSA -validity 3650 -alias cqse -keystore test/fixtures/aem.keystore  -keypass somekeypassword -storepass somestorepassword -dname "CN=somehost, OU=Some Group, O=Some Organisation, L=Melbourne, S=Victoria, C=AU"
 
 build:
 	puppet module build .
