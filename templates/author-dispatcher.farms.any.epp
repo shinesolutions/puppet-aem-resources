@@ -38,6 +38,7 @@
         /port "<%= $author_port %>"
         # Connect timeout in milliseconds, 0 to wait indefinitely
         # /timeout "0"
+        /secure "<%= $author_secure %>"
         }
       }
 
