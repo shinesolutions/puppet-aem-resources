@@ -5,6 +5,7 @@ class aem_resources::publish_dispatcher_set_config(
   $allowed_client,
   $publish_host,
   $publish_port,
+  $publish_secure = '1',
 ) {
 
   file { "${dispatcher_conf_dir}":
@@ -15,6 +16,7 @@ class aem_resources::publish_dispatcher_set_config(
     content => epp('aem_resources/publish-dispatcher.farms.any.epp', {
       publish_host   => "${publish_host}",
       publish_port   => "${publish_port}",
+      publish_secure => "${publish_secure}",
       docroot_dir    => "${docroot_dir}",
       allowed_client => "${allowed_client}"
     }),
