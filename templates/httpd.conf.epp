@@ -21,3 +21,32 @@
   # Security - Prevent clickjacking
   Header always append X-Frame-Options SAMEORIGIN
 </VirtualHost>
+
+Listen 443
+<VirtualHost *:443>
+  ServerName default
+  ServerAdmin root@localhost
+
+  ## Vhost docroot
+  DocumentRoot "<%= $docroot_dir %>"
+
+  <Directory />
+    <IfModule dispatcher_module>
+      SetHandler dispatcher-handler
+    </IfModule>
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  ## Logging
+  ErrorLog "/var/log/httpd/default_error.log"
+  ServerSignature Off
+  CustomLog "/var/log/httpd/access_log" combined
+
+  # Security - Prevent clickjacking
+  Header always append X-Frame-Options SAMEORIGIN
+
+  # Security - Use SSL
+  SSLEngine on
+  SSLCertificateFile /etc/httpd/aem.disp-cert
+</VirtualHost>
