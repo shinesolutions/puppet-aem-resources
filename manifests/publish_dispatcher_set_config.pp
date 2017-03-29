@@ -2,7 +2,6 @@ class aem_resources::publish_dispatcher_set_config(
   $dispatcher_conf_dir,
   $httpd_conf_dir,
   $docroot_dir,
-  $ssl_cert,
   $allowed_client,
   $publish_host,
   $publish_port,
