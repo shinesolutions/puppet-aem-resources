@@ -5,6 +5,7 @@ class aem_resources::author_dispatcher_set_config(
   $author_host,
   $author_port,
   $author_secure = '1',
+  $ssl_cert = '/etc/httpd/aem.disp-cert',
 ) {
 
   file { "${dispatcher_conf_dir}":
@@ -26,7 +27,10 @@ class aem_resources::author_dispatcher_set_config(
   } ->
   file { "${httpd_conf_dir}/1-puppet-aem-resources.conf":
     ensure  => file,
-    content => epp('aem_resources/httpd.conf.epp', { docroot_dir => "${docroot_dir}" }),
+    content => epp('aem_resources/httpd.conf.epp', {
+      docroot_dir => $docroot_dir,
+      ssl_cert    => $ssl_cert,
+    }),
     mode    => '0664',
   }
 

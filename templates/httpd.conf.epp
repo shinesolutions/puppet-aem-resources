@@ -48,5 +48,5 @@ Listen 443
 
   # Security - Use SSL
   SSLEngine on
-  SSLCertificateFile /etc/httpd/aem.disp-cert
+  SSLCertificateFile <%= $ssl_cert %>
 </VirtualHost>
