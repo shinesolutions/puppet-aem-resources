@@ -7,8 +7,8 @@ class aem_resources::publish_set_osgi_config(
     name   => 'org.apache.sling.security.impl.ReferrerFilter',
     path   => '/apps/system/config.publish',
     type   => 'sling:OsgiConfig',
-  } ->
-  aem_config_property { 'Do not allow empty referrer':
+  }
+  -> aem_config_property { 'Do not allow empty referrer':
     ensure           => present,
     name             => 'allow.empty',
     type             => 'Boolean',
@@ -23,32 +23,32 @@ class aem_resources::publish_set_osgi_config(
     name   => 'org.apache.sling.servlets.get.DefaultGetServlet',
     path   => '/apps/system/config.publish',
     type   => 'sling:OsgiConfig',
-  } ->
-  aem_config_property { 'Limit depth of JSON rendering':
+  }
+  -> aem_config_property { 'Limit depth of JSON rendering':
     ensure           => present,
     name             => 'json.maximumresults',
     type             => 'String',
     value            => '100',
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
-  } ->
-  aem_config_property { 'Disable HTML renderer':
+  }
+  -> aem_config_property { 'Disable HTML renderer':
     ensure           => present,
     name             => 'enable.html',
     type             => 'Boolean',
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
-  } ->
-  aem_config_property { 'Disable plain text renderer':
+  }
+  -> aem_config_property { 'Disable plain text renderer':
     ensure           => present,
     name             => 'enable.txt',
     type             => 'Boolean',
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
-  } ->
-  aem_config_property { 'Disable XML renderer':
+  }
+  -> aem_config_property { 'Disable XML renderer':
     ensure           => present,
     name             => 'enable.xml',
     type             => 'Boolean',
