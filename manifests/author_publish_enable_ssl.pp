@@ -1,37 +1,12 @@
 class aem_resources::author_publish_enable_ssl(
   $run_mode,
   $port,
-  $ssl_dir,
-  $owner,
-  $group,
-  $keystore_cert,
+  $keystore,
   $keystore_password,
   $keystore_key_alias,
-  $keystore_private_key,
-  $truststore_cert,
+  $truststore,
   $truststore_password,
-  $keystore_trustcacerts = false,
-  $truststore_trustcacerts = false,
 ) {
-
-  java_ks { 'Set up keystore':
-    ensure       => latest,
-    name         => $keystore_key_alias,
-    certificate  => $keystore_cert,
-    target       => "${ssl_dir}/aem.ks",
-    private_key  => $keystore_private_key,
-    password     => $keystore_password,
-    trustcacerts => $keystore_trustcacerts,
-  }
-
-  java_ks { 'Set up truststore':
-    ensure       => latest,
-    name         => $keystore_key_alias,
-    certificate  => $truststore_cert,
-    target       => "${ssl_dir}/aem.ts",
-    password     => $truststore_password,
-    trustcacerts => $truststore_trustcacerts,
-  }
 
   aem_node { 'Ensure org.apache.felix.http OSGI config exists':
     ensure => present,
@@ -57,7 +32,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.keystore',
     type             => 'String',
-    value            => "${ssl_dir}/aem.ks",
+    value            => $keystore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
@@ -109,7 +84,7 @@ class aem_resources::author_publish_enable_ssl(
     ensure           => present,
     name             => 'org.apache.felix.https.truststore',
     type             => 'String',
-    value            => "${ssl_dir}/aem.ts",
+    value            => $truststore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
   }
