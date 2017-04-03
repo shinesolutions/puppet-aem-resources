@@ -12,6 +12,7 @@
 * Add force param to aem_user type's creation, this enforces user to be recreated if it already exists
 * Add aem_outbox_replication_agent type
 * Add aem_bundle_alias type
+* Change deployer system user path to /home/users/q/
 
 ### 0.9.2
 * deploy_packages enforces state present

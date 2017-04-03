@@ -26,10 +26,17 @@ class aem_resources::create_system_users(
     force      => true,
   }
 
+  # deployer user does not use /home/users/d/
+  # because postAuthorizables fail when the
+  # intermediatePath already exists
+  # (/home/users/d/ is used by admin user in
+  # AEM 6.2 jar)
+  # /home/users/q/ is used instead just because
+  # it doesn't exist on vanilla AEM installation
   aem_user { 'Create user - deployer':
     ensure     => present,
     name       => 'deployer',
-    path       => '/home/users/d',
+    path       => '/home/users/q',
     password   => "${deployer_password}",
     group_name => 'administrators',
     group_path => '/home/groups/a',
