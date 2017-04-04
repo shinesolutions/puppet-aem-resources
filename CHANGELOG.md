@@ -13,6 +13,7 @@
 * Add aem_outbox_replication_agent type
 * Add aem_bundle_alias type
 * Change deployer system user path to /home/users/q/
+* Add class for changing system users password
 
 ### 0.9.2
 * deploy_packages enforces state present
