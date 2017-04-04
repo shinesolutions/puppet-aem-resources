@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'ruby_aem', '~> 1.0.14'
+gem 'ruby_aem', '~> 1.0.15'
 gem 'nokogiri', '~> 1.6.8.1'
 
 group :lint do
