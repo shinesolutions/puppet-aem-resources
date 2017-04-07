@@ -60,10 +60,10 @@ test-fixtures:
 		-keyout test/fixtures/aem.key \
 		-out test/fixtures/aem.cert
 
-build:
+package:
 	puppet module build .
 
 tools:
 	gem install puppet puppet-lint librarian-puppet
 
-.PHONY: ci clean deps lint test-integration build tools
+.PHONY: ci clean deps lint test-integration package tools
