@@ -1,3 +1,6 @@
+### 0.9.4
+*
+
 ### 0.9.3
 * Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
 * Add Apache Sling GET Servlet OSGI config for DoS prevention
