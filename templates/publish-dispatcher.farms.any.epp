@@ -40,6 +40,8 @@
         # Connect timeout in milliseconds, 0 to wait indefinitely
         # /timeout "0"
         /secure "<%= $publish_secure %>"
+        # Avoid caching IP in anticipation of instance recovery with a different IP
+        /always-resolve "1"
         }
       }
 

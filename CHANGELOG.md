@@ -1,5 +1,5 @@
 ### 0.9.4
-*
+* Set author-dispatcher and publish-dispatcher config to always resolve hostname
 
 ### 0.9.3
 * Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
