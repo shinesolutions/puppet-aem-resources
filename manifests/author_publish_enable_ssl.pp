@@ -13,132 +13,95 @@ class aem_resources::author_publish_enable_ssl(
     name   => 'org.apache.felix.http',
     path   => "/apps/system/config.${run_mode}",
     type   => 'sling:OsgiConfig',
-  }
-
-  aem_config_property { 'Create org.osgi.service.http.port.secure property':
+  } -> exec { 'Wait org.apache.felix.http OSGI config':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
+  } -> aem_config_property { 'Create org.osgi.service.http.port.secure property':
     ensure           => present,
     name             => 'org.osgi.service.http.port.secure',
     type             => 'Long',
     value            => $port,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.osgi.service.http.port.secure property is set':
+  } -> aem_aem { 'Wait until org.osgi.service.http.port.secure property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.keystore property':
+  } -> aem_config_property { 'Create org.apache.felix.https.keystore property':
     ensure           => present,
     name             => 'org.apache.felix.https.keystore',
     type             => 'String',
     value            => $keystore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.keystore property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.keystore property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.keystore.password property':
+  } -> aem_config_property { 'Create org.apache.felix.https.keystore.password property':
     ensure           => present,
     name             => 'org.apache.felix.https.keystore.password',
     type             => 'String',
     value            => $keystore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.keystore.password property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.keystore.password property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.keystore.key property':
+  } -> aem_config_property { 'Create org.apache.felix.https.keystore.key property':
     ensure           => present,
     name             => 'org.apache.felix.https.keystore.key',
     type             => 'String',
     value            => $keystore_key_alias,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.keystore.key property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.keystore.key property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.keystore.key.password property':
+  } -> aem_config_property { 'Create org.apache.felix.https.keystore.key.password property':
     ensure           => present,
     name             => 'org.apache.felix.https.keystore.key.password',
     type             => 'String',
     value            => $keystore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.keystore.key.password property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.keystore.key.password property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.truststore property':
+  } -> aem_config_property { 'Create org.apache.felix.https.truststore property':
     ensure           => present,
     name             => 'org.apache.felix.https.truststore',
     type             => 'String',
     value            => $truststore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.truststore property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.truststore property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.truststore.password property':
+  } -> aem_config_property { 'Create org.apache.felix.https.truststore.password property':
     ensure           => present,
     name             => 'org.apache.felix.https.truststore.password',
     type             => 'String',
     value            => $truststore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.truststore.password property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.truststore.password property is set':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.nio property':
+  } -> aem_config_property { 'Create org.apache.felix.https.nio property':
     ensure           => present,
     name             => 'org.apache.felix.https.nio',
     type             => 'Boolean',
     value            => true,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  exec { 'Wait org.apache.felix.https.nio property':
+  } -> exec { 'Wait org.apache.felix.https.nio property':
     command => 'sleep 5',
     path    => ['/usr/bin', '/usr/sbin', '/bin'],
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.nio property':
+  } -> aem_aem { 'Wait until org.apache.felix.https.nio property':
     ensure => login_page_is_ready,
-  }
-
-  aem_config_property { 'Create org.apache.felix.https.enable property':
+  } -> aem_config_property { 'Create org.apache.felix.https.enable property':
     ensure           => present,
     name             => 'org.apache.felix.https.enable',
     type             => 'Boolean',
     value            => true,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
-  }
-
-  exec { 'Wait org.apache.felix.https.enable property':
+  } -> exec { 'Wait org.apache.felix.https.enable property':
     command => 'sleep 5',
     path    => ['/usr/bin', '/usr/sbin', '/bin'],
-  }
-
-  aem_aem { 'Wait until org.apache.felix.https.enable property is set':
+  } -> aem_aem { 'Wait until org.apache.felix.https.enable property is set':
     ensure => login_page_is_ready,
   }
 
