@@ -16,6 +16,8 @@ class aem_resources::author_publish_enable_ssl(
   } -> exec { 'Wait org.apache.felix.http OSGI config':
     command => 'sleep 5',
     path    => ['/usr/bin', '/usr/sbin', '/bin'],
+  } -> aem_aem { 'Wait until org.apache.felix.http OSGI config is set':
+    ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.osgi.service.http.port.secure property':
     ensure           => present,
     name             => 'org.osgi.service.http.port.secure',
