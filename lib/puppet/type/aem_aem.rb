@@ -19,6 +19,10 @@ Puppet::Type.newtype(:aem_aem)do
       provider.get_login_page_wait_until_ready
     end
 
+    newvalue(:aem_health_check_is_ok) do
+      provider.get_aem_health_check_wait_until_ok
+    end
+
   end
 
   newparam :name, :namevar => false do
