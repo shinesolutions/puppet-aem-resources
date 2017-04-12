@@ -28,6 +28,19 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
     client().aem().get_login_page_wait_until_ready(opts)
   end
 
+  def get_aem_health_check_wait_until_ok
+    opts = {
+      tags: resource[:tags],
+      combine_tags_or: resource[:combine_tags_or],
+      _retries: {
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds],
+      }
+    }
+    client().aem().get_aem_health_check_wait_until_ok(opts)
+  end
+
   # Existence check defaults to true in order to simulate that aem always exists.
   def exists?
     true

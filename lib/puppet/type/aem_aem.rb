@@ -19,10 +19,32 @@ Puppet::Type.newtype(:aem_aem)do
       provider.get_login_page_wait_until_ready
     end
 
+    newvalue(:aem_health_check_is_ok) do
+      provider.get_aem_health_check_wait_until_ok
+    end
+
   end
 
   newparam :name, :namevar => false do
     desc 'Description'
+  end
+
+  newparam :tags do
+    desc 'AEM HealthCheck tags'
+    validate do |value|
+      if value == ''
+        value = nil
+      end
+    end
+  end
+
+  newparam :combine_tags_or do
+    desc 'AEM HealthCheck change AND to OR'
+    validate do |value|
+      if value == ''
+        value = nil
+      end
+    end
   end
 
   newparam :retries_max_tries do
