@@ -1,8 +1,6 @@
-### 0.9.5
-* Add aem resource get_aem_health_check_wait_until_ok method
-
 ### 0.9.4
 * Set author-dispatcher and publish-dispatcher config to always resolve hostname
+* Add aem resource get_aem_health_check_wait_until_ok method
 
 ### 0.9.3
 * Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
