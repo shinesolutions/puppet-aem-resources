@@ -30,6 +30,8 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
 
   def get_aem_health_check_wait_until_ok
     opts = {
+      tags: resource[:tags],
+      combine_tags_or: resource[:combine_tags_or],
       _retries: {
         max_tries: resource[:retries_max_tries],
         base_sleep_seconds: resource[:retries_base_sleep_seconds],

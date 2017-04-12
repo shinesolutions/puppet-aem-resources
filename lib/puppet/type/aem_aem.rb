@@ -29,6 +29,24 @@ Puppet::Type.newtype(:aem_aem)do
     desc 'Description'
   end
 
+  newparam :tags do
+    desc 'AEM HealthCheck tags'
+    validate do |value|
+      if value == ''
+        value = nil
+      end
+    end
+  end
+
+  newparam :combine_tags_or do
+    desc 'AEM HealthCheck change AND to OR'
+    validate do |value|
+      if value == ''
+        value = nil
+      end
+    end
+  end
+
   newparam :retries_max_tries do
     desc 'Maximum number of tries'
     validate do |value|
