@@ -56,8 +56,12 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
   # Delete the package.
   def destroy
     package = client().package(resource[:group], resource[:name], resource[:version])
-    result = package.delete()
-    handle(result)
+    results = []
+    if package.is_installed().data
+      results.push(package.uninstall())
+    end
+    results.push(package.delete())
+    handle_multi(results)
   end
 
   # Check whether the package exists or not.
