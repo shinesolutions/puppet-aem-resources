@@ -20,7 +20,7 @@ GEM
       json_pure (~> 1.8)
     puppet-lint (2.1.0)
     retries (0.0.5)
-    ruby_aem (1.0.17)
+    ruby_aem (1.0.18)
       nokogiri (~> 1.6, < 1.7)
       retries (~> 0.0.5)
       swagger_aem (~> 0.9.12)
@@ -37,7 +37,7 @@ DEPENDENCIES
   nokogiri (~> 1.6.8.1)
   puppet
   puppet-lint
-  ruby_aem (~> 1.0.17)
+  ruby_aem (~> 1.0.18)
 
 BUNDLED WITH
    1.14.6
