@@ -1,6 +1,7 @@
 ### 0.9.4
 * Set author-dispatcher and publish-dispatcher config to always resolve hostname
 * Add aem_health_check_is_ok ensurable to aem_aem type
+* Add uninstall to destroy
 
 ### 0.9.3
 * Add X-Frame-Options SAMEORIGIN header to dispatcher's Apache httpd config
