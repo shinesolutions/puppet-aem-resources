@@ -25,6 +25,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $port,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.osgi.service.http.port.secure property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.osgi.service.http.port.secure property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.keystore property':
@@ -34,6 +37,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $keystore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.keystore property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.keystore property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.keystore.password property':
@@ -43,6 +49,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $keystore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.keystore.password property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.keystore.password property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.keystore.key property':
@@ -52,6 +61,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $keystore_key_alias,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.keystore.key property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.keystore.key property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.keystore.key.password property':
@@ -61,6 +73,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $keystore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.keystore.key.password property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.keystore.key.password property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.truststore property':
@@ -70,6 +85,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $truststore,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.truststore property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.truststore property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.truststore.password property':
@@ -79,6 +97,9 @@ class aem_resources::author_publish_enable_ssl(
     value            => $truststore_password,
     run_mode         => $run_mode,
     config_node_name => 'org.apache.felix.http',
+  } -> exec { 'Wait org.apache.felix.https.truststore.password property':
+    command => 'sleep 5',
+    path    => ['/usr/bin', '/usr/sbin', '/bin'],
   } -> aem_aem { 'Wait until org.apache.felix.https.truststore.password property is set':
     ensure => login_page_is_ready,
   } -> aem_config_property { 'Create org.apache.felix.https.nio property':
