@@ -8,7 +8,11 @@ class aem_resources::author_dispatcher_set_config(
   $ssl_cert = '/etc/httpd/aem.disp-cert',
 ) {
 
-  file { unique([ $dispatcher_conf_dir, $httpd_conf_dir, ]):
+  $conf_dirs = [ $dispatcher_conf_dir, $httpd_conf_dir, ]
+
+  $unique_conf_dirs = unique($conf_dirs)
+
+  file { $unique_conf_dirs:
     ensure => directory,
   }
 
