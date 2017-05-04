@@ -290,3 +290,9 @@ Create Puppet AEM Resources' configuration file:
       port     => 4502,
       debug    => false,
     }
+
+Enable CRXDE:
+
+    class { 'aem_resources::enable_crxde':
+      run_mode => 'author',
+    }
