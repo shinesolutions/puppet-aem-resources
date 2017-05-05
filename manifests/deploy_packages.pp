@@ -1,7 +1,7 @@
 class aem_resources::deploy_packages (
   $packages,
   $path          = '/tmp/shinesolutions/puppet-aem-resources',
-  $sleep_seconds = 3
+  $sleep_seconds = 10
 ) {
 
   $packages.each | Integer $index, Hash $package| {
