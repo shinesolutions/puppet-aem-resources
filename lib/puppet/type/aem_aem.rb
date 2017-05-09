@@ -23,6 +23,10 @@ Puppet::Type.newtype(:aem_aem)do
       provider.get_aem_health_check_wait_until_ok
     end
 
+    newvalue(:all_agents_removed) do
+      provider.remove_all_agents
+    end
+
   end
 
   newparam :name, :namevar => false do
@@ -40,6 +44,15 @@ Puppet::Type.newtype(:aem_aem)do
 
   newparam :combine_tags_or do
     desc 'AEM HealthCheck change AND to OR'
+    validate do |value|
+      if value == ''
+        value = nil
+      end
+    end
+  end
+
+  newparam :run_mode do
+    desc 'AEM run mode where the replication agent is'
     validate do |value|
       if value == ''
         value = nil

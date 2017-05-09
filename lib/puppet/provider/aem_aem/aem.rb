@@ -41,6 +41,20 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
     client().aem().get_aem_health_check_wait_until_ok(opts)
   end
 
+  def remove_all_agents
+    opts = {}
+    run_modes = resource[:run_mode] == nil ? ['author', 'publish'] : [resource[:run_mode]]
+
+    run_modes.each do |run_mode|
+      result = client().aem().get_agents(run_mode)
+      agent_names = result.data
+        agent_names.each do |agent_name|
+        replication_agent = client().replication_agent(run_mode, agent_name)
+        replication_agent.delete
+      end
+    end
+  end
+
   # Existence check defaults to true in order to simulate that aem always exists.
   def exists?
     true

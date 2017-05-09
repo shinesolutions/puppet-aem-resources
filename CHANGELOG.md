@@ -1,5 +1,6 @@
 ### 0.9.5
 * Add enable_crxde class
+* Add all_agents_removed ensurable to aem resource #9
 
 ### 0.9.4
 * Set author-dispatcher and publish-dispatcher config to always resolve hostname
