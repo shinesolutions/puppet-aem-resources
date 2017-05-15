@@ -133,6 +133,22 @@ Group
       path   => '/home/groups/c',
     }
 
+    aem_group { 'Create contractor group as a member of staff group':
+      ensure            => present,
+      name              => 'contractor',
+      path              => '/home/groups/c',
+      parent_group_name => 'staff',
+      parent_group_path => '/home/groups/s',
+    }
+
+    aem_group { 'Create staff group and add contractor group as a member':
+      ensure            => present,
+      name              => 'staff',
+      path              => '/home/groups/s',
+      member_group_name => 'contractor',
+      member_group_path => '/home/groups/c',
+    }
+
     aem_group { 'Delete staff group':
       ensure => absent,
       name   => 'staff',

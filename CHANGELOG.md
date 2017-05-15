@@ -1,3 +1,6 @@
+### 1.0.0
+* Add support for adding parent/member group to an aem_group resource
+
 ### 0.9.5
 * Add enable_crxde class
 * Add all_agents_removed ensurable to aem resource #9

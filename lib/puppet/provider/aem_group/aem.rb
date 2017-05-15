@@ -16,10 +16,22 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_group).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
 
   # Create a group.
+  # When force is set to true and if the group already exists then it will be deleted before recreated.
   def create
     group = client().group(resource[:path], resource[:name])
-    result = group.create()
-    handle(result)
+    results = []
+    if resource[:force] == true && group.exists().data == true
+      results.push(group.delete())
+    end
+    results.push(group.create())
+    if !resource[:parent_group_path].nil? && !resource[:parent_group_name].nil?
+      parent_group = client().group(resource[:parent_group_path], resource[:parent_group_name])
+      results.push(parent_group.add_member(resource[:name]))
+    end
+    if !resource[:member_group_path].nil? && !resource[:member_group_name].nil?
+      results.push(group.add_member(resource[:member_group_name]))
+    end
+    handle_multi(results)
   end
 
   # Delete the group.
@@ -31,8 +43,12 @@ Puppet::Type.type(:aem_group).provide(:aem, :parent => PuppetX::ShineSolutions::
 
   # Check whether the group exists or not.
   def exists?
-    group = client().group(resource[:path], resource[:name])
-    group.exists().data
+    if resource[:force] == true
+      return false
+    else
+      group = client().group(resource[:path], resource[:name])
+      group.exists().data
+    end
   end
 
 end

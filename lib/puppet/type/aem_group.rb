@@ -29,4 +29,29 @@ Puppet::Type.newtype(:aem_group)do
     end
   end
 
+  newparam :parent_group_path do
+    desc 'Parent group path'
+  end
+
+  newparam :parent_group_name do
+    desc 'Parent group name'
+  end
+
+  newparam :member_group_path do
+    desc 'Member group path'
+  end
+
+  newparam :member_group_name do
+    desc 'Member group name'
+  end
+
+  newparam :force do
+    desc 'Set to true to force group creation, if the group already exists then it will be deleted before recreated, default to false'
+    validate do |value|
+      if value == ''
+        value = false
+      end
+    end
+  end
+
 end
