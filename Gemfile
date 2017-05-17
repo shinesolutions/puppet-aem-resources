@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+case RUBY_PLATFORM
+when /darwin/
+  gem 'CFPropertyList'
+end
+
 gem 'ruby_aem', '~> 1.1.1'
 gem 'nokogiri', '~> 1.6.8.1'
 

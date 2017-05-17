@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.2.8)
     ethon (0.10.1)
       ffi (>= 1.3.0)
     facter (2.4.6)
@@ -43,6 +44,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  CFPropertyList
   nokogiri (~> 1.6.8.1)
   puppet
   puppet-lint
