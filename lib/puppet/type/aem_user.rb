@@ -23,6 +23,10 @@ Puppet::Type.newtype(:aem_user)do
       provider.add_to_group
     end
 
+    newvalue(:has_permission) do
+      provider.set_permission
+    end
+
     newvalue(:present) do
       if @resource.provider and @resource.provider.respond_to?(:create)
         @resource.provider.create
@@ -75,6 +79,10 @@ Puppet::Type.newtype(:aem_user)do
 
   newparam :group_name do
     desc 'Group name'
+  end
+
+  newparam :permission do
+    desc 'User permission'
   end
 
   newparam :force do

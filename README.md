@@ -257,6 +257,11 @@ User
       name       => 'charlie',
       path       => '/home/users/c',
       password   => 'somepassword',
+      permission => {
+        '/libs' => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
+        '/var'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
+        '/tmp'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
+      },
     }
 
     aem_user { 'Create user bob and add to administrators group':
@@ -290,6 +295,16 @@ User
       path   => '/home/users/b',
     }
 
+    aem_user { 'Update replication-service user permission':
+      ensure     => has_permission,
+      name       => 'replication-service',
+      path       => '/home/users/system/',
+      permission => {
+        '/etc/replication/agents.author' => ['replicate:false'],
+        '/etc/replication/agents.publish' => ['replicate:false']
+      }
+    }
+    
 Other than single AEM resource, this module also provides predefined classes for common AEM provisioning tasks.
 
 Remove default agents on AEM Author:

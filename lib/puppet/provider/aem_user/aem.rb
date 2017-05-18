@@ -27,6 +27,11 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
     if !resource[:group_path].nil? && !resource[:group_name].nil?
       results.push(user.add_to_group(resource[:group_path], resource[:group_name]))
     end
+    if !resource[:permission].nil?
+      resource[:permission].each do |permission_path, permission_array|
+        results.push(user.set_permission(permission_path, permission_array.join(',')))
+      end
+    end
     handle_multi(results)
   end
 
@@ -58,6 +63,17 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
     user = client().user(resource[:path], resource[:name])
     result = user.add_to_group(resource[:group_path], resource[:group_name])
     handle(result)
+  end
+
+  def set_permission
+    user = client().user(resource[:path], resource[:name])
+    results = []
+    if !resource[:permission].nil?
+      resource[:permission].each do |permission_path, permission_array|
+        results.push(user.set_permission(permission_path, permission_array.join(',')))
+      end
+    end
+    handle_multi(results)
   end
 
 end
