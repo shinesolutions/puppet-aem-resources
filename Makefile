@@ -21,7 +21,7 @@ lint:
 		--no-documentation-check \
 		--no-only_variable_string-check \
 		--no-selector_inside_resource-check \
-		test/integration/*.pp \
+		test/integration/*/*.pp \
 		manifests/*.pp
 
 test-integration:
