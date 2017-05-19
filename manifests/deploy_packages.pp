@@ -21,7 +21,7 @@ class aem_resources::deploy_packages (
 
       exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
         command => "sleep ${package['sleep_seconds']}",
-        cwd     => "${path}",
+        cwd     => $path,
         path    => ['/usr/bin', '/usr/sbin', '/bin'],
         require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
       }
@@ -30,7 +30,7 @@ class aem_resources::deploy_packages (
 
       exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
         command => "sleep ${sleep_seconds}",
-        cwd     => "${path}",
+        cwd     => $path,
         path    => ['/usr/bin', '/usr/sbin', '/bin'],
         require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
       }

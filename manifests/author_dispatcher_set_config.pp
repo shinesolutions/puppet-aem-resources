@@ -19,10 +19,10 @@ class aem_resources::author_dispatcher_set_config(
   file { "${dispatcher_conf_dir}/dispatcher.farms.any":
     ensure  => file,
     content => epp('aem_resources/author-dispatcher.farms.any.epp', {
-      author_host   => "${author_host}",
-      author_port   => "${author_port}",
-      author_secure => "${author_secure}",
-      docroot_dir   => "${docroot_dir}"
+      author_host   => $author_host,
+      author_port   => $author_port,
+      author_secure => $author_secure,
+      docroot_dir   => $docroot_dir,
     }),
     mode    => '0664',
     require =>  File[$dispatcher_conf_dir],

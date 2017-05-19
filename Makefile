@@ -19,7 +19,6 @@ lint:
 		--no-140chars-check \
 		--no-autoloader_layout-check \
 		--no-documentation-check \
-		--no-only_variable_string-check \
 		--no-selector_inside_resource-check \
 		test/integration/*/*.pp \
 		manifests/*.pp

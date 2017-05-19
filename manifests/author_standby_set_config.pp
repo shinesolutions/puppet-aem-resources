@@ -14,7 +14,7 @@ class aem_resources::author_standby_set_config(
   }
   file { "${crx_quickstart_dir}/install/org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService.config":
     ensure  => file,
-    content => epp('aem_resources/org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService.config.epp', { primary_host => "${primary_host}" }),
+    content => epp('aem_resources/org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService.config.epp', { primary_host => $primary_host }),
     mode    => '0664',
     require => File["${crx_quickstart_dir}/install"],
   }
