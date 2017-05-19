@@ -17,5 +17,21 @@
     "aem",
     "cq"
   ],
-  "data_provider": "hiera"
+  "data_provider": "hiera",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2016.03",
+        "2016.09",
+        "2017.03"
+      ]
+    }
+  ]
 }
