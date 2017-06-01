@@ -1,5 +1,7 @@
 ### 1.1.0
 * Add timeout configuration parameter
+* Modify package archive ensurable to delete all versions of the package to be exported
+* Add build status readiness wait to package archive ensurable
 
 ### 1.0.0
 * Add support for adding parent/member group to an aem_group resource

@@ -16,13 +16,24 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
 
   # Archive a package by building a new package and downloading in to the specified path.
+  # All older versions of the package that could've been built beforehand will be deleted before building the new package.
   def archive
     package = client().package(resource[:group], resource[:name], resource[:version])
     results = []
-    results.push(package.delete_wait_until_ready()) if package.is_uploaded().data == true
+    build_opts = {
+      _retries: {
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
+      }
+    }
+    package.get_versions.data.each do | version |
+      package_per_version = client().package(resource[:group], resource[:name], version)
+      results.push(package_per_version.delete_wait_until_ready()) if package_per_version.exists().data == true
+    end
     results.push(package.create())
     results.push(package.update(resource[:filter]))
-    results.push(package.build())
+    results.push(package.build_wait_until_ready(build_opts))
     results.push(package.download(resource[:path]))
     handle_multi(results)
   end
