@@ -5,7 +5,7 @@ when /darwin/
   gem 'CFPropertyList'
 end
 
-gem 'ruby_aem', '~> 1.1.2'
+gem 'ruby_aem', '~> 1.3.0'
 gem 'nokogiri', '~> 1.6.8.1'
 
 group :lint do
