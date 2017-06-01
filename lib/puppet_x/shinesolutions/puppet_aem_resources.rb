@@ -18,7 +18,7 @@ module PuppetX
         # - otherwise, use config file property if provided in aem.yaml
         # - otherwise, use RubyAem::Aem's default value
         params = {}
-        ['username', 'password', 'protocol', 'host', 'port', 'debug'].each { |field|
+        ['username', 'password', 'protocol', 'host', 'port', 'debug', 'timeout'].each { |field|
           env_field = 'aem_%s' % [field]
           if opts != nil and opts[field.to_sym] != nil
             params[field.to_sym] = opts[field.to_sym]

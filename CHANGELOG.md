@@ -1,3 +1,6 @@
+### 1.1.0
+* Add timeout configuration parameter
+
 ### 1.0.0
 * Add support for adding parent/member group to an aem_group resource
 * Add has_permission ensurable and permission param to aem_user resource #8
