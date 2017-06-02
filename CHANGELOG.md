@@ -1,3 +1,6 @@
+### 1.1.1
+* Fix aem.yaml.epp template to handle non-String types
+
 ### 1.1.0
 * Add timeout configuration parameter
 * Modify package archive ensurable to delete all versions of the package to be exported

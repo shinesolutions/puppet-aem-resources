@@ -1,22 +1,22 @@
 ---
-<% if $username != '' { -%>
+<% if $username != undef { -%>
 :username: '<%= $username %>'
 <% } -%>
-<% if $password != '' { -%>
+<% if $password != undef { -%>
 :password: '<%= $password %>'
 <% } -%>
-<% if $protocol != '' { -%>
+<% if $protocol != undef { -%>
 :protocol: '<%= $protocol %>'
 <% } -%>
-<% if $host != '' { -%>
+<% if $host != undef { -%>
 :host: '<%= $host %>'
 <% } -%>
-<% if $port != '' { -%>
+<% if $port != undef { -%>
 :port: <%= $port %>
 <% } -%>
-<% if $debug == 'true' { -%>
+<% if $debug == true { -%>
 :debug: True
 <% } -%>
-<% if $debug == 'false' { -%>
+<% if $debug == false { -%>
 :debug: False
 <% } -%>
