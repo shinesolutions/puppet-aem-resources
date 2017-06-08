@@ -21,6 +21,7 @@ lint:
 		--no-documentation-check \
 		test/integration/*/*.pp \
 		manifests/*.pp
+	rubocop
 
 test-integration:
 	# set up module
