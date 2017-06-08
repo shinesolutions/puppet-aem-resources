@@ -23,6 +23,6 @@ Puppet::Type.newtype(:aem_repository) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
   end
 end

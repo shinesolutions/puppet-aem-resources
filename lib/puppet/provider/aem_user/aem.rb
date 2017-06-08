@@ -14,20 +14,20 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a user.
   # When force is set to true and if the user already exists then it will be deleted before recreated.
   def create
-    user = client().user(resource[:path], resource[:name])
+    user = client.user(resource[:path], resource[:name])
     results = []
-    if resource[:force] == true && user.exists().data == true
-      results.push(user.delete())
+    if resource[:force] == true && user.exists.data == true
+      results.push(user.delete)
     end
     results.push(user.create(resource[:password]))
     if !resource[:group_path].nil? && !resource[:group_name].nil?
       results.push(user.add_to_group(resource[:group_path], resource[:group_name]))
     end
-    if !resource[:permission].nil?
+    unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|
         results.push(user.set_permission(permission_path, permission_array.join(',')))
       end
@@ -37,8 +37,8 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
 
   # Delete the user.
   def destroy
-    user = client().user(resource[:path], resource[:name])
-    result = user.delete()
+    user = client.user(resource[:path], resource[:name])
+    result = user.delete
     handle(result)
   end
 
@@ -48,8 +48,8 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
     if resource[:force] == true
       false
     else
-      user = client().user(resource[:path], resource[:name])
-      user.exists().data
+      user = client.user(resource[:path], resource[:name])
+      user.exists.data
     end
   end
 
@@ -60,15 +60,15 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   end
 
   def add_to_group
-    user = client().user(resource[:path], resource[:name])
+    user = client.user(resource[:path], resource[:name])
     result = user.add_to_group(resource[:group_path], resource[:group_name])
     handle(result)
   end
 
   def set_permission
-    user = client().user(resource[:path], resource[:name])
+    user = client.user(resource[:path], resource[:name])
     results = []
-    if !resource[:permission].nil?
+    unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|
         results.push(user.set_permission(permission_path, permission_array.join(',')))
       end

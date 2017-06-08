@@ -14,10 +14,10 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a outbox replication agent.
   def create
-    outbox_replication_agent = client().outbox_replication_agent(resource[:run_mode], resource[:name])
+    outbox_replication_agent = client.outbox_replication_agent(resource[:run_mode], resource[:name])
     opts = { user_id: resource[:user_id], log_level: resource[:log_level] }
     result = outbox_replication_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
@@ -25,8 +25,8 @@ Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => Puppet
 
   # Delete the outbox replication agent.
   def destroy
-    outbox_replication_agent = client().outbox_replication_agent(resource[:run_mode], resource[:name])
-    result = outbox_replication_agent.delete()
+    outbox_replication_agent = client.outbox_replication_agent(resource[:run_mode], resource[:name])
+    result = outbox_replication_agent.delete
     handle(result)
   end
 
@@ -36,8 +36,8 @@ Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => Puppet
     if resource[:force] == true
       false
     else
-      outbox_replication_agent = client().outbox_replication_agent(resource[:run_mode], resource[:name])
-      outbox_replication_agent.exists().data
+      outbox_replication_agent = client.outbox_replication_agent(resource[:run_mode], resource[:name])
+      outbox_replication_agent.exists.data
     end
   end
 end

@@ -15,18 +15,18 @@
 Puppet::Type.newtype(:aem_replication_agent) do
   ensurable
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM replication agent name'
     validate do |value|
-      fail 'replication agent name must be provided' if value == ''
+      raise ArgumentError.new('replication agent name must be provided') if value == ''
     end
   end
 
   newparam :run_mode do
     desc 'AEM run mode where the replication agent is'
     validate do |value|
-      unless ['author', 'publish'].include? value
-        raise ArgumentError, 'run_mode should be author or publish'
+      unless %w[author publish].include? value
+        raise ArgumentError.new('run_mode should be author or publish')
       end
     end
   end

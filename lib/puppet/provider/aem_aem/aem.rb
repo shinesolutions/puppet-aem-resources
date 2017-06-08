@@ -14,7 +14,7 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Get the login page and wait until it's ready.
   # This is handy when AEM restarts Jetty and the next operation needs to wait.
   def get_login_page_wait_until_ready
@@ -22,10 +22,10 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
       _retries: {
         max_tries: resource[:retries_max_tries],
         base_sleep_seconds: resource[:retries_base_sleep_seconds],
-        max_sleep_seconds: resource[:retries_max_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client().aem().get_login_page_wait_until_ready(opts)
+    client.aem.get_login_page_wait_until_ready(opts)
   end
 
   def get_aem_health_check_wait_until_ok
@@ -35,20 +35,20 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
       _retries: {
         max_tries: resource[:retries_max_tries],
         base_sleep_seconds: resource[:retries_base_sleep_seconds],
-        max_sleep_seconds: resource[:retries_max_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client().aem().get_aem_health_check_wait_until_ok(opts)
+    client.aem.get_aem_health_check_wait_until_ok(opts)
   end
 
   def remove_all_agents
-    run_modes = resource[:run_mode] == nil ? ['author', 'publish'] : [resource[:run_mode]]
+    run_modes = resource[:run_mode].nil? ? %w[author publish] : [resource[:run_mode]]
 
     run_modes.each do |run_mode|
-      result = client().aem().get_agents(run_mode)
+      result = client.aem.get_agents(run_mode)
       agent_names = result.data
-        agent_names.each do |agent_name|
-        replication_agent = client().replication_agent(run_mode, agent_name)
+      agent_names.each do |agent_name|
+        replication_agent = client.replication_agent(run_mode, agent_name)
         replication_agent.delete
       end
     end

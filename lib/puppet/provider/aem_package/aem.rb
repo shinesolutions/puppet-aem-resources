@@ -14,11 +14,11 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Archive a package by building a new package and downloading in to the specified path.
   # All older versions of the package that could've been built beforehand will be deleted before building the new package.
   def archive
-    package = client().package(resource[:group], resource[:name], resource[:version])
+    package = client.package(resource[:group], resource[:name], resource[:version])
     results = []
     build_opts = {
       _retries: {
@@ -28,10 +28,10 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
       }
     }
     package.get_versions.data.each do |version|
-      package_per_version = client().package(resource[:group], resource[:name], version)
-      results.push(package_per_version.delete_wait_until_ready()) if package_per_version.exists().data == true
+      package_per_version = client.package(resource[:group], resource[:name], version)
+      results.push(package_per_version.delete_wait_until_ready) if package_per_version.exists.data == true
     end
-    results.push(package.create())
+    results.push(package.create)
     results.push(package.update(resource[:filter]))
     results.push(package.build_wait_until_ready(build_opts))
     results.push(package.download(resource[:path]))
@@ -40,7 +40,7 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
 
   # Create a package.
   def create
-    package = client().package(resource[:group], resource[:name], resource[:version])
+    package = client.package(resource[:group], resource[:name], resource[:version])
     results = []
     upload_opts = {
       force: resource[:force],
@@ -59,19 +59,17 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
     }
     results.push(package.upload_wait_until_ready(resource[:path], upload_opts))
     results.push(package.install_wait_until_ready(install_opts))
-    results.push(package.replicate()) if resource[:replicate] == true
+    results.push(package.replicate) if resource[:replicate] == true
     results.push(package.activate(true, false)) if resource[:activate] == true
     handle_multi(results)
   end
 
   # Delete the package.
   def destroy
-    package = client().package(resource[:group], resource[:name], resource[:version])
+    package = client.package(resource[:group], resource[:name], resource[:version])
     results = []
-    if package.is_installed().data
-      results.push(package.uninstall())
-    end
-    results.push(package.delete())
+    results.push(package.uninstall) if package.is_installed.data
+    results.push(package.delete)
     handle_multi(results)
   end
 
@@ -82,8 +80,8 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
     if resource[:force] == true
       false
     else
-      package = client().package(resource[:group], resource[:name], resource[:version])
-      package.is_installed().data
+      package = client.package(resource[:group], resource[:name], resource[:version])
+      package.is_installed.data
     end
   end
 end

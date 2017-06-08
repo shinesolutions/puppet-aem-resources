@@ -15,17 +15,17 @@
 Puppet::Type.newtype(:aem_group) do
   ensurable
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'Group name'
     validate do |value|
-      fail 'Group name must be provided' if value == ''
+      raise ArgumentError.new('Group name must be provided') if value == ''
     end
   end
 
   newparam :path do
     desc 'Group path'
     validate do |value|
-      fail 'Group path must be provided' if value == ''
+      raise ArgumentError.new('Group path must be provided') if value == ''
     end
   end
 
@@ -48,9 +48,7 @@ Puppet::Type.newtype(:aem_group) do
   newparam :force do
     desc 'Set to true to force group creation, if the group already exists then it will be deleted before recreated, default to false'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 end

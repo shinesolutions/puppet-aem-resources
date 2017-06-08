@@ -27,7 +27,7 @@ Puppet::Type.newtype(:aem_user) do
     end
 
     newvalue(:present) do
-      if @resource.provider and @resource.provider.respond_to?(:create)
+      if @resource.provider && @resource.provider.respond_to?(:create)
         @resource.provider.create
       else
         @resource.create
@@ -36,7 +36,7 @@ Puppet::Type.newtype(:aem_user) do
     end
 
     newvalue(:absent) do
-      if @resource.provider and @resource.provider.respond_to?(:destroy)
+      if @resource.provider && @resource.provider.respond_to?(:destroy)
         @resource.provider.destroy
       else
         @resource.destroy
@@ -45,17 +45,17 @@ Puppet::Type.newtype(:aem_user) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'User name'
     validate do |value|
-      fail 'User name must be provided' if value == ''
+      raise ArgumentError.new('User name must be provided') if value == ''
     end
   end
 
   newparam :path do
     desc 'User path'
     validate do |value|
-      fail 'User path must be provided' if value == ''
+      raise ArgumentError.new('User path must be provided') if value == ''
     end
   end
 

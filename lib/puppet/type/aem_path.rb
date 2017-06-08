@@ -19,10 +19,10 @@ Puppet::Type.newtype(:aem_path) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM path name'
     validate do |value|
-      fail 'AEM path name must be provided' if value == ''
+      raise ArgumentError.new('AEM path name must be provided') if value == ''
     end
   end
 end

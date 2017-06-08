@@ -14,11 +14,11 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_path).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_path).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Activate nodes under a path.
   # This is applicable only to nodes that are not deactivated, regardless whether they are modified or not.
   def activate
-    client().path(resource[:name]).activate(true, false)
+    client.path(resource[:name]).activate(true, false)
   end
 
   # Existence check defaults to true in order to simulate that the path exists.

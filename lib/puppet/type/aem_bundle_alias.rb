@@ -23,10 +23,10 @@ Puppet::Type.newtype(:aem_bundle_alias) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM bundle name'
     validate do |value|
-      fail 'Bundle name must be provided' if value == ''
+      raise ArgumentError.new('Bundle name must be provided') if value == ''
     end
   end
 end

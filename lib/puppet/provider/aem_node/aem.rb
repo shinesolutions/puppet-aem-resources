@@ -14,24 +14,24 @@
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
-Puppet::Type.type(:aem_node).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
+Puppet::Type.type(:aem_node).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a node.
   def create
-    node = client().node(resource[:path], resource[:name])
+    node = client.node(resource[:path], resource[:name])
     result = node.create(resource[:type])
     handle(result)
   end
 
   # Delete the node.
   def destroy
-    node = client().node(resource[:path], resource[:name])
-    result = node.delete()
+    node = client.node(resource[:path], resource[:name])
+    result = node.delete
     handle(result)
   end
 
   # Check whether the node exists or not.
   def exists?
-    node = client().node(resource[:path], resource[:name])
-    node.exists().data
+    node = client.node(resource[:path], resource[:name])
+    node.exists.data
   end
 end

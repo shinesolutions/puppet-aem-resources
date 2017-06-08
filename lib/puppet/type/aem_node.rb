@@ -15,24 +15,24 @@
 Puppet::Type.newtype(:aem_node) do
   ensurable
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM node name'
     validate do |value|
-      fail 'AEM node name must be provided' if value == ''
+      raise ArgumentError.new('AEM node name must be provided') if value == ''
     end
   end
 
   newparam :path do
     desc 'AEM node path'
     validate do |value|
-      fail 'AEM node path must be provided' if value == ''
+      raise ArgumentError.new('AEM node path must be provided') if value == ''
     end
   end
 
   newparam :type do
     desc 'AEM node type'
     validate do |value|
-      fail 'AEM node type must be provided' if value == ''
+      raise ArgumentError.new('AEM node type must be provided') if value == ''
     end
   end
 end

@@ -15,10 +15,10 @@
 Puppet::Type.newtype(:aem_config_property) do
   ensurable
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM property name'
     validate do |value|
-      fail 'AEM property name must be provided' if value == ''
+      raise ArgumentError.new('AEM property name must be provided') if value == ''
     end
   end
 
@@ -32,15 +32,15 @@ Puppet::Type.newtype(:aem_config_property) do
   newparam :value do
     desc 'AEM property value'
     validate do |value|
-      fail 'AEM property value must be provided' if value == ''
+      raise ArgumentError.new('AEM property value must be provided') if value == ''
     end
   end
 
   newparam :run_mode do
     desc 'AEM run mode where the config property is'
     validate do |value|
-      unless ['author', 'publish'].include? value
-        raise ArgumentError, 'run_mode should be author or publish'
+      unless %w[author publish].include? value
+        raise ArgumentError.new('run_mode should be author or publish')
       end
     end
   end
@@ -48,7 +48,7 @@ Puppet::Type.newtype(:aem_config_property) do
   newparam :config_node_name do
     desc 'AEM config node name'
     validate do |value|
-      fail 'AEM config node name must be provided' if value == ''
+      raise ArgumentError.new('AEM config node name must be provided') if value == ''
     end
   end
 end

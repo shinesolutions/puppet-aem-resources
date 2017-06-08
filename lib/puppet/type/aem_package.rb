@@ -19,7 +19,7 @@ Puppet::Type.newtype(:aem_package) do
     end
 
     newvalue(:present) do
-      if @resource.provider and @resource.provider.respond_to?(:create)
+      if @resource.provider && @resource.provider.respond_to?(:create)
         @resource.provider.create
       else
         @resource.create
@@ -28,7 +28,7 @@ Puppet::Type.newtype(:aem_package) do
     end
 
     newvalue(:absent) do
-      if @resource.provider and @resource.provider.respond_to?(:destroy)
+      if @resource.provider && @resource.provider.respond_to?(:destroy)
         @resource.provider.destroy
       else
         @resource.destroy
@@ -37,58 +37,52 @@ Puppet::Type.newtype(:aem_package) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'AEM package name'
     validate do |value|
-      fail 'Name must be provided' if value == ''
+      raise ArgumentError.new('Name must be provided') if value == ''
     end
   end
 
   newparam :version do
     desc 'AEM package version'
     validate do |value|
-      fail 'Version must be provided' if value == ''
+      raise ArgumentError.new('Version must be provided') if value == ''
     end
   end
 
   newparam :group do
     desc 'AEM package group'
     validate do |value|
-      fail 'Group must be provided' if value == ''
+      raise ArgumentError.new('Group must be provided') if value == ''
     end
   end
 
   newparam :path do
     desc 'Path where the package file to be uploaded is located at'
     validate do |value|
-      fail 'Package file path must be provided' if value == ''
+      raise ArgumentError.new('Package file path must be provided') if value == ''
     end
   end
 
   newparam :force do
     desc 'Set to true to force package installation even if it is already installed, default to false'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 
   newparam :replicate do
     desc 'Set to true to replicate package after installation, default to false'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 
   newparam :activate do
     desc 'Set to true to activate all filters in the package after installation, default to false'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 
@@ -99,27 +93,21 @@ Puppet::Type.newtype(:aem_package) do
   newparam :retries_max_tries do
     desc 'Maximum tries when waiting for package to be uploaded/installed'
     validate do |value|
-      if value == ''
-        value = 30
-      end
+      value = 30 if value == ''
     end
   end
 
   newparam :retries_base_sleep_seconds do
     desc 'Starting wait delay in seconds when waiting for package to be uploaded/installed'
     validate do |value|
-      if value == ''
-        value = 2
-      end
+      value = 2 if value == ''
     end
   end
 
   newparam :retries_max_sleep_seconds do
     desc 'Maximum wait delay in seconds when waiting for package to be uploaded/installed'
     validate do |value|
-      if value == ''
-        value = 2
-      end
+      value = 2 if value == ''
     end
   end
 end

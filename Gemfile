@@ -5,16 +5,11 @@ when /darwin/
   gem 'CFPropertyList'
 end
 
-gem 'ruby_aem', '~> 1.3.0'
 gem 'nokogiri', '~> 1.6.8.1'
+gem 'puppet', require: false
 gem 'rubocop', require: false
+gem 'ruby_aem', '~> 1.3.0'
 
 group :lint do
   gem 'puppet-lint', require: false
-end
-
-if puppetversion = ENV['PUPPET_VERSION']
-  gem 'puppet', puppetversion, require: false
-else
-  gem 'puppet', require: false
 end

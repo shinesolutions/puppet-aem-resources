@@ -27,61 +27,49 @@ Puppet::Type.newtype(:aem_aem) do
     end
   end
 
-  newparam :name, :namevar => false do
+  newparam :name, namevar: false do
     desc 'Description'
   end
 
   newparam :tags do
     desc 'AEM HealthCheck tags'
     validate do |value|
-      if value == ''
-        value = nil
-      end
+      value = nil if value == ''
     end
   end
 
   newparam :combine_tags_or do
     desc 'AEM HealthCheck change AND to OR'
     validate do |value|
-      if value == ''
-        value = nil
-      end
+      value = nil if value == ''
     end
   end
 
   newparam :run_mode do
     desc 'AEM run mode where the replication agent is'
     validate do |value|
-      if value == ''
-        value = nil
-      end
+      value = nil if value == ''
     end
   end
 
   newparam :retries_max_tries do
     desc 'Maximum number of tries'
     validate do |value|
-      if value == ''
-        value = 30
-      end
+      value = 30 if value == ''
     end
   end
 
   newparam :retries_base_sleep_seconds do
     desc 'Starting sleep duration in seconds'
     validate do |value|
-      if value == ''
-        value = 2
-      end
+      value = 2 if value == ''
     end
   end
 
   newparam :retries_max_sleep_seconds do
     desc 'Maximum sleep duration in seconds'
     validate do |value|
-      if value == ''
-        value = 2
-      end
+      value = 2 if value == ''
     end
   end
 end
