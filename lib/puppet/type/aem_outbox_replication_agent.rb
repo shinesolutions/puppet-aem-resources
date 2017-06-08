@@ -33,45 +33,34 @@ Puppet::Type.newtype(:aem_outbox_replication_agent) do
 
   newparam :title do
     desc 'AEM outbox replication agent title'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :description do
     desc 'AEM outbox replication agent description'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :dest_base_url do
     desc 'AEM outbox replication agent destination base URL'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :user_id do
     desc 'AEM outbox replication agent user ID'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :log_level do
     desc 'AEM outbox replication agent log level'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :force do
     desc 'Set to true to force outbox replication agent to be created if it doesn\'t exist or updated if it already exists'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 end

@@ -34,7 +34,7 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolut
   # When force is set to true, flush agent will be created if it doesn't exist or updated if it already exists.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
       flush_agent.exists().data

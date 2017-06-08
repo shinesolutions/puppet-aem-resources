@@ -42,7 +42,6 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
   end
 
   def remove_all_agents
-    opts = {}
     run_modes = resource[:run_mode] == nil ? ['author', 'publish'] : [resource[:run_mode]]
 
     run_modes.each do |run_mode|

@@ -80,7 +80,7 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
   # When force is set to true, package will be created if it doesn't exist or overwritten if it already exists.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       package = client().package(resource[:group], resource[:name], resource[:version])
       package.is_installed().data

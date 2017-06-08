@@ -34,7 +34,7 @@ Puppet::Type.type(:aem_replication_agent).provide(:aem, :parent => PuppetX::Shin
   # When force is set to true, replication agent will be created if it doesn't exist or updated if it already exists.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       replication_agent = client().replication_agent(resource[:run_mode], resource[:name])
       replication_agent.exists().data

@@ -46,7 +46,7 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   # When force is set to true and if the user already exists then it will be deleted before recreated.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       user = client().user(resource[:path], resource[:name])
       user.exists().data
@@ -54,7 +54,7 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
   end
 
   def change_password
-    user = client({ username: resource[:name], password: resource[:old_password] }).user(resource[:path], resource[:name])
+    user = client(username: resource[:name], password: resource[:old_password]).user(resource[:path], resource[:name])
     result = user.change_password(resource[:old_password], resource[:new_password])
     handle(result)
   end

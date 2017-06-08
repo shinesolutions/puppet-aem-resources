@@ -33,59 +33,48 @@ Puppet::Type.newtype(:aem_replication_agent) do
 
   newparam :title do
     desc 'AEM replication agent title'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :description do
     desc 'AEM replication agent description'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :dest_base_url do
     desc 'AEM replication agent destination base URL'
-    validate do |value|
-      value = ''
-    end
   end
 
   newparam :transport_user do
     desc 'AEM replication agent transport user\'s username'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :transport_password do
     desc 'AEM replication agent transport user\'s password'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :log_level do
     desc 'AEM replication agent log level'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :retry_delay do
     desc 'AEM replication agent retry delay in milliseconds'
     validate do |value|
-      value = nil
+      value = nil if value == ''
     end
   end
 
   newparam :force do
     desc 'Set to true to force replication agent to be created if it doesn\'t exist or updated if it already exists'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 end

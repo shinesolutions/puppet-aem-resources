@@ -25,7 +25,7 @@ Puppet::Type.newtype(:aem_config_property) do
   newparam :type do
     desc 'AEM property type (e.g. String, Boolean)'
     validate do |value|
-      value = 'String'
+      value = 'String' if value == ''
     end
   end
 

@@ -34,7 +34,7 @@ Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => Puppet
   # When force is set to true, outbox replication agent will be created if it doesn't exist or updated if it already exists.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       outbox_replication_agent = client().outbox_replication_agent(resource[:run_mode], resource[:name])
       outbox_replication_agent.exists().data

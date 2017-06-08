@@ -44,7 +44,7 @@ Puppet::Type.type(:aem_group).provide(:aem, :parent => PuppetX::ShineSolutions::
   # Check whether the group exists or not.
   def exists?
     if resource[:force] == true
-      return false
+      false
     else
       group = client().group(resource[:path], resource[:name])
       group.exists().data

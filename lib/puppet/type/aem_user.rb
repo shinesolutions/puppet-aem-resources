@@ -86,9 +86,7 @@ Puppet::Type.newtype(:aem_user) do
   newparam :force do
     desc 'Set to true to force user creation, if the user already exists then it will be deleted before recreated, default to false'
     validate do |value|
-      if value == ''
-        value = false
-      end
+      value = false if value == ''
     end
   end
 end

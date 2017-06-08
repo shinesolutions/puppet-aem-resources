@@ -4,6 +4,13 @@ AllCops:
   Exclude:
     - pkg/**/*
     - test/**/*
+# Disabled useless assignment check due to Puppet type param validation
+# e.g.
+# validate do |value|
+#   value = 'foo' if value == ''
+# end
+Lint/UselessAssignment:
+  Enabled: false
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
