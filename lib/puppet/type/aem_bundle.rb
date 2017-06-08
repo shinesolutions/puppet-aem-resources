@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_bundle)do
-
+Puppet::Type.newtype(:aem_bundle) do
   ensurable do
-
     newvalue(:started) do
       provider.start
     end
@@ -23,7 +21,6 @@ Puppet::Type.newtype(:aem_bundle)do
     newvalue(:stopped) do
       provider.stop
     end
-
   end
 
   newparam :name, :namevar => false do
@@ -32,5 +29,4 @@ Puppet::Type.newtype(:aem_bundle)do
       fail 'Bundle name must be provided' if value == ''
     end
   end
-
 end

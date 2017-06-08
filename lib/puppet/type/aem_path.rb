@@ -12,14 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_path)do
-
+Puppet::Type.newtype(:aem_path) do
   ensurable do
-
     newvalue(:is_activated) do
       provider.activate
     end
-
   end
 
   newparam :name, :namevar => false do
@@ -28,5 +25,4 @@ Puppet::Type.newtype(:aem_path)do
       fail 'AEM path name must be provided' if value == ''
     end
   end
-
 end

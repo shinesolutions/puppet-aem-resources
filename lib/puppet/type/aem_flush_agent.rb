@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_flush_agent)do
-
+Puppet::Type.newtype(:aem_flush_agent) do
   ensurable
 
   newparam :name, :namevar => false do
@@ -75,5 +74,4 @@ Puppet::Type.newtype(:aem_flush_agent)do
       end
     end
   end
-
 end

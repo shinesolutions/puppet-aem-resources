@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_repository)do
-
+Puppet::Type.newtype(:aem_repository) do
   ensurable do
-
     newvalue(:writes_unblocked) do
       provider.unblock_writes
     end
@@ -23,10 +21,8 @@ Puppet::Type.newtype(:aem_repository)do
     newvalue(:writes_blocked) do
       provider.block_writes
     end
-
   end
 
   newparam :name, :namevar => false do
   end
-
 end

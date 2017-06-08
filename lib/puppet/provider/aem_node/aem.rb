@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_node).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a node.
   def create
     node = client().node(resource[:path], resource[:name])
@@ -35,5 +34,4 @@ Puppet::Type.type(:aem_node).provide(:aem, :parent => PuppetX::ShineSolutions::P
     node = client().node(resource[:path], resource[:name])
     node.exists().data
   end
-
 end

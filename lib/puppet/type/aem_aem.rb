@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_aem)do
-
+Puppet::Type.newtype(:aem_aem) do
   ensurable do
-
     newvalue(:login_page_is_ready) do
       provider.get_login_page_wait_until_ready
     end
@@ -27,7 +25,6 @@ Puppet::Type.newtype(:aem_aem)do
     newvalue(:all_agents_removed) do
       provider.remove_all_agents
     end
-
   end
 
   newparam :name, :namevar => false do
@@ -87,5 +84,4 @@ Puppet::Type.newtype(:aem_aem)do
       end
     end
   end
-
 end

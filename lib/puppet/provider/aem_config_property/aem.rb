@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_config_property).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a config property.
   def create
     config_property = client().config_property(resource[:name], resource[:type], resource[:value])
@@ -28,5 +27,4 @@ Puppet::Type.type(:aem_config_property).provide(:aem, :parent => PuppetX::ShineS
   def exists?
     false
   end
-
 end

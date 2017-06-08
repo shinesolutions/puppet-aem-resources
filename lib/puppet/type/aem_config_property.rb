@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_config_property)do
-
+Puppet::Type.newtype(:aem_config_property) do
   ensurable
 
   newparam :name, :namevar => false do
@@ -52,5 +51,4 @@ Puppet::Type.newtype(:aem_config_property)do
       fail 'AEM config node name must be provided' if value == ''
     end
   end
-
 end

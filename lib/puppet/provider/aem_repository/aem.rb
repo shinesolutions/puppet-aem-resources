@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_repository).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Block repository writes.
   def block_writes
     client().repository().block_writes()
@@ -30,5 +29,4 @@ Puppet::Type.type(:aem_repository).provide(:aem, :parent => PuppetX::ShineSoluti
   def exists?
     true
   end
-
 end

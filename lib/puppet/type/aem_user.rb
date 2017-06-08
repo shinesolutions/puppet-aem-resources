@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_user)do
-
+Puppet::Type.newtype(:aem_user) do
   ensurable do
-
     newvalue(:password_changed) do
       provider.change_password
     end
@@ -45,7 +43,6 @@ Puppet::Type.newtype(:aem_user)do
       end
       nil
     end
-
   end
 
   newparam :name, :namevar => false do
@@ -94,5 +91,4 @@ Puppet::Type.newtype(:aem_user)do
       end
     end
   end
-
 end

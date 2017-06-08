@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a outbox replication agent.
   def create
     outbox_replication_agent = client().outbox_replication_agent(resource[:run_mode], resource[:name])
@@ -41,5 +40,4 @@ Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, :parent => Puppet
       outbox_replication_agent.exists().data
     end
   end
-
 end

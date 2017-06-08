@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Get the login page and wait until it's ready.
   # This is handy when AEM restarts Jetty and the next operation needs to wait.
   def get_login_page_wait_until_ready
@@ -60,5 +59,4 @@ Puppet::Type.type(:aem_aem).provide(:aem, :parent => PuppetX::ShineSolutions::Pu
   def exists?
     true
   end
-
 end

@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_group).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a group.
   # When force is set to true and if the group already exists then it will be deleted before recreated.
   def create
@@ -51,5 +50,4 @@ Puppet::Type.type(:aem_group).provide(:aem, :parent => PuppetX::ShineSolutions::
       group.exists().data
     end
   end
-
 end

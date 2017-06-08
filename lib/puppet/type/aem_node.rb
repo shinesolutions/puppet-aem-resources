@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_node)do
-
+Puppet::Type.newtype(:aem_node) do
   ensurable
 
   newparam :name, :namevar => false do
@@ -36,5 +35,4 @@ Puppet::Type.newtype(:aem_node)do
       fail 'AEM node type must be provided' if value == ''
     end
   end
-
 end

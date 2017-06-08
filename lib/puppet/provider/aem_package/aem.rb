@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Archive a package by building a new package and downloading in to the specified path.
   # All older versions of the package that could've been built beforehand will be deleted before building the new package.
   def archive
@@ -28,7 +27,7 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    package.get_versions.data.each do | version |
+    package.get_versions.data.each do |version|
       package_per_version = client().package(resource[:group], resource[:name], version)
       results.push(package_per_version.delete_wait_until_ready()) if package_per_version.exists().data == true
     end
@@ -87,5 +86,4 @@ Puppet::Type.type(:aem_package).provide(:aem, :parent => PuppetX::ShineSolutions
       package.is_installed().data
     end
   end
-
 end

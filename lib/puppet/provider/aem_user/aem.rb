@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a user.
   # When force is set to true and if the user already exists then it will be deleted before recreated.
   def create
@@ -76,5 +75,4 @@ Puppet::Type.type(:aem_user).provide(:aem, :parent => PuppetX::ShineSolutions::P
     end
     handle_multi(results)
   end
-
 end

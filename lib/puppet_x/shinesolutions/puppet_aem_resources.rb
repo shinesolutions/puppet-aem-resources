@@ -17,11 +17,10 @@ require 'ruby_aem'
 module PuppetX
   module ShineSolutions
     class PuppetAemResources < Puppet::Provider
-
       @@label = '[puppet-aem-resources]'
 
       def self.client(opts = nil)
-        config_file = File.join([ File.dirname(Puppet.settings[:config]), 'aem.yaml' ])
+        config_file = File.join([File.dirname(Puppet.settings[:config]), 'aem.yaml'])
         if File.exist?(config_file)
           config = YAML.load_file(config_file)
         end
@@ -66,7 +65,6 @@ module PuppetX
       def handle_multi(results)
         results.each { |result| handle(result) }
       end
-
     end
   end
 end

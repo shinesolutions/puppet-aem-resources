@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Puppet::Type.newtype(:aem_package)do
-
+Puppet::Type.newtype(:aem_package) do
   ensurable do
-
     newvalue(:archived) do
       provider.archive
     end
@@ -37,7 +35,6 @@ Puppet::Type.newtype(:aem_package)do
       end
       nil
     end
-
   end
 
   newparam :name, :namevar => false do
@@ -125,5 +122,4 @@ Puppet::Type.newtype(:aem_package)do
       end
     end
   end
-
 end

@@ -15,7 +15,6 @@
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 
 Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Create a flush agent.
   def create
     flush_agent = client().flush_agent(resource[:run_mode], resource[:name])
@@ -41,5 +40,4 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, :parent => PuppetX::ShineSolut
       flush_agent.exists().data
     end
   end
-
 end
