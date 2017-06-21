@@ -1,0 +1,11 @@
+.DS_Store
+.git
+.gitignore
+.pmtignore
+.rubocopy.yml
+.travis.yml
+Gemfile.lock
+Makefile
+pkg/
+test/
+.idea/

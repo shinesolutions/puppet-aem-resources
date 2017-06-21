@@ -1,5 +1,5 @@
 ### 1.1.2
-*
+* Exclude test and tools config files from module package #16
 
 ### 1.1.1
 * Fix aem.yaml.epp template to handle non-String types
