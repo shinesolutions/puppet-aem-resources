@@ -1,3 +1,6 @@
+### 1.1.2
+*
+
 ### 1.1.1
 * Fix aem.yaml.epp template to handle non-String types
 
