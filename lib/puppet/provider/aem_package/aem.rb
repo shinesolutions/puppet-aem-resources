@@ -60,7 +60,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
     results.push(package.upload_wait_until_ready(resource[:path], upload_opts))
     results.push(package.install_wait_until_ready(install_opts))
     results.push(package.replicate) if resource[:replicate] == true
-    results.push(package.activate(true, false)) if resource[:activate] == true
+    results = results.concat(package.activate_filter(true, false)) if resource[:activate] == true
     handle_multi(results)
   end
 

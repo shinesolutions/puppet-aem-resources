@@ -1,5 +1,6 @@
 ### 1.1.2
 * Exclude test and tools config files from module package #16
+* Fix undefined method error when package activate is set to true #17
 
 ### 1.1.1
 * Fix aem.yaml.epp template to handle non-String types

@@ -6,7 +6,7 @@ $packages = [
     version   => '1.2.3',
     group     => 'somepackagegroup',
     replicate => true,
-    activate  => false,
+    activate  => true,
     force     => true
   }
 ]
