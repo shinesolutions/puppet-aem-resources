@@ -17,24 +17,15 @@ class aem_resources::deploy_packages (
       force     => $package[force],
     }
 
-    if has_key($package, 'sleep_seconds') {
+    $final_sleep_seconds = pick(
+      $package['sleep_seconds'],
+      $sleep_seconds,
+    )
 
-      exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
-        command => "sleep ${package['sleep_seconds']}",
-        cwd     => $path,
-        path    => ['/usr/bin', '/usr/sbin', '/bin'],
-        require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
-      }
-
-    } else {
-
-      exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
-        command => "sleep ${sleep_seconds}",
-        cwd     => $path,
-        path    => ['/usr/bin', '/usr/sbin', '/bin'],
-        require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
-      }
-
+    exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
+      command => "sleep ${final_sleep_seconds}",
+      path    => ['/usr/bin', '/usr/sbin', '/bin'],
+      require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
     }
 
     aem_aem { "Wait until login page is ready post Deploy package ${package['group']}/${package['name']}-${package['version']}":
