@@ -25,6 +25,7 @@ class aem_resources::deploy_packages (
     exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       command => "sleep ${final_sleep_seconds}",
       path    => ['/usr/bin', '/usr/sbin', '/bin'],
+      timeout => 0,
       require => Aem_package["Deploy package ${package['group']}/${package['name']}-${package['version']}"],
     }
 
