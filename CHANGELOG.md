@@ -1,4 +1,4 @@
-### 1.1.2
+### 1.2.0
 * Lock Puppet to version 4.x
 * Exclude test and tools config files from module package #16
 * Fix undefined method error when package activate is set to true #17
