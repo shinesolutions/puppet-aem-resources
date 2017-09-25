@@ -4,11 +4,10 @@ deps:
 	gem install bundler
 	rm -rf .bundle
 	bundle install
-	cd test/integration/ && librarian-puppet install --path modules --verbose
+	cd test/integration/ && r10k puppetfile install --moduledir modules
 
 clean:
 	rm -rf pkg
-	rm -rf test/integration/.librarian/
 	rm -rf test/integration/.tmp/
 	rm -rf test/integration/modules/
 	rm -rf /tmp/shinesolutions/puppet-aem-resources/
@@ -67,6 +66,6 @@ package:
 	puppet module build .
 
 tools:
-	gem install puppet puppet-lint librarian-puppet
+	gem install puppet puppet-lint r10k
 
 .PHONY: ci clean deps lint test-integration package tools

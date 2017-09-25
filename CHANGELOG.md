@@ -4,6 +4,7 @@
 * Fix undefined method error when package activate is set to true #17
 * Post package installation delay is only executed for packages that haven't been installed
 * Disable timeout on package installation execution
+* Replace librarian-puppet with r10k for integration test dependencies resolution
 
 ### 1.1.1
 * Fix aem.yaml.epp template to handle non-String types
