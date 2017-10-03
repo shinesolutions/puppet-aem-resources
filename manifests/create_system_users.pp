@@ -4,6 +4,7 @@ class aem_resources::create_system_users(
   $deployer_password = 'deployer',
   $exporter_password = 'exporter',
   $importer_password = 'importer',
+  $aem_id = undef,
 ) {
 
   aem_user { 'Create user - orchestrator':
@@ -14,6 +15,7 @@ class aem_resources::create_system_users(
     group_name => 'administrators',
     group_path => '/home/groups/a',
     force      => true,
+    aem_id     => $aem_id,
   }
 
   aem_user { 'Create user - replicator':
@@ -24,6 +26,7 @@ class aem_resources::create_system_users(
     group_name => 'administrators',
     group_path => '/home/groups/a',
     force      => true,
+    aem_id     => $aem_id,
   }
 
   # deployer user does not use /home/users/d/
@@ -41,6 +44,7 @@ class aem_resources::create_system_users(
     group_name => 'administrators',
     group_path => '/home/groups/a',
     force      => true,
+    aem_id     => $aem_id,
   }
 
   aem_user { 'Create user - exporter':
@@ -51,6 +55,7 @@ class aem_resources::create_system_users(
     group_name => 'administrators',
     group_path => '/home/groups/a',
     force      => true,
+    aem_id     => $aem_id,
   }
 
   aem_user { 'Create user - importer':
@@ -61,5 +66,6 @@ class aem_resources::create_system_users(
     group_name => 'administrators',
     group_path => '/home/groups/a',
     force      => true,
+    aem_id     => $aem_id,
   }
 }

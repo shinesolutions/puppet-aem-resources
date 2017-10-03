@@ -1,4 +1,5 @@
 class aem_resources::publish_set_osgi_config(
+  $aem_id = undef,
 ) {
 
   # Security - CSRF attacks prevention
@@ -7,6 +8,7 @@ class aem_resources::publish_set_osgi_config(
     name   => 'org.apache.sling.security.impl.ReferrerFilter',
     path   => '/apps/system/config.publish',
     type   => 'sling:OsgiConfig',
+    aem_id => $aem_id,
   }
   -> aem_config_property { 'Do not allow empty referrer':
     ensure           => present,
@@ -15,6 +17,7 @@ class aem_resources::publish_set_osgi_config(
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
+    aem_id           => $aem_id,
   }
 
   # Security - DoS prevention
@@ -23,6 +26,7 @@ class aem_resources::publish_set_osgi_config(
     name   => 'org.apache.sling.servlets.get.DefaultGetServlet',
     path   => '/apps/system/config.publish',
     type   => 'sling:OsgiConfig',
+    aem_id => $aem_id,
   }
   -> aem_config_property { 'Limit depth of JSON rendering':
     ensure           => present,
@@ -31,6 +35,7 @@ class aem_resources::publish_set_osgi_config(
     value            => '100',
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable HTML renderer':
     ensure           => present,
@@ -39,6 +44,7 @@ class aem_resources::publish_set_osgi_config(
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable plain text renderer':
     ensure           => present,
@@ -47,6 +53,7 @@ class aem_resources::publish_set_osgi_config(
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable XML renderer':
     ensure           => present,
@@ -55,6 +62,7 @@ class aem_resources::publish_set_osgi_config(
     value            => false,
     run_mode         => 'publish',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
 
 }

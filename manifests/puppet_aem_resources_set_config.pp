@@ -6,9 +6,10 @@ class aem_resources::puppet_aem_resources_set_config(
   $host = undef,
   $port = undef,
   $debug = undef,
+  $aem_id = 'aem',
 ) {
 
-  file { "${conf_dir}/aem.yaml":
+  file { "${conf_dir}/${aem_id}.yaml":
     ensure  => file,
     content => epp('aem_resources/aem.yaml.epp', {
       username => $username,

@@ -1,7 +1,8 @@
 class aem_resources::deploy_packages (
   $packages,
-  $path          = '/tmp/shinesolutions/puppet-aem-resources',
-  $sleep_seconds = 10
+  $path = '/tmp/shinesolutions/puppet-aem-resources',
+  $sleep_seconds = 10,
+  $aem_id = undef,
 ) {
 
   $packages.each | Integer $index, Hash $package| {
@@ -20,6 +21,7 @@ class aem_resources::deploy_packages (
       replicate => $package[replicate],
       activate  => $package[activate],
       force     => $package[force],
+      aem_id    => $aem_id,
     }
     -> exec { "Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       command     => "sleep ${final_sleep_seconds}",
@@ -34,12 +36,14 @@ class aem_resources::deploy_packages (
       retries_base_sleep_seconds => 5,
       retries_max_sleep_seconds  => 5,
       require                    => Exec["Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}"],
+      aem_id                     => $aem_id,
     } -> aem_aem { "Wait until aem health check is ok post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => aem_health_check_is_ok,
       tags                       => 'deep',
       retries_max_tries          => 60,
       retries_base_sleep_seconds => 5,
       retries_max_sleep_seconds  => 5,
+      aem_id                     => $aem_id,
     }
 
   }

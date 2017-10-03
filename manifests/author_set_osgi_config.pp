@@ -1,4 +1,5 @@
 class aem_resources::author_set_osgi_config(
+  $aem_id = undef,
 ) {
 
   # Security - DoS prevention
@@ -7,6 +8,7 @@ class aem_resources::author_set_osgi_config(
     name   => 'org.apache.sling.servlets.get.DefaultGetServlet',
     path   => '/apps/system/config.author',
     type   => 'sling:OsgiConfig',
+    aem_id => $aem_id,
   }
   -> aem_config_property { 'Limit depth of JSON rendering':
     ensure           => present,
@@ -15,6 +17,7 @@ class aem_resources::author_set_osgi_config(
     value            => '100',
     run_mode         => 'author',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable HTML renderer':
     ensure           => present,
@@ -23,6 +26,7 @@ class aem_resources::author_set_osgi_config(
     value            => false,
     run_mode         => 'author',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable plain text renderer':
     ensure           => present,
@@ -31,6 +35,7 @@ class aem_resources::author_set_osgi_config(
     value            => false,
     run_mode         => 'author',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
   -> aem_config_property { 'Disable XML renderer':
     ensure           => present,
@@ -39,6 +44,7 @@ class aem_resources::author_set_osgi_config(
     value            => false,
     run_mode         => 'author',
     config_node_name => 'org.apache.sling.servlets.get.DefaultGetServlet',
+    aem_id           => $aem_id,
   }
 
 }
