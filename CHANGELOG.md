@@ -1,3 +1,6 @@
+### 1.3.0
+*
+
 ### 1.2.0
 * Lock Puppet to version 4.x
 * Exclude test and tools config files from module package #16
