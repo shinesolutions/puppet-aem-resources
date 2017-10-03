@@ -17,12 +17,12 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_bundle).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Start a bundle.
   def start
-    client.bundle(resource[:name]).start
+    client(aem_id: resource[:aem_id]).bundle(resource[:name]).start
   end
 
   # Stop a bundle.
   def stop
-    client.bundle(resource[:name]).stop
+    client(aem_id: resource[:aem_id]).bundle(resource[:name]).stop
   end
 
   # Existence check defaults to true in order to simulate that the bundle exists.

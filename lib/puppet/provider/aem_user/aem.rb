@@ -18,7 +18,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   # Create a user.
   # When force is set to true and if the user already exists then it will be deleted before recreated.
   def create
-    user = client.user(resource[:path], resource[:name])
+    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
     results = []
     if resource[:force] == true && user.exists.data == true
       results.push(user.delete)
@@ -37,7 +37,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   # Delete the user.
   def destroy
-    user = client.user(resource[:path], resource[:name])
+    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
     result = user.delete
     handle(result)
   end
@@ -48,7 +48,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     if resource[:force] == true
       false
     else
-      user = client.user(resource[:path], resource[:name])
+      user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
       user.exists.data
     end
   end
@@ -60,13 +60,13 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   end
 
   def add_to_group
-    user = client.user(resource[:path], resource[:name])
+    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
     result = user.add_to_group(resource[:group_path], resource[:group_name])
     handle(result)
   end
 
   def set_permission
-    user = client.user(resource[:path], resource[:name])
+    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
     results = []
     unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|

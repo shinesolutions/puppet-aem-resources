@@ -50,6 +50,16 @@ Configuration file should be named `aem.yaml` and be placed under [Puppet config
 
 If a configuration property is not set, then it will use the default value set in [ruby_aem](https://github.com/shinesolutions/ruby_aem).
 
+However, if the invocation specifies an `aem_id` attribute, then the value of that attribute will be used to identify the environment variables and configuration file. For example:
+
+    aem_bundle {
+      ...
+      aem_id => 'myaem',
+      ...
+    }
+
+The invocation above will use environment variables with `myaem_` prefix, e.g. `myaem_username`, and it will use a configuration file named `myaem.yaml` under Puppet config directory.
+
 Usage
 -----
 
@@ -345,3 +355,46 @@ Enable CRXDE:
     class { 'aem_resources::enable_crxde':
       run_mode => 'author',
     }
+
+Multi AEM instances
+-------------------
+
+Starting from version 1.3.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
+
+Let's say you have an AEM author instance at http://localhost:4502 and an AEM publish instance at https://localhost:5433 . Set up the following configuration files:
+
+`<puppet-config-dir>/myaemauthor.yaml`
+
+    ---
+    :username: 'admin'
+    :password: 'admin'
+    :protocol: 'http'
+    :host: 'localhost'
+    :port: 4502
+    :debug: False
+
+`<puppet-config-dir>/myaempublish.yaml`
+
+    ---
+    :username: 'admin'
+    :password: 'admin'
+    :protocol: 'https'
+    :host: 'localhost'
+    :port: 5433
+    :debug: False
+
+Then specify `aem_id` attribute on resource invocation in Puppet manifest:
+
+    aem_bundle { 'Stop webdav bundle':
+      ensure => stopped,
+      name   => 'org.apache.sling.jcr.webdav',
+      aem_id => 'myaemauthor',
+    }
+
+    aem_bundle { 'Stop webdav bundle':
+      ensure => stopped,
+      name   => 'org.apache.sling.jcr.webdav',
+      aem_id => 'myaempublish',
+    }
+
+The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.

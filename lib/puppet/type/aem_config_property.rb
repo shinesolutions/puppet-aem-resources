@@ -15,11 +15,21 @@
 Puppet::Type.newtype(:aem_config_property) do
   ensurable
 
-  newparam :name, namevar: false do
+  def self.title_patterns
+    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+  end
+
+  newparam :name do
+    isnamevar
     desc 'AEM property name'
     validate do |value|
       raise ArgumentError.new('AEM property name must be provided') if value == ''
     end
+  end
+
+  newparam :aem_id do
+    isnamevar
+    desc 'AEM instance ID'
   end
 
   newparam :type do

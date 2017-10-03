@@ -37,11 +37,21 @@ Puppet::Type.newtype(:aem_package) do
     end
   end
 
-  newparam :name, namevar: false do
+  def self.title_patterns
+    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+  end
+
+  newparam :name do
+    isnamevar
     desc 'AEM package name'
     validate do |value|
       raise ArgumentError.new('Name must be provided') if value == ''
     end
+  end
+
+  newparam :aem_id do
+    isnamevar
+    desc 'AEM instance ID'
   end
 
   newparam :version do

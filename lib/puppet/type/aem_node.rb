@@ -15,11 +15,21 @@
 Puppet::Type.newtype(:aem_node) do
   ensurable
 
-  newparam :name, namevar: false do
+  def self.title_patterns
+    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+  end
+
+  newparam :name do
+    isnamevar
     desc 'AEM node name'
     validate do |value|
       raise ArgumentError.new('AEM node name must be provided') if value == ''
     end
+  end
+
+  newparam :aem_id do
+    isnamevar
+    desc 'AEM instance ID'
   end
 
   newparam :path do

@@ -27,8 +27,18 @@ Puppet::Type.newtype(:aem_aem) do
     end
   end
 
-  newparam :name, namevar: false do
+  def self.title_patterns
+    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+  end
+
+  newparam :name do
+    isnamevar
     desc 'Description'
+  end
+
+  newparam :aem_id do
+    isnamevar
+    desc 'AEM instance ID'
   end
 
   newparam :tags do

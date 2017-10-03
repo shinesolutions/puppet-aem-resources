@@ -17,12 +17,12 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_repository).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Block repository writes.
   def block_writes
-    client.repository.block_writes
+    client(aem_id: resource[:aem_id]).repository.block_writes
   end
 
   # Unblock repository writes.
   def unblock_writes
-    client.repository.unblock_writes
+    client(aem_id: resource[:aem_id]).repository.unblock_writes
   end
 
   # Existence check defaults to true because repository should always exist in AEM.

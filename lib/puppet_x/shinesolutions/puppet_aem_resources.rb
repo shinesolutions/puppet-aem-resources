@@ -22,17 +22,20 @@ module PuppetX
       @label = '[puppet-aem-resources]'
 
       def self.client(opts = nil)
-        config_file = File.join([File.dirname(Puppet.settings[:config]), 'aem.yaml'])
+        aem_id = opts[:aem_id] || 'aem'
+        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%s.yaml', aem_id)])
         config = YAML.load_file(config_file) if File.exist?(config_file)
 
         # Set RubyAem::Aem parameters in order of priority:
         # - use opts if provided
-        # - otherwise, use environment variable if provided, variable name is prefixed with 'aem_', e.g. aem_username, aem_password, aem_debug
-        # - otherwise, use config file property if provided in aem.yaml
-        # - otherwise, use RubyAem::Aem's default value
+        # - otherwise, use environment variable if provided, variable name is prefixed with value of `aem_id` variable,
+        #   e.g. if aem_id is aem, then the environment variables would be aem_username, aem_password, aem_debug
+        # - otherwise, use config file property if provided, config file name is using `aem_id` variable,
+        #   e.g. if aem_id is aem, then file name is aem.yaml
+        # - otherwise, use RubyAem::Aem's default configuration values
         params = {}
         %w[username password protocol host port debug timeout].each { |field|
-          env_field = format('aem_%s', field)
+          env_field = format('%s_%s', aem_id, field)
           if !opts.nil? && !opts[field.to_sym].nil?
             params[field.to_sym] = opts[field.to_sym]
           elsif !ENV[env_field].nil?

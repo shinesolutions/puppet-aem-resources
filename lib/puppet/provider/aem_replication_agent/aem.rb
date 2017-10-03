@@ -17,7 +17,7 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_replication_agent).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a replication agent.
   def create
-    replication_agent = client.replication_agent(resource[:run_mode], resource[:name])
+    replication_agent = client(aem_id: resource[:aem_id]).replication_agent(resource[:run_mode], resource[:name])
     opts = { transport_user: resource[:transport_user], transport_password: resource[:transport_password], log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
     result = replication_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
@@ -25,7 +25,7 @@ Puppet::Type.type(:aem_replication_agent).provide(:aem, parent: PuppetX::ShineSo
 
   # Delete the replication agent.
   def destroy
-    replication_agent = client.replication_agent(resource[:run_mode], resource[:name])
+    replication_agent = client(aem_id: resource[:aem_id]).replication_agent(resource[:run_mode], resource[:name])
     result = replication_agent.delete
     handle(result)
   end
@@ -36,7 +36,7 @@ Puppet::Type.type(:aem_replication_agent).provide(:aem, parent: PuppetX::ShineSo
     if resource[:force] == true
       false
     else
-      replication_agent = client.replication_agent(resource[:run_mode], resource[:name])
+      replication_agent = client(aem_id: resource[:aem_id]).replication_agent(resource[:run_mode], resource[:name])
       replication_agent.exists.data
     end
   end
