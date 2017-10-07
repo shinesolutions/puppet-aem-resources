@@ -27,7 +27,7 @@ And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't be
       provider => 'puppet_gem',
     } ->
     package { 'ruby_aem':
-      ensure   => '1.3.0',
+      ensure   => '1.4.0',
       provider => 'puppet_gem',
     }
 
@@ -78,6 +78,13 @@ AEM
       ensure                     => aem_health_check_is_ok,
       tags                       => 'deep',
       combine_tags_or            => false,
+      retries_max_tries          => 60,
+      retries_base_sleep_seconds => 5,
+      retries_max_sleep_seconds  => 5,
+    }
+
+    aem_aem { 'Wait until install status is finished':
+      ensure                     => install_status_is_finished,
       retries_max_tries          => 60,
       retries_base_sleep_seconds => 5,
       retries_max_sleep_seconds  => 5,

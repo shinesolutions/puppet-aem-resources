@@ -41,6 +41,20 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
     client(aem_id: resource[:aem_id]).aem.get_aem_health_check_wait_until_ok(opts)
   end
 
+  # Get the install status and wait until it's finished.
+  # This is handy for waiting while AEM is installing one or more packages
+  # until they are all finished.
+  def get_install_status_wait_until_finished
+    opts = {
+      _retries: {
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
+      }
+    }
+    client(aem_id: resource[:aem_id]).aem.get_install_status_wait_until_finished(opts)
+  end
+
   def remove_all_agents
     run_modes = resource[:run_mode].nil? ? %w[author publish] : [resource[:run_mode]]
 

@@ -22,6 +22,10 @@ Puppet::Type.newtype(:aem_aem) do
       provider.get_aem_health_check_wait_until_ok
     end
 
+    newvalue(:install_status_is_finished) do
+      provider.get_install_status_wait_until_finished
+    end
+
     newvalue(:all_agents_removed) do
       provider.remove_all_agents
     end

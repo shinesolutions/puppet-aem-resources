@@ -1,5 +1,6 @@
 ### 1.3.0
 * Add multi AEM instances support using aem_id attribute #19
+* Add aem resource install_status_is_finished ensurable
 
 ### 1.2.0
 * Lock Puppet to version 4.x
