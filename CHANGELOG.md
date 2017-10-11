@@ -1,5 +1,8 @@
+### 2.0.0
+* Add multi AEM instances support at manifests level by replacing classes with definitions #19
+
 ### 1.3.0
-* Add multi AEM instances support using aem_id attribute #19
+* Add multi AEM instances support at custom types level by introducing aem_id attribute #19
 * Add aem resource install_status_is_finished ensurable
 
 ### 1.2.0

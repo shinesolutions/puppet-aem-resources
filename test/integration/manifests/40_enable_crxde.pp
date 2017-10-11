@@ -1,3 +1,3 @@
-class { 'aem_resources::enable_crxde':
+aem_resources::enable_crxde { 'Enable CRXDE':
   run_mode => 'author',
 }

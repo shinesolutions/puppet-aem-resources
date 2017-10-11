@@ -17,7 +17,7 @@ java_ks { 'Set up truststore':
   trustcacerts => true,
 }
 
-class { 'aem_resources::author_publish_enable_ssl':
+aem_resources::author_publish_enable_ssl { 'Enable author/publish SSL':
   run_mode            => 'author',
   port                => 5433,
   keystore            => '/tmp/shinesolutions/puppet-aem-resources/aem.ks',

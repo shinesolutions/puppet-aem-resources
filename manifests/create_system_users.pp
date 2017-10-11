@@ -1,4 +1,4 @@
-class aem_resources::create_system_users(
+define aem_resources::create_system_users(
   $orchestrator_password = 'orchestrator',
   $replicator_password = 'replicator',
   $deployer_password = 'deployer',

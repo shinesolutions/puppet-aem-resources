@@ -1,4 +1,3 @@
-
 $packages = [
   {
     ensure    => present,
@@ -11,7 +10,7 @@ $packages = [
   }
 ]
 
-class { 'aem_resources::deploy_packages':
+aem_resources::deploy_packages { 'Deploy packages':
   packages => $packages,
   path     => '/tmp/shinesolutions/puppet-aem-resources/',
 }

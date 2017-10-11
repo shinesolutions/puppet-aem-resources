@@ -1,4 +1,4 @@
-class aem_resources::puppet_aem_resources_set_config(
+define aem_resources::puppet_aem_resources_set_config(
   $conf_dir,
   $username = undef,
   $password = undef,

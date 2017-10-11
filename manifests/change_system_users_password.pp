@@ -1,4 +1,4 @@
-class aem_resources::change_system_users_password(
+define aem_resources::change_system_users_password(
   $orchestrator_new_password,
   $replicator_new_password,
   $deployer_new_password,

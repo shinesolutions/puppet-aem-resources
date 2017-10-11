@@ -1,4 +1,4 @@
-class aem_resources::author_set_osgi_config(
+define aem_resources::author_set_osgi_config(
   $aem_id = undef,
 ) {
 

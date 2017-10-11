@@ -1,4 +1,4 @@
-class aem_resources::enable_crxde(
+define aem_resources::enable_crxde(
   $run_mode,
   $aem_id = 'aem',
 ) {

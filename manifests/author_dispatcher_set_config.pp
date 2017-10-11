@@ -1,4 +1,4 @@
-class aem_resources::author_dispatcher_set_config(
+define aem_resources::author_dispatcher_set_config(
   $dispatcher_conf_dir,
   $httpd_conf_dir,
   $docroot_dir,

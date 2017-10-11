@@ -1,4 +1,4 @@
-class aem_resources::author_publish_enable_ssl(
+define aem_resources::author_publish_enable_ssl(
   $run_mode,
   $port,
   $keystore,

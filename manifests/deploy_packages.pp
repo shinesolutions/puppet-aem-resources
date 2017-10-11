@@ -1,4 +1,4 @@
-class aem_resources::deploy_packages (
+define aem_resources::deploy_packages (
   $packages,
   $path = '/tmp/shinesolutions/puppet-aem-resources',
   $sleep_seconds = 10,

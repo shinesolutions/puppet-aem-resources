@@ -328,26 +328,29 @@ Other than single AEM resource, this module also provides predefined classes for
 
 Remove default agents on AEM Author:
 
-    include aem_resources::author_remove_default_agents
+    aem_resources::author_remove_default_agents { 'Remove default author agents':
+    }
 
 Remove default agents on AEM Publish:
 
-    include aem_resources::publish_remove_default_agents
+    aem_resources::publish_remove_default_agents { 'Remove default publish agents':
+    }
 
 Set AEM Author Standby configuration:
 
-    class { 'aem_resources::author_standby_set_config':
+    aem_resources::author_standby_set_config { 'Set author standby config':
       install_dir  => '/opt/aem/crx-quickstart/install',
       primary_host => 'somehost',
     }
 
 Create system users (orchestrator, replicator, deployer, exporter, importer):
 
-    include aem_resources::create_system_users
+    aem_resources::create_system_users { 'Create system users':
+    }
 
 Create Puppet AEM Resources' configuration file:
 
-    class { 'aem_resources::puppet_aem_resources_set_config':
+    aem_resources::puppet_aem_resources_set_config { 'Set puppet-aem-resources config file for author':
       conf_dir => '/tmp/puppet-aem-resources/',
       username => 'admin',
       password => 'admin',
@@ -359,14 +362,14 @@ Create Puppet AEM Resources' configuration file:
 
 Enable CRXDE:
 
-    class { 'aem_resources::enable_crxde':
+    aem_resources::enable_crxde { 'Enable CRXDE':
       run_mode => 'author',
     }
 
 Multi AEM instances
 -------------------
 
-Starting from version 1.3.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
+Starting from version 2.0.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
 
 Let's say you have an AEM author instance at http://localhost:4502 and an AEM publish instance at https://localhost:5433 . Set up the following configuration files:
 
@@ -405,3 +408,22 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
     }
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
+
+Upgrade
+-------
+
+Upgrading to 2.x.x:
+
+* Replace all class calls to definitions.
+
+  From:
+
+    class { 'aem_resources::enable_crxde':
+      run_mode => 'author',
+    }
+
+  To:
+
+    aem_resources::enable_crxde { 'Enable CRXDE':
+      run_mode => 'author',
+    }

@@ -1,4 +1,4 @@
-class aem_resources::author_remove_default_agents(
+define aem_resources::author_remove_default_agents(
   $aem_id = undef,
 ) {
 

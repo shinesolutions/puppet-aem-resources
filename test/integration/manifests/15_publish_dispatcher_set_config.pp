@@ -1,4 +1,4 @@
-class { 'aem_resources::publish_dispatcher_set_config':
+aem_resources::publish_dispatcher_set_config { 'Set publish-dispatcher config':
   dispatcher_conf_dir => '/tmp/shinesolutions/puppet-aem-resources/publish-dispatcher/',
   httpd_conf_dir      => '/tmp/shinesolutions/puppet-aem-resources/publish-httpd/',
   docroot_dir         => '/path/to/some/docroot/',

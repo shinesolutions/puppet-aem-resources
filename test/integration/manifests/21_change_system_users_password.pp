@@ -1,4 +1,4 @@
-class { 'aem_resources::change_system_users_password':
+aem_resources::change_system_users_password { 'Change system users password':
   orchestrator_new_password => 'orchestrator',
   replicator_new_password   => 'replicator',
   deployer_new_password     => 'deployer',
