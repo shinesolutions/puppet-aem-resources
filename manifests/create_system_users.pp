@@ -4,10 +4,10 @@ define aem_resources::create_system_users(
   $deployer_password = 'deployer',
   $exporter_password = 'exporter',
   $importer_password = 'importer',
-  $aem_id = undef,
+  $aem_id = 'aem',
 ) {
 
-  aem_user { 'Create user - orchestrator':
+  aem_user { "[${aem_id}] Create user - orchestrator":
     ensure     => present,
     name       => 'orchestrator',
     path       => '/home/users/o',
@@ -18,7 +18,7 @@ define aem_resources::create_system_users(
     aem_id     => $aem_id,
   }
 
-  aem_user { 'Create user - replicator':
+  aem_user { "[${aem_id}] Create user - replicator":
     ensure     => present,
     name       => 'replicator',
     path       => '/home/users/r',
@@ -36,7 +36,7 @@ define aem_resources::create_system_users(
   # AEM 6.2 jar)
   # /home/users/q/ is used instead just because
   # it doesn't exist on vanilla AEM installation
-  aem_user { 'Create user - deployer':
+  aem_user { "[${aem_id}] Create user - deployer":
     ensure     => present,
     name       => 'deployer',
     path       => '/home/users/q',
@@ -47,7 +47,7 @@ define aem_resources::create_system_users(
     aem_id     => $aem_id,
   }
 
-  aem_user { 'Create user - exporter':
+  aem_user { "[${aem_id}] Create user - exporter":
     ensure     => present,
     name       => 'exporter',
     path       => '/home/users/e',
@@ -58,7 +58,7 @@ define aem_resources::create_system_users(
     aem_id     => $aem_id,
   }
 
-  aem_user { 'Create user - importer':
+  aem_user { "[${aem_id}] Create user - importer":
     ensure     => present,
     name       => 'importer',
     path       => '/home/users/i',

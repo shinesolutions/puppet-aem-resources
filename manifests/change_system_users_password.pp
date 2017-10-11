@@ -9,10 +9,10 @@ define aem_resources::change_system_users_password(
   $deployer_old_password = 'deployer',
   $exporter_old_password = 'exporter',
   $importer_old_password = 'importer',
-  $aem_id = undef,
+  $aem_id = 'aem',
 ) {
 
-  aem_user { 'Change user password - orchestrator':
+  aem_user { "[${aem_id}] Change user password - orchestrator":
     ensure       => password_changed,
     name         => 'orchestrator',
     path         => '/home/users/o',
@@ -21,7 +21,7 @@ define aem_resources::change_system_users_password(
     aem_id       => $aem_id,
   }
 
-  aem_user { 'Change user password - replicator':
+  aem_user { "[${aem_id}] Change user password - replicator":
     ensure       => password_changed,
     name         => 'replicator',
     path         => '/home/users/r',
@@ -30,7 +30,7 @@ define aem_resources::change_system_users_password(
     aem_id       => $aem_id,
   }
 
-  aem_user { 'Change user password - deployer':
+  aem_user { "[${aem_id}] Change user password - deployer":
     ensure       => password_changed,
     name         => 'deployer',
     path         => '/home/users/q',
@@ -39,7 +39,7 @@ define aem_resources::change_system_users_password(
     aem_id       => $aem_id,
   }
 
-  aem_user { 'Change user password - exporter':
+  aem_user { "[${aem_id}] Change user password - exporter":
     ensure       => password_changed,
     name         => 'exporter',
     path         => '/home/users/e',
@@ -48,7 +48,7 @@ define aem_resources::change_system_users_password(
     aem_id       => $aem_id,
   }
 
-  aem_user { 'Change user password - importer':
+  aem_user { "[${aem_id}] Change user password - importer":
     ensure       => password_changed,
     name         => 'importer',
     path         => '/home/users/i',
