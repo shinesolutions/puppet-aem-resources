@@ -54,7 +54,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   end
 
   def change_password
-    user = client(username: resource[:name], password: resource[:old_password]).user(resource[:path], resource[:name])
+    user = client(aem_id: resource[:aem_id], username: resource[:name], password: resource[:old_password]).user(resource[:path], resource[:name])
     result = user.change_password(resource[:old_password], resource[:new_password])
     handle(result)
   end
