@@ -18,14 +18,14 @@ Puppet::Type.type(:aem_group).provide(:aem, parent: PuppetX::ShineSolutions::Pup
   # Create a group.
   # When force is set to true and if the group already exists then it will be deleted before recreated.
   def create
-    group = client(aem_id: resource[:aem_id]).group(resource[:path], resource[:name])
+    group = client(resource).group(resource[:path], resource[:name])
     results = []
     if resource[:force] == true && group.exists.data == true
       results.push(group.delete)
     end
     results.push(group.create)
     if !resource[:parent_group_path].nil? && !resource[:parent_group_name].nil?
-      parent_group = client(aem_id: resource[:aem_id]).group(resource[:parent_group_path], resource[:parent_group_name])
+      parent_group = client(resource).group(resource[:parent_group_path], resource[:parent_group_name])
       results.push(parent_group.add_member(resource[:name]))
     end
     if !resource[:member_group_path].nil? && !resource[:member_group_name].nil?
@@ -36,7 +36,7 @@ Puppet::Type.type(:aem_group).provide(:aem, parent: PuppetX::ShineSolutions::Pup
 
   # Delete the group.
   def destroy
-    group = client(aem_id: resource[:aem_id]).group(resource[:path], resource[:name])
+    group = client(resource).group(resource[:path], resource[:name])
     result = group.delete
     handle(result)
   end
@@ -46,7 +46,7 @@ Puppet::Type.type(:aem_group).provide(:aem, parent: PuppetX::ShineSolutions::Pup
     if resource[:force] == true
       false
     else
-      group = client(aem_id: resource[:aem_id]).group(resource[:path], resource[:name])
+      group = client(resource).group(resource[:path], resource[:name])
       group.exists.data
     end
   end

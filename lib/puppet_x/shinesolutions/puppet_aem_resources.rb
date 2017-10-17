@@ -27,7 +27,7 @@ module PuppetX
         config = YAML.load_file(config_file) if File.exist?(config_file)
 
         # Set RubyAem::Aem parameters in order of priority:
-        # - use opts if provided
+        # - use opts if provided, opts uses field names with `aem_` prefix
         # - otherwise, use environment variable if provided, variable name is prefixed with value of `aem_id` variable,
         #   e.g. if aem_id is aem, then the environment variables would be aem_username, aem_password, aem_debug
         # - otherwise, use config file property if provided, config file name is using `aem_id` variable,
@@ -35,9 +35,10 @@ module PuppetX
         # - otherwise, use RubyAem::Aem's default configuration values
         params = {}
         %w[username password protocol host port debug timeout].each { |field|
+          opt_field = format('aem_%s', field)
           env_field = format('%s_%s', aem_id, field)
-          if !opts.nil? && !opts[field.to_sym].nil?
-            params[field.to_sym] = opts[field.to_sym]
+          if !opts.nil? && !opts[opt_field.to_sym].nil?
+            params[field.to_sym] = opts[opt_field.to_sym]
           elsif !ENV[env_field].nil?
             params[field.to_sym] = ENV[env_field]
           elsif !config.nil? && !config[field.to_sym].nil?
@@ -50,7 +51,15 @@ module PuppetX
         RubyAem::Aem.new(params)
       end
 
-      def client(opts = nil)
+      def client(resource)
+        self.class.client(
+          aem_id: resource[:aem_id],
+          aem_username: resource[:aem_username],
+          aem_password: resource[:aem_password]
+        )
+      end
+
+      def client_opts(opts = nil)
         self.class.client(opts)
       end
 

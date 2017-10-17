@@ -2,6 +2,8 @@ define aem_resources::deploy_packages (
   $packages,
   $path = '/tmp/shinesolutions/puppet-aem-resources',
   $sleep_seconds = 10,
+  $aem_username = undef,
+  $aem_password = undef,
   $aem_id = 'aem',
 ) {
 
@@ -13,17 +15,18 @@ define aem_resources::deploy_packages (
     )
 
     aem_package { "[${aem_id}] Deploy package ${package['group']}/${package['name']}-${package['version']}":
-      ensure    => present,
-      name      => $package[name],
-      group     => $package[group],
-      version   => $package[version],
-      path      => "${path}/${package['group']}",
-      replicate => $package[replicate],
-      activate  => $package[activate],
-      force     => $package[force],
-      aem_id    => $aem_id,
-    }
-    -> exec { "[${aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
+      ensure       => present,
+      name         => $package[name],
+      group        => $package[group],
+      version      => $package[version],
+      path         => "${path}/${package['group']}",
+      replicate    => $package[replicate],
+      activate     => $package[activate],
+      force        => $package[force],
+      aem_username => $aem_username,
+      aem_password => $aem_password,
+      aem_id       => $aem_id,
+    } -> exec { "[${aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       command     => "sleep ${final_sleep_seconds}",
       path        => ['/usr/bin', '/usr/sbin', '/bin'],
       timeout     => 0,
@@ -36,6 +39,8 @@ define aem_resources::deploy_packages (
       retries_base_sleep_seconds => 5,
       retries_max_sleep_seconds  => 5,
       require                    => Exec["[${aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}"],
+      aem_username               => $aem_username,
+      aem_password               => $aem_password,
       aem_id                     => $aem_id,
     } -> aem_aem { "[${aem_id}] Wait until aem health check is ok post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => aem_health_check_is_ok,
@@ -43,6 +48,8 @@ define aem_resources::deploy_packages (
       retries_max_tries          => 60,
       retries_base_sleep_seconds => 5,
       retries_max_sleep_seconds  => 5,
+      aem_username               => $aem_username,
+      aem_password               => $aem_password,
       aem_id                     => $aem_id,
     }
 

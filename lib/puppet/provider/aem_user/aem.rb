@@ -18,7 +18,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   # Create a user.
   # When force is set to true and if the user already exists then it will be deleted before recreated.
   def create
-    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
+    user = client(resource).user(resource[:path], resource[:name])
     results = []
     if resource[:force] == true && user.exists.data == true
       results.push(user.delete)
@@ -37,7 +37,7 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   # Delete the user.
   def destroy
-    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
+    user = client(resource).user(resource[:path], resource[:name])
     result = user.delete
     handle(result)
   end
@@ -48,25 +48,27 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     if resource[:force] == true
       false
     else
-      user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
+      user = client(resource).user(resource[:path], resource[:name])
       user.exists.data
     end
   end
 
   def change_password
-    user = client(aem_id: resource[:aem_id], username: resource[:name], password: resource[:old_password]).user(resource[:path], resource[:name])
+    user = client_opts(aem_id: resource[:aem_id], aem_username: resource[:name], aem_password: resource[:old_password]).user(resource[:path], resource[:name])
+    puts user
     result = user.change_password(resource[:old_password], resource[:new_password])
+    puts result
     handle(result)
   end
 
   def add_to_group
-    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
+    user = client(resource).user(resource[:path], resource[:name])
     result = user.add_to_group(resource[:group_path], resource[:group_name])
     handle(result)
   end
 
   def set_permission
-    user = client(aem_id: resource[:aem_id]).user(resource[:path], resource[:name])
+    user = client(resource).user(resource[:path], resource[:name])
     results = []
     unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|

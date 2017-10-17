@@ -62,6 +62,14 @@ Puppet::Type.newtype(:aem_user) do
     desc 'AEM instance ID'
   end
 
+  newparam :aem_username do
+    desc 'AEM username'
+  end
+
+  newparam :aem_password do
+    desc 'AEM password'
+  end
+
   newparam :path do
     desc 'User path'
     validate do |value|

@@ -32,6 +32,14 @@ Puppet::Type.newtype(:aem_flush_agent) do
     desc 'AEM instance ID'
   end
 
+  newparam :aem_username do
+    desc 'AEM username'
+  end
+
+  newparam :aem_password do
+    desc 'AEM password'
+  end
+
   newparam :run_mode do
     desc 'AEM run mode where the flush agent is'
     validate do |value|

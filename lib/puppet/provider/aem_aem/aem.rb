@@ -25,7 +25,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client(aem_id: resource[:aem_id]).aem.get_login_page_wait_until_ready(opts)
+    client(resource).aem.get_login_page_wait_until_ready(opts)
   end
 
   def get_aem_health_check_wait_until_ok
@@ -38,7 +38,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client(aem_id: resource[:aem_id]).aem.get_aem_health_check_wait_until_ok(opts)
+    client(resource).aem.get_aem_health_check_wait_until_ok(opts)
   end
 
   # Get the install status and wait until it's finished.
@@ -52,17 +52,17 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client(aem_id: resource[:aem_id]).aem.get_install_status_wait_until_finished(opts)
+    client(resource).aem.get_install_status_wait_until_finished(opts)
   end
 
   def remove_all_agents
     run_modes = resource[:run_mode].nil? ? %w[author publish] : [resource[:run_mode]]
 
     run_modes.each do |run_mode|
-      result = client(aem_id: resource[:aem_id]).aem.get_agents(run_mode)
+      result = client(resource).aem.get_agents(run_mode)
       agent_names = result.data
       agent_names.each do |agent_name|
-        replication_agent = client(aem_id: resource[:aem_id]).replication_agent(run_mode, agent_name)
+        replication_agent = client(resource).replication_agent(run_mode, agent_name)
         replication_agent.delete
       end
     end

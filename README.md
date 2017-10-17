@@ -60,6 +60,15 @@ However, if the invocation specifies an `aem_id` attribute, then the value of th
 
 The invocation above will use environment variables with `myaem_` prefix, e.g. `myaem_username`, and it will use a configuration file named `myaem.yaml` under Puppet config directory.
 
+It is also possible to specify username and password at invocation level by specifying `aem_username` and `aem_password` attributes. For example:
+
+    aem_bundle {
+      ...
+      aem_username => 'myusername',
+      aem_password => 'mypassword',
+      ...
+    }
+
 Usage
 -----
 

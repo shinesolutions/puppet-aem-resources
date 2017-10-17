@@ -18,7 +18,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
   # Archive a package by building a new package and downloading in to the specified path.
   # All older versions of the package that could've been built beforehand will be deleted before building the new package.
   def archive
-    package = client(aem_id: resource[:aem_id]).package(resource[:group], resource[:name], resource[:version])
+    package = client(resource).package(resource[:group], resource[:name], resource[:version])
     results = []
     build_opts = {
       _retries: {
@@ -28,7 +28,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
       }
     }
     package.get_versions.data.each do |version|
-      package_per_version = client(aem_id: resource[:aem_id]).package(resource[:group], resource[:name], version)
+      package_per_version = client(resource).package(resource[:group], resource[:name], version)
       results.push(package_per_version.delete_wait_until_ready) if package_per_version.exists.data == true
     end
     results.push(package.create)
@@ -40,7 +40,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
 
   # Create a package.
   def create
-    package = client(aem_id: resource[:aem_id]).package(resource[:group], resource[:name], resource[:version])
+    package = client(resource).package(resource[:group], resource[:name], resource[:version])
     results = []
     upload_opts = {
       force: resource[:force],
@@ -66,7 +66,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
 
   # Delete the package.
   def destroy
-    package = client(aem_id: resource[:aem_id]).package(resource[:group], resource[:name], resource[:version])
+    package = client(resource).package(resource[:group], resource[:name], resource[:version])
     results = []
     results.push(package.uninstall) if package.is_installed.data
     results.push(package.delete)
@@ -80,7 +80,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
     if resource[:force] == true
       false
     else
-      package = client(aem_id: resource[:aem_id]).package(resource[:group], resource[:name], resource[:version])
+      package = client(resource).package(resource[:group], resource[:name], resource[:version])
       package.is_installed.data
     end
   end

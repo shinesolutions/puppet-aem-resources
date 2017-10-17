@@ -35,4 +35,12 @@ Puppet::Type.newtype(:aem_path) do
     isnamevar
     desc 'AEM instance ID'
   end
+
+  newparam :aem_username do
+    desc 'AEM username'
+  end
+
+  newparam :aem_password do
+    desc 'AEM password'
+  end
 end

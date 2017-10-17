@@ -45,6 +45,14 @@ Puppet::Type.newtype(:aem_aem) do
     desc 'AEM instance ID'
   end
 
+  newparam :aem_username do
+    desc 'AEM username'
+  end
+
+  newparam :aem_password do
+    desc 'AEM password'
+  end
+
   newparam :tags do
     desc 'AEM HealthCheck tags'
     validate do |value|

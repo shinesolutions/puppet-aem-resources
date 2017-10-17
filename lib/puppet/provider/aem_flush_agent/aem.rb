@@ -17,7 +17,7 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_flush_agent).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a flush agent.
   def create
-    flush_agent = client(aem_id: resource[:aem_id]).flush_agent(resource[:run_mode], resource[:name])
+    flush_agent = client(resource).flush_agent(resource[:run_mode], resource[:name])
     opts = { log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
     result = flush_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
@@ -25,7 +25,7 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, parent: PuppetX::ShineSolution
 
   # Delete the flush agent.
   def destroy
-    flush_agent = client(aem_id: resource[:aem_id]).flush_agent(resource[:run_mode], resource[:name])
+    flush_agent = client(resource).flush_agent(resource[:run_mode], resource[:name])
     result = flush_agent.delete
     handle(result)
   end
@@ -36,7 +36,7 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, parent: PuppetX::ShineSolution
     if resource[:force] == true
       false
     else
-      flush_agent = client(aem_id: resource[:aem_id]).flush_agent(resource[:run_mode], resource[:name])
+      flush_agent = client(resource).flush_agent(resource[:run_mode], resource[:name])
       flush_agent.exists.data
     end
   end
