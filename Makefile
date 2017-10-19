@@ -37,15 +37,14 @@ test-integration:
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
-	# # test manifests
-	# for test in test/integration/manifests/*.pp; do \
-	#   puppet apply --modulepath=test/integration/modules/ $$test; \
-	# done
-	# # test resources
-	# for test in test/integration/resources/*.pp; do \
-	#   puppet apply --modulepath=test/integration/modules/ $$test; \
-	# done
-	puppet apply --debug --modulepath=test/integration/modules/ test/integration/manifests/21_change_system_users_password.pp; \
+	# test manifests
+	for test in test/integration/manifests/*.pp; do \
+	  puppet apply --modulepath=test/integration/modules/ $$test; \
+	done
+	# test resources
+	for test in test/integration/resources/*.pp; do \
+	  puppet apply --modulepath=test/integration/modules/ $$test; \
+	done
 
 test-fixtures:
 	rm -f test/fixtures/aem.key test/fixtures/aem.cert
