@@ -19,7 +19,7 @@ define aem_resources::puppet_aem_resources_set_config(
       port     => $port,
       debug    => $debug,
     }),
-    mode    => '0664',
+    mode    => '0644',
   }
 
 }

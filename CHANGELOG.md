@@ -1,6 +1,7 @@
 ### 2.0.0
 * Add multi AEM instances support at manifests level by replacing classes with definitions #19
 * Allow custom credential at invocation level by introducing aem_username and aem_password attributes #5
+* Change puppet-aem-resources config file mode to 644
 
 ### 1.3.0
 * Add multi AEM instances support at custom types level by introducing aem_id attribute #19
