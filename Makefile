@@ -4,7 +4,7 @@ deps:
 	gem install bundler
 	rm -rf .bundle
 	bundle install
-	cd test/integration/ && r10k puppetfile install --moduledir modules
+	cd test/integration/ && r10k puppetfile install --verbose --moduledir modules
 
 clean:
 	rm -rf pkg
