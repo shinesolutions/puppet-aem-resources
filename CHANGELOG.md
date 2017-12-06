@@ -1,3 +1,6 @@
+### 2.0.1
+*
+
 ### 2.0.0
 * Add multi AEM instances support at manifests level by replacing classes with definitions #19
 * Allow custom credential at invocation level by introducing aem_username and aem_password attributes #5
