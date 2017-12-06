@@ -1,5 +1,5 @@
 ### 2.0.1
-*
+* Fix incorrect aem_id source, was definition parameter, now package aem_id field
 
 ### 2.0.0
 * Add multi AEM instances support at manifests level by replacing classes with definitions #19

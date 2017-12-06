@@ -4,10 +4,11 @@ define aem_resources::deploy_packages (
   $sleep_seconds = 10,
   $aem_username = undef,
   $aem_password = undef,
-  $aem_id = 'aem',
 ) {
 
   $packages.each | Integer $index, Hash $package| {
+
+    $aem_id = $package[aem_id]
 
     $final_sleep_seconds = pick(
       $package['sleep_seconds'],
@@ -19,7 +20,7 @@ define aem_resources::deploy_packages (
       name         => $package[name],
       group        => $package[group],
       version      => $package[version],
-      path         => "${path}/${package['group']}",
+      path         => "${path}/${aem_id}/${package['group']}",
       replicate    => $package[replicate],
       activate     => $package[activate],
       force        => $package[force],
