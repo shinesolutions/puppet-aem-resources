@@ -22,7 +22,6 @@
   Header always append X-Frame-Options SAMEORIGIN
 </VirtualHost>
 
-Listen 443
 <VirtualHost *:443>
   ServerName default
   ServerAdmin root@localhost

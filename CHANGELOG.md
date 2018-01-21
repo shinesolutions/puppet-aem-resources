@@ -1,5 +1,5 @@
 ### 2.0.2
-*
+* Remove port 443 listening from sample httpd.conf #21
 
 ### 2.0.1
 * Fix incorrect aem_id source, was definition parameter, now package aem_id field
