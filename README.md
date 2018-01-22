@@ -20,14 +20,10 @@ If you want to use the master version:
 
     mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
 
-And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module. [nokogiri](http://www.nokogiri.org/) needs to be installed explicitly to version 1.6.8.1 only if you are using ruby 2.0 (ruby 1.9 is no longer supported).
+And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module.
 
-    package { 'nokogiri':
-      ensure   => '1.6.8.1',
-      provider => 'puppet_gem',
-    } ->
     package { 'ruby_aem':
-      ensure   => '1.4.0',
+      ensure   => '1.4.1',
       provider => 'puppet_gem',
     }
 
