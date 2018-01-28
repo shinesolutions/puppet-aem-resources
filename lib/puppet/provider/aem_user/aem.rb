@@ -20,13 +20,9 @@ Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   def create
     user = client(resource).user(resource[:path], resource[:name])
     results = []
-    if resource[:force] == true && user.exists.data == true
-      results.push(user.delete)
-    end
+    results.push(user.delete) if resource[:force] == true && user.exists.data == true
     results.push(user.create(resource[:password]))
-    if !resource[:group_path].nil? && !resource[:group_name].nil?
-      results.push(user.add_to_group(resource[:group_path], resource[:group_name]))
-    end
+    results.push(user.add_to_group(resource[:group_path], resource[:group_name])) if !resource[:group_path].nil? && !resource[:group_name].nil?
     unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|
         results.push(user.set_permission(permission_path, permission_array.join(',')))

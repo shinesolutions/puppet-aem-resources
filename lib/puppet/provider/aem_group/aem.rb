@@ -20,17 +20,13 @@ Puppet::Type.type(:aem_group).provide(:aem, parent: PuppetX::ShineSolutions::Pup
   def create
     group = client(resource).group(resource[:path], resource[:name])
     results = []
-    if resource[:force] == true && group.exists.data == true
-      results.push(group.delete)
-    end
+    results.push(group.delete) if resource[:force] == true && group.exists.data == true
     results.push(group.create)
     if !resource[:parent_group_path].nil? && !resource[:parent_group_name].nil?
       parent_group = client(resource).group(resource[:parent_group_path], resource[:parent_group_name])
       results.push(parent_group.add_member(resource[:name]))
     end
-    if !resource[:member_group_path].nil? && !resource[:member_group_name].nil?
-      results.push(group.add_member(resource[:member_group_name]))
-    end
+    results.push(group.add_member(resource[:member_group_name])) if !resource[:member_group_path].nil? && !resource[:member_group_name].nil?
     handle_multi(results)
   end
 
