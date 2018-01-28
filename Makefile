@@ -7,10 +7,11 @@ deps:
 	cd test/integration/ && r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf pkg
-	rm -rf test/integration/.tmp/
-	rm -rf test/integration/modules/
-	rm -rf /tmp/shinesolutions/puppet-aem-resources/
+	rm -rf Gemfile.lock \
+	  pkg \
+	  test/integration/.tmp/ \
+		test/integration/modules/ \
+		/tmp/shinesolutions/puppet-aem-resources/
 
 lint:
 	puppet-lint \

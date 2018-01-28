@@ -23,7 +23,7 @@ module PuppetX
 
       def self.client(opts = nil)
         aem_id = opts[:aem_id] || 'aem'
-        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%s.yaml', aem_id)])
+        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%<aem_id>.yaml', aem_id: aem_id)])
         config = YAML.load_file(config_file) if File.exist?(config_file)
 
         # Set RubyAem::Aem parameters in order of priority:
@@ -35,8 +35,8 @@ module PuppetX
         # - otherwise, use RubyAem::Aem's default configuration values
         params = {}
         %w[username password protocol host port debug timeout].each { |field|
-          opt_field = format('aem_%s', field)
-          env_field = format('%s_%s', aem_id, field)
+          opt_field = format('aem_%<field>s', field: field)
+          env_field = format('%<aem_id>s_%<field>s', aem_id: aem_id, field: field)
           if !opts.nil? && !opts[opt_field.to_sym].nil?
             params[field.to_sym] = opts[opt_field.to_sym]
           elsif !ENV[env_field].nil?
