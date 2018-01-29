@@ -1,11 +1,19 @@
 define aem_resources::author_primary_set_config(
   $crx_quickstart_dir,
+  $aem_version = '6.2',
 ) {
 
-  file { "${crx_quickstart_dir}/install/org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService.config":
+  if $aem_version == '6.2' {
+    $segment_package = 'org.apache.jackrabbit.oak.plugins.segment'
+  }
+  else {
+    $segment_package = 'org.apache.jackrabbit.oak.segment'
+  }
+
+  file { "${crx_quickstart_dir}/install/${segment_package}.SegmentNodeStoreService.config":
     ensure => absent,
   }
-  file { "${crx_quickstart_dir}/install/org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService.config":
+  file { "${crx_quickstart_dir}/install/${segment_package}.standby.store.StandbyStoreService.config":
     ensure => absent,
   }
 
