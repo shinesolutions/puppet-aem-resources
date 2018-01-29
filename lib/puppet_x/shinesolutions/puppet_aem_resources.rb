@@ -23,7 +23,7 @@ module PuppetX
 
       def self.client(opts = nil)
         aem_id = opts[:aem_id] || 'aem'
-        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%<aem_id>.yaml', aem_id: aem_id)])
+        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%<aem_id>s.yaml', aem_id: aem_id)])
         config = YAML.load_file(config_file) if File.exist?(config_file)
 
         # Set RubyAem::Aem parameters in order of priority:
