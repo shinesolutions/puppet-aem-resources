@@ -10,8 +10,8 @@ clean:
 	rm -rf Gemfile.lock \
 	  pkg \
 	  test/integration/.tmp/ \
-		test/integration/modules/ \
-		/tmp/shinesolutions/puppet-aem-resources/
+	  test/integration/modules/ \
+	  /tmp/shinesolutions/puppet-aem-resources/
 
 lint:
 	puppet-lint \
