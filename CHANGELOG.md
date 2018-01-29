@@ -1,3 +1,6 @@
+### 2.1.1
+*
+
 ### 2.1.0
 * Added Puppet manifest to disable crxde
 * Add AEM >= 6.3 support for configuring Author Primary and Author Standby #22
