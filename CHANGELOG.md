@@ -1,8 +1,11 @@
+### 2.1.0
+* Added Puppet manifest to disable crxde
+* Add AEM >= 6.3 support for configuring Author Primary and Author Standby #22
+
 ### 2.0.2
 * Remove port 443 listening from sample httpd.conf #21
 * Upgrade ruby_aem to 1.4.1 with nokogiri security vulnerability fix
 * Increase minimum ruby version requirement to 2.1
-* Added Puppet manifest to disable crxde
 
 ### 2.0.1
 * Fix incorrect aem_id source, was definition parameter, now package aem_id field
