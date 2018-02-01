@@ -414,6 +414,21 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
 
+Multi AEM versions
+------------------
+
+Some types support multiple AEM versions due to differences how particular features are implemented between those AEM versions.
+
+For example, AEM Author Standby configuration package was `org.apache.jackrabbit.oak.plugins.segment` in AEM <= 6.2, and it was changed to `org.apache.jackrabbit.oak.segment` in AEM >= 6.3 .
+
+Starting version 2.1.1, `aem_version` attribute was added to the corresponding types:
+
+    aem_resources::author_standby_set_config { 'Set author standby config':
+      install_dir  => '/opt/aem/crx-quickstart/install',
+      primary_host => 'somehost',
+      aem_version  => '6.3',
+    }
+
 Upgrade
 -------
 
