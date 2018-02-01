@@ -1,5 +1,5 @@
 ### 2.1.1
-*
+* Fix AEM 6.3 Author Standby provisioning missing config file
 
 ### 2.1.0
 * Added Puppet manifest to disable crxde

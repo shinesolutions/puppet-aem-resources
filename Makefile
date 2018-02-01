@@ -34,10 +34,14 @@ test-integration:
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/somepackage/1.2.3/
 	cp test/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
 	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
+	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
+	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
+	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
+	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
 	# test manifests
 	for test in test/integration/manifests/*.pp; do \
 	  puppet apply --modulepath=test/integration/modules/ $$test; \
