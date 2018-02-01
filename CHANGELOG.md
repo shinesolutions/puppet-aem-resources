@@ -1,3 +1,6 @@
+### 2.1.2
+*
+
 ### 2.1.1
 * Fix AEM 6.3 Author Standby provisioning missing config file
 
