@@ -16,13 +16,13 @@ define aem_resources::author_standby_set_config(
   }
   file { "${crx_quickstart_dir}/install/${segment_package}.SegmentNodeStoreService.config":
     ensure  => present,
-    source  => "puppet:///modules/aem_resources/SegmentNodeStoreService.config",
+    source  => 'puppet:///modules/aem_resources/SegmentNodeStoreService.config',
     mode    => '0664',
     require => File["${crx_quickstart_dir}/install"],
   }
   file { "${crx_quickstart_dir}/install/${segment_package}.standby.store.StandbyStoreService.config":
     ensure  => file,
-    content => epp("aem_resources/StandbyStoreService.config.epp", { primary_host => $primary_host }),
+    content => epp('aem_resources/StandbyStoreService.config.epp', { primary_host => $primary_host }),
     mode    => '0664',
     require => File["${crx_quickstart_dir}/install"],
   }
