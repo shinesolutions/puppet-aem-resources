@@ -6,5 +6,5 @@ aem_resources::publish_dispatcher_set_config { 'Set publish-dispatcher config':
   publish_host        => 'somepublishhost',
   publish_port        => 4503,
   publish_secure      => 1,
-  ssl_cert            => '/etc/ssl/aem.unified-dispatcher.cert
+  ssl_cert            => '/etc/ssl/aem.unified-dispatcher.cert'
 }
