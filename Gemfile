@@ -8,7 +8,7 @@ end
 puppetversion = ENV['PUPPET_VERSION'] || '~> 4.0'
 gem 'puppet', puppetversion, require: false
 
-gem 'ruby_aem', '~> 1.4.1'
+gem 'ruby_aem', '~> 1.4.2'
 
 group :lint do
   gem 'puppet-lint', require: false
