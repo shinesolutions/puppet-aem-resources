@@ -1,6 +1,6 @@
 define aem_resources::author_dispatcher_set_config(
   $dispatcher_conf_dir,
-  $apache_conf_dir,
+  $virtual_hosts_dir,
   $docroot_dir,
   $author_host,
   $author_port,
@@ -8,7 +8,7 @@ define aem_resources::author_dispatcher_set_config(
   $ssl_cert = '/etc/httpd/aem.disp-cert',
 ) {
 
-  $conf_dirs = [ $dispatcher_conf_dir, $apache_conf_dir, ]
+  $conf_dirs = [ $dispatcher_conf_dir, $virtual_hosts_dir ]
 
   $unique_conf_dirs = unique($conf_dirs)
 
@@ -28,14 +28,14 @@ define aem_resources::author_dispatcher_set_config(
     require =>  File[$dispatcher_conf_dir],
   }
 
-  file { "${apache_conf_dir}/1-puppet-aem-resources.conf":
+  file { "${virtual_hosts_dir}/1-puppet-aem-resources.conf":
     ensure  => file,
     content => epp('aem_resources/httpd.conf.epp', {
       docroot_dir => $docroot_dir,
       ssl_cert    => $ssl_cert,
     }),
     mode    => '0664',
-    require => File[$apache_conf_dir],
+    require => File[$virtual_hosts_dir],
   }
 
 }
