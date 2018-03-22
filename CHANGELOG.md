@@ -1,5 +1,8 @@
-### 2.1.2
+### 2.2.1
 *
+
+### 2.2.0
+* Rename dispatcher template variables from httpd_conf_dir to apache_conf_dir
 
 ### 2.1.1
 * Fix AEM 6.3 Author Standby provisioning missing config file
