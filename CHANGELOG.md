@@ -1,3 +1,6 @@
+### 2.2.2
+*
+
 ### 2.2.1
 * Move puppet-aem-resources-generated httpd config to virtual_hosts_dir
 
