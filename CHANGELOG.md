@@ -1,5 +1,5 @@
 ### 2.2.1
-*
+* Fix aem_id handling for deploy packages #27
 
 ### 2.2.0
 * Rename dispatcher template variables from httpd_conf_dir to apache_conf_dir
