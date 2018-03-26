@@ -2,13 +2,22 @@ define aem_resources::deploy_packages (
   $packages,
   $path = '/tmp/shinesolutions/puppet-aem-resources',
   $sleep_seconds = 10,
-  $aem_username = undef,
-  $aem_password = undef,
+  $aem_id        = undef,
+  $aem_username  = undef,
+  $aem_password  = undef,
 ) {
 
   $packages.each | Integer $index, Hash $package| {
 
-    $aem_id = $package[aem_id]
+    if $package[aem_id] {
+      $aem_id = $package[aem_id]
+    }
+
+    $aem_id = $aem_id ? {
+        'author'  => 'author',
+        'publish' => 'publish',
+        default   => 'author',
+    }
 
     $final_sleep_seconds = pick(
       $package['sleep_seconds'],
