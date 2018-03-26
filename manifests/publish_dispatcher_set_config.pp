@@ -30,7 +30,7 @@ define aem_resources::publish_dispatcher_set_config(
     require =>  File[$dispatcher_conf_dir],
   }
 
-  file { "${apache_conf_dir}/1-puppet-aem-resources.conf":
+  file { "${dispatcher_conf_dir}/1-puppet-aem-resources.conf":
     ensure  => file,
     content => epp('aem_resources/httpd.conf.epp', {
       docroot_dir => $docroot_dir,
