@@ -1,5 +1,8 @@
-### 2.2.1
+### 2.2.2
 * Fix aem_id handling for deploy packages #27
+
+### 2.2.1
+* Move puppet-aem-resources-generated httpd config to virtual_hosts_dir
 
 ### 2.2.0
 * Rename dispatcher template variables from httpd_conf_dir to apache_conf_dir
