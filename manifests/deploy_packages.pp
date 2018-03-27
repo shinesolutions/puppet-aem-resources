@@ -9,15 +9,11 @@ define aem_resources::deploy_packages (
 
   $packages.each | Integer $index, Hash $package| {
 
-    if $package[aem_id] {
-      $aem_id = $package[aem_id]
-    }
-
-    $_aem_id = $aem_id ? {
-        'author'  => 'author',
-        'publish' => 'publish',
-        default   => 'author',
-    }
+    $_aem_id = pick(
+      $package[aem_id],
+      $aem_id,
+      'author'
+      )
 
     $final_sleep_seconds = pick(
       $package['sleep_seconds'],
