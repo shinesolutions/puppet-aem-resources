@@ -1,3 +1,6 @@
+### 2.2.3
+*
+
 ### 2.2.2
 * Fix aem_id handling for deploy packages #27
 
