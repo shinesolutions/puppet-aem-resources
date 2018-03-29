@@ -21,6 +21,7 @@ lint:
 		--no-documentation-check \
 		test/integration/*/*.pp \
 		manifests/*.pp
+	puppet epp validate templates/*.epp
 	rubocop
 
 test-integration:
