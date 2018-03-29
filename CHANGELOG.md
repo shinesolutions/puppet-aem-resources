@@ -1,5 +1,5 @@
 ### 2.2.3
-*
+* Add publish-dispatcher config to deny cache invalidation #29
 
 ### 2.2.2
 * Fix aem_id handling for deploy packages #27

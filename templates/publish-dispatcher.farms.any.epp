@@ -180,6 +180,8 @@
       /0144 { /type "deny"  /url "/content.feed.html" }
       /0145 { /type "deny"  /url "/content/add_valid_page.html?debug=layout" }
 
+      # Security - Make Sure attempt to invalidate the Dispatcher cache is denied
+      /0160 { /type "deny"  /url "/dispatcher/invalidate.cache" }
       }
 
     # The cache section regulates what responses will be cached and where.
