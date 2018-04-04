@@ -5,7 +5,7 @@ when /darwin/
   gem 'CFPropertyList'
 end
 
-puppetversion = ENV['PUPPET_VERSION'] || '~> 4.0'
+puppetversion = ENV['PUPPET_VERSION'] || '~> 5.0'
 gem 'puppet', puppetversion, require: false
 
 gem 'ruby_aem', '~> 1.4.2'
