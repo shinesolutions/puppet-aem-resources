@@ -1,20 +1,18 @@
-ci: tools clean deps lint
+ci: clean deps lint
 
 deps:
 	gem install bundler
-	rm -rf .bundle
-	bundle install
-	cd test/integration/ && r10k puppetfile install --verbose --moduledir modules
+	bundle install --binstubs
+	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf Gemfile.lock \
-	  pkg \
-	  test/integration/.tmp/ \
+	rm -rf bin/ pkg/ stage/ vendor/ *.lock
+	rm -rf test/integration/.tmp/ \
 	  test/integration/modules/ \
 	  /tmp/shinesolutions/puppet-aem-resources/
 
 lint:
-	puppet-lint \
+	bundle exec puppet-lint \
 		--fail-on-warnings \
 		--no-140chars-check \
 		--no-autoloader_layout-check \
@@ -22,7 +20,7 @@ lint:
 		test/integration/*/*.pp \
 		manifests/*.pp
 	puppet epp validate templates/*.epp
-	rubocop
+	bundle exec rubocop
 
 test-integration:
 	# set up module
@@ -71,7 +69,4 @@ test-fixtures:
 package:
 	puppet module build .
 
-tools:
-	gem install puppet puppet-lint r10k
-
-.PHONY: ci clean deps lint test-integration package tools
+.PHONY: ci clean deps lint test-integration package

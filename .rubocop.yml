@@ -2,6 +2,8 @@
 AllCops:
   DisplayCopNames: true
   Exclude:
+    - .bundle/*
+    - bin/*
     - pkg/**/*
     - test/**/*
 # Disabled useless assignment check due to Puppet type param validation
