@@ -29,6 +29,10 @@ Puppet::Type.newtype(:aem_aem) do
     newvalue(:all_agents_removed) do
       provider.remove_all_agents
     end
+
+    newvalue(:packages_listed) do
+      provider.list_packages_by_groups(resource[:package_groups])
+    end
   end
 
   def self.title_patterns
@@ -64,6 +68,13 @@ Puppet::Type.newtype(:aem_aem) do
     desc 'AEM HealthCheck change AND to OR'
     validate do |value|
       value = nil if value == ''
+    end
+  end
+
+  newparam :package_groups do
+    desc 'AEM Package groups'
+    validate do |value|
+      value = [] if value == ''
     end
   end
 

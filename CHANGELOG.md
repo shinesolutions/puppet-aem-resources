@@ -1,5 +1,5 @@
 ### 2.2.4
-*
+* Add packages_listed ensurable to aem_aem type
 
 ### 2.2.3
 * Add publish-dispatcher config to deny cache invalidation #29

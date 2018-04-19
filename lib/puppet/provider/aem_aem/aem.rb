@@ -68,6 +68,18 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
     end
   end
 
+  def list_packages_by_groups(package_groups)
+    result = client(resource).aem.get_packages
+    packages = result.data
+    packages.each do |package|
+      next unless (package_groups.include? package['group']) || package_groups.empty?
+      puts '========================================================================'
+      package.each do |key, value|
+        puts "#{key}: #{value}"
+      end
+    end
+  end
+
   # Existence check defaults to true in order to simulate that aem always exists.
   def exists?
     true
