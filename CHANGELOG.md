@@ -1,3 +1,6 @@
+### 2.2.5
+*
+
 ### 2.2.4
 * Add packages_listed ensurable to aem_aem type
 
