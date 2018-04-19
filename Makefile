@@ -1,4 +1,4 @@
-ci: clean deps lint
+ci: clean deps lint package
 
 deps:
 	gem install bundler
