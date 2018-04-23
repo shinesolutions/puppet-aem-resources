@@ -1,12 +1,13 @@
 define aem_resources::puppet_aem_resources_set_config(
   $conf_dir,
-  $username = undef,
-  $password = undef,
-  $protocol = undef,
-  $host = undef,
-  $port = undef,
-  $debug = undef,
-  $aem_id = 'aem',
+  $username           = undef,
+  $password           = undef,
+  $protocol           = undef,
+  $host               = undef,
+  $port               = undef,
+  $debug              = undef,
+  $deployment_timeout = undef,
+  $aem_id             = 'aem',
 ) {
 
   file { "${conf_dir}/${aem_id}.yaml":
@@ -18,6 +19,7 @@ define aem_resources::puppet_aem_resources_set_config(
       host     => $host,
       port     => $port,
       debug    => $debug,
+      timeout  => $deployment_timeout,
     }),
     mode    => '0644',
   }

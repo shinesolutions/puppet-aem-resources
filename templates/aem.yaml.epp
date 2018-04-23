@@ -20,3 +20,6 @@
 <% if $debug == false { -%>
 :debug: False
 <% } -%>
+<% if $timeout != undef { -%>
+:timeout: '<%= $timeout %>'
+<% } -%>
