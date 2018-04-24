@@ -6,7 +6,7 @@ define aem_resources::puppet_aem_resources_set_config(
   $host     = undef,
   $port     = undef,
   $debug    = undef,
-  $timeout   = undef,
+  $timeout  = undef,
   $aem_id   = 'aem',
 ) {
 
