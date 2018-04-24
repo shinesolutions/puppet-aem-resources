@@ -32,7 +32,7 @@ Configuration
 
 AEM username, password, protocol, host, port, and debug can be set via environment variables or a configuration file.
 
-Environment variables have `aem_` prefix, e.g. `aem_username`, `aem_password`, `aem_protocol`, `aem_host`, `aem_port`, and `aem_debug`.
+Environment variables have `aem_` prefix, e.g. `aem_username`, `aem_password`, `aem_protocol`, `aem_host`, `aem_port`, `aem_timeout`, and `aem_debug`.
 
 Configuration file should be named `aem.yaml` and be placed under [Puppet config directory](https://docs.puppet.com/puppet/latest/dirs_confdir.html). Example config file:
 
@@ -42,6 +42,7 @@ Configuration file should be named `aem.yaml` and be placed under [Puppet config
     :protocol: 'http'
     :host: 'localhost'
     :port: 4502
+    :timeout: 300
     :debug: False
 
 If a configuration property is not set, then it will use the default value set in [ruby_aem](https://github.com/shinesolutions/ruby_aem).
@@ -362,6 +363,7 @@ Create Puppet AEM Resources' configuration file:
       protocol => 'http',
       host     => 'localhost',
       port     => 4502,
+      timeout  => 300,
       debug    => false,
     }
 
@@ -386,6 +388,7 @@ Let's say you have an AEM author instance at http://localhost:4502 and an AEM pu
     :protocol: 'http'
     :host: 'localhost'
     :port: 4502
+    :timeout: 300
     :debug: False
 
 `<puppet-config-dir>/myaempublish.yaml`
@@ -396,6 +399,7 @@ Let's say you have an AEM author instance at http://localhost:4502 and an AEM pu
     :protocol: 'https'
     :host: 'localhost'
     :port: 5433
+    :timeout: 300
     :debug: False
 
 Then specify `aem_id` attribute on resource invocation in Puppet manifest:

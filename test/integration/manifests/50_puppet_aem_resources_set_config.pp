@@ -4,6 +4,7 @@ aem_resources::puppet_aem_resources_set_config { 'Set puppet-aem-resources confi
   protocol => 'http',
   host     => 'localhost',
   port     => 4502,
+  timeout  => 300,
   debug    => false,
   aem_id   => 'test-aem-author1',
 }
@@ -14,6 +15,7 @@ aem_resources::puppet_aem_resources_set_config { 'Set puppet-aem-resources confi
   protocol => 'http',
   host     => 'localhost',
   port     => 4502,
+  timeout  => 300,
   debug    => false,
   aem_id   => 'test-aem-author2',
 }
