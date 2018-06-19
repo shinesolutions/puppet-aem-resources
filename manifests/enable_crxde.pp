@@ -16,7 +16,7 @@ define aem_resources::enable_crxde(
   aem_node { "[${aem_id}] Create Apache Sling DavEx Servlet config node":
     ensure       => present,
     name         => 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet',
-    path         => "/apps/system/config.${$run_mode}",
+    path         => '/apps/system/config',
     type         => 'sling:OsgiConfig',
     aem_username => $aem_username,
     aem_password => $aem_password,
