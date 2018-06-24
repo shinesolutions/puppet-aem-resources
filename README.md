@@ -185,14 +185,14 @@ Node
     aem_node { 'Create http OSGI config node':
       ensure => present,
       name   => 'org.apache.felix.http',
-      path   => '/apps/system/config.author',
+      path   => '/apps/system/config',
       type   => 'sling:OsgiConfig',
     }
 
     aem_node { 'Delete http OSGI config node':
       ensure => absent,
       name   => 'org.apache.felix.http',
-      path   => '/apps/system/config.author',
+      path   => '/apps/system/config',
     }
 
 Package

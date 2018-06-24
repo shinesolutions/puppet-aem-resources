@@ -1,3 +1,6 @@
+### 3.0.1
+* Modify SSL and security config path to work with AEM 6.4
+
 ### 3.0.0
 * Modify enable CRXDE config path to work with AEM 6.4
 

@@ -1,7 +1,7 @@
 aem_node { 'Create Apache Sling Referrer Filter config node':
   ensure => present,
   name   => 'org.apache.sling.security.impl.ReferrerFilter',
-  path   => '/apps/system/config.publish',
+  path   => '/apps/system/config',
   type   => 'sling:OsgiConfig',
 }
 
