@@ -8,7 +8,7 @@ define aem_resources::publish_set_osgi_config(
   aem_node { "[${aem_id}] Create Apache Sling Referrer Filter config node":
     ensure       => present,
     name         => 'org.apache.sling.security.impl.ReferrerFilter',
-    path         => '/apps/system/config.publish',
+    path         => '/apps/system/config',
     type         => 'sling:OsgiConfig',
     aem_username => $aem_username,
     aem_password => $aem_password,
@@ -29,7 +29,7 @@ define aem_resources::publish_set_osgi_config(
   aem_node { "[${aem_id}] Create Apache Sling GET Servlet config node":
     ensure       => present,
     name         => 'org.apache.sling.servlets.get.DefaultGetServlet',
-    path         => '/apps/system/config.publish',
+    path         => '/apps/system/config',
     type         => 'sling:OsgiConfig',
     aem_username => $aem_username,
     aem_password => $aem_password,

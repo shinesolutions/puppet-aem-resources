@@ -8,7 +8,7 @@ define aem_resources::author_set_osgi_config(
   aem_node { "[${aem_id}] Create Apache Sling GET Servlet config node":
     ensure       => present,
     name         => 'org.apache.sling.servlets.get.DefaultGetServlet',
-    path         => '/apps/system/config.author',
+    path         => '/apps/system/config',
     type         => 'sling:OsgiConfig',
     aem_username => $aem_username,
     aem_password => $aem_password,

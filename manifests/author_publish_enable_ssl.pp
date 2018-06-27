@@ -14,7 +14,7 @@ define aem_resources::author_publish_enable_ssl(
   aem_node { "[${aem_id}] Ensure org.apache.felix.http OSGI config exists":
     ensure       => present,
     name         => 'org.apache.felix.http',
-    path         => "/apps/system/config.${run_mode}",
+    path         => '/apps/system/config',
     type         => 'sling:OsgiConfig',
     aem_username => $aem_username,
     aem_password => $aem_password,
