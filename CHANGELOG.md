@@ -1,3 +1,7 @@
+### 3.0.2
+* Add feature to define system users name & path as parameters
+* Improved credentials handling for system users
+
 ### 3.0.1
 * Modify SSL and security config path to work with AEM 6.4
 
