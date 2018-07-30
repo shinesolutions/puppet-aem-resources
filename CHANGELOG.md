@@ -1,3 +1,6 @@
+### 2.2.6
+* Add feature 'absent' for module aem_path
+
 ### 2.2.5
 * Add timeout parameter to AEM config file
 

@@ -17,6 +17,15 @@ Puppet::Type.newtype(:aem_path) do
     newvalue(:is_activated) do
       provider.activate
     end
+
+    newvalue(:absent) do
+      if @resource.provider && @resource.provider.respond_to?(:destroy)
+        @resource.provider.destroy
+      else
+        @resource.destroy
+      end
+      nil
+    end
   end
 
   def self.title_patterns
@@ -42,5 +51,9 @@ Puppet::Type.newtype(:aem_path) do
 
   newparam :aem_password do
     desc 'AEM password'
+  end
+
+  newparam :path do
+    desc 'AEM node path'
   end
 end
