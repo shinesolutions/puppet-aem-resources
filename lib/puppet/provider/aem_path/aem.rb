@@ -21,9 +21,16 @@ Puppet::Type.type(:aem_path).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     client(resource).path(resource[:name]).activate(true, false)
   end
 
-  # Existence check defaults to true in order to simulate that the path exists.
-  # ruby_aem does not currently provide path resource existence check.
+  def destroy
+    return false if resource[:path].eql? nil
+    path = resource[:path]
+    client(resource).path(resource[:name]).delete(path)
+  end
+
+  # Existence check true unless a path is defined
   def exists?
-    true
+    return true if resource[:path].eql? nil
+    path = client(resource).node(resource[:path], resource[:name])
+    path.exists.data
   end
 end

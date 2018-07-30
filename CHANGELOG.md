@@ -1,3 +1,6 @@
+### 3.0.2
+* Add feature 'absent' for module aem_path
+
 ### 3.0.1
 * Modify SSL and security config path to work with AEM 6.4
 
