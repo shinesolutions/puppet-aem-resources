@@ -525,3 +525,12 @@ Upgrading to 2.x.x:
     aem_resources::enable_crxde { 'Enable CRXDE':
       run_mode => 'author',
     }
+
+Testing
+-------
+
+If you run AEM on a non default port `4502`, then you need to specify the port number as environment variable:
+
+    aem_port=45622 author_port=45622 make test-integration
+
+The `aem_port` environment variable is used by provisioning steps that use default `aem_id`. `author_port` is used by the ones that specify `author` `aem_id`.
