@@ -223,6 +223,11 @@ Path
       name   => '/etc/designs/cloudservices/',
     }
 
+    aem_path { 'Delete /etc/designs/somepath/':
+      ensure => absent,
+      name   => '/etc/designs/somepath/',
+    }
+
 Replication agent
 
     aem_replication_agent { 'Create replication agent':
