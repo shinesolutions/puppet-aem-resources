@@ -30,9 +30,9 @@ test-integration:
 	cp -R manifests test/integration/modules/aem_resources/
 	cp -R templates test/integration/modules/aem_resources/
 	# set up test fixtures
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/somepackage/1.2.3/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/somepackage/1.2.3/
 	cp test/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
-	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/somepackagegroup/
+	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
