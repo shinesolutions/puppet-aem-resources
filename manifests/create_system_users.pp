@@ -1,4 +1,5 @@
 define aem_resources::create_system_users(
+  $aem_system_users = undef,
   $orchestrator_password = 'orchestrator',
   $replicator_password = 'replicator',
   $deployer_password = 'deployer',
@@ -8,11 +9,38 @@ define aem_resources::create_system_users(
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
+  $_aem_system_users = pick(
+    $aem_system_users,
+    admin => {
+      name => 'admin',
+      path => '/home/users/d'
+      },
+      deployer => {
+      name => 'deployer',
+      path => '/home/users/q'
+      },
+      exporter => {
+      name => 'exporter',
+      path => '/home/users/e'
+      },
+      importer => {
+      name => 'importer',
+      path => '/home/users/i'
+      },
+      orchestrator => {
+      name => 'orchestrator',
+      path => '/home/users/o'
+      },
+      replicator => {
+      name => 'replicator',
+      path => '/home/users/r'
+              },
+  )
 
   aem_user { "[${aem_id}] Create user - orchestrator":
     ensure       => present,
-    name         => 'orchestrator',
-    path         => '/home/users/o',
+    name         => $_aem_system_users[orchestrator][name],
+    path         => $_aem_system_users[orchestrator][path],
     password     => $orchestrator_password,
     group_name   => 'administrators',
     group_path   => '/home/groups/a',
@@ -24,8 +52,8 @@ define aem_resources::create_system_users(
 
   aem_user { "[${aem_id}] Create user - replicator":
     ensure       => present,
-    name         => 'replicator',
-    path         => '/home/users/r',
+    name         => $_aem_system_users[replicator][name],
+    path         => $_aem_system_users[replicator][path],
     password     => $replicator_password,
     group_name   => 'administrators',
     group_path   => '/home/groups/a',
@@ -44,8 +72,8 @@ define aem_resources::create_system_users(
   # it doesn't exist on vanilla AEM installation
   aem_user { "[${aem_id}] Create user - deployer":
     ensure       => present,
-    name         => 'deployer',
-    path         => '/home/users/q',
+    name         => $_aem_system_users[deployer][name],
+    path         => $_aem_system_users[deployer][path],
     password     => $deployer_password,
     group_name   => 'administrators',
     group_path   => '/home/groups/a',
@@ -57,8 +85,8 @@ define aem_resources::create_system_users(
 
   aem_user { "[${aem_id}] Create user - exporter":
     ensure       => present,
-    name         => 'exporter',
-    path         => '/home/users/e',
+    name         => $_aem_system_users[exporter][name],
+    path         => $_aem_system_users[exporter][path],
     password     => $exporter_password,
     group_name   => 'administrators',
     group_path   => '/home/groups/a',
@@ -70,8 +98,8 @@ define aem_resources::create_system_users(
 
   aem_user { "[${aem_id}] Create user - importer":
     ensure       => present,
-    name         => 'importer',
-    path         => '/home/users/i',
+    name         => $_aem_system_users[importer][name],
+    path         => $_aem_system_users[importer][path],
     password     => $importer_password,
     group_name   => 'administrators',
     group_path   => '/home/groups/a',
