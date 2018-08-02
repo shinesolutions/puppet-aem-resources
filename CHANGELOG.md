@@ -1,4 +1,4 @@
-### 3.0.2
+### 3.1.0
 * Add feature 'absent' for module aem_path
 * Add feature to define system users name & path as parameters
 * Improved credentials handling for system users
