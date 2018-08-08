@@ -28,75 +28,39 @@ define aem_resources::create_system_users(
     },
   )
 
-  aem_user { "[${aem_id}] Create user - orchestrator":
-    ensure       => present,
-    name         => $_aem_system_users[orchestrator][name],
-    path         => $_aem_system_users[orchestrator][path],
-    password     => pick($_aem_system_users[orchestrator][password], 'orchestrator'),
-    group_name   => 'administrators',
-    group_path   => '/home/groups/a',
-    force        => true,
-    aem_username => $aem_username,
-    aem_password => $aem_password,
-    aem_id       => $aem_id,
-  }
-
-  aem_user { "[${aem_id}] Create user - replicator":
-    ensure       => present,
-    name         => $_aem_system_users[replicator][name],
-    path         => $_aem_system_users[replicator][path],
-    password     => pick($_aem_system_users[replicator][password], 'replicator'),
-    group_name   => 'administrators',
-    group_path   => '/home/groups/a',
-    force        => true,
-    aem_username => $aem_username,
-    aem_password => $aem_password,
-    aem_id       => $aem_id,
-  }
-
-  # deployer user does not use /home/users/d/
-  # because postAuthorizables fail when the
-  # intermediatePath already exists
-  # (/home/users/d/ is used by admin user in
-  # AEM 6.2 jar)
-  # /home/users/q/ is used instead just because
-  # it doesn't exist on vanilla AEM installation
-  aem_user { "[${aem_id}] Create user - deployer":
-    ensure       => present,
-    name         => $_aem_system_users[deployer][name],
-    path         => $_aem_system_users[deployer][path],
-    password     => pick($_aem_system_users[deployer][password], 'deployer'),
-    group_name   => 'administrators',
-    group_path   => '/home/groups/a',
-    force        => true,
-    aem_username => $aem_username,
-    aem_password => $aem_password,
-    aem_id       => $aem_id,
-  }
-
-  aem_user { "[${aem_id}] Create user - exporter":
-    ensure       => present,
-    name         => $_aem_system_users[exporter][name],
-    path         => $_aem_system_users[exporter][path],
-    password     => pick($_aem_system_users[exporter][password], 'exporter'),
-    group_name   => 'administrators',
-    group_path   => '/home/groups/a',
-    force        => true,
-    aem_username => $aem_username,
-    aem_password => $aem_password,
-    aem_id       => $aem_id,
-  }
-
-  aem_user { "[${aem_id}] Create user - importer":
-    ensure       => present,
-    name         => $_aem_system_users[importer][name],
-    path         => $_aem_system_users[importer][path],
-    password     => pick($_aem_system_users[importer][password], 'importer'),
-    group_name   => 'administrators',
-    group_path   => '/home/groups/a',
-    force        => true,
-    aem_username => $aem_username,
-    aem_password => $aem_password,
-    aem_id       => $aem_id,
-  }
+  ensure_resources('aem_user', {
+    "[${aem_id}] Create user - orchestrator" => {
+      name     => $_aem_system_users[orchestrator][name],
+      path     => $_aem_system_users[orchestrator][path],
+      password => pick($_aem_system_users[orchestrator][password], 'orchestrator'),
+    },
+    "[${aem_id}] Create user - replicator" => {
+      name     => $_aem_system_users[replicator][name],
+      path     => $_aem_system_users[replicator][path],
+      password => pick($_aem_system_users[replicator][password], 'replicator'),
+    },
+    "[${aem_id}] Create user - deployer" => {
+      name     => $_aem_system_users[deployer][name],
+      path     => $_aem_system_users[deployer][path],
+      password => pick($_aem_system_users[deployer][password], 'deployer'),
+    },
+    "[${aem_id}] Create user - exporter" => {
+      name     => $_aem_system_users[exporter][name],
+      path     => $_aem_system_users[exporter][path],
+      password => pick($_aem_system_users[exporter][password], 'exporter'),
+    },
+    "[${aem_id}] Create user - importer" => {
+      name     => $_aem_system_users[importer][name],
+      path     => $_aem_system_users[importer][path],
+      password => pick($_aem_system_users[importer][password], 'importer'),
+    }
+  }, {
+      ensure       => present,
+      group_name   => 'administrators',
+      group_path   => '/home/groups/a',
+      force        => true,
+      aem_username => $aem_username,
+      aem_password => $aem_password,
+      aem_id       => $aem_id,
+  })
 }

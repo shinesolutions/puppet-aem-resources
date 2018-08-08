@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
-
+# TODO: Figure out a better way to have an aem_bundle_alias rather than copy pasting the code from aem_bundle
 Puppet::Type.type(:aem_bundle_alias).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Start a bundle.
   def start
