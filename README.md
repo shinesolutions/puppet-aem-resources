@@ -507,6 +507,26 @@ Starting version 2.1.1, `aem_version` attribute was added to the corresponding t
       aem_version  => '6.3',
     }
 
+Alias
+-----
+
+Due to the need to change the state of some resources from within the same manifest, both `aem_bundle` and `aem_user` have alias resources named `aem_bundle_alias` and `aem_user_alias` .
+
+For example, this allows you to stop and start a bundle from within the same manifest:
+
+  aem_bundle { 'Stop webdav bundle':
+    ensure => stopped,
+    name   => 'org.apache.sling.jcr.webdav',
+  }
+
+  # Do other things here
+  ...
+
+  aem_bundle_alias { 'Start webdav bundle':
+    ensure => started,
+    name   => 'org.apache.sling.jcr.webdav',
+  }
+
 Upgrade
 -------
 

@@ -1,5 +1,5 @@
 ### 3.1.1
-*
+* Add new aem_user_alias type
 
 ### 3.1.0
 * Add feature 'absent' for module aem_path
