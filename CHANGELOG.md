@@ -1,3 +1,6 @@
+### 2.3.2
+*
+
 ### 2.3.1
 * Add new aem_user_alias type
 
