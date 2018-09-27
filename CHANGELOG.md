@@ -1,4 +1,5 @@
 ### 3.1.2
+* Fix issue with wait post Deploy package in deploy_packages.pp #41
 *
 
 ### 3.1.1
