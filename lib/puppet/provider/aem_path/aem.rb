@@ -23,6 +23,7 @@ Puppet::Type.type(:aem_path).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   def destroy
     return false if resource[:path].eql? nil
+
     path = resource[:path]
     client(resource).path(resource[:name]).delete(path)
   end
@@ -30,6 +31,7 @@ Puppet::Type.type(:aem_path).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   # Existence check true unless a path is defined
   def exists?
     return true if resource[:path].eql? nil
+
     path = client(resource).node(resource[:path], resource[:name])
     path.exists.data
   end
