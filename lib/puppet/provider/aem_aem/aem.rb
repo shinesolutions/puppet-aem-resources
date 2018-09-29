@@ -73,6 +73,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
     packages = result.data
     packages.each do |package|
       next unless (package_groups.include? package['group']) || package_groups.empty?
+
       puts '========================================================================'
       package.each do |key, value|
         puts "#{key}: #{value}"
