@@ -2,6 +2,7 @@
 * Fix issue with wait post Deploy package in deploy_packages.pp #41
 * Removed Ruby 2.1 support as ruby_aem 1.5.0 doesn't support ruby 2.1
 * Improve readiness check after bundle start within enable CRXDE action #42
+* Drop ruby 2.1 support
 
 ### 2.3.1
 * Add new aem_user_alias type
