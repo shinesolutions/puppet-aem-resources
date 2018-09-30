@@ -1,5 +1,5 @@
 ### 3.1.2
-*
+* Improve readiness check after bundle start within enable CRXDE action #42
 
 ### 3.1.1
 * Add new aem_user_alias type
