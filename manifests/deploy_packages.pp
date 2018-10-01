@@ -1,6 +1,6 @@
 define aem_resources::deploy_packages (
   $packages,
-  $path = '/tmp/shinesolutions/puppet-aem-resources',
+  $path          = '/tmp/shinesolutions/puppet-aem-resources',
   $sleep_seconds = 10,
   $aem_id        = undef,
   $aem_username  = undef,
@@ -33,10 +33,9 @@ define aem_resources::deploy_packages (
       aem_password => $aem_password,
       aem_id       => $_aem_id,
     } -> exec { "[${_aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
-      command     => "sleep ${final_sleep_seconds}",
-      path        => ['/usr/bin', '/usr/sbin', '/bin'],
-      timeout     => 0,
-      refreshonly => true,
+      command => "sleep ${final_sleep_seconds}",
+      path    => ['/usr/bin', '/usr/sbin', '/bin'],
+      timeout => 0
     }
 
     aem_aem { "[${_aem_id}] Wait until login page is ready post Deploy package ${package['group']}/${package['name']}-${package['version']}":
