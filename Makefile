@@ -20,9 +20,7 @@ lint:
 		test/integration/*/*.pp \
 		manifests/*.pp
 	puppet epp validate templates/*.epp
-	pwd
-	ls
-	bundle exec rubocop --config ./.rubocop.yml .
+	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
 
 test-integration:
 	# set up module
