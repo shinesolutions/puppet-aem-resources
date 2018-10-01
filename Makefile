@@ -6,7 +6,7 @@ deps:
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf bin/ pkg/ stage/ vendor/ 
+	rm -rf bin/ pkg/ stage/ vendor/
 	rm -rf test/integration/.tmp/ \
 	  test/integration/modules/ \
 	  /tmp/shinesolutions/puppet-aem-resources/
@@ -20,7 +20,7 @@ lint:
 		test/integration/*/*.pp \
 		manifests/*.pp
 	puppet epp validate templates/*.epp
-	bundle exec rubocop
+	bundle exec rubocop --config ./.rubocop.yml
 
 test-integration:
 	# set up module
