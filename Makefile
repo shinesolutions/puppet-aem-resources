@@ -21,7 +21,9 @@ lint:
 		manifests/*.pp
 	puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
-	bundle exec pdk validate metadata
+	# TODO: switch to pdk command when pdk 1.8.0 has been released
+	# bundle exec pdk validate metadata
+	bundle exec ~/.pdk/cache/ruby/2.4.0/bin/pdk validate metadata
 
 test-integration:
 	# set up module
@@ -68,6 +70,8 @@ test-fixtures:
 		-out test/fixtures/aem.cert
 
 package:
-	pdk build
+	# TODO: switch to pdk command when pdk 1.8.0 has been released
+	# bundle exec pdk build --force
+	bundle exec ~/.pdk/cache/ruby/2.4.0/bin/pdk build --force
 
 .PHONY: ci clean deps lint test-integration package
