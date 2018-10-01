@@ -7,6 +7,7 @@ end
 
 gem 'facter', '2.5.1', require: false
 gem 'metadata-json-lint', require: false
+gem 'pdk', require: false
 gem 'puppet', '5', require: false
 gem 'puppet-lint', require: false
 gem 'puppetlabs_spec_helper', require: false
