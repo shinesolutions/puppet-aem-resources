@@ -21,6 +21,9 @@ lint:
 		manifests/*.pp
 	puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
+	# ensure latest bundler is installed for pdk
+	/opt/puppetlabs/pdk/private/ruby/2.4.4/bin/gem install bundler
+	bundle exec pdk validate metadata
 
 test-integration:
 	# set up module

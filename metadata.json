@@ -42,5 +42,8 @@
     "adobe experience manager",
     "aem",
     "cq"
-  ]
+  ],
+  "pdk-version": "1.7.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.7.0-0-g57412ed"
 }

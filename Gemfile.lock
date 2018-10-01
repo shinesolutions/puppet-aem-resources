@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     ast (2.4.0)
     colored (1.2)
     cri (2.15.1)
@@ -22,8 +24,13 @@ GEM
       locale
     jaro_winkler (1.5.1)
     json (2.1.0)
+    json-schema (2.8.0)
+      addressable (>= 2.4)
     locale (2.1.2)
     log4r (1.1.10)
+    metadata-json-lint (2.2.0)
+      json-schema (~> 2.8)
+      spdx-licenses (~> 1.0)
     mini_portile2 (2.3.0)
     minitar (0.6.1)
     multi_json (1.13.1)
@@ -35,6 +42,7 @@ GEM
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.2)
+    public_suffix (3.0.3)
     puppet-lint (2.3.6)
     puppet_forge (2.2.9)
       faraday (>= 0.9.0, < 0.14.0)
@@ -50,6 +58,7 @@ GEM
       multi_json (~> 1.10)
       puppet_forge (~> 2.2.8)
     rainbow (3.0.0)
+    rake (12.3.1)
     retries (0.0.5)
     rubocop (0.59.2)
       jaro_winkler (~> 1.5.1)
@@ -66,6 +75,7 @@ GEM
       retries (~> 0.0.5)
       swagger_aem (~> 2.1.0)
     semantic_puppet (1.0.2)
+    spdx-licenses (1.2.0)
     swagger_aem (2.1.0)
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
@@ -78,8 +88,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  metadata-json-lint
   puppet-lint
   r10k
+  rake
   rubocop
   ruby_aem (~> 2.1.0)
 
