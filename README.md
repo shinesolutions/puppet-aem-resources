@@ -1,6 +1,7 @@
 [![Build Status](https://img.shields.io/travis/shinesolutions/puppet-aem-resources.svg)](http://travis-ci.org/shinesolutions/puppet-aem-resources)
 [![Published Version](https://img.shields.io/puppetforge/v/shinesolutions/aem_resources.svg)](http://forge.puppet.com/shinesolutions/aem_resources)
 [![Downloads Count](https://img.shields.io/puppetforge/dt/shinesolutions/aem_resources.svg)](http://forge.puppet.com/shinesolutions/aem_resources)
+[![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/puppet-aem-resources/badge.svg)](https://snyk.io/test/github/shinesolutions/puppet-aem-resources)
 
 Puppet AEM Resources
 --------------------
