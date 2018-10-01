@@ -6,7 +6,7 @@ deps:
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf bin/ pkg/ stage/ vendor/ *.lock
+	rm -rf bin/ pkg/ stage/ vendor/ 
 	rm -rf test/integration/.tmp/ \
 	  test/integration/modules/ \
 	  /tmp/shinesolutions/puppet-aem-resources/
