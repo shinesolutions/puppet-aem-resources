@@ -7,7 +7,8 @@ end
 
 gem 'facter', '2.5.1', require: false
 gem 'metadata-json-lint', require: false
-gem 'pdk', '1.7.0', require: false
+# TODO: replace git URL with version when pdk 1.8.0 has been released
+gem 'pdk', git: 'git://github.com/puppetlabs/pdk.git', ref: 'b336d5755f8b29d620a3073003063ae81eef7b28', require: false
 gem 'puppet', '5', require: false
 gem 'puppet-lint', require: false
 gem 'puppetlabs_spec_helper', require: false
