@@ -2,6 +2,7 @@
 * Fix issue with wait post Deploy package in deploy_packages.pp #41
 * Improve readiness check after bundle start within enable CRXDE action #42
 * Drop ruby 2.1 and 2.2 support
+* Introduce pdk as Puppet module build
 
 ### 3.1.1
 * Add new aem_user_alias type
