@@ -4,6 +4,7 @@
 * Improve readiness check after bundle start within enable CRXDE action #42
 * Drop ruby 2.1 and 2.2 support
 * Introduce pdk as Puppet module build
+* Drop Puppet 4 support, add Puppet 6 support
 
 ### 2.3.1
 * Add new aem_user_alias type
