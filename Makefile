@@ -67,6 +67,6 @@ test-fixtures:
 		-out test/fixtures/aem.cert
 
 package:
-	puppet module build .
+	pdk build
 
 .PHONY: ci clean deps lint test-integration package
