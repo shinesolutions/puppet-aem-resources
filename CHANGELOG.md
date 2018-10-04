@@ -1,3 +1,6 @@
+### 2.4.1
+*
+
 ### 2.4.0
 * Fix issue with wait post Deploy package in deploy_packages.pp #41
 * Removed Ruby 2.1 support as ruby_aem 1.5.0 doesn't support ruby 2.1
