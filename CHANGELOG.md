@@ -1,3 +1,6 @@
+### 3.2.1
+*
+
 ### 3.2.0
 * Fix issue with wait post Deploy package in deploy_packages.pp #41
 * Improve readiness check after bundle start within enable CRXDE action #42
