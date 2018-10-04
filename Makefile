@@ -2,6 +2,7 @@ ci: clean deps lint package
 
 deps:
 	gem install bundler
+	bundle config --local path vendor/bundle
 	bundle install --binstubs
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
