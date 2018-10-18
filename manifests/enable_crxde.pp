@@ -12,12 +12,16 @@ define aem_resources::enable_crxde(
     aem_password => $aem_password,
     aem_id       => $aem_id,
   } -> aem_aem { "[${aem_id}]: Wait until login page is ready after starting davex bundle":
-    ensure => login_page_is_ready,
-    aem_id => $aem_id,
+    ensure       => login_page_is_ready,
+    aem_id       => $aem_id,
+    aem_username => $aem_username,
+    aem_password => $aem_password,
   } -> aem_aem { "${aem_id}: Wait until aem health check is ok after starting davex bundle":
-    ensure => aem_health_check_is_ok,
-    tags   => 'deep',
-    aem_id => $aem_id,
+    ensure       => aem_health_check_is_ok,
+    tags         => 'deep',
+    aem_id       => $aem_id,
+    aem_username => $aem_username,
+    aem_password => $aem_password,
   } -> aem_node { "[${aem_id}] Create Apache Sling DavEx Servlet config node":
     ensure       => present,
     name         => 'org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet',
