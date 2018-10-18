@@ -1,5 +1,5 @@
 ### 3.2.1
-*
+* Fix authentication issue in the enable_crxde manifest #44
 
 ### 3.2.0
 * Fix issue with wait post Deploy package in deploy_packages.pp #41
