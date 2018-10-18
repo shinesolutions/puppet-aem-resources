@@ -1,3 +1,6 @@
+### 2.4.2
+*
+
 ### 2.4.1
 * Fix authentication issue in the enable_crxde manifest #44
 
