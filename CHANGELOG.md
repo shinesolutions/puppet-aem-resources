@@ -1,5 +1,8 @@
 ### 3.2.2
-*
+* Add feature to manage AEM Truststore
+* Add feature to manage AEM Authorizable Keystore
+* Add feature to manage Certificates in AEM Truststore
+* Add feature to manage SAML Authentication configuration
 
 ### 3.2.1
 * Fix authentication issue in the enable_crxde manifest #44

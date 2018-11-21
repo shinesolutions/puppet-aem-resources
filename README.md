@@ -24,7 +24,7 @@ If you want to use the master version:
 And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module.
 
     package { 'ruby_aem':
-      ensure   => '1.4.3',
+      ensure   => '2.2.0',
       provider => 'puppet_gem',
     }
 
@@ -102,6 +102,71 @@ AEM
       run_mode => 'author',
     }
 
+Authorizable Keystore
+
+    aem_authorizable_keystore { "Create new keystore for user authentication-service":
+      ensure            => present,
+      aem_id            => 'author',
+      aem_username      => 'admin',
+      aem_password      => 'admin',
+      authorizable_id   => 'authentication-service',
+      intermediate_path => '/home/users/system',
+      password          => 'password1'
+    }
+
+    aem_authorizable_keystore { "Archive keystore for user authentication-service to a specific path":
+      ensure            => archived,
+      aem_id            => 'author',
+      aem_username      => 'admin',
+      aem_password      => 'admin',
+      authorizable_id   => 'authentication-service',
+      intermediate_path => '/home/users/system',
+      path              => '/tmp'
+    }
+
+    aem_authorizable_keystore { "Archive keystore for user authentication-service to a specific path":
+      ensure            => archived,
+      aem_id            => 'author',
+      aem_username      => 'admin',
+      aem_password      => 'admin',
+      authorizable_id   => 'authentication-service',
+      intermediate_path => '/home/users/system',
+      file              => '/tmp/store.p12'
+    }
+
+    aem_authorizable_keystore { "Remove keystore for user authentication-service":
+      ensure            => absent,
+      aem_id            => 'author',
+      aem_username      => 'admin',
+      aem_password      => 'admin',
+      authorizable_id   => 'authentication-service',
+      intermediate_path => '/home/users/system',
+    }
+
+Authorizable Keystore Certificate
+
+    aem_certificate_chain { "Add certificate to user authentication-service keystore with certificate provided as file":
+      ensure                      => present,
+      aem_id                      => 'author',
+      aem_username                => 'admin',
+      aem_password                => 'admin',
+      authorizable_id             => 'authentication-service',
+      intermediate_path           => '/home/users/system',
+      private_key_alias           => 'alias_123'
+      private_key_file_path       => '/tmp/private_key_pkcs8.der'
+      certificate_chain_file_path => '/tmp/cert_pem.crt'
+    }
+
+    aem_certificate_chain { "Remove a certificate from User1 keystore":
+      ensure            => present,
+      aem_id            => 'author',
+      aem_username      => 'admin',
+      aem_password      => 'admin',
+      authorizable_id   => 'authentication-service',
+      intermediate_path => '/home/users/system',
+      private_key_alias => 'alias_123'
+    }
+
 Bundle
 
     aem_bundle { 'Stop webdav bundle':
@@ -112,6 +177,51 @@ Bundle
     aem_bundle { 'Start webdav bundle':
       ensure => started,
       name   => 'org.apache.sling.jcr.webdav',
+    }
+
+Certificate
+
+    aem_certificate { "Add certificate by file name":
+      ensure       => present,
+      aem_id       => 'author',
+      aem_username => 'admin',
+      aem_password => 'admin',
+      file         => '/tmp/cert.crt'
+    }
+
+    aem_certificate { "Force adding certificate by file name":
+      ensure       => present,
+      aem_id       => 'author',
+      aem_username => 'admin',
+      aem_password => 'admin',
+      file         => '/tmp/cert.crt',
+      force        => true
+    }
+
+    aem_certificate { "Archive certificate via serial number to a specified file path":
+      ensure              => archived,
+      aem_id              => 'author',
+      aem_username        => 'admin',
+      aem_password        => 'admin',
+      truststore_password => 'admin'
+      serial              => '1234567890'
+      file                => '/tmp/cert.crt',
+    }
+
+    aem_certificate { "Remove certificate by file name":
+      ensure       => absent,
+      aem_id       => 'author',
+      aem_username => 'admin',
+      aem_password => 'admin',
+      file         => '/tmp/cert.crt'
+    }
+
+    aem_certificate { "Remove certificate by serial number":
+      ensure       => absent,
+      aem_id       => 'author',
+      aem_username => 'admin',
+      aem_password => 'admin',
+      serial       => '1234567890'
     }
 
 Config property
@@ -279,6 +389,351 @@ Repository
 
     aem_repository { 'Unblock repository writes':
       ensure => writes_unblocked,
+    }
+
+Saml
+
+    aem_saml { 'Create SAML configuration for AEM 6.2 with certificate provided via idp_cert_alias parameter':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      idp_cert_alias             => 'certalias___1542770831396',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.3 with certificate provided via idp_cert_alias parameter':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      idp_cert_alias             => 'certalias___1542770831396',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via idp_cert_alias parameter':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      idp_cert_alias             => 'certalias___1542770831396',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      user_intermediate_path     => '',
+      assertion_consumer_service_url => ''
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.2 with certificate provided via serial number':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      serial                     => '1234567890',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.3 with certificate provided via serial number':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      serial                     => '1234567890',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via serial number':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      serial                     => '1234567890',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      user_intermediate_path     => '',
+      assertion_consumer_service_url => ''
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.2 with certificate provided as a file':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      file                       => '/tmp/cert.crt',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.3 with certificate provided as a file':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      file                       => '/tmp/cert.crt',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+    }
+
+    aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided as a file':
+      ensure                     => present,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+      key_store_password         => 'admin',
+      service_ranking            => 5002,
+      idp_http_redirect          => true,
+      create_user                => true,
+      default_redirect_url       => '/sites.html',
+      user_id_attribute          => 'NameID',
+      default_groups             => ['def-groups'],
+      file                       => '/tmp/cert.crt',
+      add_group_memberships      => true,
+      path                       => ['/'],
+      synchronize_attributes     => [
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\=profile/givenName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\=profile/familyName',
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\=profile/email'
+      ],
+      clock_tolerance            => 60,
+      group_membership_attribute => 'http://temp/variable/aem-groups',
+      idp_url                    => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx?RequestBinding\=HTTPPost&loginToRp\=https://prod-aemauthor.com/saml_login',
+      logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
+      service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
+      handle_logout              => true,
+      sp_private_key_alias       => '',
+      use_encryption             => false,
+      name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      user_intermediate_path     => '',
+      assertion_consumer_service_url => ''
+    }
+
+    aem_saml { 'Remove SAML configuration':
+      ensure                     => absent,
+      aem_username               => 'admin',
+      aem_password               => 'admin',
+      aem_id                     => 'author',
+    }
+
+Truststore
+
+    aem_truststore { "Create Truststore":
+      ensure              => present,
+      aem_id              => 'author',
+      aem_username        => 'admin',
+      aem_password        => 'admin',
+      password            => 'admin'
+    }
+
+    aem_truststore { "Import Truststore from file provided via file":
+      ensure              => present,
+      aem_id              => 'author',
+      aem_username        => 'admin',
+      aem_password        => 'admin',
+      password            => 'admin'
+      file                => '/root/truststore.p12'
+    }
+
+    aem_truststore { "Archive Truststore to /root":
+      ensure              => archived,
+      aem_id              => 'author',
+      aem_username        => 'admin',
+      aem_password        => 'admin',
+      path                => '/root'
+    }
+
+    aem_truststore { "Archive Truststore to /root/truststore.p12":
+      ensure              => archived,
+      aem_id              => 'author',
+      aem_username        => 'admin',
+      aem_password        => 'admin',
+      file                => '/root/truststore.p12'
+    }
+
+    aem_truststore { "Delete Truststore":
+      ensure       => absent,
+      aem_id       => 'author',
+      aem_username => 'admin',
+      aem_password => 'admin'
     }
 
 User
