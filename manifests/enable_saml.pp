@@ -62,9 +62,14 @@ define aem_resources::enable_saml(
     }
 
     if $file {
+      archive { "${tmp_dir}/saml_certificate.crt":
+        ensure => present,
+        source => $file,
+      }
+
       $params_enable_saml = {
         aem_saml => {
-          file => $file
+          file => "${tmp_dir}/saml_certificate.crt"
         }
       }
     } elsif $idp_cert_alias {
