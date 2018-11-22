@@ -18,7 +18,7 @@ Puppet::Type.type(:aem_config_property).provide(:aem, parent: PuppetX::ShineSolu
   # Create a config property.
   def create
     config_property = client(resource).config_property(resource[:name], resource[:type], resource[:value])
-    result = config_property.create(resource[:run_mode], resource[:config_node_name])
+    result = config_property.create(resource[:config_node_name])
     handle(result)
   end
 
