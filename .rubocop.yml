@@ -18,13 +18,24 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Max: 100
   Exclude:
+    # AEM SAML endpoint does support that many parameters
+    - "lib/puppet/provider/aem_saml/aem.rb"
+    - "lib/puppet/type/aem_saml.rb"
     - "**/**/*_spec.rb"
 Metrics/ClassLength:
   Max: 300
 Metrics/LineLength:
   Max: 280
+  Exclude:
+    # AEM SAML endpoint does support that many parameters
+    - "lib/puppet/provider/aem_saml/aem.rb"
+    - "lib/puppet/type/aem_saml.rb"
 Metrics/MethodLength:
   Max: 30
+  Exclude:
+    # AEM SAML endpoint does support that many parameters
+    - "lib/puppet/provider/aem_saml/aem.rb"
+    - "lib/puppet/type/aem_saml.rb"
 Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/PerceivedComplexity:
