@@ -64,10 +64,12 @@ module PuppetX
       end
 
       def handle(result)
-        Puppet.debug("#{@label} Response status code: #{result.response.status_code}")
-        Puppet.debug("#{@label} Response body:\n#{result.response.body[0..500]}") if result.response.body.is_a? String
-        Puppet.debug("#{@label} Response headers:\n#{result.response.headers}")
-        Puppet.info("#{@label} #{result.message}")
+        unless result.response.eql? nil
+          Puppet.debug("#{@label} Response status code: #{result.response.status_code}")
+          Puppet.debug("#{@label} Response body:\n#{result.response.body[0..500]}") if result.response.body.is_a? String
+          Puppet.debug("#{@label} Response headers:\n#{result.response.headers}")
+        end
+        Puppet.info("#{@label} #{result.message}") unless result.message.eql? nil
       end
 
       def handle_multi(results)
