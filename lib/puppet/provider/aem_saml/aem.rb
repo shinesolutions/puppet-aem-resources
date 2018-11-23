@@ -86,8 +86,9 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     # To-Do:
     # To not end in a endless loop we need to add retry check
     ############################################################
+    retries_count = 0
     while exists?.eql? false
-      puts 'Wait until SAML is configured'
+      puts format('Wait until SAML configuration exists, check attempt #%<retries_count>d', retries_count: retries_count)
       sleep 10
     end
 
@@ -145,7 +146,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     ############################################################
     results.push(saml.create(property_params))
 
-    puts 'SAML successfully configured.'
     handle_multi(results)
   end
 
@@ -159,7 +159,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     saml = client(resource).saml
     results.push(saml.delete)
 
-    puts 'SAML configuration successfully removed'
     handle_multi(results)
   end
 
@@ -170,9 +169,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
     saml_properties = result.response.body.properties
 
-    puts result.message if saml_properties[:idpCertAlias][:is_set].eql? true
-
-    return true if saml_properties[:idpCertAlias][:is_set].eql? true
-    return false if saml_properties[:idpCertAlias][:is_set].eql? false
+    saml_properties[:idpCertAlias][:is_set]
   end
 end
