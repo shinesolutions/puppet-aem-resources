@@ -1,4 +1,4 @@
-define aem_resources::remove_certificate(
+define aem_resources::remove_truststore_certificate(
   $aem_id          = 'aem',
   $aem_username    = undef,
   $aem_password    = undef,

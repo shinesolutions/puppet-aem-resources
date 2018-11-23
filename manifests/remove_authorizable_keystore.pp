@@ -1,4 +1,4 @@
-define aem_resources::create_authorizable_keystore(
+define aem_resources::remove_authorizable_keystore(
   $aem_id               = 'aem',
   $aem_username         = undef,
   $aem_password         = undef,
