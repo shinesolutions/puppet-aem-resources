@@ -45,11 +45,11 @@ test-integration:
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
 	# test manifests
 	for test in test/integration/manifests/*.pp; do \
-	  puppet apply --modulepath=test/integration/modules/ $$test; \
+	  bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
 	done
 	# test resources
 	for test in test/integration/resources/*.pp; do \
-	  puppet apply --modulepath=test/integration/modules/ $$test; \
+	  bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
 	done
 
 test-fixtures:
