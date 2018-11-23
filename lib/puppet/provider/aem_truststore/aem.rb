@@ -23,7 +23,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
 
     truststore = client(resource).truststore
     result = truststore.download(file_path)
-    puts result.message
+
     handle(result)
   end
 
@@ -47,7 +47,6 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
       result = truststore.create(resource[:password])
     end
 
-    puts result.message
     handle(result)
   end
 
@@ -55,7 +54,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
   def destroy
     truststore = client(resource).truststore
     result = truststore.delete
-    puts result.message
+
     handle(result)
   end
 
@@ -65,7 +64,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
 
     truststore = client(resource).truststore
     result = truststore.exists
-    puts result.message
+
     result.data
   end
 end

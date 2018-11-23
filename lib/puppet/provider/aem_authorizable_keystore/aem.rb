@@ -24,7 +24,6 @@ Puppet::Type.type(:aem_authorizable_keystore).provide(:aem, parent: PuppetX::Shi
     authorizable_keystore = client(resource).authorizable_keystore(resource[:intermediate_path], resource[:authorizable_id])
     result = authorizable_keystore.download(file_path)
 
-    puts result.message
     handle(result)
   end
 
@@ -33,7 +32,6 @@ Puppet::Type.type(:aem_authorizable_keystore).provide(:aem, parent: PuppetX::Shi
     authorizable_keystore = client(resource).authorizable_keystore(resource[:intermediate_path], resource[:authorizable_id])
     result = authorizable_keystore.create(resource[:password])
 
-    puts result.message
     handle(result)
   end
 
@@ -42,7 +40,6 @@ Puppet::Type.type(:aem_authorizable_keystore).provide(:aem, parent: PuppetX::Shi
     authorizable_keystore = client(resource).authorizable_keystore(resource[:intermediate_path], resource[:authorizable_id])
     result = authorizable_keystore.delete
 
-    puts result.message
     handle(result)
   end
 
@@ -53,7 +50,6 @@ Puppet::Type.type(:aem_authorizable_keystore).provide(:aem, parent: PuppetX::Shi
     authorizable_keystore = client(resource).authorizable_keystore(resource[:intermediate_path], resource[:authorizable_id])
     result = authorizable_keystore.exists
 
-    puts result.message
     result.data
   end
 end

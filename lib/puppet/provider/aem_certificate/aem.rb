@@ -30,8 +30,6 @@ Puppet::Type.type(:aem_certificate).provide(:aem, parent: PuppetX::ShineSolution
     file = File.new(resource[:file], 'w')
     file.puts(exported_certificate)
     file.close
-
-    puts result.message
   end
 
   # Upload certificate to the AEM Truststore.
@@ -53,7 +51,6 @@ Puppet::Type.type(:aem_certificate).provide(:aem, parent: PuppetX::ShineSolution
     certificate = client(resource).certificate(serial_number)
     result = certificate.import_wait_until_ready(resource[:file], **opts)
 
-    puts result.message
     handle(result)
   end
 
@@ -72,7 +69,6 @@ Puppet::Type.type(:aem_certificate).provide(:aem, parent: PuppetX::ShineSolution
     certificate = client(resource).certificate(serial_number)
     result = certificate.delete
 
-    puts result.message
     handle(result)
   end
 
@@ -91,7 +87,6 @@ Puppet::Type.type(:aem_certificate).provide(:aem, parent: PuppetX::ShineSolution
     certificate = client(resource).certificate(serial_number)
     result = certificate.exists
 
-    puts result.message
     result.data
   end
 end

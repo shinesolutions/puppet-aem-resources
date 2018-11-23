@@ -28,7 +28,6 @@ Puppet::Type.type(:aem_certificate_chain).provide(:aem, parent: PuppetX::ShineSo
     certificate_chain = client(resource).certificate_chain(resource[:private_key_alias], resource[:intermediate_path], resource[:authorizable_id])
     result = certificate_chain.import_wait_until_ready(resource[:certificate_chain_file_path], resource[:private_key_file_path], **opts)
 
-    puts result.message
     handle(result)
   end
 
@@ -37,7 +36,6 @@ Puppet::Type.type(:aem_certificate_chain).provide(:aem, parent: PuppetX::ShineSo
     certificate_chain = client(resource).certificate_chain(resource[:private_key_alias], resource[:intermediate_path], resource[:authorizable_id])
     result = certificate_chain.delete
 
-    puts result.message
     handle(result)
   end
 
@@ -46,7 +44,6 @@ Puppet::Type.type(:aem_certificate_chain).provide(:aem, parent: PuppetX::ShineSo
     certificate_chain = client(resource).certificate_chain(resource[:private_key_alias], resource[:intermediate_path], resource[:authorizable_id])
     result = certificate_chain.exists
 
-    puts result.message
     result.data
   end
 end
