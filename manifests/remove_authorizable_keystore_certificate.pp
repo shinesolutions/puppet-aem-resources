@@ -10,7 +10,7 @@ define aem_resources::remove_authorizable_keystore_certificate(
     ensure            => absent,
     aem_id            => $aem_id,
     aem_username      => $aem_username,
-    aem_password      => $aem_password
+    aem_password      => $aem_password,
     authorizable_id   => $authorizable_id,
     intermediate_path => $intermediate_path,
     private_key_alias => $private_key_alias,

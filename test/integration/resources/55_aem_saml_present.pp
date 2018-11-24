@@ -7,7 +7,7 @@ aem_saml { 'Create SAML configuratoin':
   default_redirect_url       => '/sites.html',
   user_id_attribute          => 'NameID',
   default_groups             => ['def-groups'],
-  file                       => '/tmp/shinesolutions/puppet-aem-resources/saml.crt'
+  file                       => '/tmp/shinesolutions/puppet-aem-resources/saml.crt',
   add_group_memberships      => true,
   path                       => ['/'],
   synchronize_attributes     => [

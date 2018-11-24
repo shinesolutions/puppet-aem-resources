@@ -6,7 +6,7 @@ aem_resources::enable_saml { 'Enable SAML authentication':
   default_redirect_url       => '/sites.html',
   user_id_attribute          => 'NameID',
   default_groups             => ['def-groups'],
-  file                       => '/tmp/shinesolutions/puppet-aem-resources/saml.crt'
+  file                       => '/tmp/shinesolutions/puppet-aem-resources/saml.crt',
   add_group_memberships      => true,
   path                       => ['/'],
   synchronize_attributes     => [
@@ -24,5 +24,6 @@ aem_resources::enable_saml { 'Enable SAML authentication':
   use_encryption             => false,
   name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
   digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
-  signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+  signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
+  aem_id                     => 'author',
 }

@@ -35,7 +35,7 @@ define aem_resources::deploy_packages (
     } -> exec { "[${_aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       command => "sleep ${final_sleep_seconds}",
       path    => ['/usr/bin', '/usr/sbin', '/bin'],
-      timeout => 0
+      timeout => 0,
     }
 
     aem_aem { "[${_aem_id}] Wait until login page is ready post Deploy package ${package['group']}/${package['name']}-${package['version']}":
