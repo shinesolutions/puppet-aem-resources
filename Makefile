@@ -44,12 +44,14 @@ test-integration:
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
 	# test manifests
+	# author_port needs to be set here for test/integration/manifests/30_deploy_pakages.pp scenario
 	for test in test/integration/manifests/*.pp; do \
-	  bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
+	  author_port=$$aem_port bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
 	done
 	# test resources
+	# author_port needs to be set here for test/integration/resources/10_aem_bundle_stopped.pp scenario
 	for test in test/integration/resources/*.pp; do \
-	  bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
+	  author_port=$$aem_port bundle exec puppet apply --modulepath=test/integration/modules/ $$test; \
 	done
 
 test-fixtures:
