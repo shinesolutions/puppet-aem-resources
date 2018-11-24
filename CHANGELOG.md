@@ -1,4 +1,4 @@
-### 3.2.2
+### 3.3.0
 * Add feature to manage AEM Truststore
 * Add feature to manage AEM Authorizable Keystore
 * Add feature to manage Certificates in AEM Truststore
