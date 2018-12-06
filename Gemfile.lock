@@ -103,7 +103,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.10.0)
-    ruby_aem (2.2.0)
+    ruby_aem (2.2.1)
       nokogiri (~> 1.8.1)
       nori (~> 2.6.0)
       retries (~> 0.0.5)
@@ -130,7 +130,7 @@ DEPENDENCIES
   r10k
   rake
   rubocop
-  ruby_aem (~> 2.2.0)
+  ruby_aem (~> 2.2.1)
 
 BUNDLED WITH
    1.17.1
