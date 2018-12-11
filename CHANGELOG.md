@@ -1,6 +1,5 @@
 ### 3.3.2
-* Introducing ensure flag for installing/uninstalling packages via descriptor file shinesolutions/aem-aws-stack-builder
-#224
+* Introducing ensure flag for installing/uninstalling packages via descriptor file shinesolutions/aem-aws-stack-builder#224
 
 ### 3.3.1
 * Upgrade ruby_aem to 2.2.1
