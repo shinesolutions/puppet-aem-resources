@@ -62,9 +62,10 @@ define aem_resources::enable_saml(
     }
 
     if $file {
-      archive { "${tmp_dir}/saml_certificate.crt":
+      archive { "${tmp_dir}/SAML/saml_certificate.crt":
         ensure => present,
         source => $file,
+        before => Aem_saml[aem_saml]
       }
 
       $params_enable_saml = {
@@ -100,10 +101,11 @@ define aem_resources::enable_saml(
     )
 
     aem_node { "${aem_id}: Create Apache Sling Referrer Filter config node":
-      ensure => present,
-      name   => 'org.apache.sling.security.impl.ReferrerFilter',
-      path   => '/apps/system/config',
-      type   => 'sling:OsgiConfig',
+      ensure  => present,
+      name    => 'org.apache.sling.security.impl.ReferrerFilter',
+      path    => '/apps/system/config',
+      type    => 'sling:OsgiConfig',
+      require => Aem_saml[aem_saml]
     } -> aem_config_property { "${aem_id}: allow empty referrer":
       ensure           => present,
       name             => 'allow.empty',
@@ -132,5 +134,13 @@ define aem_resources::enable_saml(
       value            => [$idp_hostname],
       run_mode         => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
+    }
+
+    if $file {
+      # Remove created SAML certificate
+      exec { "${aem_id}: Clean SAML certificate":
+        command => "rm -fr ${tmp_dir}/SAML/saml_certificate.crt",
+        require => Aem_saml[aem_saml]
+      }
     }
   }
