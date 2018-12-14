@@ -8,8 +8,20 @@ Puppet AEM Resources
 
 A Puppet module for provisioning [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) resources.
 
-Install
--------
+Learn more about Puppet AEM Resources:
+
+* [Installation](https://github.com/shinesolutions/puppet-aem-resources#installation)
+* [Usage](https://github.com/shinesolutions/puppet-aem-resources#usage)
+* [Multi AEM Instances](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-instances)
+* [Multi AEM Versions](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-versions)
+* [Alias](https://github.com/shinesolutions/puppet-aem-resources#alias)
+* [Upgrade](https://github.com/shinesolutions/puppet-aem-resources#upgrade)
+* [Testing](https://github.com/shinesolutions/puppet-aem-resources#testing)
+
+Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
+
+Installation
+------------
 
     puppet module install shinesolutions-aem_resources
 
@@ -903,7 +915,7 @@ Enable CRXDE:
       run_mode => 'author',
     }
 
-Multi AEM instances
+Multi AEM Instances
 -------------------
 
 Starting from version 2.0.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
@@ -948,7 +960,7 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
 
-Multi AEM versions
+Multi AEM Versions
 ------------------
 
 Some types support multiple AEM versions due to differences how particular features are implemented between those AEM versions.
