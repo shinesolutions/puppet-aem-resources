@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- Introducing ensure flag for installing/uninstalling packages via descriptor file shinesolutions/aem-aws-stack-builder#224
-- Upgrade ruby_aem to 2.3.0
+### Added
 - Add YAML syntax check to lint target
+- Introducing ensure flag for installing/uninstalling packages via descriptor file shinesolutions/aem-aws-stack-builder#224
+- Add temp SAML-related resource cleanup
+
+### Changed
+- Upgrade ruby_aem to 2.3.0
 
 ## [3.3.0] - 2018-11-24
 
