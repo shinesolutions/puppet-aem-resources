@@ -20,8 +20,13 @@ define aem_resources::deploy_packages (
       $sleep_seconds,
     )
 
+    $_ensure = pick(
+      $package['ensure'],
+      'present',
+    )
+
     aem_package { "[${_aem_id}] Deploy package ${package['group']}/${package['name']}-${package['version']}":
-      ensure       => present,
+      ensure       => $_ensure,
       name         => $package[name],
       group        => $package[group],
       version      => $package[version],
