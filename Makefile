@@ -22,6 +22,7 @@ lint:
 		manifests/*.pp
 	puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
+	bundle exec yaml-lint .*.yml
 	pdk validate metadata
 
 test-integration:

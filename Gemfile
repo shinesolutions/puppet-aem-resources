@@ -14,3 +14,4 @@ gem 'r10k', require: false
 gem 'rake', require: false
 gem 'rubocop', require: false
 gem 'ruby_aem', '~> 2.3.0'
+gem 'yaml-lint', require: false
