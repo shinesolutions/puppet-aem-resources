@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-## [3.4.0]
+## [3.4.0] - 2018-12-17
 
 ### Added
 - Add YAML syntax check to lint target
