@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add new resource manifests to archive AEM Global Truststore shinesolutions/aem-aws-stack-builder#229
+
 ### Changed
 
 ### Removed
