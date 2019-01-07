@@ -70,7 +70,7 @@ define aem_resources::enable_saml(
 
       $params_enable_saml = {
         aem_saml => {
-          file => "${tmp_dir}/saml_certificate.crt"
+          file => "${tmp_dir}/SAML/saml_certificate.crt"
         }
       }
     } elsif $idp_cert_alias {
@@ -139,7 +139,8 @@ define aem_resources::enable_saml(
     if $file {
       # Remove created SAML certificate
       exec { "${aem_id}: Clean SAML certificate":
-        command => "rm -fr ${tmp_dir}/SAML/saml_certificate.crt",
+        command => "rm -rf ${tmp_dir}/SAML/saml_certificate.crt",
+        path    => ['/usr/bin', '/usr/sbin', '/bin'],
         require => Aem_saml[aem_saml]
       }
     }
