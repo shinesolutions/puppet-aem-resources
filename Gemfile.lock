@@ -129,7 +129,7 @@ DEPENDENCIES
   puppet-lint
   puppetlabs_spec_helper
   r10k
-  rake (~> 12.3.2)
+  rake
   rubocop
   ruby_aem (~> 2.4.0)
   yaml-lint
