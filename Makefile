@@ -23,7 +23,10 @@ lint:
 	puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
 	bundle exec yaml-lint .*.yml
-	pdk validate metadata
+	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
+	# this is due to Gemfile.lock being created by environment bundler which is of a different
+	# version to the available bundler bundled within pdk's ruby
+	mv Gemfile.lock Gemfile.lock.orig && pdk validate metadata && mv Gemfile.lock.orig Gemfile.lock
 
 test-integration:
 	# set up module
