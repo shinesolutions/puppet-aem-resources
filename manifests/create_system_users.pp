@@ -10,7 +10,7 @@ define aem_resources::create_system_users(
       name => 'deployer',
       path => '/home/users/q',
       permission => {
-        '/apps' => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:true', ‘replicate:false'],
+        '/apps' => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:true', 'replicate:false'],
         '/conf'  => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:true', 'replicate:false'],
         '/content'  => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:true', 'replicate:false'],
         '/etc'  => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:true', 'replicate:false'],
