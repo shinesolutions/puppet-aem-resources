@@ -41,7 +41,7 @@ define aem_resources::create_system_users(
       permission => {
         '/' => ['read:true', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/apps' => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
-        '/conf'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],  
+        '/conf'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/content'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/etc'  => ['read:true', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:true', 'replicate:false'],
         '/etc/replication'  => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:false', 'replicate:false'],
@@ -59,7 +59,7 @@ define aem_resources::create_system_users(
       permission => {
         '/' => ['read:true', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/apps' => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
-        '/conf'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],  
+        '/conf'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/content'  => ['read:false', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:false', 'replicate:false'],
         '/etc'  => ['read:true', 'modify:false', 'create:false', 'delete:false', 'acl_read:false', 'acl_edit:true', 'replicate:false'],
         '/etc/replication'  => ['read:true', 'modify:true', 'create:true', 'delete:true', 'acl_read:true', 'acl_edit:false', 'replicate:false'],
