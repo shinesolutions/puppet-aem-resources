@@ -91,6 +91,13 @@ AEM
       retries_max_sleep_seconds  => 5,
     }
 
+    aem_aem { 'Wait until CRX Package Manager is ready':
+      ensure                     => aem_package_manager_is_ready,
+      retries_max_tries          => 60,
+      retries_base_sleep_seconds => 5,
+      retries_max_sleep_seconds  => 5,
+    }
+
     # this requires aem-healthcheck package to be installed
     # https://github.com/shinesolutions/aem-healthcheck
     aem_aem { 'Wait until health is ok':

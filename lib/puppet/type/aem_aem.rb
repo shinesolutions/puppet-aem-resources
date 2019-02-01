@@ -22,6 +22,10 @@ Puppet::Type.newtype(:aem_aem) do
       provider.get_aem_health_check_wait_until_ok
     end
 
+    newvalue(:aem_package_manager_is_ready) do
+      provider.get_package_manager_servlet_state_wait_until_ready
+    end
+
     newvalue(:install_status_is_finished) do
       provider.get_install_status_wait_until_finished
     end

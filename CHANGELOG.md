@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add new ensurable aem_package_manager_is_ready for provider aem_aem for checking if AEM Package Manager is ready shinesolutions/aem-aws-stack-builder#214
+
 ## [3.5.0] - 2019-01-08
 
 ### Added
