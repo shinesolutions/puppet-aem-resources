@@ -28,7 +28,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
     client(resource).aem.get_login_page_wait_until_ready(opts)
   end
 
-  def get_package_manager_servlet_state_wait_until_ready
+  def get_package_manager_servlet_status_wait_until_ready
     opts = {
       _retries: {
         max_tries: resource[:retries_max_tries],
@@ -36,7 +36,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
-    client(resource).aem.get_package_manager_servlet_state_wait_until_ready(opts)
+    client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts)
   end
 
   def get_aem_health_check_wait_until_ok

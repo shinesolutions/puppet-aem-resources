@@ -23,7 +23,7 @@ Puppet::Type.newtype(:aem_aem) do
     end
 
     newvalue(:aem_package_manager_is_ready) do
-      provider.get_package_manager_servlet_state_wait_until_ready
+      provider.get_package_manager_servlet_status_wait_until_ready
     end
 
     newvalue(:install_status_is_finished) do
