@@ -1,10 +1,13 @@
 define aem_resources::deploy_packages (
   $packages,
-  $path          = '/tmp/shinesolutions/puppet-aem-resources',
-  $sleep_seconds = 10,
-  $aem_id        = undef,
-  $aem_username  = undef,
-  $aem_password  = undef,
+  $path                       = '/tmp/shinesolutions/puppet-aem-resources',
+  $sleep_seconds              = 10,
+  $aem_id                     = undef,
+  $aem_username               = undef,
+  $aem_password               = undef,
+  $retries_max_tries          = 60,
+  $retries_base_sleep_seconds = 5,
+  $retries_max_sleep_seconds  = 5,
 ) {
 
   $packages.each | Integer $index, Hash $package| {
@@ -25,7 +28,13 @@ define aem_resources::deploy_packages (
       'present',
     )
 
-    aem_package { "[${_aem_id}] Deploy package ${package['group']}/${package['name']}-${package['version']}":
+    aem_aem { "${_aem_id}: Wait until CRX Package Manager is ready before deploying package ${package['group']}/${package['name']}-${package['version']}":
+      ensure                     => aem_package_manager_is_ready,
+      retries_max_tries          => $retries_max_tries,
+      retries_base_sleep_seconds => $retries_base_sleep_seconds,
+      retries_max_sleep_seconds  => $retries_max_sleep_seconds,
+      aem_id                     => $_aem_id,
+    } -> aem_package { "[${_aem_id}] Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure       => $_ensure,
       name         => $package[name],
       group        => $package[group],

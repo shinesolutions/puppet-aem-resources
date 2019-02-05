@@ -13,5 +13,5 @@ gem 'puppetlabs_spec_helper', require: false
 gem 'r10k', require: false
 gem 'rake', require: false
 gem 'rubocop', require: false
-gem 'ruby_aem', '~> 2.4.0'
+gem 'ruby_aem', '~> 2.5.1'
 gem 'yaml-lint', require: false
