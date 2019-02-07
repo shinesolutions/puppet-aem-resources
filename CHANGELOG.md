@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add feature to force the removal of the AEM Global Truststore.
+
 ## [3.5.0] - 2019-01-08
 
 ### Added
