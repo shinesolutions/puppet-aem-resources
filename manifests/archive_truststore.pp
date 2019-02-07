@@ -4,6 +4,7 @@
   $aem_password        = undef,
   $file                = undef,
   $path                = undef,
+  $force               = false,
 ) {
 
   if $file {
@@ -12,7 +13,8 @@
       aem_id       => $aem_id,
       aem_username => $aem_username,
       aem_password => $aem_password,
-      file         => $file
+      file         => $file,
+      force        => $force
     }
   } elsif $path {
     aem_truststore { "[${aem_id}] Download Global Truststore to defined path":
@@ -21,6 +23,7 @@
       aem_username => $aem_username,
       aem_password => $aem_password,
       path         => $path,
+      force        => $force
     }
   }
 }
