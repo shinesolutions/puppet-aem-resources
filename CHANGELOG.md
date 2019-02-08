@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Add checks to aem_package module before calling CRX Package Manager
+
 ## [3.6.0] - 2019-02-02
 
 ### Added

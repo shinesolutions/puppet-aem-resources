@@ -31,9 +31,13 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
       package_per_version = client(resource).package(resource[:group], resource[:name], version)
       results.push(package_per_version.delete_wait_until_ready) if package_per_version.exists.data == true
     end
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.create)
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.update(resource[:filter]))
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.build_wait_until_ready(build_opts))
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.download(resource[:path]))
     handle_multi(results)
   end
@@ -57,9 +61,13 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
         max_sleep_seconds: resource[:retries_max_sleep_seconds]
       }
     }
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.upload_wait_until_ready(resource[:path], upload_opts))
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.install_wait_until_ready(install_opts))
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts)) if resource[:replicate] == true
     results.push(package.replicate) if resource[:replicate] == true
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts)) if resource[:activate] == true
     results = results.concat(package.activate_filter(true, false)) if resource[:activate] == true
     handle_multi(results)
   end
@@ -68,7 +76,9 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
   def destroy
     package = client(resource).package(resource[:group], resource[:name], resource[:version])
     results = []
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.uninstall) if package.is_installed.data
+    results.push(client(resource).aem.get_package_manager_servlet_status_wait_until_ready(opts))
     results.push(package.delete)
     handle_multi(results)
   end
