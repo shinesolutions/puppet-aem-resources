@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Add checks to aem_package module before calling CRX Package Manager
+- Package-related calls are now done after Package Manager Servlet status readiness check due to AEM 6.4 noticeable longer readiness
 
 ## [3.6.0] - 2019-02-02
 
