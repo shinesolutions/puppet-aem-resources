@@ -63,11 +63,11 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
     if resource[:force]
       true if (resource[:ensure] == :absent || resource[:ensure] == :archived)
       false if resource[:ensure] == :present
-    else
-      truststore = client(resource).truststore
-      result = truststore.exists
-
-      result.data
     end
+    
+    truststore = client(resource).truststore
+    result = truststore.exists
+
+    result.data
   end
 end
