@@ -63,6 +63,11 @@ module PuppetX
         self.class.client(opts)
       end
 
+      # Call the object's method with an array of params, which resource must contain retries opts.
+      # This wrapper ensures that the readiness check is applied prior to calling the method.
+      # This was introduced specifically for handling AEM 6.4 calls which seem to restart resources
+      # (e.g. Package Manager Servlet) and requires a longer readiness time than previously observed
+      # in AEM 6.2 and 6.3 .
       def call_with_readiness_check(obj, method, params, resource)
         check_opts = {
           _retries: {
