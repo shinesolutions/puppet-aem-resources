@@ -80,6 +80,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
   end
 
   def list_packages_by_groups(package_groups)
+    aem = client(resource).aem
     result = call_with_readiness_check(aem, 'get_packages', [], resource)
     packages = result.data
     packages.each do |package|
