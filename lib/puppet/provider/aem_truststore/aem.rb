@@ -42,7 +42,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
       file_path = resource[:file] if resource[:file]
       file_path = "#{resource[:path]}/truststore.p12" if resource[:path]
       opts[:force] = resource[:force]
-      result = truststore.upload_wait_until_ready(file_path, **opts)
+      result = call_with_readiness_check(truststore, 'upload_wait_until_ready', [file_path, **opts], resource)
     else
       result = truststore.create(resource[:password])
     end
@@ -53,7 +53,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
   # Delete the AEM Truststore.
   def destroy
     truststore = client(resource).truststore
-    result = truststore.delete
+    result = call_with_readiness_check(truststore, 'delete', [], resource)
 
     handle(result)
   end
@@ -66,7 +66,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
     end
 
     truststore = client(resource).truststore
-    result = truststore.exists
+    result = call_with_readiness_check(truststore, 'exists', [], resource)
 
     result.data
   end

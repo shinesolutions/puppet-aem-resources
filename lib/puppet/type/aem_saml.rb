@@ -185,4 +185,25 @@ Puppet::Type.newtype(:aem_saml) do
   newparam :serial do
     desc 'Serial number of the SAML certificate in the AEM Truststore'
   end
+
+  newparam :retries_max_tries do
+    desc 'Maximum number of tries'
+    validate do |value|
+      value = 60 if value == ''
+    end
+  end
+
+  newparam :retries_base_sleep_seconds do
+    desc 'Starting sleep duration in seconds'
+    validate do |value|
+      value = 2 if value == ''
+    end
+  end
+
+  newparam :retries_max_sleep_seconds do
+    desc 'Maximum sleep duration in seconds'
+    validate do |value|
+      value = 5 if value == ''
+    end
+  end
 end

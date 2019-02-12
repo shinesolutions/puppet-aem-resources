@@ -74,13 +74,13 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
       agent_names = result.data
       agent_names.each do |agent_name|
         replication_agent = client(resource).replication_agent(run_mode, agent_name)
-        replication_agent.delete
+        call_with_readiness_check(replication_agent, 'delete', [], resource)
       end
     end
   end
 
   def list_packages_by_groups(package_groups)
-    result = client(resource).aem.get_packages
+    result = call_with_readiness_check(aem, 'get_packages', [], resource)
     packages = result.data
     packages.each do |package|
       next unless (package_groups.include? package['group']) || package_groups.empty?
