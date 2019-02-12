@@ -63,6 +63,18 @@ module PuppetX
         self.class.client(opts)
       end
 
+      def call_with_readiness_check(obj, method, params, resource)
+        check_opts = {
+          _retries: {
+            max_tries: resource[:retries_max_tries],
+            base_sleep_seconds: resource[:retries_base_sleep_seconds],
+            max_sleep_seconds: resource[:retries_max_sleep_seconds]
+          }
+        }
+        client(resource).aem.get_package_manager_servlet_status_wait_until_ready(check_opts)
+        obj.send(method, *params)
+      end
+
       def handle(result)
         unless result.response.eql? nil
           Puppet.debug("#{@label} Response status code: #{result.response.status_code}")

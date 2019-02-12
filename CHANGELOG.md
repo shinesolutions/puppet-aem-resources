@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add puppet_aem_resources#call_with_readiness_check for wrapping readiness check before making client call
+
 ### Changed
 - Package-related calls are now done after Package Manager Servlet status readiness check due to AEM 6.4 noticeable longer readiness
 
