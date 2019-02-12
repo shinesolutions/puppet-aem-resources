@@ -21,12 +21,12 @@ Puppet::Type.type(:aem_user_alias).provide(:aem, parent: PuppetX::ShineSolutions
   def create
     user = client(resource).user(resource[:path], resource[:name])
     results = []
-    results.push(call_with_readiness_check(user, 'delete', [], resource)) if resource[:force] == true && user.exists.data == true
-    results.push(call_with_readiness_check(user, 'create', [resource[:password]], resource))
-    results.push(call_with_readiness_check(user, 'add_to_group', [resource[:group_path], resource[:group_name]], resource)) if !resource[:group_path].nil? && !resource[:group_name].nil?
+    results.push(user.delete) if resource[:force] == true && user.exists.data == true
+    results.push(user.create(resource[:password]))
+    results.push(user.add_to_group(resource[:group_path], resource[:group_name])) if !resource[:group_path].nil? && !resource[:group_name].nil?
     unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|
-        results.push(call_with_readiness_check(user, 'set_permission', [permission_path, permission_array.join(',')], resource))
+        results.push(user.set_permission(permission_path, permission_array.join(',')))
       end
     end
     handle_multi(results)
@@ -35,7 +35,7 @@ Puppet::Type.type(:aem_user_alias).provide(:aem, parent: PuppetX::ShineSolutions
   # Delete the user.
   def destroy
     user = client(resource).user(resource[:path], resource[:name])
-    result = call_with_readiness_check(user, 'delete', [], resource)
+    result = user.delete
     handle(result)
   end
 
@@ -52,13 +52,13 @@ Puppet::Type.type(:aem_user_alias).provide(:aem, parent: PuppetX::ShineSolutions
 
   def change_password
     user = client_opts(aem_id: resource[:aem_id], aem_username: resource[:name], aem_password: resource[:old_password]).user(resource[:path], resource[:name])
-    result = call_with_readiness_check(user, 'change_password', [resource[:old_password], resource[:new_password]], resource)
+    result = user.change_password(resource[:old_password], resource[:new_password])
     handle(result)
   end
 
   def add_to_group
     user = client(resource).user(resource[:path], resource[:name])
-    result = call_with_readiness_check(user, 'add_to_group', [resource[:group_path], resource[:group_name]], resource)
+    result = user.add_to_group(resource[:group_path], resource[:group_name])
     handle(result)
   end
 
@@ -67,7 +67,7 @@ Puppet::Type.type(:aem_user_alias).provide(:aem, parent: PuppetX::ShineSolutions
     results = []
     unless resource[:permission].nil?
       resource[:permission].each do |permission_path, permission_array|
-        results.push(call_with_readiness_check(user, 'set_permission', [permission_path, permission_array.join(',')], resource))
+        results.push(user.set_permission(permission_path, permission_array.join(',')))
       end
     end
     handle_multi(results)
