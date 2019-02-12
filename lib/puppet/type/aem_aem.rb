@@ -92,7 +92,7 @@ Puppet::Type.newtype(:aem_aem) do
   newparam :retries_max_tries do
     desc 'Maximum number of tries'
     validate do |value|
-      value = 30 if value == ''
+      value = 60 if value == ''
     end
   end
 
@@ -106,7 +106,7 @@ Puppet::Type.newtype(:aem_aem) do
   newparam :retries_max_sleep_seconds do
     desc 'Maximum sleep duration in seconds'
     validate do |value|
-      value = 2 if value == ''
+      value = 5 if value == ''
     end
   end
 end

@@ -18,14 +18,14 @@ Puppet::Type.type(:aem_node).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   # Create a node.
   def create
     node = client(resource).node(resource[:path], resource[:name])
-    result = node.create(resource[:type])
+    result = call_with_readiness_check(node, 'create', [resource[:type]], resource)
     handle(result)
   end
 
   # Delete the node.
   def destroy
     node = client(resource).node(resource[:path], resource[:name])
-    result = node.delete
+    result = call_with_readiness_check(node, 'delete', [], resource)
     handle(result)
   end
 

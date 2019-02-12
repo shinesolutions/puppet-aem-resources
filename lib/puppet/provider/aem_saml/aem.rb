@@ -49,7 +49,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     # create the osgi node
     ############################################################
     node = client(resource).node(resource[:config_node_path], resource[:config_node_name])
-    results.push(node.create(resource[:node_type]))
+    results.push(call_with_readiness_check(node, 'create', [resource[:node_type]], resource))
 
     ############################################################
     # before creating the SAML configuration we need to add
@@ -60,22 +60,22 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
         type = 'String'
 
         config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(config_property.create(resource[:config_node_name]))
+        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
       elsif string_multi_property.include? key.to_s
         type = 'String[]'
 
         config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(config_property.create(resource[:config_node_name]))
+        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
       elsif boolean_property.include? key.to_s
         type = 'Boolean'
 
         config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(config_property.create(resource[:config_node_name]))
+        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
       elsif long_property.include? key.to_s
         type = 'Long'
 
         config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(config_property.create(resource[:config_node_name]))
+        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
       end
     end
 
@@ -144,7 +144,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     ############################################################
     # Create SAML configuration
     ############################################################
-    results.push(saml.create(property_params))
+    results.push(call_with_readiness_check(saml, 'create', [property_params], resource))
 
     handle_multi(results)
   end
@@ -154,10 +154,10 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     results = []
 
     node = client(resource).node(resource[:config_node_path], resource[:config_node_name])
-    results.push(node.delete)
+    results.push(call_with_readiness_check(node, 'delete', [], resource))
 
     saml = client(resource).saml
-    results.push(saml.delete)
+    results.push(call_with_readiness_check(saml, 'delete', [], resource))
 
     handle_multi(results)
   end

@@ -19,14 +19,14 @@ Puppet::Type.type(:aem_outbox_replication_agent).provide(:aem, parent: PuppetX::
   def create
     outbox_replication_agent = client(resource).outbox_replication_agent(resource[:run_mode], resource[:name])
     opts = { user_id: resource[:user_id], log_level: resource[:log_level] }
-    result = outbox_replication_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
+    result = call_with_readiness_check(outbox_replication_agent, 'create_update', [resource[:title], resource[:description], resource[:dest_base_url], opts], resource)
     handle(result)
   end
 
   # Delete the outbox replication agent.
   def destroy
     outbox_replication_agent = client(resource).outbox_replication_agent(resource[:run_mode], resource[:name])
-    result = outbox_replication_agent.delete
+    result = call_with_readiness_check(outbox_replication_agent, 'delete', [], resource)
     handle(result)
   end
 

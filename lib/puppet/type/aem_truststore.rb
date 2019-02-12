@@ -97,23 +97,23 @@ Puppet::Type.newtype(:aem_truststore) do
   end
 
   newparam :retries_max_tries do
-    desc 'Maximum tries when waiting for package to be uploaded/installed'
+    desc 'Maximum number of tries'
     validate do |value|
-      value = 30 if value == ''
+      value = 60 if value == ''
     end
   end
 
   newparam :retries_base_sleep_seconds do
-    desc 'Starting wait delay in seconds when waiting for package to be uploaded/installed'
+    desc 'Starting sleep duration in seconds'
     validate do |value|
       value = 2 if value == ''
     end
   end
 
   newparam :retries_max_sleep_seconds do
-    desc 'Maximum wait delay in seconds when waiting for package to be uploaded/installed'
+    desc 'Maximum sleep duration in seconds'
     validate do |value|
-      value = 2 if value == ''
+      value = 5 if value == ''
     end
   end
 end
