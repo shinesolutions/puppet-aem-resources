@@ -260,35 +260,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial version
 
-[Unreleased] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.6.0...HEAD
-[3.6.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.5.0...3.6.0
-[3.5.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.4.0...3.5.0
-[3.4.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.3.0...3.4.0
-[3.3.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.2.1...3.3.0
-[3.2.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.2.0...3.2.1
-[3.2.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.1.1...3.2.0
-[3.1.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.1.0...3.1.1
-[3.1.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.0.1...3.1.0
-[3.0.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/3.0.0...3.0.1
-[3.0.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.5...3.0.0
-[2.2.5] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.4...2.2.5
-[2.2.4] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.3...2.2.4
-[2.2.3] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.2...2.2.3
-[2.2.2] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.1...2.2.2
-[2.2.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.0...2.2.1
-[2.2.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.1.1...2.2.0
-[2.1.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.1.0...2.1.1
-[2.1.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.2...2.1.0
-[2.0.2] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.1...2.0.2
-[2.0.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.0...2.0.1
-[2.0.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/1.3.0...2.0.0
-[1.3.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/1.2.0...1.3.0
-[1.2.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/1.1.1...1.2.0
-[1.1.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/1.1.0...1.1.1
-[1.1.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/1.0.0...1.1.0
-[1.0.0] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.5...1.0.0
-[0.9.5] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.4...0.9.5
-[0.9.4] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.3...0.9.4
-[0.9.3] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.2...0.9.3
-[0.9.2] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.1...0.9.2
-[0.9.1] - https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.0...0.9.1
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.6.0...HEAD
+[3.6.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.5.0...3.6.0
+[3.5.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.4.0...3.5.0
+[3.4.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.3.0...3.4.0
+[3.3.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.2.1...3.3.0
+[3.2.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.2.0...3.2.1
+[3.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.1.1...3.2.0
+[3.1.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.1.0...3.1.1
+[3.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.0.1...3.1.0
+[3.0.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.0.0...3.0.1
+[3.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.5...3.0.0
+[2.2.5]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.4...2.2.5
+[2.2.4]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.3...2.2.4
+[2.2.3]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.2...2.2.3
+[2.2.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.1...2.2.2
+[2.2.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.2.0...2.2.1
+[2.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.1.1...2.2.0
+[2.1.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.1.0...2.1.1
+[2.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.2...2.1.0
+[2.0.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.1...2.0.2
+[2.0.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/2.0.0...2.0.1
+[2.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/1.3.0...2.0.0
+[1.3.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/1.1.1...1.2.0
+[1.1.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/1.0.0...1.1.0
+[1.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.5...1.0.0
+[0.9.5]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.4...0.9.5
+[0.9.4]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.3...0.9.4
+[0.9.3]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.2...0.9.3
+[0.9.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.1...0.9.2
+[0.9.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.0...0.9.1
