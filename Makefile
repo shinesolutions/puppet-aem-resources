@@ -77,4 +77,7 @@ test-fixtures:
 package:
 	pdk build --force
 
-.PHONY: ci deps clean lint test-integration test-fixtures package
+release:
+	rtk release
+
+.PHONY: ci deps clean lint test-integration test-fixtures package release
