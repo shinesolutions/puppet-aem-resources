@@ -34,6 +34,8 @@ define aem_resources::deploy_packages (
       retries_base_sleep_seconds => $retries_base_sleep_seconds,
       retries_max_sleep_seconds  => $retries_max_sleep_seconds,
       aem_id                     => $_aem_id,
+      aem_username               => $aem_username,
+      aem_password               => $aem_password,
     } -> aem_package { "[${_aem_id}] Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure       => $_ensure,
       name         => $package[name],
