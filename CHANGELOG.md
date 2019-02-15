@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Add feature to aem_package to reinstall a existing package in the CRX Package Manager
+- Add feature to aem_package to reinstall a existing package in the CRX Package Manager via aem_package reinstalled state
 
 ## [3.7.0] - 2019-02-13
 ### Added
