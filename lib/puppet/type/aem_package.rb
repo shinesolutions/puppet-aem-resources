@@ -27,7 +27,7 @@ Puppet::Type.newtype(:aem_package) do
       nil
     end
 
-    newvalue(:reinstall) do
+    newvalue(:reinstalled) do
       if @resource.provider && @resource.provider.respond_to?(:create)
         @resource.provider.reinstall
       else
