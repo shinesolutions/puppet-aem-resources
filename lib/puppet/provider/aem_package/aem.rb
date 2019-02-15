@@ -79,6 +79,25 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
     handle_multi(results)
   end
 
+  # Reinstall the package.
+  def reinstall
+    package = client(resource).package(resource[:group], resource[:name], resource[:version])
+    results = []
+    install_opts = {
+      _retries: {
+        max_tries: resource[:retries_max_tries],
+        base_sleep_seconds: resource[:retries_base_sleep_seconds],
+        max_sleep_seconds: resource[:retries_max_sleep_seconds]
+      }
+    }
+
+    results.push(call_with_readiness_check(package, 'install_wait_until_ready', [install_opts], resource))
+    results.push(call_with_readiness_check(package, 'replicate', [], resource)) if resource[:replicate] == true
+    results = results.concat(call_with_readiness_check(package, 'activate_filter', [true, false], resource)) if resource[:activate] == true
+
+    handle_multi(results)
+  end
+
   # Check whether the package exists or not.
   # The definition of an existing package is one that is installed.
   # When force is set to true, package will be created if it doesn't exist or overwritten if it already exists.
