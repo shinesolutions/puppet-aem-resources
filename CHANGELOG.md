@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update RUNMODE replacement to always overwrite the RUNMODE with specified parameter
+
+
 ## [3.8.0] - 2019-02-15
 ### Added
 - Add feature to aem_package to reinstall a existing package in the CRX Package Manager via aem_package reinstalled state
