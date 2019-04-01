@@ -33,7 +33,7 @@ define aem_resources::author_standby_set_config(
   file_line { "Set standby runmode on ${crx_quickstart_dir}":
     path    => "${crx_quickstart_dir}/bin/start-env",
     line    => 'RUNMODES=\'standby\'',
-    match   => 'RUNMODES=\'\'',
+    match   => '^RUNMODES=\'',
     require => File["${crx_quickstart_dir}/bin"],
   }
 
