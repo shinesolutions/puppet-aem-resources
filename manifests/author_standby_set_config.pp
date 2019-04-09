@@ -30,10 +30,25 @@ define aem_resources::author_standby_set_config(
   file { "${crx_quickstart_dir}/bin":
     ensure => directory,
   }
+
+  # work out the existing RUNMODES values
+  $_file_content = file("${crx_quickstart_dir}/bin/start-env")
+  $_run_modes = $_file_content.match(/^RUNMODES=\'(.*)\'$/)[1]
+
+  # set or append 'standby' to run modes
+  if ($_run_modes == '') {
+    $run_modes = "\'standby\'"
+  } else {
+    $run_modes = "\'${_run_modes},standby\'"
+  }
+
+   file_line { "Set standby runmode on ${crx_quickstart_dir}":
+     path    => "${crx_quickstart_dir}/bin/start-env",
+
   file_line { "Set standby runmode on ${crx_quickstart_dir}":
     path    => "${crx_quickstart_dir}/bin/start-env",
-    line    => 'RUNMODES=\'standby\'',
-    match   => '^RUNMODES=\'',
+    line    => "RUNMODES=${run_modes}",
+    match   => "^RUNMODES=",
     require => File["${crx_quickstart_dir}/bin"],
   }
 
