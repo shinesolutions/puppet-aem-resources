@@ -35,7 +35,7 @@ define aem_resources::author_primary_set_config(
   file_line { "Set standby primary on ${crx_quickstart_dir}":
     path    => "${crx_quickstart_dir}/bin/start-env",
     line    => "RUNMODES=${run_modes}",
-    match   => "^RUNMODES=",
+    match   => '^RUNMODES=',
     require => File["${crx_quickstart_dir}/bin"],
   }
 
