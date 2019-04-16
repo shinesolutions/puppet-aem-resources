@@ -25,11 +25,21 @@ define aem_resources::author_primary_set_config(
   $_file_content = file("${crx_quickstart_dir}/bin/start-env")
   $_run_modes = $_file_content.match(/^RUNMODES=\'(.*)\'$/)[1]
 
-  # set or append 'primary' to run modes
-  if ($_run_modes == '') {
-    $run_modes = "\'primary\'"
+  # replace 'standby' with 'primary' if it exists
+  $_temp = $_run_modes.split(',').map | $rm | {
+      if $rm == 'standby' {
+          'primary'
+      } else {
+          $rm
+      }
+  }
+
+  if $_run_modes == '' {
+      $run_modes = 'primary'
+  } elsif 'primary' in $_temp {
+      $run_modes = $_temp.join(',')
   } else {
-    $run_modes = "\'${_run_modes},primary\'"
+      $run_modes = ($_temp + ['primary']).join(',')
   }
 
   file_line { "Set standby primary on ${crx_quickstart_dir}":
