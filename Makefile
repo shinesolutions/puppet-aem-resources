@@ -40,13 +40,13 @@ test-integration:
 	cp test/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
 	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
-	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
 	# test manifests
 	# author_port needs to be set here for test/integration/manifests/30_deploy_pakages.pp scenario
 	for test in test/integration/manifests/*.pp; do \

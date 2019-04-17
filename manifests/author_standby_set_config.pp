@@ -2,6 +2,7 @@ define aem_resources::author_standby_set_config(
   $crx_quickstart_dir,
   $primary_host,
   $aem_version = '6.2',
+  $start_env_file = 'start-env',
 ) {
 
   if $aem_version == '6.2' {
@@ -31,7 +32,7 @@ define aem_resources::author_standby_set_config(
     ensure => directory,
   }
   file_line { "Set standby runmode on ${crx_quickstart_dir}":
-    path    => "${crx_quickstart_dir}/bin/start-env",
+    path    => "${crx_quickstart_dir}/bin/${start_env_file}",
     line    => 'RUNMODES=\'standby\'',
     match   => '^RUNMODES=\'',
     require => File["${crx_quickstart_dir}/bin"],

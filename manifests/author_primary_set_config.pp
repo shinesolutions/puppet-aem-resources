@@ -1,6 +1,7 @@
 define aem_resources::author_primary_set_config(
   $crx_quickstart_dir,
   $aem_version = '6.2',
+  $start_env_file = 'start-env',
 ) {
 
   if $aem_version == '6.2' {
@@ -21,7 +22,7 @@ define aem_resources::author_primary_set_config(
     ensure => directory,
   }
   file_line { "Set standby primary on ${crx_quickstart_dir}":
-    path    => "${crx_quickstart_dir}/bin/start-env",
+    path    => "${crx_quickstart_dir}/bin/${start_env_file}",
     line    => 'RUNMODES=\'primary\'',
     match   => '^RUNMODES=\'',
     require => File["${crx_quickstart_dir}/bin"],
