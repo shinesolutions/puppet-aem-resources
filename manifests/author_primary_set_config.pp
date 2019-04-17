@@ -23,7 +23,7 @@ define aem_resources::author_primary_set_config(
   }
 
   # work out the existing RUNMODES values
-  $_file_content = file("${crx_quickstart_dir}/bin/start-env")
+  $_file_content = file("${crx_quickstart_dir}/bin/${start_env_file}")
   $_run_modes = $_file_content.match(/^RUNMODES=\'(.*)\'$/)[1]
 
   # replace 'standby' with 'primary' if it exists
@@ -45,7 +45,7 @@ define aem_resources::author_primary_set_config(
 
   file_line { "Set standby primary on ${crx_quickstart_dir}":
     path    => "${crx_quickstart_dir}/bin/${start_env_file}",
-    line    => 'RUNMODES=\'primary\'',
+    line    => "RUNMODES=\'${run_modes}\'",
     match   => '^RUNMODES=\'',
     require => File["${crx_quickstart_dir}/bin"],
   }
