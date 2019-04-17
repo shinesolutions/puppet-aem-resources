@@ -75,7 +75,10 @@ test-fixtures:
 		-out test/fixtures/aem.cert
 
 package:
-	pdk build --force
+	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
+	# this is due to Gemfile.lock being created by environment bundler which is of a different
+	# version to the available bundler bundled within pdk's ruby
+	mv Gemfile.lock Gemfile.lock.orig && pdk build --force && mv Gemfile.lock.orig Gemfile.lock
 
 release:
 	rtk release

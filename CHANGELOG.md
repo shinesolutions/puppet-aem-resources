@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Modify run mode on Author Primary and Author Standby set config to handle multiple run modes
+- Make package target should run pdk without Gemfile.lock in order to avoid requiring bundler
 
 ## [3.9.0] - 2019-04-01
 
