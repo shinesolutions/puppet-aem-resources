@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Modify run mode on Author Primary and Author Standby set config to handle multiple run modes
+
 ## [3.9.0] - 2019-04-01
 
 ### Changed
