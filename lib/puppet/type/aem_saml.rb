@@ -21,7 +21,7 @@ Puppet::Type.newtype(:aem_saml) do
     end
 
     newvalue(:present) do
-      if @resource.provider && @resource.provider.respond_to?(:create)
+      if @resource.provider&.respond_to?(:create)
         @resource.provider.create
       else
         @resource.create
@@ -30,7 +30,7 @@ Puppet::Type.newtype(:aem_saml) do
     end
 
     newvalue(:exists) do
-      if @resource.provider && @resource.provider.respond_to?(:exists?)
+      if @resource.provider&.respond_to?(:exists?)
         @resource.provider.exists?
       else
         @resource.exists?
@@ -39,7 +39,7 @@ Puppet::Type.newtype(:aem_saml) do
     end
 
     newvalue(:absent) do
-      if @resource.provider && @resource.provider.respond_to?(:destroy)
+      if @resource.provider&.respond_to?(:destroy)
         @resource.provider.destroy
       else
         @resource.destroy

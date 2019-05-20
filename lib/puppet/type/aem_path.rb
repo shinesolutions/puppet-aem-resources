@@ -21,7 +21,7 @@ Puppet::Type.newtype(:aem_path) do
     end
 
     newvalue(:absent) do
-      if @resource.provider && @resource.provider.respond_to?(:destroy)
+      if @resource.provider&.respond_to?(:destroy)
         @resource.provider.destroy
       else
         @resource.destroy

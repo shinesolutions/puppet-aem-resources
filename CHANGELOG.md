@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Fix frozen literal Rubocop violations
+- Fix frozen literal and safe navigation Rubocop violations
 
 ## [3.10.0] - 2019-04-17
 ### Changed

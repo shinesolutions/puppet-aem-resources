@@ -63,7 +63,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
   # Check if the AEM Truststore exists
   def exists?
     if resource[:force]
-      return true if (resource[:ensure] == :absent || resource[:ensure] == :archived)
+      return true if resource[:ensure] == :absent || resource[:ensure] == :archived
       return false if resource[:ensure] == :present
     end
 
