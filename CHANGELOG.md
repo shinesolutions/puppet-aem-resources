@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Fix frozen literal Rubocop violations
+
 ## [3.10.0] - 2019-04-17
 ### Changed
 - Modify run mode on Author Primary and Author Standby set config to handle multiple run modes
