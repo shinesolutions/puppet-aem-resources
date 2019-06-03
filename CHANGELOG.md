@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Upgrade ruby_aem to 3.1.0
+
 ## [3.10.1] - 2019-05-20
 ### Changed
 - Fix frozen literal and safe navigation Rubocop violations
