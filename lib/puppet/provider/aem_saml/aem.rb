@@ -125,7 +125,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       # The item name has to be Java variable style
       # Therefore we are set the first letter after _ as uppercase
       # and we remove _ e.g. key_store_password to keyStorePassword
-      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
       propertylist.push(property_list_item) if property_is_set.eql?(true)
       property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
     }
@@ -134,7 +134,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       # The item name has to be Java variable style
       # Therefore we are set the first letter after _ as uppercase
       # and we remove _ e.g. default_groups to defaultGroups
-      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
       propertylist.push(property_list_item) if property_is_set.eql?(true)
       property_params[item.to_sym] = saml_properties.send(item.to_sym).values if property_is_set.eql?(true)
     }
@@ -144,7 +144,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       # Therefore we are set the first letter after _ as uppercase
       # and we remove _
       # e.g. handle_logout to handleLogout
-      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
       propertylist.push(property_list_item) if property_is_set.eql?(true)
       property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
     }
@@ -154,7 +154,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       # Therefore we are set the first letter after _ as uppercase
       # and we remove _ e.g. clock_tolerance to clockTolerance
       # Except for service_ranking, as it has a . isntead of nothing
-      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_') unless item.eql?('service_ranking')
+      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_') unless item.eql?('service_ranking')
       property_list_item = item.tr('_', '.') if item.eql?('service_ranking')
       propertylist.push(property_list_item) if property_is_set.eql?(true)
       property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)

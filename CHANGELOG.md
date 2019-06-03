@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update aem_saml module to support swagger-aem release 3 #63
-
-### Changed
 - Upgrade ruby_aem to 3.1.0
 
 ## [3.10.1] - 2019-05-20
