@@ -23,6 +23,12 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     ############################################################
     # Parameters are needed in order to create the osgi:config
     ############################################################
+    # SAMLUPDATE
+    ############################################################
+    # Caution:
+    # Whenever new SAML options are available in AEM, we need
+    # to add them here according to the type of the value.
+    ############################################################
     string_property = %w[key_store_password default_redirect_url idp_cert_alias group_membership_attribute idp_url logout_url service_provider_entity_id sp_private_key_alias name_id_format user_id_attribute digest_method signature_method assertion_consumer_service_url user_intermediate_path]
     string_multi_property = %w[default_groups synchronize_attributes path]
     boolean_property = %w[handle_logout use_encryption idp_http_redirect add_group_memberships create_user]
@@ -101,42 +107,59 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
     ############################################################
     # Building property parameters to create the actual
-    # SAML configuration
+    # SAML configuration.
+    #
+    # OSGI config alone is not enough to enable SAML in AEM.
+    # Therefore we need to set it via /system/console/configMgr
+    # again as well. But we are only setting those options
+    # we already set via osgi config.
     ############################################################
     property_params = {}
     propertylist = []
 
-    saml_properties.each { |item|
-      property_name = item.first
-      propertylist.push(property_name)
-      property_is_set = saml_properties[property_name][:is_set]
-      property_name_api = :path if property_name.eql? :path
-      property_name_api = :service_ranking if property_name.eql? :'service.ranking'
-      property_name_api = :idp_url if property_name.eql? :idpUrl
-      property_name_api = :idp_cert_alias if property_name.eql? :idpCertAlias
-      property_name_api = :idp_http_redirect if property_name.eql? :idpHttpRedirect
-      property_name_api = :service_provider_entity_id if property_name.eql? :serviceProviderEntityId
-      property_name_api = :assertion_consumer_service_url if property_name.eql? :assertionConsumerServiceURL
-      property_name_api = :sp_private_key_alias if property_name.eql? :spPrivateKeyAlias
-      property_name_api = :key_store_password if property_name.eql? :keyStorePassword
-      property_name_api = :default_redirect_url if property_name.eql? :defaultRedirectUrl
-      property_name_api = :user_id_attribute if property_name.eql? :userIDAttribute
-      property_name_api = :use_encryption if property_name.eql? :useEncryption
-      property_name_api = :create_user if property_name.eql? :createUser
-      property_name_api = :add_group_memberships if property_name.eql? :addGroupMemberships
-      property_name_api = :group_membership_attribute if property_name.eql? :groupMembershipAttribute
-      property_name_api = :default_groups if property_name.eql? :defaultGroups
-      property_name_api = :name_id_format if property_name.eql? :nameIdFormat
-      property_name_api = :synchronize_attributes if property_name.eql? :synchronizeAttributes
-      property_name_api = :handle_logout if property_name.eql? :handleLogout
-      property_name_api = :logout_url if property_name.eql? :logoutUrl
-      property_name_api = :clock_tolerance if property_name.eql? :clockTolerance
-      property_name_api = :digest_method if property_name.eql? :digestMethod
-      property_name_api = :signature_method if property_name.eql? :signatureMethod
-      property_name_api = :user_intermediate_path if property_name.eql? :userIntermediatePath
-
-      property_params[property_name_api] = saml_properties[property_name][:values] || saml_properties[property_name][:value] if property_is_set.eql? true
+    # We need to interate through all SAML options,
+    # but we only want to set those which are set
+    # in the osgi config.
+    string_property.each { |item|
+      property_is_set = saml_properties.send(item.to_sym).is_set
+      # The item name has to be Java variable style
+      # Therefore we are set the first letter after _ as uppercase
+      # and we remove _ e.g. key_store_password to keyStorePassword
+      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      propertylist.push(property_list_item) if property_is_set.eql?(true)
+      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
     }
+    string_multi_property.each { |item|
+      property_is_set = saml_properties.send(item.to_sym).is_set
+      # The item name has to be Java variable style
+      # Therefore we are set the first letter after _ as uppercase
+      # and we remove _ e.g. default_groups to defaultGroups
+      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      propertylist.push(property_list_item) if property_is_set.eql?(true)
+      property_params[item.to_sym] = saml_properties.send(item.to_sym).values if property_is_set.eql?(true)
+    }
+    boolean_property.each { |item|
+      property_is_set = saml_properties.send(item.to_sym).is_set
+      # The item name has to be Java variable style
+      # Therefore we are set the first letter after _ as uppercase
+      # and we remove _
+      # e.g. handle_logout to handleLogout
+      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_')
+      propertylist.push(property_list_item) if property_is_set.eql?(true)
+      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
+    }
+    long_property.each { |item|
+      property_is_set = saml_properties.send(item.to_sym).is_set
+      # The item name has to be Java variable style
+      # Therefore we are set the first letter after _ as uppercase
+      # and we remove _ e.g. clock_tolerance to clockTolerance
+      # Except for service_ranking, as it has a . isntead of nothing
+      property_list_item = item.gsub(/_[a-z]/){$&.upcase}.delete('_') unless item.eql?('service_ranking')
+      property_list_item = item.tr('_', '.') if item.eql?('service_ranking')
+      propertylist.push(property_list_item) if property_is_set.eql?(true)
+      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
+    }
+
     property_params[:post] = false
     property_params[:apply] = true
     property_params[:action] = 'ajaxConfigManager'
@@ -171,6 +194,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
     saml_properties = result.response.body.properties
 
-    saml_properties[:idpCertAlias][:is_set]
+    saml_properties.idp_cert_alias.is_set
   end
 end

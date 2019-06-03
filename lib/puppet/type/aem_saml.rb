@@ -70,6 +70,14 @@ Puppet::Type.newtype(:aem_saml) do
     desc 'AEM password'
   end
 
+  ############################################################
+  # SAMLUPDATE
+  ############################################################
+  # Caution:
+  # Whenever new SAML options are available in AEM, we need
+  # to add them here.
+  ############################################################
+
   newparam :key_store_password do
     desc 'The password of the key-store of the authentication-service system user.'
   end
