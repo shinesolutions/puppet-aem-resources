@@ -7,6 +7,8 @@ define aem_resources::publish_dispatcher_set_config(
   $publish_port,
   $publish_secure = '1',
   $ssl_cert = '/etc/httpd/aem.disp-cert',
+  $dispatcher_farm_template = 'aem_resources/publish-dispatcher.farms.any.epp',
+  $httpd_conf_template = 'aem_resources/httpd.conf.epp',
 ) {
 
   $conf_dirs = [ $dispatcher_conf_dir, $virtual_hosts_dir ]
@@ -19,7 +21,7 @@ define aem_resources::publish_dispatcher_set_config(
 
   file { "${dispatcher_conf_dir}/dispatcher.farms.any":
     ensure  => file,
-    content => epp('aem_resources/publish-dispatcher.farms.any.epp', {
+    content => epp($dispatcher_farm_template, {
       publish_host   => $publish_host,
       publish_port   => $publish_port,
       publish_secure => $publish_secure,
@@ -32,7 +34,7 @@ define aem_resources::publish_dispatcher_set_config(
 
   file { "${virtual_hosts_dir}/1-puppet-aem-resources.conf":
     ensure  => file,
-    content => epp('aem_resources/httpd.conf.epp', {
+    content => epp($httpd_conf_template, {
       docroot_dir => $docroot_dir,
       ssl_cert    => $ssl_cert,
     }),
