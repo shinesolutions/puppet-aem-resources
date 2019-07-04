@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed issue with property SAML assertionConsumerServiceUrl
+
 ## [4.0.0] - 2019-06-05
 ### Changed
 - Update aem_saml module to support swagger-aem release 3 [#63]
