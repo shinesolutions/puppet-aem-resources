@@ -1,6 +1,6 @@
 define aem_resources::enable_saml(
   $add_group_memberships          = true,
-  $aem_id                         = 'aem',
+  $aem_id                         = 'author',
   $aem_username                   = undef,
   $aem_password                   = undef,
   $assertion_consumer_service_url = undef,
