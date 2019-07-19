@@ -126,6 +126,13 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       # Therefore we are set the first letter after _ as uppercase
       # and we remove _ e.g. key_store_password to keyStorePassword
       property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
+
+      # 04-07-2019 - Michael Bloch
+      # I know this is not nice but it fits our current
+      # use cases. We need a better way of doing this and
+      # it only applies for property assertion_consumer_service_url atm.
+      property_list_item = property_list_item.gsub('Url', 'URL') if item.eql?('assertion_consumer_service_url')
+
       propertylist.push(property_list_item) if property_is_set.eql?(true)
       property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
     }
