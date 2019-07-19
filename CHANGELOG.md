@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Changed default aem_id for enabling saml
+- Parameterise dispatcher farm and httpd conf template names #65
 
 ### Fixed
 - Fixed issue with property SAML assertionConsumerServiceUrl
