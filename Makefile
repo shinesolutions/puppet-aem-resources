@@ -26,7 +26,7 @@ lint:
 	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
 	# this is due to Gemfile.lock being created by environment bundler which is of a different
 	# version to the available bundler bundled within pdk's ruby
-	mv Gemfile.lock Gemfile.lock.orig && pdk validate metadata && mv Gemfile.lock.orig Gemfile.lock
+	mv Gemfile.lock Gemfile.lock.orig && PDK_DISABLE_ANALYTICS=true pdk validate metadata && mv Gemfile.lock.orig Gemfile.lock
 
 test-integration:
 	# set up module
@@ -78,7 +78,7 @@ package:
 	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
 	# this is due to Gemfile.lock being created by environment bundler which is of a different
 	# version to the available bundler bundled within pdk's ruby
-	mv Gemfile.lock Gemfile.lock.orig && pdk build --force && mv Gemfile.lock.orig Gemfile.lock
+	mv Gemfile.lock Gemfile.lock.orig && PDK_DISABLE_ANALYTICS=true pdk build --force && mv Gemfile.lock.orig Gemfile.lock
 
 release:
 	rtk release
