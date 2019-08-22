@@ -105,6 +105,7 @@ define aem_resources::enable_saml(
       name    => 'org.apache.sling.security.impl.ReferrerFilter',
       path    => '/apps/system/config',
       type    => 'sling:OsgiConfig',
+      aem_id  => $aem_id,
       require => Aem_saml[aem_saml]
     } -> aem_config_property { "${aem_id}: allow empty referrer":
       ensure           => present,
@@ -112,6 +113,7 @@ define aem_resources::enable_saml(
       type             => 'Boolean',
       value            => true, # False or true ? Def OpenCloud False SAML package is true
       run_mode         => $aem_id,
+      aem_id           => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed hosts regexp":
       ensure           => present,
@@ -119,6 +121,7 @@ define aem_resources::enable_saml(
       type             => 'String[]',
       value            => [''],
       run_mode         => $aem_id,
+      aem_id           => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed methods":
       ensure           => present,
@@ -126,6 +129,7 @@ define aem_resources::enable_saml(
       type             => 'String[]',
       value            => ['POST', 'PUT', 'DELETE'],
       run_mode         => $aem_id,
+      aem_id           => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed hosts":
       ensure           => present,
@@ -133,6 +137,7 @@ define aem_resources::enable_saml(
       type             => 'String[]',
       value            => [$idp_hostname],
       run_mode         => $aem_id,
+      aem_id           => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     }
 
