@@ -28,6 +28,14 @@ define aem_resources::deploy_packages (
       'present',
     )
 
+    $replicate = str2bool($package[replicate])
+    $activate = str2bool($package[activate])
+    $force = str2bool($package[force])
+
+    validate_bool($replicate)
+    validate_bool($activate)
+    validate_bool($force)
+
     aem_aem { "${_aem_id}: Wait until CRX Package Manager is ready before deploying package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => aem_package_manager_is_ready,
       retries_max_tries          => $retries_max_tries,
@@ -42,9 +50,9 @@ define aem_resources::deploy_packages (
       group        => $package[group],
       version      => $package[version],
       path         => "${path}/${_aem_id}/${package['group']}",
-      replicate    => $package[replicate],
-      activate     => $package[activate],
-      force        => $package[force],
+      replicate    => $replicate,
+      activate     => $activate,
+      force        => $force,
       aem_username => $aem_username,
       aem_password => $aem_password,
       aem_id       => $_aem_id,
