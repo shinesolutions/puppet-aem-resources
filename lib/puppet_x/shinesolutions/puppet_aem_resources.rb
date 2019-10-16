@@ -36,7 +36,7 @@ module PuppetX
         #   e.g. if aem_id is aem, then file name is aem.yaml
         # - otherwise, use RubyAem::Aem's default configuration values
         params = {}
-        %w[username password protocol host port debug timeout].each { |field|
+        %w[username password protocol host port debug timeout verify_ssl].each { |field|
           opt_field = format('aem_%<field>s', field: field)
           env_field = format('%<aem_id>s_%<field>s', aem_id: aem_id, field: field)
           if !opts.nil? && !opts[opt_field.to_sym].nil?
