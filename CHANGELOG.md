@@ -8,13 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Added feature to disable ssl verification for RubyAEM Client
+- Enforced translation of boolean parameters in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
+- Added boolean validation in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
+
+### Changed
+- Upgrade ruby_aem to 3.4.0 (first version to use swagger_aem_osgi 1.0.0)
 
 ### Fixed
 - Fixed parameter passing for aem_id in `enable_saml` manifest #71
-
-### Added
-- Enforced translation of boolean parameters in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
-- Added boolean validation in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
 
 ## [4.1.0] - 2019-07-19
 ### Changed
