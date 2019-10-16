@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [5.0.0] - 2019-10-16
 ### Added
 - Added feature to disable ssl verification for RubyAEM Client
@@ -285,6 +287,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#65]: https://github.com/shinesolutions/puppet-aem-resources/issues/65
 [#71]: https://github.com/shinesolutions/puppet-aem-resources/issues/71
 
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.0.0...HEAD
 [5.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/4.1.0...5.0.0
 [4.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/4.0.0...4.1.0
 [4.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/3.10.1...4.0.0
