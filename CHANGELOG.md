@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed parameter passing for aem_id in `enable_saml` manifest #71
 
+### Added
+- Enforced translation of boolean parameters in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
+- Added boolean validation in manifest deploy_packages shinesolutions/aem-aws-stack-builder#332
+
 ## [4.1.0] - 2019-07-19
 ### Changed
 - Changed default aem_id for enabling saml
