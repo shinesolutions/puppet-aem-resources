@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Force the change of the aem system users password [shinesolutions/puppet-aem-curator#164]
+
 ## [5.0.0] - 2019-10-16
 ### Added
 - Added feature to disable ssl verification for RubyAEM Client
