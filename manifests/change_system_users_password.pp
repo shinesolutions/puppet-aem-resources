@@ -3,6 +3,7 @@ define aem_resources::change_system_users_password(
   $aem_username = undef,
   $aem_password = undef,
   $aem_id       = 'aem',
+  $force        = true,
 ) {
 
   ensure_resources('aem_user_alias', {
@@ -38,6 +39,7 @@ define aem_resources::change_system_users_password(
     }
   }, {
       ensure       => password_changed,
+      force        => $force,
       aem_username => $aem_username,
       aem_password => $aem_password,
       aem_id       => $aem_id,

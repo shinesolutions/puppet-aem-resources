@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+ - Force the change of the aem system users password [shinesolutions/puppet-aem-curator#164]
+
 ## [3.10.1] - 2019-05-20
 ### Changed
 - Fix frozen literal and safe navigation Rubocop violations
