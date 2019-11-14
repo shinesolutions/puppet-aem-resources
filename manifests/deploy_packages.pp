@@ -60,28 +60,29 @@ define aem_resources::deploy_packages (
       command => "sleep ${final_sleep_seconds}",
       path    => ['/usr/bin', '/usr/sbin', '/bin'],
       timeout => 0,
+      before  => Aem_aem["[${_aem_id}] Wait until login page is ready post package deployment"],
     }
+  }
 
-    aem_aem { "[${_aem_id}] Wait until login page is ready post Deploy package ${package['group']}/${package['name']}-${package['version']}":
-      ensure                     => login_page_is_ready,
-      retries_max_tries          => 60,
-      retries_base_sleep_seconds => 5,
-      retries_max_sleep_seconds  => 5,
-      require                    => Exec["[${_aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}"],
-      aem_username               => $aem_username,
-      aem_password               => $aem_password,
-      aem_id                     => $_aem_id,
-    } -> aem_aem { "[${_aem_id}] Wait until aem health check is ok post Deploy package ${package['group']}/${package['name']}-${package['version']}":
-      ensure                     => aem_health_check_is_ok,
-      tags                       => 'deep',
-      retries_max_tries          => 60,
-      retries_base_sleep_seconds => 5,
-      retries_max_sleep_seconds  => 5,
-      aem_username               => $aem_username,
-      aem_password               => $aem_password,
-      aem_id                     => $_aem_id,
-    }
-
+  aem_aem { "[${_aem_id}] Wait until login page is ready post package deployment":
+    ensure                     => login_page_is_ready,
+    retries_max_tries          => $retries_max_tries,
+    retries_base_sleep_seconds => $retries_base_sleep_seconds,
+    retries_max_sleep_seconds  => $retries_max_sleep_seconds,
+    aem_username               => $aem_username,
+    aem_password               => $aem_password,
+    aem_id                     => $_aem_id,
+    before                     => Aem_aem["[${_aem_id}] Wait until aem health check is ok post package deployment"],
+  } -> aem_aem { "[${_aem_id}] Wait until aem health check is ok post package deployment":
+    ensure                     => aem_health_check_is_ok,
+    tags                       => 'deep',
+    retries_max_tries          => $retries_max_tries,
+    retries_base_sleep_seconds => $retries_base_sleep_seconds,
+    retries_max_sleep_seconds  => $retries_max_sleep_seconds,
+    aem_username               => $aem_username,
+    aem_password               => $aem_password,
+    aem_id                     => $_aem_id,
+    require                    => Aem_aem["[${_aem_id}] Wait until login page is ready post package deployment"],
   }
 
 }
