@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- Change Package Deployment process to check AEM Healthy after all packages were deployed #75
-- Update default parameters for AEM Health checks after all packages were deployed #76
+- Change Package Deployment process to check AEM health after all packages were deployed #75
+- Update default parameters for AEM Health checks to use configurable parameters #76
 
 ## [5.0.0] - 2019-10-16
 ### Added
