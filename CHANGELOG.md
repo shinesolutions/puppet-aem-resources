@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Force the changing of AEM system users' password [shinesolutions/puppet-aem-curator#164]
 - Change Package Deployment process to check AEM health after all packages were deployed #75
 - Update default parameters for AEM Health checks to use configurable parameters #76
 
