@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed test fixtures for testing authentication-service keystore upload
+
 ## [5.2.0] - 2019-12-02
+
+### Removed
+- Package Deployment's consolidated health check post all packages deployment [#75]
 
 ## [5.1.0] - 2019-11-26
 ### Changed
