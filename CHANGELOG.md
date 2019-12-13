@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed test fixtures for testing authentication-service keystore upload
 
+## [5.2.0] - 2019-12-02
+
+### Removed
+- Package Deployment's consolidated health check post all packages deployment [#75]
+
 ## [5.1.0] - 2019-11-26
 ### Changed
 - Force the changing of AEM system users' password [shinesolutions/puppet-aem-curator#164]
@@ -298,7 +303,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#75]: https://github.com/shinesolutions/puppet-aem-resources/issues/75
 [#76]: https://github.com/shinesolutions/puppet-aem-resources/issues/76
 
-[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.1.0...HEAD
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.2.0...HEAD
+[5.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.0.0...5.1.0
 [5.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/4.1.0...5.0.0
 [4.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/4.0.0...4.1.0
