@@ -5,13 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
+## [5.3.0] - 2019-12-14
 ### Fixed
 - Fixed test fixtures for testing authentication-service keystore upload
 
 ## [5.2.0] - 2019-12-02
-
 ### Removed
 - Package Deployment's consolidated health check post all packages deployment [#75]
 
@@ -303,7 +301,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#75]: https://github.com/shinesolutions/puppet-aem-resources/issues/75
 [#76]: https://github.com/shinesolutions/puppet-aem-resources/issues/76
 
-[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.2.0...HEAD
+[5.3.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.2.0...5.3.0
 [5.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.0.0...5.1.0
 [5.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/4.1.0...5.0.0
