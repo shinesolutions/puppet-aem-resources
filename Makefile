@@ -3,7 +3,7 @@ ci: clean deps lint package
 deps:
 	gem install bundler --version=1.17.3
 	bundle config --local path vendor/bundle
-	bundle install --binstubs
+	bundle install --binstubs -j4
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
