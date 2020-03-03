@@ -77,7 +77,7 @@ define aem_resources::author_remove_default_agents(
   }
 
   # Remove screens default URI user - as it triggers the warn message of the Replication and Transport Users healthcheck
-  aem_flush_agent { "[${aem_id}] Delete publish flush agent - resource-only-flush":
+  aem_flush_agent { "[${aem_id}] Delete author screens agent":
     ensure       => absent,
     name         => 'screens',
     run_mode     => 'author',
