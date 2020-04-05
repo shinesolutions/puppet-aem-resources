@@ -76,6 +76,16 @@ define aem_resources::author_remove_default_agents(
     aem_id       => $aem_id,
   }
 
+  # Remove screens default URI user - as it triggers the warn message of the Replication and Transport Users healthcheck
+  aem_flush_agent { "[${aem_id}] Delete author screens agent":
+    ensure       => absent,
+    name         => 'screens',
+    run_mode     => 'author',
+    aem_username => $aem_username,
+    aem_password => $aem_password,
+    aem_id       => $aem_id,
+  }
+
   aem_replication_agent { "[${aem_id}] Delete author replication agent - Dynamic Media Asset Activation (scene7)":
     ensure       => absent,
     name         => 'scene7',
