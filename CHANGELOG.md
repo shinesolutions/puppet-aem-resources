@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- Remove author scene7 replication agent
+- Remove author screens flush agent
+
 ## [5.3.0] - 2019-12-14
 ### Fixed
 - Fixed test fixtures for testing authentication-service keystore upload
