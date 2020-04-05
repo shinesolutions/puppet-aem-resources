@@ -86,4 +86,12 @@ define aem_resources::author_remove_default_agents(
     aem_id       => $aem_id,
   }
 
+  aem_replication_agent { "[${aem_id}] Delete author replication agent - Dynamic Media Asset Activation (scene7)":
+    ensure       => absent,
+    name         => 'scene7',
+    run_mode     => 'author',
+    aem_username => $aem_username,
+    aem_password => $aem_password,
+    aem_id       => $aem_id,
+  }
 }
