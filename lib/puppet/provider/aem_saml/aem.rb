@@ -21,20 +21,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   def create
     results = []
     ############################################################
-    # Parameters are needed in order to create the osgi:config
-    ############################################################
-    # SAMLUPDATE
-    ############################################################
-    # Caution:
-    # Whenever new SAML options are available in AEM, we need
-    # to add them here according to the type of the value.
-    ############################################################
-    string_property = %w[key_store_password default_redirect_url idp_cert_alias group_membership_attribute idp_url logout_url service_provider_entity_id sp_private_key_alias name_id_format user_id_attribute digest_method signature_method assertion_consumer_service_url user_intermediate_path]
-    string_multi_property = %w[default_groups synchronize_attributes path]
-    boolean_property = %w[handle_logout use_encryption idp_http_redirect add_group_memberships create_user]
-    long_property = %w[service_ranking clock_tolerance]
-
-    ############################################################
     # Getting idp_cert_alias from truststore if not provided
     ############################################################
     unless resource[:idp_cert_alias]
@@ -52,58 +38,9 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
       resource[:idp_cert_alias] = certificate.instance_variable_get(:@cert_alias)
     end
 
-    ############################################################
-    # before we can create the SAML configuration we need
-    # create the osgi node
-    ############################################################
-    node = client(resource).node(resource[:config_node_path], resource[:config_node_name])
-    results.push(call_with_readiness_check(node, 'create', [resource[:node_type]], resource))
-
-    ############################################################
-    # before creating the SAML configuration we need to add
-    # osgi:config parameters to the previously created node
-    ############################################################
-    resource.to_hash.each do |(key, value)|
-      if string_property.include? key.to_s
-        type = 'String'
-
-        config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
-      elsif string_multi_property.include? key.to_s
-        type = 'String[]'
-
-        config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
-      elsif boolean_property.include? key.to_s
-        type = 'Boolean'
-
-        config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
-      elsif long_property.include? key.to_s
-        type = 'Long'
-
-        config_property = client(resource).config_property(key.to_s, type, value)
-        results.push(call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource))
-      end
-    end
-
-    ############################################################
-    # Checking if the parameters config properties set before
-    # are setted by using the local method exists?
-    #
-    # To-Do:
-    # To not end in a endless loop we need to add retry check
-    ############################################################
-    retries_count = 0
-    while exists?.eql? false
-      puts format('Wait until SAML configuration exists, check attempt #%<retries_count>d', retries_count: retries_count)
-      sleep 10
-    end
-
     saml = client(resource).saml
     saml_response = saml.get.response
     saml_response_body = saml_response.body
-    saml_properties = saml_response_body.properties
 
     ############################################################
     # Building property parameters to create the actual
@@ -116,68 +53,23 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     ############################################################
     property_params = {}
     propertylist = []
+    resource.to_hash.each do |(key, value)|
+      property_list_item = key.to_s.gsub(/_[a-z]/) { $&.upcase }.delete('_') unless key.to_s.eql?('service_ranking')
+      property_list_item = key.to_s.tr('_', '.') if key.to_s.eql?('service_ranking')
+      property_list_item = property_list_item.gsub('Url', 'URL') if key.to_s.eql?('assertion_consumer_service_url')
 
-    # We need to interate through all SAML options,
-    # but we only want to set those which are set
-    # in the osgi config.
-    string_property.each { |item|
-      property_is_set = saml_properties.send(item.to_sym).is_set
-      # The item name has to be Java variable style
-      # Therefore we are set the first letter after _ as uppercase
-      # and we remove _ e.g. key_store_password to keyStorePassword
-      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
-
-      # 04-07-2019 - Michael Bloch
-      # I know this is not nice but it fits our current
-      # use cases. We need a better way of doing this and
-      # it only applies for property assertion_consumer_service_url atm.
-      property_list_item = property_list_item.gsub('Url', 'URL') if item.eql?('assertion_consumer_service_url')
-
-      propertylist.push(property_list_item) if property_is_set.eql?(true)
-      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
-    }
-    string_multi_property.each { |item|
-      property_is_set = saml_properties.send(item.to_sym).is_set
-      # The item name has to be Java variable style
-      # Therefore we are set the first letter after _ as uppercase
-      # and we remove _ e.g. default_groups to defaultGroups
-      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
-      propertylist.push(property_list_item) if property_is_set.eql?(true)
-      property_params[item.to_sym] = saml_properties.send(item.to_sym).values if property_is_set.eql?(true)
-    }
-    boolean_property.each { |item|
-      property_is_set = saml_properties.send(item.to_sym).is_set
-      # The item name has to be Java variable style
-      # Therefore we are set the first letter after _ as uppercase
-      # and we remove _
-      # e.g. handle_logout to handleLogout
-      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_')
-      propertylist.push(property_list_item) if property_is_set.eql?(true)
-      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
-    }
-    long_property.each { |item|
-      property_is_set = saml_properties.send(item.to_sym).is_set
-      # The item name has to be Java variable style
-      # Therefore we are set the first letter after _ as uppercase
-      # and we remove _ e.g. clock_tolerance to clockTolerance
-      # Except for service_ranking, as it has a . isntead of nothing
-      property_list_item = item.gsub(/_[a-z]/) { $&.upcase }.delete('_') unless item.eql?('service_ranking')
-      property_list_item = item.tr('_', '.') if item.eql?('service_ranking')
-      propertylist.push(property_list_item) if property_is_set.eql?(true)
-      property_params[item.to_sym] = saml_properties.send(item.to_sym).value if property_is_set.eql?(true)
-    }
-
+      propertylist.push(property_list_item)
+      property_params[key.to_sym] = value
+    end
     property_params[:post] = false
     property_params[:apply] = true
     property_params[:action] = 'ajaxConfigManager'
     property_params[:location] = saml_response_body.bundle_location if saml_response_body.respond_to?(:bundle_location)
     property_params[:propertylist] = propertylist
-
     ############################################################
     # Create SAML configuration
     ############################################################
     results.push(call_with_readiness_check(saml, 'create', [property_params], resource))
-
     handle_multi(results)
   end
 
@@ -200,7 +92,6 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     result = saml.get
 
     saml_properties = result.response.body.properties
-
     saml_properties.idp_cert_alias.is_set
   end
 end
