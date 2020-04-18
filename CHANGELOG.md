@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Upgrade ruby_aem to 3.6.0
+
 ## [5.5.0] - 2020-04-05
 ### Removed
 - Remove author scene7 replication agent
