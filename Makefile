@@ -32,22 +32,30 @@ lint:
 test-integration:
 	# set up module
 	mkdir -p test/integration/modules/aem_resources/
-	cp -R files test/integration/modules/aem_resources/
 	cp -R lib test/integration/modules/aem_resources/
 	cp -R manifests test/integration/modules/aem_resources/
 	cp -R templates test/integration/modules/aem_resources/
 	# set up test fixtures
+	useradd aem
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/somepackage/1.2.3/
 	cp test/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
 	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
-	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
-	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
-	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
-	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/install/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/install/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/install/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/bin/
+	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/install/
+	cp test/fixtures/start-env* /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/bin/
 	# test manifests
 	# author_port needs to be set here for test/integration/manifests/30_deploy_pakages.pp scenario
 	for test in test/integration/manifests/*.pp; do \
