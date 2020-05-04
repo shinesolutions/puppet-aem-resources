@@ -11,10 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new puppet module `bstopp/aem`
 - Add new manifest `set_osgi_config` to configure AEM OSGI nodes with the puppet module `bstopp/aem`
 - Add new required parameter `aem_user, aem_user_group, aem_home_dir` to manifest `author_standby_set_config`
+- Add new required parameter `aem_user, aem_user_group, aem_home_dir` to manifest `author_primary_set_config`
 
 ### Changed
 - Parameter `crx_quickstart_dir` is not a required parameter for manifest `author_standby_set_config` anymore
+- Parameter `crx_quickstart_dir` is not a required parameter for manifest `author_primary_set_config` anymore
 - Update manifest `author_standby_set_config` to use `set_osgi_config` for setting author-standby settings
+- Update manifest `author_primary_set_config` to use `set_osgi_config` for setting author-primary settings shinesolutions/aem-opencloud-manager#71
+- `SegmentNodeStoreService.config` does not get deleted anymore as part of manifest `author_primary_set_config` shinesolutions/puppet-aem-curator#200
 
 ### Removed
 - Removed template file `StandbyStoreService.config`
