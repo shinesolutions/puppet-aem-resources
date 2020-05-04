@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update manifest `author_standby_set_config` to use `set_osgi_config` for setting author-standby settings
 - Update manifest `author_primary_set_config` to use `set_osgi_config` for setting author-primary settings shinesolutions/aem-opencloud-manager#71
 - `SegmentNodeStoreService.config` does not get deleted anymore as part of manifest `author_primary_set_config` shinesolutions/puppet-aem-curator#200
+- Enable SSL encryption for AEM Author-Standby sync #69
 
 ### Removed
 - Removed template file `StandbyStoreService.config`
