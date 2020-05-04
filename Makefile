@@ -4,6 +4,7 @@ deps:
 	gem install bundler --version=1.17.3
 	bundle config --local path vendor/bundle
 	bundle install --binstubs -j4
+	bundle exec r10k puppetfile install --verbose --moduledir modules
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:

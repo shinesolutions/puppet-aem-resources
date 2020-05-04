@@ -9,6 +9,10 @@
   "issues_url": "https://github.com/shinesolutions/puppet-aem-resources/issues/",
   "dependencies": [
     {
+      "name": "bstopp/aem",
+      "version_requirement": "3.0.0"
+    },
+    {
       "name": "puppet-archive",
       "version_requirement": "3.2.1"
     },

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add new puppet module `bstopp/aem`
 ## [5.6.0] - 2020-04-24
 ### Changed
 - Refactor `aem_saml` module to use `swaqger_aem_osgi` API Client for setting SAML configuration
