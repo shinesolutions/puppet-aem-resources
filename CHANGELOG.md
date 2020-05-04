@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add new puppet module `bstopp/aem`
 - Add new manifest `set_osgi_config` to configure AEM OSGI nodes with the puppet module `bstopp/aem`
+- Add new required parameter `aem_user, aem_user_group, aem_home_dir` to manifest `author_standby_set_config`
+
+### Changed
+- Parameter `crx_quickstart_dir` is not a required parameter for manifest `author_standby_set_config` anymore
+- Update manifest `author_standby_set_config` to use `set_osgi_config` for setting author-standby settings
+
+### Removed
+- Removed template file `StandbyStoreService.config`
+- Removed file `SegmentNodeStoreService.config`
+
 ## [5.6.0] - 2020-04-24
 ### Changed
 - Refactor `aem_saml` module to use `swaqger_aem_osgi` API Client for setting SAML configuration
@@ -30,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.1.0] - 2019-11-26
 ### Changed
-- Force the changing of AEM system users' password [shinesolutions/puppet-aem-curator#164]
+- Force the changing of AEM system users' password shinesolutions/puppet-aem-curator#164
 - Change Package Deployment process to check AEM health after all packages were deployed [#75]
 - Update default parameters for AEM Health checks to use configurable parameters [#76]
 
