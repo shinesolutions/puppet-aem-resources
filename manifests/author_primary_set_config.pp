@@ -26,7 +26,7 @@ define aem_resources::author_primary_set_config(
   }
   else {
     $_osgi_configs = {
-      $segment_package => {
+      "${segment_package}.SegmentNodeStoreService" => {
         'org.apache.sling.installer.configuration.persist' => false,
         'name'                                             => 'Oak-Tar',
         'service.ranking'                                  => 100,
