@@ -31,7 +31,7 @@ define aem_resources::author_primary_set_config(
         'name'                                             => 'Oak-Tar',
         'service.ranking'                                  => 100,
         'standby'                                          => false,
-        'customBlobstore'                                  => true
+        'customBlobStore'                                  => true
       },
       "${segment_package}.standby.store.StandbyStoreService" => {
         'org.apache.sling.installer.configuration.persist' => false,

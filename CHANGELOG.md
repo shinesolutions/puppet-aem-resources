@@ -17,13 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Parameter `crx_quickstart_dir` is not a required parameter for manifest `author_standby_set_config` anymore
 - Parameter `crx_quickstart_dir` is not a required parameter for manifest `author_primary_set_config` anymore
 - Update manifest `author_standby_set_config` to use `set_osgi_config` for setting author-standby settings
-- Update manifest `author_primary_set_config` to use `set_osgi_config` for setting author-primary settings shinesolutions/aem-opencloud-manager#71
+- Update manifest `author_primary_set_config` to use `set_osgi_config` for setting author-primary settings
 - `SegmentNodeStoreService.config` does not get deleted anymore as part of manifest `author_primary_set_config` shinesolutions/puppet-aem-curator#200
 - Enable SSL encryption for AEM Author-Standby sync #69
 
 ### Removed
 - Removed template file `StandbyStoreService.config`
 - Removed file `SegmentNodeStoreService.config`
+- Fix author-standby to author-primary promotion error shinesolutions/aem-opencloud-manager#71 shinesolutions/aem-aws-stack-builder#280
 
 ## [5.6.0] - 2020-04-24
 ### Changed

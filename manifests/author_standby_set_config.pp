@@ -32,7 +32,7 @@ define aem_resources::author_standby_set_config(
         'name'                                             => 'Oak-Tar',
         'service.ranking'                                  => 100,
         'standby'                                          => true,
-        'customBlobstore'                                  => true
+        'customBlobStore'                                  => true
       },
       "${segment_package}.standby.store.StandbyStoreService" => {
         'org.apache.sling.installer.configuration.persist' => false,
