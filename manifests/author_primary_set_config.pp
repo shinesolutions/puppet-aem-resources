@@ -14,31 +14,47 @@ define aem_resources::author_primary_set_config(
     $_crx_quickstart_dir = "${aem_home_dir}/crx-quickstart"
   }
 
-  if $aem_version == '6.2' {
-    $segment_package = 'org.apache.jackrabbit.oak.plugins.segment'
-  }
-  else {
-    $segment_package = 'org.apache.jackrabbit.oak.segment'
-  }
-
   if $osgi_configs {
     $_osgi_configs = $osgi_configs
-  }
-  else {
-    $_osgi_configs = {
-      "${segment_package}.SegmentNodeStoreService" => {
-        'org.apache.sling.installer.configuration.persist' => false,
-        'name'                                             => 'Oak-Tar',
-        'service.ranking'                                  => 100,
-        'standby'                                          => false,
-        'customBlobStore'                                  => true
-      },
-      "${segment_package}.standby.store.StandbyStoreService" => {
-        'org.apache.sling.installer.configuration.persist' => false,
-        'mode'                                             => 'primary',
-        'port'                                             => 8023,
-        'secure'                                           => true,
-        'interval'                                         => 5
+  } else {
+    if $aem_version == '6.2' {
+      $_osgi_configs = {
+        'org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'name'                                             => 'Oak-Tar',
+          'service.ranking'                                  => 100,
+          'standby'                                          => false,
+          'customBlobStore'                                  => false
+        },
+        'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'mode'                                             => 'primary',
+          'port'                                             => 8023,
+          'secure'                                           => true,
+          'interval'                                         => 5
+        }
+      }
+    } else {
+      $_osgi_configs = {
+        'org.apache.jackrabbit.oak.segment.SegmentNodeStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'name'                                             => 'Oak-Tar',
+          'service.ranking'                                  => 100,
+          'standby'                                          => false,
+          'customBlobStore'                                  => true
+        },
+        'org.apache.jackrabbit.oak.segment.standby.store.StandbyStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'mode'                                             => 'primary',
+          'port'                                             => 8023,
+          'secure'                                           => true,
+          'interval'                                         => 5
+        },
+        'org.apache.jackrabbit.oak.plugins.blob.datastore.FileDataStore' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'path'                                             => './crx-quickstart/repository/datastore',
+          'minRecordLength'                                  => 16384
+        }
       }
     }
   }
