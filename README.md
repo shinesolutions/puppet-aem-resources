@@ -922,6 +922,32 @@ Enable CRXDE:
       run_mode => 'author',
     }
 
+Create OSGI Configuration:
+  Setting the OSGI configuration in the manifest `set_osgi_config` is done by using the class `aem::osgi::config` from the puppet-module `bstopp/aem`.
+
+  aem_resources::set_osgi_config {"Author-Primary set OSGI configuration":
+    aem_home_dir   => '/opt/aem/author',
+    aem_user       => 'aem-author',
+    aem_user_group => 'aem-author',
+    aem_id         => 'author',
+    osgi_configs   => {
+      'org.apache.jackrabbit.oak.plugins.segment' => {
+        'org.apache.sling.installer.configuration.persist' => false,
+        'name'                                             => 'Oak-Tar',
+        'service.ranking'                                  => 100,
+        'standby'                                          => false,
+        'customBlobstore'                                  => true
+      },
+      'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
+        'org.apache.sling.installer.configuration.persist'                          => false,
+        'mode'                                                                      => 'primary',
+        'port'                                                                      => 8023,
+        'secure'                                                                    => true,
+        'interval'                                                                  => 5
+      }
+    }
+  }
+
 Multi AEM Instances
 -------------------
 

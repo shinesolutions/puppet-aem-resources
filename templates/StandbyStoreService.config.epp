@@ -1,6 +1,0 @@
-org.apache.sling.installer.configuration.persist=B"false"
-mode="standby"
-primary.host="<%= $primary_host %>"
-port=I"8023"
-secure=B"false"
-interval=I"5"

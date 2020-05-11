@@ -10,6 +10,7 @@
 /coverage/
 /bin/
 /doc/
+/modules/
 /Gemfile.local
 /junit/
 /log/

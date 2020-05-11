@@ -1,29 +1,78 @@
 define aem_resources::author_primary_set_config(
-  $crx_quickstart_dir,
-  $aem_version = '6.2',
-  $start_env_file = 'start-env',
+  $aem_home_dir       = undef,
+  $aem_id             = 'aem',
+  $aem_user           = 'aem',
+  $aem_user_group     = 'aem',
+  $aem_version        = '6.2',
+  $crx_quickstart_dir = undef,
+  $osgi_configs       = undef,
+  $start_env_file     = 'start-env',
 ) {
-
-  if $aem_version == '6.2' {
-    $segment_package = 'org.apache.jackrabbit.oak.plugins.segment'
-  }
-  else {
-    $segment_package = 'org.apache.jackrabbit.oak.segment'
+  if $crx_quickstart_dir {
+    $_crx_quickstart_dir = $crx_quickstart_dir
+  } else {
+    $_crx_quickstart_dir = "${aem_home_dir}/crx-quickstart"
   }
 
-  file { "${crx_quickstart_dir}/install/${segment_package}.SegmentNodeStoreService.config":
-    ensure => absent,
-  }
-  file { "${crx_quickstart_dir}/install/${segment_package}.standby.store.StandbyStoreService.config":
-    ensure => absent,
+  if $osgi_configs {
+    $_osgi_configs = $osgi_configs
+  } else {
+    if $aem_version == '6.2' {
+      $_osgi_configs = {
+        'org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'name'                                             => 'Oak-Tar',
+          'service.ranking'                                  => 100,
+          'standby'                                          => false,
+          'customBlobStore'                                  => false
+        },
+        'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'mode'                                             => 'primary',
+          'port'                                             => 8023,
+          'secure'                                           => true,
+          'interval'                                         => 5
+        }
+      }
+    } else {
+      $_osgi_configs = {
+        'org.apache.jackrabbit.oak.segment.SegmentNodeStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'name'                                             => 'Oak-Tar',
+          'service.ranking'                                  => 100,
+          'standby'                                          => false,
+          'customBlobStore'                                  => true
+        },
+        'org.apache.jackrabbit.oak.segment.standby.store.StandbyStoreService' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'mode'                                             => 'primary',
+          'port'                                             => 8023,
+          'secure'                                           => true,
+          'interval'                                         => 5
+        },
+        'org.apache.jackrabbit.oak.plugins.blob.datastore.FileDataStore' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'path'                                             => './crx-quickstart/repository/datastore',
+          'minRecordLength'                                  => 16384
+        }
+      }
+    }
   }
 
-  file { "${crx_quickstart_dir}/bin":
+  aem_resources::set_osgi_config {'Author-Primary set OSGI configuration':
+    aem_home_dir   => $aem_home_dir,
+    aem_user       => $aem_user,
+    aem_user_group => $aem_user_group,
+    aem_id         => $aem_id,
+    osgi_configs   => $_osgi_configs
+  }
+
+  file { "${_crx_quickstart_dir}/bin":
     ensure => directory,
   }
 
   # work out the existing RUNMODES values
-  $_file_content = file("${crx_quickstart_dir}/bin/${start_env_file}")
+  $_file_content = file("${_crx_quickstart_dir}/bin/${start_env_file}")
   $_run_modes = $_file_content.match(/^RUNMODES=\'(.*)\'$/)[1]
 
   # replace 'standby' with 'primary' if it exists
@@ -43,11 +92,11 @@ define aem_resources::author_primary_set_config(
       $run_modes = ($_temp + ['primary']).join(',')
   }
 
-  file_line { "Set standby primary on ${crx_quickstart_dir}":
-    path    => "${crx_quickstart_dir}/bin/${start_env_file}",
+  file_line { "Set standby primary on ${_crx_quickstart_dir}":
+    path    => "${_crx_quickstart_dir}/bin/${start_env_file}",
     line    => "RUNMODES=\'${run_modes}\'",
     match   => '^RUNMODES=\'',
-    require => File["${crx_quickstart_dir}/bin"],
+    require => File["${_crx_quickstart_dir}/bin"],
   }
 
 }
