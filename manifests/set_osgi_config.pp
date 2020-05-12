@@ -1,8 +1,8 @@
 define aem_resources::set_osgi_config(
   $aem_home_dir   = undef,
+  $aem_id         = 'aem',
   $aem_user       = 'aem',
   $aem_user_group = 'aem',
-  $aem_id         = 'aem',
   $ensure         = 'present',
   $osgi_configs   = {},
 ) {

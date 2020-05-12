@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add new manifest to configure AEM Publish component `publish_set_config`
+
+### Changed
+- Refactor `author_primary_set_config` & `author_standby_set_config` manifests to use `aem::config` for setting AEM configurations
+
+### Removed
+- Removed parameter `crx_quickstart_dir` from `author_primary_set_config` & `author_standby_set_config` manifests
+
 ## [6.0.0] - 2020-05-12
 ### Added
 - Add new puppet module `bstopp/aem`

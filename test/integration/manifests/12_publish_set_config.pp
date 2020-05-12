@@ -1,0 +1,3 @@
+aem_resources::publish_set_config { 'Set Publish config':
+  aem_home_dir => '/tmp/shinesolutions/puppet-aem-resources/publish',
+}

@@ -822,11 +822,23 @@ Remove default agents on AEM Publish:
     aem_resources::publish_remove_default_agents { 'Remove default publish agents':
     }
 
+Set AEM Author Primary configuration:
+
+    aem_resources::author_primary_set_config { 'Set author primary config':
+      aem_home_dir => '/opt/aem/author'
+    }
+
 Set AEM Author Standby configuration:
 
     aem_resources::author_standby_set_config { 'Set author standby config':
-      install_dir  => '/opt/aem/crx-quickstart/install',
+      aem_home_dir => '/opt/aem/author',
       primary_host => 'somehost',
+    }
+
+Set AEM Publish configuration:
+
+    aem_resources::publish_set_config { 'Set Publish config':
+      aem_home_dir => '/opt/aem/publish'
     }
 
 Create system users (orchestrator, replicator, deployer, exporter, importer):
@@ -925,28 +937,28 @@ Enable CRXDE:
 Create OSGI Configuration:
   Setting the OSGI configuration in the manifest `set_osgi_config` is done by using the class `aem::osgi::config` from the puppet-module `bstopp/aem`.
 
-  aem_resources::set_osgi_config {"Author-Primary set OSGI configuration":
-    aem_home_dir   => '/opt/aem/author',
-    aem_user       => 'aem-author',
-    aem_user_group => 'aem-author',
-    aem_id         => 'author',
-    osgi_configs   => {
-      'org.apache.jackrabbit.oak.plugins.segment' => {
-        'org.apache.sling.installer.configuration.persist' => false,
-        'name'                                             => 'Oak-Tar',
-        'service.ranking'                                  => 100,
-        'standby'                                          => false,
-        'customBlobstore'                                  => true
-      },
-      'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
-        'org.apache.sling.installer.configuration.persist'                          => false,
-        'mode'                                                                      => 'primary',
-        'port'                                                                      => 8023,
-        'secure'                                                                    => true,
-        'interval'                                                                  => 5
+    aem_resources::set_osgi_config {"Author-Primary set OSGI configuration":
+      aem_home_dir   => '/opt/aem/author',
+      aem_user       => 'aem-author',
+      aem_user_group => 'aem-author',
+      aem_id         => 'author',
+      osgi_configs   => {
+        'org.apache.jackrabbit.oak.plugins.segment' => {
+          'org.apache.sling.installer.configuration.persist' => false,
+          'name'                                             => 'Oak-Tar',
+          'service.ranking'                                  => 100,
+          'standby'                                          => false,
+          'customBlobstore'                                  => true
+        },
+        'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
+          'org.apache.sling.installer.configuration.persist'                          => false,
+          'mode'                                                                      => 'primary',
+          'port'                                                                      => 8023,
+          'secure'                                                                    => true,
+          'interval'                                                                  => 5
+        }
       }
     }
-  }
 
 Multi AEM Instances
 -------------------

@@ -1,19 +1,19 @@
 define aem_resources::author_primary_set_config(
-  $aem_home_dir       = undef,
-  $aem_id             = 'aem',
-  $aem_user           = 'aem',
-  $aem_user_group     = 'aem',
-  $aem_version        = '6.2',
-  $crx_quickstart_dir = undef,
-  $osgi_configs       = undef,
-  $start_env_file     = 'start-env',
+  $aem_home_dir,
+  $aem_context_root      = undef,
+  $aem_crx_packages      = undef,
+  $aem_debug_port        = undef,
+  $aem_id                = 'aem',
+  $aem_port              = '4502',
+  $aem_runmodes          = [],
+  $aem_user              = 'aem',
+  $aem_user_group        = 'aem',
+  $aem_version           = '6.2',
+  $enable_sample_content = false,
+  $jvm_mem_opts          = '-Xmx1024m',
+  $jvm_opts              = undef,
+  $osgi_configs          = undef,
 ) {
-  if $crx_quickstart_dir {
-    $_crx_quickstart_dir = $crx_quickstart_dir
-  } else {
-    $_crx_quickstart_dir = "${aem_home_dir}/crx-quickstart"
-  }
-
   if $osgi_configs {
     $_osgi_configs = $osgi_configs
   } else {
@@ -59,44 +59,25 @@ define aem_resources::author_primary_set_config(
     }
   }
 
-  aem_resources::set_osgi_config {'Author-Primary set OSGI configuration':
-    aem_home_dir   => $aem_home_dir,
-    aem_user       => $aem_user,
-    aem_user_group => $aem_user_group,
-    aem_id         => $aem_id,
-    osgi_configs   => $_osgi_configs
-  }
-
-  file { "${_crx_quickstart_dir}/bin":
-    ensure => directory,
-  }
-
-  # work out the existing RUNMODES values
-  $_file_content = file("${_crx_quickstart_dir}/bin/${start_env_file}")
-  $_run_modes = $_file_content.match(/^RUNMODES=\'(.*)\'$/)[1]
-
-  # replace 'standby' with 'primary' if it exists
-  $_temp = $_run_modes.split(',').map | $rm | {
-      if $rm == 'standby' {
-          'primary'
-      } else {
-          $rm
-      }
-  }
-
-  if $_run_modes == '' {
-      $run_modes = 'primary'
-  } elsif 'primary' in $_temp {
-      $run_modes = $_temp.join(',')
+  if !('primary' in $aem_runmodes) {
+    $_runmodes = concat(['primary'], $aem_runmodes)
   } else {
-      $run_modes = ($_temp + ['primary']).join(',')
+    $_runmodes = $aem_runmodes
   }
 
-  file_line { "Set standby primary on ${_crx_quickstart_dir}":
-    path    => "${_crx_quickstart_dir}/bin/${start_env_file}",
-    line    => "RUNMODES=\'${run_modes}\'",
-    match   => '^RUNMODES=\'',
-    require => File["${_crx_quickstart_dir}/bin"],
+  aem::config { 'Configure AEM Author-Primary':
+    context_root   => $aem_context_root,
+    debug_port     => $aem_debug_port,
+    group          => $aem_user_group,
+    home           => $aem_home_dir,
+    jvm_mem_opts   => $jvm_mem_opts,
+    jvm_opts       => $jvm_opts,
+    osgi_configs   => $_osgi_configs,
+    crx_packages   => $aem_crx_packages,
+    port           => $aem_port,
+    runmodes       => $_runmodes,
+    sample_content => $enable_sample_content,
+    type           => $aem_id,
+    user           => $aem_user_group
   }
-
 }
