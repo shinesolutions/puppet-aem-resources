@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [7.0.0] - 2020-05-12
 ### Added
 - Add new manifest to configure AEM Publish component `publish_set_config`
@@ -342,6 +344,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#75]: https://github.com/shinesolutions/puppet-aem-resources/issues/75
 [#76]: https://github.com/shinesolutions/puppet-aem-resources/issues/76
 
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.0.0...HEAD
 [7.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/6.0.0...7.0.0
 [6.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.6.0...6.0.0
 [5.6.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/5.5.0...5.6.0
