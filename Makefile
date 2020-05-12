@@ -8,7 +8,7 @@ deps:
 	cd test/integration/ && bundle exec r10k puppetfile install --verbose --moduledir modules
 
 clean:
-	rm -rf bin/ pkg/ stage/ vendor/
+	rm -rf bin/ pkg/ stage/ vendor/ modules/
 	rm -rf test/integration/.tmp/ \
 	  test/integration/modules/ \
 	  /tmp/shinesolutions/puppet-aem-resources/
@@ -83,7 +83,7 @@ test-fixtures:
 		-keyout test/fixtures/aem.key \
 		-out test/fixtures/aem.cert
 
-package:
+package: deps
 	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
 	# this is due to Gemfile.lock being created by environment bundler which is of a different
 	# version to the available bundler bundled within pdk's ruby
