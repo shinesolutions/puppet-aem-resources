@@ -27,6 +27,6 @@ define aem_resources::publish_set_config(
     runmodes       => $aem_runmodes,
     sample_content => $enable_sample_content,
     type           => $aem_id,
-    user           => $aem_user_group
+    user           => $aem_user,
   }
 }

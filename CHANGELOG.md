@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix variable name in `author_primary_set_config`, `author_standby_set_config` & `publish_set_config`
+
 ## [7.0.0] - 2020-05-12
 ### Added
 - Add new manifest to configure AEM Publish component `publish_set_config`

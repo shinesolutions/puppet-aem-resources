@@ -81,6 +81,6 @@ define aem_resources::author_standby_set_config(
     runmodes       => $_runmodes,
     sample_content => $enable_sample_content,
     type           => $aem_id,
-    user           => $aem_user_group
+    user           => $aem_user,
   }
 }
