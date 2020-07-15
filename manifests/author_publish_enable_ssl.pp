@@ -1,16 +1,32 @@
 define aem_resources::author_publish_enable_ssl(
-  $run_mode,
-  $port,
-  $keystore,
-  $keystore_password,
-  $keystore_key_alias,
-  $truststore,
-  $truststore_password,
-  $aem_username = undef,
-  $aem_password = undef,
-  $aem_id = 'aem',
+$port,
+$keystore,
+$keystore_password,
+$truststore,
+$truststore_password,
+$run_mode               = undef,
+$aem_username           = undef,
+$aem_password           = undef,
+$keystore_key_alias     = undef,
+$ssl_method             = 'jetty',
+$aem_id                 = 'aem',
+$https_hostname         = 'localhost',
 ) {
-
+if $ssl_method == 'granite' {
+  aem_ssl { "[${aem_id}]  ] SSL by default for AEM":
+    ensure                => present,
+    aem_username          => $aem_username,
+    aem_password          => $aem_password,
+    https_hostname        => $https_hostname,
+    https_port            => $port,
+    keystore_password     => $keystore_password,
+    truststore_password   => $truststore_password,
+    privatekey_file_path  => $keystore,
+    certificate_file_path => $truststore,
+    aem_id                => $aem_id,
+  }
+}
+else {
   aem_node { "[${aem_id}] Ensure org.apache.felix.http OSGI config exists":
     ensure       => present,
     name         => 'org.apache.felix.http',
@@ -250,5 +266,5 @@ define aem_resources::author_publish_enable_ssl(
     aem_password => $aem_password,
     aem_id       => $aem_id,
   }
-
+}
 }

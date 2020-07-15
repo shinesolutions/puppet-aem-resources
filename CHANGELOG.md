@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Upgrade ruby_aem to 3.7.0
+- Added Granite SSL support [shinesolutions/puppet-aem-curator#220]
 
 ## [7.0.1] - 2020-05-13
 ### Fixed
