@@ -19,19 +19,17 @@ require 'tempfile'
 require 'retries'
 
 Puppet::Type.type(:aem_ssl).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
-
   # Upload ssl to the AEM.
   def create
-
     ssl = client(resource).ssl
     opts = {
-        keystore_password: resource[:keystore_password],
-        truststore_password: resource[:truststore_password],
-        https_hostname: resource[:https_hostname],
-        https_port: resource[:https_port],
-        certificate_file_path: resource[:certificate_file_path],
-        privatekey_file_path: resource[:privatekey_file_path],
-      }
+      keystore_password: resource[:keystore_password],
+      truststore_password: resource[:truststore_password],
+      https_hostname: resource[:https_hostname],
+      https_port: resource[:https_port],
+      certificate_file_path: resource[:certificate_file_path],
+      privatekey_file_path: resource[:privatekey_file_path]
+    }
     build_opts = {
       _retries: {
         max_tries: resource[:retries_max_tries],
@@ -41,23 +39,17 @@ Puppet::Type.type(:aem_ssl).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
     }
     result = call_with_readiness_check(ssl, 'enable_wait_until_ready', [**opts, **build_opts], resource)
     handle(result)
-
   end
 
   def destroy
-
     ssl = client(resource).ssl
     result = ssl.disable
     handle(result)
-
   end
 
   def exists?
     ssl = client(resource).ssl
     result = ssl.get
     ssl_properties = result.response.body.properties
-    p ssl_properties
-    puts ssl_properties
   end
 end
-

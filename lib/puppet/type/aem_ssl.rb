@@ -16,7 +16,6 @@
 
 Puppet::Type.newtype(:aem_ssl) do
   ensurable do
-
     newvalue(:present) do
       if @resource.provider&.respond_to?(:create)
         @resource.provider.create
@@ -69,37 +68,43 @@ Puppet::Type.newtype(:aem_ssl) do
 
   newparam :https_hostname do
     desc 'AEM https hostname'
+    validate do |value|
+      value = 'localhost' if value == ''
+    end
   end
 
   newparam :https_port do
     desc 'AEM https port'
+    validate do |value|
+      value = '5432' if value == ''
+    end
   end
 
   newparam :keystore_password do
     desc 'Password for private keystore file'
     validate do |value|
-      raise ArgumentError.new('intermediate_path must be provided') if value == ''
+      raise ArgumentError.new('Keystore password must be provided') if value == ''
     end
   end
 
   newparam :truststore_password do
     desc 'Password for certificate file'
     validate do |value|
-      raise ArgumentError.new('intermediate_path must be provided') if value == ''
+      raise ArgumentError.new('Truststore password must be provided') if value == ''
     end
   end
 
   newparam :privatekey_file_path do
     desc 'Full path to the private key file'
     validate do |value|
-      raise ArgumentError.new('intermediate_path must be provided') if value == ''
+      raise ArgumentError.new('Private key path must be provided') if value == ''
     end
   end
 
   newparam :certificate_file_path do
     desc 'Full path to the certificate key file'
     validate do |value|
-      raise ArgumentError.new('intermediate_path must be provided') if value == ''
+      raise ArgumentError.new('Certificate path must be provided') if value == ''
     end
   end
   newparam :retries_max_tries do
@@ -122,6 +127,4 @@ Puppet::Type.newtype(:aem_ssl) do
       value = 5 if value == ''
     end
   end
-
 end
-
