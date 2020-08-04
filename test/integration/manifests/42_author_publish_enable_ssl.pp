@@ -17,21 +17,14 @@ java_ks { 'Set up truststore':
   trustcacerts => true,
 }
 
-aem_resources::author_publish_enable_ssl { 'Enable author/publish SSL':
+aem_resources::author_publish_enable_ssl { 'Enable author/publish SSL via Jetty':
   run_mode            => 'author',
+  aem_id              => 'author',
+  ssl_method          => 'jetty',
   port                => 5432,
   keystore            => '/tmp/shinesolutions/puppet-aem-resources/aem.ks',
   keystore_password   => 'somekeystorepassword',
   keystore_key_alias  => 'cqse',
   truststore          => '/tmp/shinesolutions/puppet-aem-resources/aem.ts',
-  truststore_password => 'sometruststorepassword',
-}
-
-aem_resources::author_publish_enable_ssl { 'Enable author/publish SSL':
-  run_mode            => 'author',
-  port                => 5432,
-  keystore            => '/tmp/shinesolutions/puppet-aem-resources/aem.key',
-  keystore_password   => 'somekeystorepassword',
-  truststore          => '/tmp/shinesolutions/puppet-aem-resources/aem.cert',
   truststore_password => 'sometruststorepassword',
 }
