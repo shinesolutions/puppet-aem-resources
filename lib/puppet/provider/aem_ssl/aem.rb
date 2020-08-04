@@ -49,7 +49,8 @@ Puppet::Type.type(:aem_ssl).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
 
   def exists?
     ssl = client(resource).ssl
-    result = ssl.get
-    ssl_properties = result.response.body.properties
+    result = ssl.is_enabled
+
+    result.data
   end
 end
