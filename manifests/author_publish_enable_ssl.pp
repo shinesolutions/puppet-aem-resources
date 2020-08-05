@@ -4,13 +4,13 @@ define aem_resources::author_publish_enable_ssl(
   $keystore_password,
   $truststore,
   $truststore_password,
-  $run_mode               = undef,
-  $aem_username           = undef,
-  $aem_password           = undef,
-  $keystore_key_alias     = undef,
-  $ssl_method             = 'jetty',
-  $aem_id                 = 'aem',
-  $https_hostname         = 'localhost',
+  $run_mode           = undef,
+  $aem_username       = undef,
+  $aem_password       = undef,
+  $keystore_key_alias = undef,
+  $aem_id             = 'aem',
+  $https_hostname     = 'localhost',
+  $ssl_method         = 'jetty',
 ) {
   case $ssl_method {
     /granite/: {
