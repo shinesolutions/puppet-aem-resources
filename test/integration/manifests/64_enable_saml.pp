@@ -20,7 +20,6 @@ aem_resources::enable_saml { 'Enable SAML authentication':
   logout_url                 => 'https://federation.prod.com/adfs/ls/IdpInitiatedSignOn.aspx',
   service_provider_entity_id => 'https://prod-aemauthor.com/saml_login',
   handle_logout              => true,
-  sp_private_key_alias       => '',
   use_encryption             => false,
   name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
   digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
