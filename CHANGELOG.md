@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [7.2.0] - 2020-09-27
 ### Changed
-- Upgrade ruby_aem to 3.10.0 [#218]
-- Upgrade puppet to 5.5.21 [#218]
+- Upgrade ruby_aem to 3.10.0
+- Upgrade puppet to 5.5.21
 
 ### Fixed
 - Fixed integration test
