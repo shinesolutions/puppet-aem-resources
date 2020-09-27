@@ -115,14 +115,6 @@ define aem_resources::enable_saml(
       run_mode         => $aem_id,
       aem_id           => $aem_id,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
-    } -> aem_config_property { "${aem_id}: Set allowed hosts regexp":
-      ensure           => present,
-      name             => 'allow.hosts.regexp',
-      type             => 'String[]',
-      value            => [''],
-      run_mode         => $aem_id,
-      aem_id           => $aem_id,
-      config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed methods":
       ensure           => present,
       name             => 'filter.methods',
