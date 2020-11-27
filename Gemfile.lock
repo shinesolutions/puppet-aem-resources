@@ -44,7 +44,7 @@ GEM
       ast (~> 2.4.0)
     pathspec (0.2.1)
     public_suffix (3.0.3)
-    puppet (5.5.21)
+    puppet (5.5.22)
       facter (> 2.0.1, < 4)
       fast_gettext (~> 1.1.2)
       hiera (>= 3.2.1, < 4)
@@ -122,7 +122,7 @@ PLATFORMS
 DEPENDENCIES
   facter (= 2.5.1)
   metadata-json-lint (= 2.2.0)
-  puppet (= 5.5.21)
+  puppet (= 5.5.22)
   puppet-lint (= 2.3.6)
   puppetlabs_spec_helper (= 2.14.1)
   r10k (= 3.2.0)
