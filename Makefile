@@ -65,6 +65,10 @@ test-integration:
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/install/
 	cp test/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
 	cp test/fixtures/start /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
+	cp test/fixtures/cert_ssl.crt /tmp/shinesolutions/puppet-aem-resources/
+	cp test/fixtures/cert_ssl.der /tmp/shinesolutions/puppet-aem-resources/
+	cp test/fixtures/cert_ssl2.crt /tmp/shinesolutions/puppet-aem-resources/
+	cp test/fixtures/cert_ssl2.der /tmp/shinesolutions/puppet-aem-resources/
 	# test manifests
 	# author_port needs to be set here for test/integration/manifests/30_deploy_pakages.pp scenario
 	for test in test/integration/manifests/*.pp; do \
