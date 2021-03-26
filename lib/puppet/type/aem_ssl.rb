@@ -66,6 +66,13 @@ Puppet::Type.newtype(:aem_ssl) do
     desc 'AEM password'
   end
 
+  newparam :force do
+    desc 'Force Enabling SSL'
+    validate do |value|
+      value = false if value == ''
+    end
+  end
+
   newparam :https_hostname do
     desc 'AEM https hostname'
     validate do |value|

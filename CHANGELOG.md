@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added `force` option to `aem_ssl` for enabling SSL via Granite [#99]
 
 ## [7.2.1] - 2020-11-27
 ### Changed
@@ -364,6 +366,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#71]: https://github.com/shinesolutions/puppet-aem-resources/issues/71
 [#75]: https://github.com/shinesolutions/puppet-aem-resources/issues/75
 [#76]: https://github.com/shinesolutions/puppet-aem-resources/issues/76
+[#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
 
 [Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.1...HEAD
 [7.2.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.0...7.2.1

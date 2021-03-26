@@ -21,6 +21,8 @@ require 'retries'
 Puppet::Type.type(:aem_ssl).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Upload ssl to the AEM.
   def create
+    destroy if resource[:force].eql? true
+
     ssl = client(resource).ssl
     opts = {
       keystore_password: resource[:keystore_password],
@@ -48,6 +50,8 @@ Puppet::Type.type(:aem_ssl).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
   end
 
   def exists?
+    return false if resource[:force].eql? true
+
     ssl = client(resource).ssl
     result = ssl.is_enabled
 
