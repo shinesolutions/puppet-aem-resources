@@ -90,6 +90,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
   # Check whether the SAML Configuration exists or not.
   def exists?
     return false if resource[:force].eql? true
+
     saml = client(resource).saml
     result = saml.get
 
