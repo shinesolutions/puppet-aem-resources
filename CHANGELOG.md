@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [7.2.3] - 2021-03-29
 ### Added
 - Added `force` option to `aem_saml` for enabling SAML [#101]
 
@@ -371,8 +371,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#75]: https://github.com/shinesolutions/puppet-aem-resources/issues/75
 [#76]: https://github.com/shinesolutions/puppet-aem-resources/issues/76
 [#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
+[#101]: https://github.com/shinesolutions/puppet-aem-resources/issues/101
 
-[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.2...HEAD
+[7.2.3]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.2...7.2.3
 [7.2.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.1...7.2.2
 [7.2.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.0...7.2.1
 [7.2.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.1.0...7.2.0
