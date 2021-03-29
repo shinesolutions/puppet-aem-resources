@@ -70,6 +70,13 @@ Puppet::Type.newtype(:aem_saml) do
     desc 'AEM password'
   end
 
+  newparam :force do
+    desc 'Force Enabling SAML'
+    validate do |value|
+      value = false if value == ''
+    end
+  end
+
   ############################################################
   # SAMLUPDATE
   ############################################################

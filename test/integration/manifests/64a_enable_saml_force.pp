@@ -25,5 +25,5 @@ aem_resources::enable_saml { 'Enable SAML authentication':
   digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
   signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
   aem_id                     => 'author',
-  force                      => false,
+  force                      => true,
 }

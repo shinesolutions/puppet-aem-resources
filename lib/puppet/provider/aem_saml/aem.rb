@@ -19,6 +19,7 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
 Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create the AEM SAML Configuration.
   def create
+    destroy if resource[:force].eql? true
     results = []
     ############################################################
     # Getting idp_cert_alias from truststore if not provided
@@ -88,6 +89,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   # Check whether the SAML Configuration exists or not.
   def exists?
+    return false if resource[:force].eql? true
     saml = client(resource).saml
     result = saml.get
 
