@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2016-2019 Shine Solutions
+# Copyright 2016-2021 Shine Solutions Group
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
