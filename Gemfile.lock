@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
     colored (1.2)
     cri (2.15.6)
@@ -43,7 +43,7 @@ GEM
     parser (2.6.3.0)
       ast (~> 2.4.0)
     pathspec (0.2.1)
-    public_suffix (3.0.3)
+    public_suffix (4.0.6)
     puppet (5.5.22)
       facter (> 2.0.1, < 4)
       fast_gettext (~> 1.1.2)
