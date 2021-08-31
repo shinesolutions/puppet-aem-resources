@@ -1,0 +1,15 @@
+name: Publish
+'on':
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: master
+      - uses: ./.github/actions/publish-action
+        env:
+          PUPPETFORGE_TOKEN: '${{ secrets.SHINEOPENSOURCE_PUPPETFORGE_TOKEN }}'
