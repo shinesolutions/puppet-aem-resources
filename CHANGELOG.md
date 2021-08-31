@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add enable|disable_development_bundles class [shinesolutions/puppet-aem-curator#207]
+
 ## [7.2.3] - 2021-03-29
 ### Added
 - Added `force` option to `aem_saml` for enabling SAML [#101]

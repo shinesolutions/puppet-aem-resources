@@ -36,7 +36,7 @@ test-integration:
 	cp -R manifests test/integration/modules/aem_resources/
 	cp -R templates test/integration/modules/aem_resources/
 	# set up test fixtures
-	useradd aem
+	useradd aem || echo "User might already exist"
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/somepackage/1.2.3/
 	cp test/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
 	cp test/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/
@@ -102,7 +102,18 @@ package: deps
 	# version to the available bundler bundled within pdk's ruby
 	mv Gemfile.lock Gemfile.lock.orig && PDK_DISABLE_ANALYTICS=true pdk build --force && mv Gemfile.lock.orig Gemfile.lock
 
-release:
-	rtk release
+release-major:
+	rtk release --release-increment-type major
 
-.PHONY: ci deps clean lint test-integration test-fixtures package release
+release-minor:
+	rtk release --release-increment-type minor
+
+release-patch:
+	rtk release --release-increment-type patch
+
+release: release-minor
+
+publish:
+	pdk release publish --force --forge-token=$(forge_token)
+
+.PHONY: ci deps clean lint test-integration test-fixtures package release release-major release-minor release-patch publish
