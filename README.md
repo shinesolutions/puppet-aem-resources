@@ -29,7 +29,7 @@ Or via a Puppetfile:
 
     mod 'shinesolutions/aem_resources'
 
-If you want to use the master version:
+If you want to use the `main` version:
 
     mod 'shinesolutions/aem_resources', :git => 'https://github.com/shinesolutions/puppet-aem-resources'
 
