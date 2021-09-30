@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.3.0] - 2021-08-31
+
 ### Added
 - Add enable|disable_development_bundles class [shinesolutions/puppet-aem-curator#207]
 - Add publish and release-* GitHub Actions
