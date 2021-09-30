@@ -976,6 +976,18 @@ Create OSGI Configuration:
       }
     }
 
+Enable Development bundles:
+
+    aem_resources::enable_development_bundles { 'Enable Development bundles':
+      run_mode => 'author',
+    }
+
+Disable Development bundles:
+
+    aem_resources::disable_development_bundles { 'Disable Development bundles':
+      run_mode => 'author',
+    }
+
 Multi AEM Instances
 -------------------
 
