@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [7.4.0] - 2021-09-30
 ### Changed
 - Upgrade ruby_aem to 3.13.1
@@ -382,6 +384,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
 [#101]: https://github.com/shinesolutions/puppet-aem-resources/issues/101
 
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.4.0...HEAD
 [7.4.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.3.0...7.4.0
 [7.3.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.3...7.3.0
 [7.2.3]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.2.2...7.2.3
