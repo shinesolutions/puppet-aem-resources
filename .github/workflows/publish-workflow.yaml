@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
         with:
-          ref: main
+          ref: 7.4.0
       - uses: ./.github/actions/publish-action
         env:
           PUPPETFORGE_TOKEN: '${{ secrets.SHINEOPENSOURCE_PUPPETFORGE_TOKEN }}'
