@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Switch api-release-* GH Actions to use ghcr.io GitHub Registry
+
 ## [7.4.0] - 2021-09-30
 ### Changed
 - Upgrade ruby_aem to 3.13.1
