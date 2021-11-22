@@ -1,13 +1,19 @@
 define aem_resources::deploy_packages (
   $packages,
-  $path                       = '/tmp/shinesolutions/puppet-aem-resources',
-  $sleep_seconds              = 10,
-  $aem_id                     = undef,
-  $aem_username               = undef,
-  $aem_password               = undef,
-  $retries_max_tries          = 60,
-  $retries_base_sleep_seconds = 5,
-  $retries_max_sleep_seconds  = 5,
+  $path                                              = '/tmp/shinesolutions/puppet-aem-resources',
+  $sleep_seconds                                     = 10,
+  $aem_id                                            = undef,
+  $aem_username                                      = undef,
+  $aem_password                                      = undef,
+  $retries_max_tries                                 = 60,
+  $retries_base_sleep_seconds                        = 5,
+  $retries_max_sleep_seconds                         = 5,
+  $login_page_is_ready_retries_max_tries             = 120,
+  $login_page_is_ready_retries_base_sleep_seconds    = 5,
+  $login_page_is_ready_retries_max_sleep_seconds     = 5,
+  $aem_health_check_is_ok_retries_max_tries          = 120,
+  $aem_health_check_is_ok_retries_base_sleep_seconds = 5,
+  $aem_health_check_is_ok_retries_max_sleep_seconds  = 5,
 ) {
 
   $packages.each | Integer $index, Hash $package| {
@@ -64,9 +70,9 @@ define aem_resources::deploy_packages (
 
     aem_aem { "[${_aem_id}] Wait until login page is ready post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => login_page_is_ready,
-      retries_max_tries          => 60,
-      retries_base_sleep_seconds => 5,
-      retries_max_sleep_seconds  => 5,
+      retries_max_tries          => $login_page_is_ready_retries_max_tries,
+      retries_base_sleep_seconds => $login_page_is_ready_retries_base_sleep_seconds,
+      retries_max_sleep_seconds  => $login_page_is_ready_retries_max_sleep_seconds,
       require                    => Exec["[${_aem_id}] Wait post Deploy package ${package['group']}/${package['name']}-${package['version']}"],
       aem_username               => $aem_username,
       aem_password               => $aem_password,
@@ -74,9 +80,9 @@ define aem_resources::deploy_packages (
     } -> aem_aem { "[${_aem_id}] Wait until aem health check is ok post Deploy package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => aem_health_check_is_ok,
       tags                       => 'deep',
-      retries_max_tries          => 60,
-      retries_base_sleep_seconds => 5,
-      retries_max_sleep_seconds  => 5,
+      retries_max_tries          => $aem_health_check_is_ok_retries_max_tries,
+      retries_base_sleep_seconds => $aem_health_check_is_ok_retries_base_sleep_seconds,
+      retries_max_sleep_seconds  => $aem_health_check_is_ok_retries_max_sleep_seconds,
       aem_username               => $aem_username,
       aem_password               => $aem_password,
       aem_id                     => $_aem_id,

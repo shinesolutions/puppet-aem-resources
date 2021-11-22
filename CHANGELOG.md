@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add login page and aem health checks retry parameters to aem_resources::deploy_packages
+
 ### Changed
 - Switch api-release-* GH Actions to use ghcr.io GitHub Registry
+- Increase default aem_resources::deploy_packages max retries to 120
 
 ## [7.4.0] - 2021-09-30
 ### Changed
