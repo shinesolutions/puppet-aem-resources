@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
+require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources'
 
 Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Archive a AEM Truststore by downloading in to the specified path.
@@ -44,7 +44,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
       file_path = resource[:file] if resource[:file]
       file_path = "#{resource[:path]}/truststore.p12" if resource[:path]
       opts[:force] = resource[:force]
-      result = call_with_readiness_check(truststore, 'upload_wait_until_ready', [file_path, **opts], resource)
+      result = call_with_readiness_check(truststore, 'upload_wait_until_ready', [file_path, { **opts }], resource)
     else
       result = truststore.create(resource[:password])
     end

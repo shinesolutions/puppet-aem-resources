@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
+require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources'
 
 Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Archive a package by building a new package and downloading in to the specified path.
@@ -65,7 +65,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
     results.push(call_with_readiness_check(package, 'upload_wait_until_ready', [resource[:path], upload_opts], resource))
     results.push(call_with_readiness_check(package, 'install_wait_until_ready', [install_opts], resource))
     results.push(call_with_readiness_check(package, 'replicate', [], resource)) if resource[:replicate] == true
-    results = results.concat(call_with_readiness_check(package, 'activate_filter', [true, false], resource)) if resource[:activate] == true
+    results.concat(call_with_readiness_check(package, 'activate_filter', [true, false], resource)) if resource[:activate] == true
 
     handle_multi(results)
   end
@@ -95,7 +95,7 @@ Puppet::Type.type(:aem_package).provide(:aem, parent: PuppetX::ShineSolutions::P
 
     results.push(call_with_readiness_check(package, 'install_wait_until_ready', [install_opts], resource))
     results.push(call_with_readiness_check(package, 'replicate', [], resource)) if resource[:replicate] == true
-    results = results.concat(call_with_readiness_check(package, 'activate_filter', [true, false], resource)) if resource[:activate] == true
+    results.concat(call_with_readiness_check(package, 'activate_filter', [true, false], resource)) if resource[:activate] == true
 
     handle_multi(results)
   end
