@@ -76,15 +76,10 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   # Delete the SAML Configuration file.
   def destroy
-    results = []
-
-    node = client(resource).node(resource[:config_node_path], resource[:config_node_name])
-    results.push(call_with_readiness_check(node, 'delete', [], resource))
-
     saml = client(resource).saml
-    results.push(call_with_readiness_check(saml, 'delete', [], resource))
+    result = call_with_readiness_check(saml, 'delete', [], resource)
 
-    handle_multi(results)
+    handle(result)
   end
 
   # Check whether the SAML Configuration exists or not.
