@@ -21,7 +21,7 @@ lint:
 		--no-documentation-check \
 		test/integration/*/*.pp \
 		manifests/*.pp
-	puppet epp validate templates/*.epp
+	bundle exec puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
 	bundle exec yaml-lint .*.yml
 	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
