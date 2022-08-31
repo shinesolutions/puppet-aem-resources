@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade Puppet module `puppetlabs/stdlib` to `4.25.1`
 - Upgrade ruby dependenies in `Gemnfile` to most recent versions
 - Update Gemfile.lock
+- Update Github Action Docker image to `shinesolutions/aem-platform-buildenv:3.1.0`
 
 ### Fixed
 - Fixed `aem_saml` `deletion` process
