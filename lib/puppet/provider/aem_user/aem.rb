@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
+require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources'
 
 Puppet::Type.type(:aem_user).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a user.

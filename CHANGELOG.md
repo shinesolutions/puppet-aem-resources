@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Upgrade Puppet module `puppet/archive` to `6.0.2`
+- Upgrade Puppet module `puppetlabs/java_ks` to `4.3.1`
+- Upgrade Puppet module `puppetlabs/stdlib` to `8.4.0`
+- Upgrade Puppet module `bstopp/aem` to `3.0.0`
+- Upgrade Puppet module `puppetlabs/stdlib` to `4.25.1`
+- Upgrade ruby dependenies in `Gemnfile` to most recent versions
+- Update Gemfile.lock
+- Update Github Action Docker image to `shinesolutions/aem-platform-buildenv:3.1.0`
+
+### Fixed
+- Fixed `aem_saml` `deletion` process
+- Fixed `aem_ssl` integration test
 
 ## [7.5.0] - 2021-11-22
 ### Added

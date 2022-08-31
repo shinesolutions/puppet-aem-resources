@@ -6,11 +6,14 @@ AllCops:
     - bin/*
     - pkg/**/*
     - test/**/*
+  SuggestExtensions: false
 # Disabled useless assignment check due to Puppet type param validation
 # e.g.
 # validate do |value|
 #   value = 'foo' if value == ''
 # end
+Lint/RedundantSafeNavigation:
+  Enabled: false
 Lint/UselessAssignment:
   Enabled: false
 Metrics/AbcSize:
@@ -44,8 +47,8 @@ Naming/AccessorMethodName:
   Enabled: false
 Naming/PredicateName:
   Enabled: false
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
+# Style/BracesAroundHashParameters:
+#   EnforcedStyle: context_dependent
 Style/BlockDelimiters:
   Enabled: false
 Style/RaiseArgs:

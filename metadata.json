@@ -9,20 +9,20 @@
   "issues_url": "https://github.com/shinesolutions/puppet-aem-resources/issues/",
   "dependencies": [
     {
-      "name": "bstopp/aem",
-      "version_requirement": "3.0.0"
-    },
-    {
-      "name": "puppet-archive",
-      "version_requirement": "3.2.1"
+      "name": "puppet/archive",
+      "version_requirement": "6.0.2"
     },
     {
       "name": "puppetlabs/java_ks",
-      "version_requirement": "1.6.0"
+      "version_requirement": "4.3.1"
     },
     {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": "4.25.1"
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "8.4.0"
+    },
+    {
+      "name": "bstopp/aem",
+      "version_requirement": "3.0.0"
     }
   ],
   "data_provider": "hiera",
@@ -47,7 +47,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.0.0 < 7.0.0"
+      "version_requirement": ">= 5.0.0 < 8.0.0"
     }
   ],
   "tags": [

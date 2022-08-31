@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources.rb'
+require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources'
 
 Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create the AEM SAML Configuration.
@@ -55,7 +55,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     property_params = {}
     propertylist = []
     resource.to_hash.each do |(key, value)|
-      property_list_item = key.to_s.gsub(/_[a-z]/) { $&.upcase }.delete('_') unless key.to_s.eql?('service_ranking')
+      property_list_item = key.to_s.gsub(/_[a-z]/) { Regexp.last_match(0).upcase }.delete('_') unless key.to_s.eql?('service_ranking')
       property_list_item = key.to_s.tr('_', '.') if key.to_s.eql?('service_ranking')
       property_list_item = property_list_item.gsub('Url', 'URL') if key.to_s.eql?('assertion_consumer_service_url')
 
@@ -76,15 +76,10 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
 
   # Delete the SAML Configuration file.
   def destroy
-    results = []
-
-    node = client(resource).node(resource[:config_node_path], resource[:config_node_name])
-    results.push(call_with_readiness_check(node, 'delete', [], resource))
-
     saml = client(resource).saml
-    results.push(call_with_readiness_check(saml, 'delete', [], resource))
+    result = call_with_readiness_check(saml, 'delete', [], resource)
 
-    handle_multi(results)
+    handle(result)
   end
 
   # Check whether the SAML Configuration exists or not.

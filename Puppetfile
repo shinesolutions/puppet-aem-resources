@@ -1,2 +1,4 @@
+mod 'puppet/archive', '6.0.2'
+mod 'puppetlabs/java_ks', '4.3.1'
+mod 'puppetlabs/stdlib', '8.4.0'
 mod 'bstopp/aem', '3.0.0'
-mod 'puppetlabs/stdlib', '4.25.1'

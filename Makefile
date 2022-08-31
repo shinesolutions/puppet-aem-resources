@@ -1,7 +1,7 @@
 ci: clean deps lint package
 
 deps:
-	gem install bundler --version=1.17.3
+	gem install bundler --version=2.3.21
 	bundle config --local path vendor/bundle
 	bundle install --binstubs -j4
 	bundle exec r10k puppetfile install --verbose --moduledir modules
@@ -21,7 +21,7 @@ lint:
 		--no-documentation-check \
 		test/integration/*/*.pp \
 		manifests/*.pp
-	puppet epp validate templates/*.epp
+	bundle exec puppet epp validate templates/*.epp
 	bundle exec rubocop --config .rubocop.yml lib/ Gemfile
 	bundle exec yaml-lint .*.yml
 	# since pdk bundles its own rubies, we need to run pdk when there's no Gemfile.lock
@@ -67,8 +67,6 @@ test-integration:
 	cp test/fixtures/start /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
 	cp test/fixtures/cert_ssl.crt /tmp/shinesolutions/puppet-aem-resources/
 	cp test/fixtures/cert_ssl.der /tmp/shinesolutions/puppet-aem-resources/
-	cp test/fixtures/cert_ssl2.crt /tmp/shinesolutions/puppet-aem-resources/
-	cp test/fixtures/cert_ssl2.der /tmp/shinesolutions/puppet-aem-resources/
 	# test manifests
 	# author_port needs to be set here for test/integration/manifests/30_deploy_pakages.pp scenario
 	for test in test/integration/manifests/*.pp; do \

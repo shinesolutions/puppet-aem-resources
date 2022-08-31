@@ -7,13 +7,13 @@ when /darwin/
   gem 'CFPropertyList'
 end
 
-gem 'facter', '2.5.1', require: false
-gem 'metadata-json-lint', '2.2.0', require: false
-gem 'puppet', '5.5.22', require: false
-gem 'puppet-lint', '2.3.6', require: false
-gem 'puppetlabs_spec_helper', '2.14.1', require: false
-gem 'r10k', '3.2.0', require: false
-gem 'rake', '12.3.3', require: false
-gem 'rubocop', '0.69.0', require: false
+gem 'facter', '4.2.11', require: false
+gem 'metadata-json-lint', '3.0.2', require: false
+gem 'puppet', '7.18.0', require: false
+gem 'puppetlabs_spec_helper', '4.0.1', require: false
+gem 'puppet-lint', '2.5.2', require: false
+gem 'r10k', '3.15.1', require: false
+gem 'rake', '13.0.6', require: false
+gem 'rubocop', '1.35.1', require: false
 gem 'ruby_aem', '3.13.1'
 gem 'yaml-lint', '0.0.10', require: false
