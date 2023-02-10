@@ -7,6 +7,7 @@ when /darwin/
   gem 'CFPropertyList'
 end
 
+gem 'concurrent-ruby', '1.1.9', require: false
 gem 'facter', '4.2.11', require: false
 gem 'metadata-json-lint', '3.0.2', require: false
 gem 'puppet', '7.18.0', require: false
