@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [7.7.0] - 2022-09-06
 ### Changed
 - Upgrade ruby_aem to 3.14.0
-- Lockdown version of `concurrent-ruby` to `1.0.9` #RS-126
+- Lockdown version of `concurrent-ruby` to `1.1.9` #RS-126
 
 ## [7.6.1] - 2022-08-31
 ### Changed
