@@ -4,6 +4,7 @@
   $aem_password        = undef,
   $file                = undef,
   $truststore_password = undef,
+  $force               = true,
 ) {
 
   if $file {
@@ -13,7 +14,8 @@
       aem_username => $aem_username,
       aem_password => $aem_password,
       password     => $truststore_password,
-      file         => $file
+      file         => $file,
+      force        => $force,
     }
   } else {
     aem_truststore { "[${aem_id}] Create new Truststore":
@@ -22,6 +24,7 @@
       aem_username => $aem_username,
       aem_password => $aem_password,
       password     => $truststore_password,
+      force        => $force,
     }
   }
 }
