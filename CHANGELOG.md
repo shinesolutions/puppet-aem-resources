@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Ensure truststore deletion upon creation will only be done when truststore exists
+
 ## [7.9.0] - 2023-06-03
 ### Changed
 - Force truststore recreation when creating truststore while one already exists

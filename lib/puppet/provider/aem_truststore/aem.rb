@@ -31,7 +31,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
 
   # Create the AEM Truststore.
   def create
-    destroy if resource[:force].eql? true
+    destroy if resource[:force].eql? true && existence_check.eql? true
     truststore = client(resource).truststore
     if resource[:file] || resource[:path]
       opts = {
@@ -59,6 +59,15 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
     result = call_with_readiness_check(truststore, 'delete', [], resource)
 
     handle(result)
+  end
+
+  # Similar to exists?, but without being affected by force attribute status
+  # 
+  def existence_check?
+    truststore = client(resource).truststore
+    result = call_with_readiness_check(truststore, 'exists', [], resource)
+
+    result.data
   end
 
   # Check if the AEM Truststore exists
