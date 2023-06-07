@@ -62,7 +62,6 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
   end
 
   # Similar to exists?, but without being affected by force attribute status
-  # 
   def existence_check?
     truststore = client(resource).truststore
     result = call_with_readiness_check(truststore, 'exists', [], resource)
