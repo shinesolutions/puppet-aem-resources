@@ -31,7 +31,7 @@ Puppet::Type.type(:aem_truststore).provide(:aem, parent: PuppetX::ShineSolutions
 
   # Create the AEM Truststore.
   def create
-    destroy if resource[:force].eql? true && existence_check.eql? true
+    destroy if resource[:force] && existence_check
     truststore = client(resource).truststore
     if resource[:file] || resource[:path]
       opts = {
