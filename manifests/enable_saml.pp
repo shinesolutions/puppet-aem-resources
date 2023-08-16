@@ -103,12 +103,14 @@ define aem_resources::enable_saml(
     )
 
     aem_node { "${aem_id}: Create Apache Sling Referrer Filter config node":
-      ensure  => present,
-      name    => 'org.apache.sling.security.impl.ReferrerFilter',
-      path    => '/apps/system/config',
-      type    => 'sling:OsgiConfig',
-      aem_id  => $aem_id,
-      require => Aem_saml[aem_saml]
+      ensure       => present,
+      name         => 'org.apache.sling.security.impl.ReferrerFilter',
+      path         => '/apps/system/config',
+      type         => 'sling:OsgiConfig',
+      aem_id       => $aem_id,
+      aem_username => $aem_username,
+      aem_password => $aem_password,
+      require      => Aem_saml[aem_saml]
     } -> aem_config_property { "${aem_id}: allow empty referrer":
       ensure           => present,
       name             => 'allow.empty',
@@ -116,6 +118,8 @@ define aem_resources::enable_saml(
       value            => true, # False or true ? Def OpenCloud False SAML package is true
       run_mode         => $aem_id,
       aem_id           => $aem_id,
+      aem_username     => $aem_username,
+      aem_password     => $aem_password,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed methods":
       ensure           => present,
@@ -124,6 +128,8 @@ define aem_resources::enable_saml(
       value            => ['POST', 'PUT', 'DELETE'],
       run_mode         => $aem_id,
       aem_id           => $aem_id,
+      aem_username     => $aem_username,
+      aem_password     => $aem_password,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     } -> aem_config_property { "${aem_id}: Set allowed hosts":
       ensure           => present,
@@ -132,6 +138,8 @@ define aem_resources::enable_saml(
       value            => [$idp_hostname],
       run_mode         => $aem_id,
       aem_id           => $aem_id,
+      aem_username     => $aem_username,
+      aem_password     => $aem_password,
       config_node_name => 'org.apache.sling.security.impl.ReferrerFilter',
     }
 
