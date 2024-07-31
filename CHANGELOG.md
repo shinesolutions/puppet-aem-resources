@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade ruby_aem to 3.17.0
+- Update Github Action workflows to `shinesolutions/aem-platform-buildenv:4.0.1`
 
 ## [7.10.2] - 2023-08-16
 ### Fixed
