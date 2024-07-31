@@ -1,6 +1,6 @@
 {
   "name": "shinesolutions-aem_resources",
-  "version": "7.10.3-pre.0",
+  "version": "7.11.0",
   "author": "Shine Solutions (opensource@shinesolutions.com)",
   "summary": "Puppet module for provisioning Adobe Experience Manager (AEM) resources",
   "license": "Apache-2.0",
