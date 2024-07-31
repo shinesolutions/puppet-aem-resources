@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Upgrade ruby_aem to 3.17.0
+
 ## [7.10.2] - 2023-08-16
 ### Fixed
 - Fixed enable_saml manifest
