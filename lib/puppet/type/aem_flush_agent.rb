@@ -81,4 +81,11 @@ Puppet::Type.newtype(:aem_flush_agent) do
       value = false if value == ''
     end
   end
+
+  newparam :alias_update do
+    desc 'AEM flush agent alias update'
+    validate do |value|
+      value = false if value == ''
+    end
+  end
 end
