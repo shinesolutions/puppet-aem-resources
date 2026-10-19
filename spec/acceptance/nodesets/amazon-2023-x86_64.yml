@@ -1,0 +1,23 @@
+---
+HOSTS:
+  amazon-2023-x86_64:
+    roles:
+      - default
+    # Must match the image's OS: beaker uses it to pick the OpenVox repo, and
+    # el-10 packages need GLIBC_2.38 while Amazon Linux 2023 ships glibc 2.34
+    platform: amazon-2023-x86_64
+    image: amazonlinux:2023
+    hypervisor: docker
+    # Keep the built image so these layers are cached between runs. The agent is
+    # baked in, so the agent install in spec_helper_acceptance.rb is a no-op.
+    docker_preserve_image: true
+    docker_image_commands:
+      # amazonlinux:2023 ships without systemd, so /sbin/init has to be installed
+      - dnf install -y systemd
+      - dnf install -y https://yum.voxpupuli.org/openvox9-release-amazon-2023.noarch.rpm
+      - dnf install -y openvox-agent
+    docker_cmd: '["/sbin/init"]'
+    image_outer_ports:
+      - 22
+CONFIG:
+  type: aio
