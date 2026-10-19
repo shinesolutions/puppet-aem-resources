@@ -16,7 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade ruby_aem to 4.0.2
 - Pass ruby_aem's default `alias_update` (false) when creating a flush agent, as ruby_aem 4 requires it
 - Limited OS support to Amazon Linux 2023 and Rocky Linux 10
-- Changed the Forge dependencies to version ranges, limiting puppetlabs/stdlib to < 9.0.0
+- Changed the Forge dependencies to version ranges
+- Replaced the bstopp/aem dependency with the internal defines `aem_resources::instance_config`, `aem_resources::osgi_config_file` and `aem_resources::crx_package_file`, ported from bstopp/aem 3.0.0, which is unmaintained and incompatible with OpenVox 9
+- Replaced the removed stdlib function validate_bool with assert_type in deploy_packages and allowed puppetlabs/stdlib >= 8.0.0 < 11.0.0
 - Moved the integration test manifests and fixtures from test/ to spec/acceptance
 - Upgraded GitHub CI to actions/checkout v7
 - Simplify CI workflow to not use action files anymore

@@ -28,10 +28,16 @@ Requirements:
   OpenVox 9 ships
 * Amazon Linux 2023 or Rocky Linux 10
 * The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
-  [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks),
-  [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) and
-  [bstopp/aem](https://forge.puppet.com/modules/bstopp/aem) modules, installed
-  automatically as dependencies
+  [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks) and
+  [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) modules,
+  installed automatically as dependencies
+
+The [bstopp/aem](https://forge.puppet.com/modules/bstopp/aem) module is no longer
+required. The parts of it this module used are included as the defines
+`aem_resources::instance_config` (from `aem::config`, writes an AEM instance's start
+scripts, OSGI configurations and CRX packages), `aem_resources::osgi_config_file`
+(from `aem::osgi::config::file`) and `aem_resources::crx_package_file` (from
+`aem::crx::package::file`); see [NOTICE](NOTICE).
 
 Install the module using the `puppet` command:
 
@@ -961,7 +967,7 @@ Enable CRXDE:
     }
 
 Create OSGI Configuration:
-  Setting the OSGI configuration in the manifest `set_osgi_config` is done by using the class `aem::osgi::config` from the puppet-module `bstopp/aem`.
+  Setting the OSGI configuration in the manifest `set_osgi_config` is done by the define `aem_resources::osgi_config_file`, which writes an OSGI configuration file to the AEM install folder.
 
     aem_resources::set_osgi_config {"Author-Primary set OSGI configuration":
       aem_home_dir   => '/opt/aem/author',
