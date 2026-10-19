@@ -1,20 +1,25 @@
-name: Publish
+---
+name: Publish Puppet Module
 'on':
   push:
     tags:
       - '*'
+permissions:
+  contents: read
+  id-token: write
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v7
         with:
-          ref: main
-      - uses: docker/login-action@v1
+          set-safe-directory: ${{ github.workspace }}
+      - uses: cliffano/command-docker-action@v2.1.0
         with:
-          registry: ghcr.io
-          username: shinesolutions
-          password: ${{ secrets.SHINEOPENSOURCE_GITHUB_TOKEN }}
-      - uses: ./.github/actions/publish-action
+          image: shinesolutions/aem-platform-buildenv:6.4.1
+          shell: bash
+          extra_args: -e BLACKSMITH_FORGE_API_KEY
+          command: |
+            make clean deps package publish
         env:
-          PUPPETFORGE_TOKEN: ${{ secrets.SHINEOPENSOURCE_PUPPETFORGE_TOKEN }}
+          BLACKSMITH_FORGE_API_KEY: ${{ secrets.SHINEOPENSOURCE_PUPPETFORGE_TOKEN }}
