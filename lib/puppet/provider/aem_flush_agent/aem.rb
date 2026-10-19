@@ -20,7 +20,8 @@ Puppet::Type.type(:aem_flush_agent).provide(:aem, parent: PuppetX::ShineSolution
   # Create a flush agent.
   def create
     flush_agent = client(resource).flush_agent(resource[:run_mode], resource[:name])
-    opts = { log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
+    # ruby_aem 4 interpolates alias_update into the agent config, so pass its default (false)
+    opts = { alias_update: false, log_level: resource[:log_level], retry_delay: resource[:retry_delay] }
     result = flush_agent.create_update(resource[:title], resource[:description], resource[:dest_base_url], opts)
     handle(result)
   end

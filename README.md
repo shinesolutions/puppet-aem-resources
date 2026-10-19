@@ -36,7 +36,7 @@ If you want to use the `main` version:
 And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module.
 
     package { 'ruby_aem':
-      ensure   => '3.8.0',
+      ensure   => '4.0.2',
       provider => 'puppet_gem',
     }
 
