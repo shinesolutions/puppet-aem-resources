@@ -27,17 +27,10 @@ SCENARIOS_WITHOUT_AEM = [
   '50_puppet_aem_resources_set_config.pp',
 ].freeze
 
-# These scenarios use bstopp/aem, which calls the stdlib is_array and validate_re
-# functions; stdlib 8 deprecates them, which fails the run with OpenVox's default
-# strict = error, and stdlib 9 removed them
-BSTOPP_AEM_FAILURE = 'bstopp/aem calls deprecated puppetlabs/stdlib functions, which fail with strict = error'.freeze
-
 describe 'aem_resources scenarios' do
   SCENARIOS_WITHOUT_AEM.each do |scenario|
     context scenario do
       it 'works idempotently with no errors' do
-        pending BSTOPP_AEM_FAILURE if scenario.start_with?('09_', '10', '11', '12')
-
         pp = File.read(File.join(__dir__, 'manifests', scenario))
 
         # Run it twice and test for idempotency

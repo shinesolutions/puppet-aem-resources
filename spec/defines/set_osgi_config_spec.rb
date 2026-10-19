@@ -34,7 +34,23 @@ describe 'aem_resources::set_osgi_config' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_aem_resources__osgi_config_file('[aem]: Set Osgi Config org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService') }
+        it do
+          is_expected.to contain_aem_resources__osgi_config_file('[aem]: Set Osgi Config org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService').with(
+            ensure: 'present',
+            group: 'aem',
+            home: '/tmp/shinesolutions/puppet-aem-resources/author-primary-6.2',
+            pid: 'org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService',
+            properties: params[:osgi_configs]['org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService'],
+            user: 'aem',
+          )
+        end
+
+        it do
+          is_expected.to contain_aem_resources__osgi_config_file('[aem]: Set Osgi Config org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService').with(
+            pid: 'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService',
+            properties: params[:osgi_configs]['org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService'],
+          )
+        end
       end
     end
   end

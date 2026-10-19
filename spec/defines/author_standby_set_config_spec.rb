@@ -37,7 +37,15 @@ describe 'aem_resources::author_standby_set_config' do
         let(:params) { { aem_home_dir: '/tmp/shinesolutions/puppet-aem-resources/author-standby-6.3', primary_host: 'somehost', aem_version: '6.3', aem_runmodes: ['dynamicmedia_scene7'] } }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_aem_resources__instance_config('Configure AEM Author-Standby') }
+        it do
+          is_expected.to contain_aem_resources__instance_config('Configure AEM Author-Standby').with(
+            home: '/tmp/shinesolutions/puppet-aem-resources/author-standby-6.3',
+            runmodes: ['standby', 'dynamicmedia_scene7'],
+            port: '4502',
+            type: 'aem',
+            sample_content: false,
+          )
+        end
       end
     end
   end

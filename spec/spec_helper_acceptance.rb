@@ -17,12 +17,9 @@ BeakerPuppetHelpers::InstallUtils.singleton_class.prepend(AmazonReleaseRepo)
 # Directory the spec/acceptance/manifests scenarios use for their AEM files
 TEST_DIR = '/tmp/shinesolutions/puppet-aem-resources'.freeze
 
-# configure_beaker installs the .fixtures.yml modules from spec/fixtures/modules
-# (run `rake fixtures:prep` first) on each host in before(:suite), then runs this block.
-# The fixtures are used instead of the metadata.json dependencies because
-# bstopp/aem requires puppetlabs/stdlib < 6.0.0, which the module installer can't
-# resolve together with this module's puppetlabs/stdlib >= 8.0.0
-configure_beaker(modules: :fixtures) do |host|
+# configure_beaker installs the local module (and its metadata.json dependencies)
+# on each host in before(:suite), then runs this block
+configure_beaker do |host|
   # Set up the scenario fixtures, as the test-integration Makefile target does
   on host, 'useradd aem || echo "User might already exist"'
   on host, "mkdir -p #{TEST_DIR}/author/somepackagegroup/somepackage/1.2.3/"

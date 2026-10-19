@@ -29,7 +29,16 @@ describe 'aem_resources::publish_set_config' do
         let(:params) { { aem_home_dir: '/tmp/shinesolutions/puppet-aem-resources/publish', aem_runmodes: ['dynamicmedia_scene7'], jvm_opts: '-Dkey=value' } }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_aem_resources__instance_config('Configure AEM Publish') }
+        it do
+          is_expected.to contain_aem_resources__instance_config('Configure AEM Publish').with(
+            home: '/tmp/shinesolutions/puppet-aem-resources/publish',
+            runmodes: ['dynamicmedia_scene7'],
+            jvm_opts: '-Dkey=value',
+            port: '4503',
+            osgi_configs: {},
+            type: 'aem',
+          )
+        end
       end
     end
   end

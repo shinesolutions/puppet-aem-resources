@@ -20,10 +20,8 @@ lint:
 	markdownlint-cli2 README.md
 	python3 -m json.tool .rtk.json
 
-# Run acceptance tests against every nodeset; beaker only runs one per invocation.
-# The .fixtures.yml modules in spec/fixtures/modules are installed on the hosts
+# Run acceptance tests against every nodeset; beaker only runs one per invocation
 acceptance:
-	bundle exec rake fixtures:prep
 	set -e; for nodeset in spec/acceptance/nodesets/*.yml; do \
 		echo "== $$nodeset"; \
 		BEAKER_SETFILE=$$nodeset bundle exec rake beaker; \
