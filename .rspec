@@ -1,2 +1,4 @@
 --color
 --format documentation
+--pattern spec/{classes,defines,hosts,functions,types,unit}/**/*_spec.rb
+--exclude-pattern "spec/fixtures/**/*"

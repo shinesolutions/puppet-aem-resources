@@ -1,0 +1,5 @@
+--fail-on-warnings
+--no-140chars-check
+--no-autoloader_layout-check
+--no-documentation-check
+--ignore-paths=spec/**/*.pp,pkg/**/*.pp
