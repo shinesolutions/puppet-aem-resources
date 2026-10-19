@@ -20,7 +20,6 @@ zzz-*.*
 /log/
 /spec/fixtures/manifests/
 /spec/fixtures/modules/
-/test/integration/modules/
 /tmp/
 /vendor/
 /convert_report.txt
