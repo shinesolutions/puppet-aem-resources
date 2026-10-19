@@ -35,6 +35,7 @@ Layout/LineLength:
 Lint/UselessAssignment:
   Enabled: false
 
+# Kept from the previous .rubocop.yml: the types raise ArgumentError.new(...)
 Style/RaiseArgs:
   EnforcedStyle: compact
 

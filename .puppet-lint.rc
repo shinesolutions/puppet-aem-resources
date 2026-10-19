@@ -2,6 +2,7 @@
 --no-140chars-check
 --no-autoloader_layout-check
 --no-documentation-check
+# The three checks below are disabled because passing them needs manifest changes (types, docs, guards)
 --no-parameter_types-check
 --no-parameter_documentation-check
 --no-exec_idempotency-check

@@ -4,6 +4,7 @@ deps:
 	gem install bundler --version=4.0.22
 	bundle install
 
+# Also removes the files the scenarios create, as the previous clean target did
 clean:
 	rm -rf bin/ pkg/ stage/ vendor/ modules/
 	rm -rf /tmp/shinesolutions/puppet-aem-resources/
@@ -14,6 +15,7 @@ test:
 	GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=safe.directory GIT_CONFIG_VALUE_0=$(CURDIR) \
 		bundle exec rake test
 
+# yamllint also covers .fixtures.yml and the acceptance nodesets, which the reference module doesn't have
 lint:
 	bundle exec rake lint syntax metadata_lint rubocop
 	yamllint .markdownlint.yaml .fixtures.yml .github/workflows/*.yaml spec/acceptance/nodesets/*.yml
@@ -74,6 +76,7 @@ test-integration:
 	  author_port=$$aem_port bundle exec puppet apply --modulepath=spec/fixtures/modules/ $$test; \
 	done
 
+# Regenerate the scenarios' aem.key/aem.cert (kept from the previous Makefile)
 test-fixtures:
 	rm -f spec/acceptance/fixtures/aem.key spec/acceptance/fixtures/aem.cert
 	# use 'somekeystorepassword' when prompted
