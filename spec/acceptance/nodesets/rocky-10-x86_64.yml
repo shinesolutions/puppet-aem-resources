@@ -10,6 +10,7 @@ HOSTS:
     # baked in, so the agent install in spec_helper_acceptance.rb is a no-op.
     docker_preserve_image: true
     docker_image_commands:
+      # yamllint disable-line rule:line-length
       - dnf install -y https://yum.voxpupuli.org/openvox9-release-el-10.noarch.rpm
       - dnf install -y openvox-agent
     docker_cmd: '["/sbin/init"]'

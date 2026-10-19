@@ -22,4 +22,5 @@ jobs:
           command: |
             make clean deps package publish
         env:
+          # yamllint disable-line rule:line-length
           BLACKSMITH_FORGE_API_KEY: ${{ secrets.SHINEOPENSOURCE_PUPPETFORGE_TOKEN }}

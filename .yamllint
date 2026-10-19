@@ -1,6 +1,0 @@
----
-extends: default
-rules:
-  # Same limit as .markdownlint.yaml; GitHub expressions don't wrap well
-  line-length:
-    max: 256
