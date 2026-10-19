@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Added Makefile targets for unit tests, acceptance tests, docs and changelog
+- Added unit and acceptance tests to GitHub CI
+- Added Puppet Forge publish targets with a pre-publish check
+
+### Changed
+- Upgraded to Ruby 4.0.7 and OpenVox 9 with Vox Pupuli tooling, replacing PDK
+- Upgrade ruby_aem to 4.0.2
+- Pass ruby_aem's default `alias_update` (false) when creating a flush agent, as ruby_aem 4 requires it
+- Limited OS support to Amazon Linux 2023 and Rocky Linux 10
+- Changed the Forge dependencies to version ranges, limiting puppetlabs/stdlib to < 9.0.0
+- Moved the integration test manifests and fixtures from test/ to spec/acceptance
+- Upgraded GitHub CI to actions/checkout v7
+- Simplify CI workflow to not use action files anymore
+- Simplify release and publish workflows to use cliffano/release-action and cliffano/command-docker-action
+- Upgrade aem-platform-buildenv to 6.4.1
 
 ## [7.11.0] - 2024-07-31
 ### Changed

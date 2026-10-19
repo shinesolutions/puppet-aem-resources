@@ -3,8 +3,7 @@
 [![Downloads Count](https://img.shields.io/puppetforge/dt/shinesolutions/aem_resources.svg)](http://forge.puppet.com/shinesolutions/aem_resources)
 [![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/puppet-aem-resources/badge.svg)](https://snyk.io/test/github/shinesolutions/puppet-aem-resources)
 
-Puppet AEM Resources
---------------------
+# Puppet AEM Resources
 
 A Puppet module for provisioning [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) resources.
 
@@ -17,11 +16,24 @@ Learn more about Puppet AEM Resources:
 * [Alias](https://github.com/shinesolutions/puppet-aem-resources#alias)
 * [Upgrade](https://github.com/shinesolutions/puppet-aem-resources#upgrade)
 * [Testing](https://github.com/shinesolutions/puppet-aem-resources#testing)
+* [Versions History](https://github.com/shinesolutions/puppet-aem-resources#versions-history)
 
 Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
 
-Installation
-------------
+## Installation
+
+Requirements:
+
+* Puppet or OpenVox 7, 8 or 9. ruby_aem 4.0.2 requires Ruby 4.0 or later, which
+  OpenVox 9 ships
+* Amazon Linux 2023 or Rocky Linux 10
+* The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
+  [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks),
+  [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) and
+  [bstopp/aem](https://forge.puppet.com/modules/bstopp/aem) modules, installed
+  automatically as dependencies
+
+Install the module using the `puppet` command:
 
     puppet module install shinesolutions-aem_resources
 
@@ -40,8 +52,7 @@ And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't be
       provider => 'puppet_gem',
     }
 
-Configuration
--------------
+## Configuration
 
 AEM username, password, protocol, host, port, and debug can be set via environment variables or a configuration file.
 
@@ -79,8 +90,7 @@ It is also possible to specify username and password at invocation level by spec
       ...
     }
 
-Usage
------
+## Usage
 
 AEM
 
@@ -471,8 +481,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via idp_cert_alias parameter':
@@ -504,8 +514,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -569,8 +579,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via serial number':
@@ -602,8 +612,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -667,8 +677,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided as a file':
@@ -700,8 +710,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -988,12 +998,11 @@ Disable Development bundles:
       run_mode => 'author',
     }
 
-Multi AEM Instances
--------------------
+## Multi AEM Instances
 
 Starting from version 2.0.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
 
-Let's say you have an AEM author instance at http://localhost:4502 and an AEM publish instance at https://localhost:5433 . Set up the following configuration files:
+Let's say you have an AEM author instance at <http://localhost:4502> and an AEM publish instance at <https://localhost:5433> . Set up the following configuration files:
 
 `<puppet-config-dir>/myaemauthor.yaml`
 
@@ -1033,8 +1042,7 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
 
-Multi AEM Versions
-------------------
+## Multi AEM Versions
 
 Some types support multiple AEM versions due to differences how particular features are implemented between those AEM versions.
 
@@ -1048,28 +1056,26 @@ Starting version 2.1.1, `aem_version` attribute was added to the corresponding t
       aem_version  => '6.3',
     }
 
-Alias
------
+## Alias
 
 Due to the need to change the state of some resources from within the same manifest, both `aem_bundle` and `aem_user` have alias resources named `aem_bundle_alias` and `aem_user_alias` .
 
 For example, this allows you to stop and start a bundle from within the same manifest:
 
-  aem_bundle { 'Stop webdav bundle':
-    ensure => stopped,
-    name   => 'org.apache.sling.jcr.webdav',
-  }
+    aem_bundle { 'Stop webdav bundle':
+      ensure => stopped,
+      name   => 'org.apache.sling.jcr.webdav',
+    }
 
-  # Do other things here
-  ...
+    # Do other things here
+    ...
 
-  aem_bundle_alias { 'Start webdav bundle':
-    ensure => started,
-    name   => 'org.apache.sling.jcr.webdav',
-  }
+    aem_bundle_alias { 'Start webdav bundle':
+      ensure => started,
+      name   => 'org.apache.sling.jcr.webdav',
+    }
 
-Upgrade
--------
+## Upgrade
 
 Upgrading to 2.x.x:
 
@@ -1087,11 +1093,46 @@ Upgrading to 2.x.x:
       run_mode => 'author',
     }
 
-Testing
--------
+## Testing
+
+Run the commands below in
+[aem-platform-buildenv](https://github.com/shinesolutions/aem-platform-buildenv),
+as CI does. Install the Ruby gems first:
+
+    make deps
+
+| Command | Runs |
+| --- | --- |
+| `make test` | Lint, syntax and `metadata.json` checks, unit specs and static checks |
+| `make lint` | Puppet lint, syntax, `metadata.json` lint, RuboCop, yamllint and markdownlint only |
+| `make acceptance` | Acceptance tests with Beaker on every nodeset in `spec/acceptance/nodesets` (Amazon Linux 2023 and Rocky Linux 10), in Docker containers. They apply the `spec/acceptance/manifests` scenarios that don't need AEM |
+| `make ci` | Everything CI runs: deps, unit and acceptance tests, and packaging |
+| `make docs` | Generate the HTML reference in `docs/` |
+| `make test-integration` | Apply every `spec/acceptance/manifests` and `spec/acceptance/resources` scenario against a running AEM instance on the same host |
 
 If you run AEM on a non default port `4502`, then you need to specify the port number as environment variable:
 
     aem_port=45622 author_port=45622 make test-integration
 
 The `aem_port` environment variable is used by provisioning steps that use default `aem_id`. `author_port` is used by the ones that specify `author` `aem_id`.
+
+## Versions History
+
+See [CHANGELOG.md](CHANGELOG.md) for the changes in each version.
+
+Releases are published to the [Puppet Forge](https://forge.puppet.com/modules/shinesolutions/aem_resources)
+and tagged `<version>` in git. Between releases, `metadata.json` holds the next
+pre-release version, e.g. `7.11.1-pre.0`. To release:
+
+1. Check that the `## [Unreleased]` entries in CHANGELOG.md on `main` describe
+   everything in this release.
+2. In GitHub Actions, run the **Release Major**, **Release Minor** or **Release
+   Patch** workflow. It uses [RTK](https://github.com/cliffano/rtk), configured
+   in `.rtk.json`, to set the release version in `metadata.json` and CHANGELOG.md,
+   commit and tag it `<version>`, commit the next pre-release version, and push
+   the commits and the tag. To do the same locally, run `make release` in
+   aem-platform-buildenv, then push the commits and the tag.
+3. The pushed tag triggers the **Publish Puppet Module** workflow, which builds
+   the module and runs `make publish`: `make publish-check` checks the module is
+   ready, then the package is pushed to the Forge. Publishing needs a Forge API
+   key in `BLACKSMITH_FORGE_API_KEY`.
