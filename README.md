@@ -24,8 +24,8 @@ Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platfor
 
 Requirements:
 
-* Puppet or OpenVox 7, 8 or 9. ruby_aem 4.0.2 requires Ruby 4.0 or later, which
-  OpenVox 9 ships
+* OpenVox 9 (`metadata.json` requires Puppet >= 9.0.0 < 10.0.0): the providers use
+  ruby_aem 4.0.2, which requires Ruby 4.0 or later, and only OpenVox 9 agents ship it
 * Amazon Linux 2023 or Rocky Linux 10
 * The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
   [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks) and

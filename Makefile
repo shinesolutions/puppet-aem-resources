@@ -22,11 +22,12 @@ lint:
 	markdownlint-cli2 README.md
 	python3 -m json.tool .rtk.json
 
-# Run acceptance tests against every nodeset; beaker only runs one per invocation
+# Run acceptance tests against every nodeset; beaker only runs one per invocation.
+# BEAKER_PUPPET_COLLECTION=openvox9 because the module requires OpenVox 9 (beaker defaults to openvox8)
 acceptance:
 	set -e; for nodeset in spec/acceptance/nodesets/*.yml; do \
 		echo "== $$nodeset"; \
-		BEAKER_SETFILE=$$nodeset bundle exec rake beaker; \
+		BEAKER_PUPPET_COLLECTION=openvox9 BEAKER_SETFILE=$$nodeset bundle exec rake beaker; \
 	done
 
 # Apply every spec/acceptance scenario on a host running AEM, set aem_port to its port

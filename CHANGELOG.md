@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Upgraded to Ruby 4.0.7 and OpenVox 9 with Vox Pupuli tooling, replacing PDK
 - Upgrade ruby_aem to 4.0.2
+- Require Puppet/OpenVox >= 9.0.0 < 10.0.0, as ruby_aem 4 requires Ruby 4, which only OpenVox 9 agents ship
 - Pass ruby_aem's default `alias_update` (false) when creating a flush agent, as ruby_aem 4 requires it
 - Limited OS support to Amazon Linux 2023 and Rocky Linux 10
 - Changed the Forge dependencies to version ranges
