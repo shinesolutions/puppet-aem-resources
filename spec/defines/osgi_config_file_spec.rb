@@ -48,6 +48,30 @@ describe 'aem_resources::osgi_config_file' do
           )
         end
       end
+
+      # Properties author_standby_set_config builds for the 11 aem62 scenario, with an undef primary.host
+      context 'with an undef property value' do
+        let(:title) { 'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' }
+        let(:params) do
+          {
+            ensure: 'present',
+            group: 'aem',
+            home: '/tmp/shinesolutions/puppet-aem-resources/author-standby-6.2',
+            pid: :undef,
+            properties: {
+              'org.apache.sling.installer.configuration.persist' => false,
+              'mode' => 'standby',
+              'primary.host' => :undef,
+              'port' => 8023,
+              'secure' => true,
+              'interval' => 5,
+            },
+            user: 'aem',
+          }
+        end
+
+        it { is_expected.to compile.and_raise_error(%r{Left match operand must result in a String value\. Got an Undef Value\. \(OSGi property 'primary\.host'\)}) }
+      end
     end
   end
 end

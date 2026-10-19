@@ -7,6 +7,8 @@
     with the same semantics (is_integer also accepted decimal integer strings, hence the regex). -%>
 service.pid="<%= $pid %>"
 <%- $properties.keys.each | String $key | { -%>
+<%# The original failed on undef values (is_string(undef) was true, then undef =~ regex raised); keep failing -%>
+  <%- if $properties[$key] =~ Undef { fail("Left match operand must result in a String value. Got an Undef Value. (OSGi property '${key}')") } -%>
   <%- if $properties[$key] =~ Array { -%>
 <%= $key -%>=["<%= $properties[$key].join('","') -%>"]
   <%- } elsif $properties[$key] =~ String and $properties[$key] =~ /^[T]".*"$/ { -%>
