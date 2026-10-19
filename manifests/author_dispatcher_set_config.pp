@@ -1,4 +1,4 @@
-define aem_resources::author_dispatcher_set_config(
+define aem_resources::author_dispatcher_set_config (
   $dispatcher_conf_dir,
   $virtual_hosts_dir,
   $docroot_dir,
@@ -9,8 +9,7 @@ define aem_resources::author_dispatcher_set_config(
   $dispatcher_farm_template = 'aem_resources/author-dispatcher.farms.any.epp',
   $httpd_conf_template = 'aem_resources/httpd.conf.epp',
 ) {
-
-  $conf_dirs = [ $dispatcher_conf_dir, $virtual_hosts_dir ]
+  $conf_dirs = [$dispatcher_conf_dir, $virtual_hosts_dir]
 
   $unique_conf_dirs = unique($conf_dirs)
 
@@ -27,7 +26,7 @@ define aem_resources::author_dispatcher_set_config(
       docroot_dir   => $docroot_dir,
     }),
     mode    => '0664',
-    require =>  File[$dispatcher_conf_dir],
+    require => File[$dispatcher_conf_dir],
   }
 
   file { "${virtual_hosts_dir}/1-puppet-aem-resources.conf":
@@ -39,5 +38,4 @@ define aem_resources::author_dispatcher_set_config(
     mode    => '0664',
     require => File[$virtual_hosts_dir],
   }
-
 }

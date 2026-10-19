@@ -1,4 +1,4 @@
-define aem_resources::publish_set_config(
+define aem_resources::publish_set_config (
   $aem_home_dir,
   $aem_context_root      = undef,
   $aem_crx_packages      = undef,
@@ -13,7 +13,6 @@ define aem_resources::publish_set_config(
   $jvm_opts              = undef,
   $osgi_configs          = {},
 ) {
-
   aem::config { 'Configure AEM Publish':
     context_root   => $aem_context_root,
     debug_port     => $aem_debug_port,

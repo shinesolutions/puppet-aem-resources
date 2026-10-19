@@ -1,9 +1,8 @@
-define aem_resources::author_set_osgi_config(
+define aem_resources::author_set_osgi_config (
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   # Security - DoS prevention
   aem_node { "[${aem_id}] Create Apache Sling GET Servlet config node":
     ensure       => present,
@@ -54,5 +53,4 @@ define aem_resources::author_set_osgi_config(
     aem_password     => $aem_password,
     aem_id           => $aem_id,
   }
-
 }

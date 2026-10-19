@@ -1,4 +1,4 @@
-define aem_resources::puppet_aem_resources_set_config(
+define aem_resources::puppet_aem_resources_set_config (
   $conf_dir,
   $username = undef,
   $password = undef,
@@ -9,7 +9,6 @@ define aem_resources::puppet_aem_resources_set_config(
   $timeout  = undef,
   $aem_id   = 'aem',
 ) {
-
   file { "${conf_dir}/${aem_id}.yaml":
     ensure  => file,
     content => epp('aem_resources/aem.yaml.epp', {
@@ -23,5 +22,4 @@ define aem_resources::puppet_aem_resources_set_config(
     }),
     mode    => '0644',
   }
-
 }

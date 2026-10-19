@@ -1,4 +1,4 @@
-define aem_resources::author_primary_set_config(
+define aem_resources::author_primary_set_config (
   $aem_home_dir,
   $aem_context_root      = undef,
   $aem_crx_packages      = undef,
@@ -24,15 +24,15 @@ define aem_resources::author_primary_set_config(
           'name'                                             => 'Oak-Tar',
           'service.ranking'                                  => 100,
           'standby'                                          => false,
-          'customBlobStore'                                  => false
+          'customBlobStore'                                  => false,
         },
         'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
           'org.apache.sling.installer.configuration.persist' => false,
           'mode'                                             => 'primary',
           'port'                                             => 8023,
           'secure'                                           => true,
-          'interval'                                         => 5
-        }
+          'interval'                                         => 5,
+        },
       }
     } else {
       $_osgi_configs = {
@@ -41,20 +41,20 @@ define aem_resources::author_primary_set_config(
           'name'                                             => 'Oak-Tar',
           'service.ranking'                                  => 100,
           'standby'                                          => false,
-          'customBlobStore'                                  => true
+          'customBlobStore'                                  => true,
         },
         'org.apache.jackrabbit.oak.segment.standby.store.StandbyStoreService' => {
           'org.apache.sling.installer.configuration.persist' => false,
           'mode'                                             => 'primary',
           'port'                                             => 8023,
           'secure'                                           => true,
-          'interval'                                         => 5
+          'interval'                                         => 5,
         },
         'org.apache.jackrabbit.oak.plugins.blob.datastore.FileDataStore' => {
           'org.apache.sling.installer.configuration.persist' => false,
           'path'                                             => './crx-quickstart/repository/datastore',
-          'minRecordLength'                                  => 16384
-        }
+          'minRecordLength'                                  => 16384,
+        },
       }
     }
   }

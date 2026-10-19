@@ -1,4 +1,4 @@
-define aem_resources::add_authorizable_keystore_certificate(
+define aem_resources::add_authorizable_keystore_certificate (
   $aem_id                      = 'aem',
   $aem_username                = undef,
   $aem_password                = undef,
@@ -10,8 +10,8 @@ define aem_resources::add_authorizable_keystore_certificate(
 ) {
   $params_add_keystore_certificate = {
     aem_certificate_chain => {
-      certificate_chain_file_path => $certificate_chain_file_path
-    }
+      certificate_chain_file_path => $certificate_chain_file_path,
+    },
   }
 
   $default_params_add_keystore_certificate = {

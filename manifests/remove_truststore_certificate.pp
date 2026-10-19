@@ -1,4 +1,4 @@
-define aem_resources::remove_truststore_certificate(
+define aem_resources::remove_truststore_certificate (
   $aem_id          = 'aem',
   $aem_username    = undef,
   $aem_password    = undef,
@@ -8,14 +8,14 @@ define aem_resources::remove_truststore_certificate(
   if  $serial {
     $params_remove_certificate = {
       aem_certificate => {
-        serial => $serial
-      }
+        serial => $serial,
+      },
     }
   } elsif $file {
     $params_remove_certificate = {
       aem_certificate => {
-        file => $file
-      }
+        file => $file,
+      },
     }
   }
 

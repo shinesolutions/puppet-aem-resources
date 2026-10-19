@@ -1,10 +1,9 @@
-define aem_resources::enable_crxde(
+define aem_resources::enable_crxde (
   $run_mode,
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   aem_bundle { "[${aem_id}] Start davex bundle":
     ensure       => started,
     name         => 'org.apache.sling.jcr.davex',
@@ -51,5 +50,4 @@ define aem_resources::enable_crxde(
     aem_password     => $aem_password,
     aem_id           => $aem_id,
   }
-
 }

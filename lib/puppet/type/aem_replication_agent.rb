@@ -18,7 +18,7 @@ Puppet::Type.newtype(:aem_replication_agent) do
   ensurable
 
   def self.title_patterns
-    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+    [[%r{^(.*)$}, [[:name, ->(x) { x }]]]]
   end
 
   newparam :name do
@@ -45,7 +45,7 @@ Puppet::Type.newtype(:aem_replication_agent) do
   newparam :run_mode do
     desc 'AEM run mode where the replication agent is'
     validate do |value|
-      raise ArgumentError.new('run_mode should be author or publish') unless %w[author publish].include? value
+      raise ArgumentError.new('run_mode should be author or publish') unless ['author', 'publish'].include? value
     end
   end
 

@@ -23,6 +23,20 @@ AllCops:
 Layout/LineLength:
   Description: People have wide screens, use them.
   Max: 200
+  Exclude:
+    # AEM SAML endpoint does support that many parameters
+    - lib/puppet/type/aem_saml.rb
+
+# Disabled useless assignment check due to Puppet type param validation
+# e.g.
+# validate do |value|
+#   value = 'foo' if value == ''
+# end
+Lint/UselessAssignment:
+  Enabled: false
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
 
 RSpec/BeforeAfterAll:
   Description: Beware of using after(:all) as it may cause state to leak between tests.
@@ -46,6 +60,9 @@ Style/BlockDelimiters:
 Style/ClassAndModuleChildren:
   Description: Compact style reduces the required amount of indentation.
   EnforcedStyle: compact
+  Exclude:
+    # PuppetX::ShineSolutions is defined here, so it can't use the compact style
+    - lib/puppet_x/**/*.rb
 
 Style/EmptyElse:
   Description: Enforce against empty else clauses, but allow `nil` for clarity.

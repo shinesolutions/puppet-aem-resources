@@ -2,4 +2,7 @@
 --no-140chars-check
 --no-autoloader_layout-check
 --no-documentation-check
+--no-parameter_types-check
+--no-parameter_documentation-check
+--no-exec_idempotency-check
 --ignore-paths=spec/**/*.pp,pkg/**/*.pp

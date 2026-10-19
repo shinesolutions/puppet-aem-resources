@@ -15,14 +15,12 @@ define aem_resources::deploy_packages (
   $aem_health_check_is_ok_retries_base_sleep_seconds = 5,
   $aem_health_check_is_ok_retries_max_sleep_seconds  = 5,
 ) {
-
   $packages.each | Integer $index, Hash $package| {
-
     $_aem_id = pick(
       $package[aem_id],
       $aem_id,
       'author'
-      )
+    )
 
     $final_sleep_seconds = pick(
       $package['sleep_seconds'],
@@ -87,7 +85,5 @@ define aem_resources::deploy_packages (
       aem_password               => $aem_password,
       aem_id                     => $_aem_id,
     }
-
   }
-
 }

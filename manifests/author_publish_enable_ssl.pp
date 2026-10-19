@@ -1,4 +1,4 @@
-define aem_resources::author_publish_enable_ssl(
+define aem_resources::author_publish_enable_ssl (
   $port,
   $keystore,
   $keystore_password,
@@ -271,7 +271,7 @@ define aem_resources::author_publish_enable_ssl(
       }
     }
     default: {
-    fail('SSL methods can only be of types: ( granite | jetty )')
+      fail('SSL methods can only be of types: ( granite | jetty )')
     }
   }
 }
