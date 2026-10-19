@@ -3,8 +3,4 @@ fixtures:
   forge_modules:
     archive: "puppet/archive"
     java_ks: "puppetlabs/java_ks"
-    # validate_bool (deploy_packages) and bstopp/aem's is_array were removed in stdlib 9
-    stdlib:
-      repo: "puppetlabs/stdlib"
-      ref: "8.6.0"
-    aem: "bstopp/aem"
+    stdlib: "puppetlabs/stdlib"
