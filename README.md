@@ -1142,3 +1142,13 @@ pre-release version, e.g. `7.11.1-pre.0`. To release:
    the module and runs `make publish`: `make publish-check` checks the module is
    ready, then the package is pushed to the Forge. Publishing needs a Forge API
    key in `BLACKSMITH_FORGE_API_KEY`.
+
+## Notice
+
+`aem_resources::instance_config`, `aem_resources::osgi_config_file`,
+`aem_resources::crx_package_file` and their templates are derived from the
+Puppet AEM Module [bstopp/aem](https://github.com/bstopp/puppet-aem) 3.0.0,
+Copyright (C) 2015-2016 Bryan Stopp (<bryan.stopp@gmail.com>), licensed under the
+Apache License, Version 2.0. See [NOTICE](NOTICE). This section repeats it
+because the Forge package only contains the files puppet-modulebuilder allows,
+which don't include NOTICE.
