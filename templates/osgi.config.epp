@@ -1,0 +1,28 @@
+<%- |
+  Hash $properties,
+  String $pid
+| -%>
+<%# Ported from bstopp/aem 3.0.0 (Apache-2.0, Copyright (C) 2015-2016 Bryan Stopp) because that module is unmaintained
+    and incompatible with OpenVox 9; see NOTICE. The stdlib is_* functions (removed in stdlib 9) became type matches
+    with the same semantics (is_integer also accepted decimal integer strings, hence the regex). -%>
+service.pid="<%= $pid %>"
+<%- $properties.keys.each | String $key | { -%>
+  <%- if $properties[$key] =~ Array { -%>
+<%= $key -%>=["<%= $properties[$key].join('","') -%>"]
+  <%- } elsif $properties[$key] =~ String and $properties[$key] =~ /^[T]".*"$/ { -%>
+<%= $key -%>=<%= $properties[$key].match(/^[T](".*")$/)[1] -%>
+
+  <%- } elsif $properties[$key] =~ String and $properties[$key] =~ /^[I|L|F|D|X|S|C|B]".*"$/ { -%>
+<%= $key -%>=<%= $properties[$key] -%>
+
+  <%- } else {-%>
+    <%- if $properties[$key] =~ Boolean { -%>
+      <%- $type = "B" -%>
+    <%- } elsif $properties[$key] =~ Integer or ($properties[$key] =~ String and $properties[$key] =~ /^-?(?:(?:[1-9]\d*)|0)$/) {-%>
+      <%- $type = "L" -%>
+    <%- } else { -%>
+      <%- $type = "" -%>
+    <%- } -%>
+<%= $key -%>=<%= $type -%>"<%= $properties[$key] -%>"
+  <%- } -%>
+<%- } -%>

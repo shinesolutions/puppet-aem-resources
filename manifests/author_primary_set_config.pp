@@ -65,7 +65,8 @@ define aem_resources::author_primary_set_config (
     $_runmodes = $aem_runmodes
   }
 
-  aem::config { 'Configure AEM Author-Primary':
+  # Internal port of aem::config: bstopp/aem is unmaintained and incompatible with OpenVox 9
+  aem_resources::instance_config { 'Configure AEM Author-Primary':
     context_root   => $aem_context_root,
     debug_port     => $aem_debug_port,
     group          => $aem_user_group,

@@ -34,7 +34,7 @@ describe 'aem_resources::set_osgi_config' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_aem__osgi__config('[aem]: Set Osgi Config org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService') }
+        it { is_expected.to contain_aem_resources__osgi_config_file('[aem]: Set Osgi Config org.apache.jackrabbit.oak.plugins.segment.SegmentNodeStoreService') }
       end
     end
   end
