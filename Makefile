@@ -108,12 +108,6 @@ test-fixtures:
 docs:
 	bundle exec rake "strings:generate[,,,,,,--output-dir docs]"
 
-# Move the Unreleased CHANGELOG.md entries to a release section, e.g. make changelog VERSION=7.11.1
-# (VERSION defaults to metadata.json's version without its pre-release suffix)
-# TODO: broken, voxpupuli-release has no changelog:release rake task
-changelog:
-	bundle exec rake "changelog:release[$(VERSION)]"
-
 package: deps
 	bundle exec rake module:build
 
@@ -131,4 +125,4 @@ publish-check: package
 publish: publish-check
 	bundle exec rake module:push
 
-.PHONY: ci deps clean test lint lint-extra acceptance test-integration test-fixtures docs changelog package release publish-check publish
+.PHONY: ci deps clean test lint lint-extra acceptance test-integration test-fixtures docs package release publish-check publish

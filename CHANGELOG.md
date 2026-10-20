@@ -12,7 +12,7 @@ The directive is indented one space so rtk's parser keeps it as text. -->
 
 ## [Unreleased]
 ### Added
-- Added Makefile targets for unit tests, acceptance tests, docs and changelog
+- Added Makefile targets for unit tests, acceptance tests and docs
 - Added unit and acceptance tests to GitHub CI
 - Added Puppet Forge publish targets with a pre-publish check
 - Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint and markdownlint on every YAML and Markdown file, and the `.rtk.json` check
