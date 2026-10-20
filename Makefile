@@ -7,7 +7,7 @@ deps:
 
 # Also removes the files the scenarios create, as the previous clean target did
 clean:
-	rm -rf bin/ pkg/ stage/ vendor/ modules/
+	rm -rf bin/ pkg/ stage/ vendor/
 	rm -rf /tmp/shinesolutions/puppet-aem-resources/
 
 # lint, validate (syntax, metadata_lint), unit specs and static checks.
@@ -39,7 +39,7 @@ acceptance:
 # Apply every spec/acceptance scenario on a host running AEM, set aem_port to its port
 test-integration:
 	# set up the module and its dependencies in spec/fixtures/modules
-	bundle exec rake spec_prep
+	bundle exec rake fixtures:prep
 	# set up test fixtures
 	useradd aem || echo "User might already exist"
 	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/somepackage/1.2.3/
