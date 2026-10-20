@@ -5,17 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-<!-- rtk release rewrites this file in keep-a-changelog's own layout (no blank lines
-around headings and lists, Added/Changed/Fixed headings repeated per release).
-The directive is indented one space so rtk's parser keeps it as text. -->
- <!-- markdownlint-disable-file MD022 MD024 MD032 -->
-
 ## [Unreleased]
 ### Added
 - Added Makefile targets for unit tests, acceptance tests and docs
 - Added unit and acceptance tests to GitHub CI
 - Added Puppet Forge publish targets with a pre-publish check
-- Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint and markdownlint on every YAML and Markdown file, and the `.rtk.json` check
+- Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint on every YAML file, markdownlint on every Markdown file except CHANGELOG.md (rtk release rewrites it), and the `.rtk.json` check
 - Added provider unit tests with a stubbed ruby_aem client for aem_flush_agent, aem_replication_agent, aem_outbox_replication_agent, aem_truststore, aem_authorizable_keystore, aem_user and aem_aem's readiness checks
 
 ### Changed
