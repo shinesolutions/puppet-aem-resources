@@ -21,6 +21,8 @@ module PuppetX
     # Puppet AEM Resources provider
     # This class uses https://github.com/shinesolutions/ruby_aem to interact with AEM
     class PuppetAemResources < Puppet::Provider
+      # TODO: @label is an instance variable of this class only, so the provider subclasses and the
+      # instance methods (e.g. handle) read nil and log without the '[puppet-aem-resources]' prefix
       @label = '[puppet-aem-resources]'
 
       def self.client(opts = nil)

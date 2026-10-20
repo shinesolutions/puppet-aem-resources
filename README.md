@@ -1133,9 +1133,10 @@ The module has two kinds of resources:
 
 Each ruby_aem call returns a
 [RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html).
-Most providers log the result's message at info level, prefixed with
-`[puppet-aem-resources]`, and the HTTP status code, headers and the first 500
-characters of the response body at debug level (`--debug`). The `aem_aem`,
+Most providers log the result's message at info level, and the HTTP status
+code, headers and the start of the response body at debug level (`--debug`).
+The intended `[puppet-aem-resources]` prefix is missing (see the TODO in
+`lib/puppet_x/shinesolutions/puppet_aem_resources.rb`). The `aem_aem`,
 `aem_bundle`, `aem_bundle_alias`, `aem_path` and `aem_repository` providers
 don't log their results.
 
