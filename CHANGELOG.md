@@ -1,9 +1,14 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. <!-- Comments must be inline for RTK's parser. Releases repeat Added/Changed/Fixed (MD024); RTK writes no blank lines around headings and lists (MD022, MD032) -->
+All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). <!-- markdownlint-disable-file MD022 MD024 MD032 -->
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+<!-- rtk release rewrites this file in keep-a-changelog's own layout (no blank lines
+around headings and lists, Added/Changed/Fixed headings repeated per release).
+The directive is indented one space so rtk's parser keeps it as text. -->
+ <!-- markdownlint-disable-file MD022 MD024 MD032 -->
 
 ## [Unreleased]
 ### Added
