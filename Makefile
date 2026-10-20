@@ -1,4 +1,5 @@
-ci: clean deps test acceptance package
+# Cheapest checks first: lint-extra (seconds), test (lint, validate, unit specs), acceptance (minutes), package
+ci: clean deps lint-extra test acceptance package
 
 deps:
 	gem install bundler --version=4.0.22
@@ -15,9 +16,14 @@ test:
 	GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=safe.directory GIT_CONFIG_VALUE_0=$(CURDIR) \
 		bundle exec rake test
 
+# All static checks, without the unit specs
+lint: lint-extra
+	bundle exec rake lint syntax metadata_lint
+
+# The static checks rake test doesn't run, so ci runs them without repeating rake test's lint/syntax/metadata_lint.
 # yamllint also covers .fixtures.yml and the acceptance nodesets, which the reference module doesn't have
-lint:
-	bundle exec rake lint syntax metadata_lint rubocop
+lint-extra:
+	bundle exec rake rubocop
 	yamllint .markdownlint.yaml .fixtures.yml .github/workflows/*.yaml spec/acceptance/nodesets/*.yml
 	markdownlint-cli2 README.md
 	python3 -m json.tool .rtk.json
@@ -120,4 +126,4 @@ publish-check: package
 publish: publish-check
 	bundle exec rake module:push
 
-.PHONY: ci deps clean test lint acceptance test-integration test-fixtures docs changelog package release publish-check publish
+.PHONY: ci deps clean test lint lint-extra acceptance test-integration test-fixtures docs changelog package release publish-check publish
