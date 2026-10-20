@@ -9,14 +9,12 @@ A Puppet module for provisioning [Adobe Experience Manager (AEM)](http://www.ado
 
 Learn more about Puppet AEM Resources:
 
-* [Installation](https://github.com/shinesolutions/puppet-aem-resources#installation)
-* [Usage](https://github.com/shinesolutions/puppet-aem-resources#usage)
-* [Multi AEM Instances](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-instances)
-* [Multi AEM Versions](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-versions)
-* [Alias](https://github.com/shinesolutions/puppet-aem-resources#alias)
-* [Upgrade](https://github.com/shinesolutions/puppet-aem-resources#upgrade)
-* [Testing](https://github.com/shinesolutions/puppet-aem-resources#testing)
-* [Versions History](https://github.com/shinesolutions/puppet-aem-resources#versions-history)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Result Model](#result-model)
+* [Error Handling](#error-handling)
+* [Testing](#testing)
+* [Versions History](#versions-history)
 
 Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
 
@@ -58,7 +56,19 @@ And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't be
       provider => 'puppet_gem',
     }
 
-## Configuration
+### Notice
+
+`aem_resources::instance_config`, `aem_resources::osgi_config_file`,
+`aem_resources::crx_package_file` and their templates are derived from the
+Puppet AEM Module [bstopp/aem](https://github.com/bstopp/puppet-aem) 3.0.0,
+Copyright (C) 2015-2016 Bryan Stopp (<bryan.stopp@gmail.com>), licensed under the
+Apache License, Version 2.0. See [NOTICE](NOTICE). This section repeats it
+because the Forge package only contains the files puppet-modulebuilder allows,
+which don't include NOTICE.
+
+## Usage
+
+### Configuration
 
 AEM username, password, protocol, host, port, and debug can be set via environment variables or a configuration file.
 
@@ -96,7 +106,7 @@ It is also possible to specify username and password at invocation level by spec
       ...
     }
 
-## Usage
+### Types and Defines
 
 AEM
 
@@ -1004,7 +1014,7 @@ Disable Development bundles:
       run_mode => 'author',
     }
 
-## Multi AEM Instances
+### Multi AEM Instances
 
 Starting from version 2.0.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
 
@@ -1048,7 +1058,7 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
 
-## Multi AEM Versions
+### Multi AEM Versions
 
 Some types support multiple AEM versions due to differences how particular features are implemented between those AEM versions.
 
@@ -1062,7 +1072,7 @@ Starting version 2.1.1, `aem_version` attribute was added to the corresponding t
       aem_version  => '6.3',
     }
 
-## Alias
+### Alias
 
 Due to the need to change the state of some resources from within the same manifest, both `aem_bundle` and `aem_user` have alias resources named `aem_bundle_alias` and `aem_user_alias` .
 
@@ -1081,7 +1091,7 @@ For example, this allows you to stop and start a bundle from within the same man
       name   => 'org.apache.sling.jcr.webdav',
     }
 
-## Upgrade
+### Upgrade
 
 Upgrading to 2.x.x:
 
@@ -1098,6 +1108,89 @@ Upgrading to 2.x.x:
     aem_resources::enable_crxde { 'Enable CRXDE':
       run_mode => 'author',
     }
+
+## Result Model
+
+The module has two kinds of resources:
+
+* The `aem_*` types change a running AEM instance through its HTTP APIs, using
+  [ruby_aem](https://github.com/shinesolutions/ruby_aem); they don't write local
+  files. Most `aem_resources::*` defines, e.g. `create_system_users`,
+  `deploy_packages` and `enable_saml`, declare these types.
+* The defines below only write local files:
+
+| Define | Files |
+| --- | --- |
+| `author_primary_set_config`, `author_standby_set_config`, `publish_set_config` (via `instance_config`) | `crx-quickstart/bin/start-env` and `start` in `aem_home_dir` (the original `start` is kept as `start.orig`) and `crx-quickstart/install` |
+| `set_osgi_config` (via `osgi_config_file`) | A `.config` file for each `osgi_configs` entry in `crx-quickstart/install` |
+| `author_dispatcher_set_config` and `publish_dispatcher_set_config` | `dispatcher.farms.any` in `dispatcher_conf_dir` and `1-puppet-aem-resources.conf` in `virtual_hosts_dir` |
+| `puppet_aem_resources_set_config` | `<conf_dir>/<aem_id>.yaml`, the configuration file described in [Configuration](#configuration) |
+
+`crx-quickstart/install` in `aem_home_dir` gets a `.config` file for each
+`osgi_configs` entry and, from `instance_config`, a copy of each
+`aem_crx_packages` file.
+
+Each ruby_aem call returns a
+[RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html).
+Most providers log the result's message at info level, prefixed with
+`[puppet-aem-resources]`, and the HTTP status code, headers and the first 500
+characters of the response body at debug level (`--debug`). The `aem_aem`,
+`aem_bundle`, `aem_bundle_alias`, `aem_path` and `aem_repository` providers
+don't log their results.
+
+Whether a type changes AEM on a Puppet run depends on how it checks AEM's
+current state:
+
+* `aem_authorizable_keystore`, `aem_certificate`, `aem_certificate_chain`,
+  `aem_flush_agent`, `aem_group`, `aem_node`, `aem_outbox_replication_agent`,
+  `aem_package` (installed or not), `aem_path`, `aem_replication_agent`,
+  `aem_saml` (IdP certificate alias set or not), `aem_ssl` (enabled or not),
+  `aem_truststore`, `aem_user` and `aem_user_alias` ask AEM first and only
+  change it when its state differs from `ensure`. Those with a `force`
+  parameter skip that check when `force` is `true`.
+* `aem_aem`, `aem_bundle`, `aem_bundle_alias`, `aem_config_property` and
+  `aem_repository` don't check AEM's state: they act, and report a change, on
+  every Puppet run.
+
+## Error Handling
+
+A failing resource fails the Puppet run, and Puppet skips the resources that
+depend on it. A resource fails when:
+
+* An AEM API call fails or returns a status code that ruby_aem doesn't expect
+  for that call; ruby_aem raises
+  [RubyAem::Error](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html).
+* A wait doesn't succeed within `retries_max_tries` attempts: the `aem_aem`
+  `ensure` values (e.g. `login_page_is_ready`, `aem_health_check_is_ok`), the
+  package upload, install and build waits, and the Package Manager readiness
+  check that most providers run before their call.
+* `crx-quickstart/bin/start` doesn't exist in `aem_home_dir`, as
+  `instance_config` copies it to `start.orig`.
+
+Puppet stops before changing anything when:
+
+* A type parameter is invalid, e.g. an empty `name`.
+
+* `osgi_config_file` or `crx_package_file` get an `ensure` other than
+  `present` or `absent`, a `home` (or a `present` `source`) that isn't an
+  absolute path, or `properties` that aren't a Hash.
+* An `osgi_configs` property value is undef.
+* `deploy_packages` gets a `replicate`, `activate` or `force` value that
+  `str2bool` can't turn into a boolean.
+* `author_publish_enable_ssl` gets an `ssl_method` that matches neither
+  `granite` nor `jetty`.
+
+What isn't checked:
+
+* The providers don't read AEM's configuration back after a change. ruby_aem
+  4.0.2 doesn't send some options to AEM because their names changed in
+  swagger_aem 4, e.g. the settings of `aem_flush_agent`,
+  `aem_replication_agent` and `aem_outbox_replication_agent`, the delete
+  operations, and `aem_user`'s password; the run still succeeds.
+* The file-only defines don't check that AEM is installed in `aem_home_dir`,
+  and don't restart AEM.
+* Without a connection setting, ruby_aem's default is used (see
+  [Configuration](#configuration)).
 
 ## Testing
 
@@ -1143,13 +1236,3 @@ pre-release version, e.g. `7.11.1-pre.0`. To release:
    the module and runs `make publish`: `make publish-check` checks the module is
    ready, then the package is pushed to the Forge. Publishing needs a Forge API
    key in `BLACKSMITH_FORGE_API_KEY`.
-
-## Notice
-
-`aem_resources::instance_config`, `aem_resources::osgi_config_file`,
-`aem_resources::crx_package_file` and their templates are derived from the
-Puppet AEM Module [bstopp/aem](https://github.com/bstopp/puppet-aem) 3.0.0,
-Copyright (C) 2015-2016 Bryan Stopp (<bryan.stopp@gmail.com>), licensed under the
-Apache License, Version 2.0. See [NOTICE](NOTICE). This section repeats it
-because the Forge package only contains the files puppet-modulebuilder allows,
-which don't include NOTICE.
