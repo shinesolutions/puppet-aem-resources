@@ -1,3 +1,6 @@
+# Where the spec/acceptance scenarios read and write their files (TEST_DIR in spec/spec_helper_acceptance.rb)
+TEST_DIR := /tmp/shinesolutions/puppet-aem-resources
+
 # Cheapest checks first: lint-extra (seconds), test (lint, validate, unit specs), acceptance (minutes), package
 ci: clean deps lint-extra test acceptance package
 
@@ -8,7 +11,7 @@ deps:
 # Also removes the files the scenarios create, as the previous clean target did
 clean:
 	rm -rf bin/ pkg/ stage/ vendor/
-	rm -rf /tmp/shinesolutions/puppet-aem-resources/
+	rm -rf $(TEST_DIR)/
 
 # lint, validate (syntax, metadata_lint), unit specs and static checks.
 # safe.directory lets the git-based checks run as root in the buildenv container
@@ -20,10 +23,11 @@ test:
 lint: lint-extra
 	bundle exec rake lint syntax metadata_lint
 
-# The static checks rake test doesn't run, so ci runs them without repeating rake test's lint/syntax/metadata_lint.
+# The static checks rake test doesn't run (its check task skips misplaced_files and utf8),
+# so ci runs them without repeating rake test's lint/syntax/metadata_lint.
 # yamllint also covers .fixtures.yml and the acceptance nodesets, which the reference module doesn't have
 lint-extra:
-	bundle exec rake rubocop
+	bundle exec rake rubocop check:misplaced_files check:utf8
 	yamllint .markdownlint.yaml .fixtures.yml .github/workflows/*.yaml spec/acceptance/nodesets/*.yml
 	markdownlint-cli2 README.md
 	python3 -m json.tool .rtk.json
@@ -42,36 +46,36 @@ test-integration:
 	bundle exec rake fixtures:prep
 	# set up test fixtures
 	useradd aem || echo "User might already exist"
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/somepackage/1.2.3/
-	cp spec/acceptance/fixtures/* /tmp/shinesolutions/puppet-aem-resources/
-	cp spec/acceptance/fixtures/somepackage-1.2.3.zip /tmp/shinesolutions/puppet-aem-resources/author/somepackagegroup/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/install/
-	cp spec/acceptance/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/start /tmp/shinesolutions/puppet-aem-resources/author-primary-6.2/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/install/
-	cp spec/acceptance/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/start /tmp/shinesolutions/puppet-aem-resources/author-primary-6.3/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/install/
-	cp spec/acceptance/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/start /tmp/shinesolutions/puppet-aem-resources/author-standby-6.2/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/install/
-	cp spec/acceptance/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/start /tmp/shinesolutions/puppet-aem-resources/author-standby-6.3/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
-	mkdir -p /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/install/
-	cp spec/acceptance/fixtures/start-env /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/start /tmp/shinesolutions/puppet-aem-resources/publish/crx-quickstart/bin/
-	cp spec/acceptance/fixtures/cert_ssl.crt /tmp/shinesolutions/puppet-aem-resources/
-	cp spec/acceptance/fixtures/cert_ssl.der /tmp/shinesolutions/puppet-aem-resources/
+	mkdir -p $(TEST_DIR)/author/somepackagegroup/somepackage/1.2.3/
+	cp spec/acceptance/fixtures/* $(TEST_DIR)/
+	cp spec/acceptance/fixtures/somepackage-1.2.3.zip $(TEST_DIR)/author/somepackagegroup/
+	mkdir -p $(TEST_DIR)/author-primary-6.2/crx-quickstart/
+	mkdir -p $(TEST_DIR)/author-primary-6.2/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-primary-6.2/crx-quickstart/install/
+	cp spec/acceptance/fixtures/start-env $(TEST_DIR)/author-primary-6.2/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/start $(TEST_DIR)/author-primary-6.2/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-primary-6.3/crx-quickstart/
+	mkdir -p $(TEST_DIR)/author-primary-6.3/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-primary-6.3/crx-quickstart/install/
+	cp spec/acceptance/fixtures/start-env $(TEST_DIR)/author-primary-6.3/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/start $(TEST_DIR)/author-primary-6.3/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-standby-6.2/crx-quickstart/
+	mkdir -p $(TEST_DIR)/author-standby-6.2/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-standby-6.2/crx-quickstart/install/
+	cp spec/acceptance/fixtures/start-env $(TEST_DIR)/author-standby-6.2/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/start $(TEST_DIR)/author-standby-6.2/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-standby-6.3/crx-quickstart/
+	mkdir -p $(TEST_DIR)/author-standby-6.3/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/author-standby-6.3/crx-quickstart/install/
+	cp spec/acceptance/fixtures/start-env $(TEST_DIR)/author-standby-6.3/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/start $(TEST_DIR)/author-standby-6.3/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/publish/crx-quickstart/
+	mkdir -p $(TEST_DIR)/publish/crx-quickstart/bin/
+	mkdir -p $(TEST_DIR)/publish/crx-quickstart/install/
+	cp spec/acceptance/fixtures/start-env $(TEST_DIR)/publish/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/start $(TEST_DIR)/publish/crx-quickstart/bin/
+	cp spec/acceptance/fixtures/cert_ssl.crt $(TEST_DIR)/
+	cp spec/acceptance/fixtures/cert_ssl.der $(TEST_DIR)/
 	# test manifests
 	# author_port needs to be set here for spec/acceptance/manifests/30_deploy_pakages.pp scenario
 	for test in spec/acceptance/manifests/*.pp; do \

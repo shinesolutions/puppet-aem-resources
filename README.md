@@ -1203,8 +1203,8 @@ as CI does. Install the Ruby gems first:
 | Command | Runs |
 | --- | --- |
 | `make test` | Lint, syntax and `metadata.json` checks, unit specs and static checks |
-| `make lint` | Puppet lint, syntax, `metadata.json` lint, RuboCop, yamllint, markdownlint and the `.rtk.json` check only |
-| `make lint-extra` | The `make lint` checks that `make test` doesn't run: RuboCop, yamllint, markdownlint and the `.rtk.json` check |
+| `make lint` | Puppet lint, syntax, `metadata.json` lint and the `make lint-extra` checks only |
+| `make lint-extra` | The `make lint` checks that `make test` doesn't run: RuboCop, the misplaced files and UTF-8 checks, yamllint, markdownlint and the `.rtk.json` check |
 | `make acceptance` | Acceptance tests with Beaker on every nodeset in `spec/acceptance/nodesets` (Amazon Linux 2023 and Rocky Linux 10), in Docker containers. They apply the `spec/acceptance/manifests` scenarios that don't need AEM |
 | `make ci` | Everything CI runs, cheapest first: deps, `make lint-extra`, `make test`, acceptance tests and packaging |
 | `make docs` | Generate the HTML reference in `docs/` |
