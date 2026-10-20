@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Makefile targets for unit tests, acceptance tests, docs and changelog
 - Added unit and acceptance tests to GitHub CI
 - Added Puppet Forge publish targets with a pre-publish check
+- Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint and markdownlint on every YAML and Markdown file, and the `.rtk.json` check
 
 ### Changed
 - Upgraded to Ruby 4.0.7 and OpenVox 9 with Vox Pupuli tooling, replacing PDK
@@ -25,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Simplify CI workflow to not use action files anymore
 - Simplify release and publish workflows to use cliffano/release-action and cliffano/command-docker-action
 - Upgrade aem-platform-buildenv to 6.4.1
+- Restructured the README into Installation, Usage, Result Model, Error Handling, Testing and Versions History
+
+### Removed
+- Removed `.pdkignore`, which nothing reads since PDK was dropped
 
 ## [7.11.0] - 2024-07-31
 ### Changed
