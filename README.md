@@ -1064,6 +1064,7 @@ Some types support multiple AEM versions due to differences how particular featu
 
 For example, AEM Author Standby configuration package was `org.apache.jackrabbit.oak.plugins.segment` in AEM <= 6.2, and it was changed to `org.apache.jackrabbit.oak.segment` in AEM >= 6.3 .
 
+<!-- TODO: author_standby_set_config has no install_dir parameter, use aem_home_dir -->
 Starting version 2.1.1, `aem_version` attribute was added to the corresponding types:
 
     aem_resources::author_standby_set_config { 'Set author standby config':
@@ -1182,6 +1183,7 @@ Puppet stops before changing anything when:
 
 What isn't checked:
 
+<!-- TODO: drop the ruby_aem 4.0.2 sentences below once ruby_aem is pinned to the fixed release (4.0.3) -->
 * The providers don't read AEM's configuration back after a change. ruby_aem
   4.0.2 doesn't send some options to AEM because their names changed in
   swagger_aem 4, e.g. the settings of `aem_flush_agent`,

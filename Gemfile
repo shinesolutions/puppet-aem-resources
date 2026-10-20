@@ -24,6 +24,7 @@ group :development, :test, :system_tests do
 end
 
 # Used by the providers to call AEM
+# TODO: move to the ruby_aem release with the swagger_aem 4 option name fix (4.0.3)
 gem "ruby_aem", "4.0.2"
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
