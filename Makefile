@@ -29,7 +29,7 @@ lint: lint-extra
 # except CHANGELOG.md, which rtk release rewrites in its own layout
 lint-extra:
 	bundle exec rake rubocop check:misplaced_files check:utf8
-	yamllint .fixtures.yml .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml spec/default_facts.yml spec/acceptance/nodesets/*.yml
+	yamllint .yamllint.yaml .fixtures.yml .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml spec/default_facts.yml spec/acceptance/nodesets/*.yml
 	markdownlint-cli2 README.md .github/ISSUE_TEMPLATE/*.md
 	python3 -m json.tool .rtk.json
 
