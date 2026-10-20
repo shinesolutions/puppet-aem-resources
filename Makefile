@@ -25,11 +25,11 @@ lint: lint-extra
 
 # The static checks rake test doesn't run (its check task skips misplaced_files and utf8),
 # so ci runs them without repeating rake test's lint/syntax/metadata_lint.
-# yamllint also covers .fixtures.yml and the acceptance nodesets, which the reference module doesn't have
+# yamllint and markdownlint cover every hand-written YAML and Markdown file (not the generated docs/)
 lint-extra:
 	bundle exec rake rubocop check:misplaced_files check:utf8
-	yamllint .markdownlint.yaml .fixtures.yml .github/workflows/*.yaml spec/acceptance/nodesets/*.yml
-	markdownlint-cli2 README.md
+	yamllint .fixtures.yml .markdownlint.yaml .rubocop.yml .github/workflows/*.yaml spec/default_facts.yml spec/acceptance/nodesets/*.yml
+	markdownlint-cli2 README.md CHANGELOG.md .github/ISSUE_TEMPLATE/*.md
 	python3 -m json.tool .rtk.json
 
 # Run acceptance tests against every nodeset; beaker only runs one per invocation.
