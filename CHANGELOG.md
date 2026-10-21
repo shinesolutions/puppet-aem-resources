@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Documented the libcurl OpenVox 9 hosts need for ruby_aem (built against OpenVox's OpenSSL, as in the-works-buildenv)
 - Added Makefile targets for unit tests, acceptance tests and docs
 - Added unit and acceptance tests to GitHub CI
 - Added Puppet Forge publish targets with a pre-publish check

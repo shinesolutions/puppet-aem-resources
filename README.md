@@ -25,6 +25,9 @@ Requirements:
 * OpenVox 9 (`metadata.json` requires Puppet >= 9.0.0 < 10.0.0): the providers use
   ruby_aem 4.1.0, which requires Ruby 4.0 or later, and only OpenVox 9 agents ship it
 * Amazon Linux 2023 or Rocky Linux 10
+* A libcurl built against OpenVox's OpenSSL in `/opt/puppetlabs/puppet` (see
+  [libcurl for OpenVox](#libcurl-for-openvox)): ruby_aem's HTTP client loads libcurl
+  when a provider is loaded
 * The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
   [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks) and
   [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) modules,
@@ -55,6 +58,33 @@ And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't be
       ensure   => '4.1.0',
       provider => 'puppet_gem',
     }
+
+### libcurl for OpenVox
+
+ruby_aem calls AEM through Typhoeus, which loads libcurl with FFI as soon as a provider is
+loaded. OpenVox 9 ships its own OpenSSL (`libssl.so.3` and `libcrypto.so.3` in
+`/opt/puppetlabs/puppet/lib`) but no libcurl, so the system libcurl is loaded instead.
+Its Kerberos dependency then binds to OpenVox's OpenSSL, and the Puppet run fails with:
+
+    Could not open library 'libcurl.so.4': /lib64/libk5crypto.so.3: undefined symbol: EVP_camellia_256_cbc, version OPENSSL_3.0.0
+
+Build libcurl against OpenVox's OpenSSL into `/opt/puppetlabs/puppet` on every host that
+applies this module's types, e.g. when baking the AMI. These are the steps
+[the-works-buildenv](https://github.com/shinesolutions/the-works-buildenv) uses (it
+needs `gcc`, `make` and `perl`):
+
+    CURL_VERSION=8.12.1
+    curl -LO https://curl.se/download/curl-${CURL_VERSION}.tar.gz
+    tar xzf curl-${CURL_VERSION}.tar.gz && cd curl-${CURL_VERSION}
+    ./configure --prefix=/opt/puppetlabs/puppet \
+      --with-openssl=/opt/puppetlabs/puppet \
+      --without-gssapi --without-libpsl --disable-ldap --disable-ntlm \
+      LDFLAGS="-Wl,-rpath,/opt/puppetlabs/puppet/lib"
+    make && make install
+
+The aem-platform-buildenv container used for this module's tests already has it. The
+file-only defines (`instance_config`, `osgi_config_file`, `crx_package_file`) don't load
+ruby_aem and don't need it.
 
 ### Notice
 
