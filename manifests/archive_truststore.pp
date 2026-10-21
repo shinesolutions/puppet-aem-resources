@@ -1,4 +1,4 @@
-  define aem_resources::archive_truststore(
+  define aem_resources::archive_truststore (
   $aem_id              = 'aem',
   $aem_username        = undef,
   $aem_password        = undef,
@@ -6,7 +6,6 @@
   $path                = undef,
   $force               = false,
 ) {
-
   if $file {
     aem_truststore { "[${aem_id}] Download Global Truststore to defined file path":
       ensure       => archived,
@@ -14,7 +13,7 @@
       aem_username => $aem_username,
       aem_password => $aem_password,
       file         => $file,
-      force        => $force
+      force        => $force,
     }
   } elsif $path {
     aem_truststore { "[${aem_id}] Download Global Truststore to defined path":
@@ -23,7 +22,7 @@
       aem_username => $aem_username,
       aem_password => $aem_password,
       path         => $path,
-      force        => $force
+      force        => $force,
     }
   }
 }

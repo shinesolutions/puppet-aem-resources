@@ -69,7 +69,7 @@ Puppet::Type.type(:aem_aem).provide(:aem, parent: PuppetX::ShineSolutions::Puppe
   end
 
   def remove_all_agents
-    run_modes = resource[:run_mode].nil? ? %w[author publish] : [resource[:run_mode]]
+    run_modes = resource[:run_mode].nil? ? ['author', 'publish'] : [resource[:run_mode]]
 
     run_modes.each do |run_mode|
       result = client(resource).aem.get_agents(run_mode)

@@ -1,0 +1,6 @@
+---
+fixtures:
+  forge_modules:
+    archive: "puppet/archive"
+    java_ks: "puppetlabs/java_ks"
+    stdlib: "puppetlabs/stdlib"

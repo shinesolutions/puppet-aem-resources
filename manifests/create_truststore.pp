@@ -1,4 +1,4 @@
-  define aem_resources::create_truststore(
+  define aem_resources::create_truststore (
   $aem_id              = 'aem',
   $aem_username        = undef,
   $aem_password        = undef,
@@ -6,7 +6,6 @@
   $truststore_password = undef,
   $force               = true,
 ) {
-
   if $file {
     aem_truststore { "[${aem_id}] Import Truststore backup from file":
       ensure       => present,

@@ -23,6 +23,8 @@ Puppet::Type.type(:aem_path).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     client(resource).path(resource[:name]).activate(true, false)
   end
 
+  # TODO: without `path` this deletes nothing, and with it ruby_aem's Path#delete gets an argument it doesn't take
+  # (ArgumentError); Path#delete deletes `name`, so ensure => absent never deletes a path
   def destroy
     return false if resource[:path].eql? nil
 

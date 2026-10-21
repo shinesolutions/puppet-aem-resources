@@ -3,25 +3,44 @@
 [![Downloads Count](https://img.shields.io/puppetforge/dt/shinesolutions/aem_resources.svg)](http://forge.puppet.com/shinesolutions/aem_resources)
 [![Known Vulnerabilities](https://snyk.io/test/github/shinesolutions/puppet-aem-resources/badge.svg)](https://snyk.io/test/github/shinesolutions/puppet-aem-resources)
 
-Puppet AEM Resources
---------------------
+# Puppet AEM Resources
 
 A Puppet module for provisioning [Adobe Experience Manager (AEM)](http://www.adobe.com/au/marketing-cloud/enterprise-content-management.html) resources.
 
 Learn more about Puppet AEM Resources:
 
-* [Installation](https://github.com/shinesolutions/puppet-aem-resources#installation)
-* [Usage](https://github.com/shinesolutions/puppet-aem-resources#usage)
-* [Multi AEM Instances](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-instances)
-* [Multi AEM Versions](https://github.com/shinesolutions/puppet-aem-resources#multi-aem-versions)
-* [Alias](https://github.com/shinesolutions/puppet-aem-resources#alias)
-* [Upgrade](https://github.com/shinesolutions/puppet-aem-resources#upgrade)
-* [Testing](https://github.com/shinesolutions/puppet-aem-resources#testing)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Result Model](#result-model)
+* [Error Handling](#error-handling)
+* [Testing](#testing)
+* [Versions History](#versions-history)
 
 Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platform but it can be used as a stand-alone.
 
-Installation
-------------
+## Installation
+
+Requirements:
+
+* OpenVox 9 (`metadata.json` requires Puppet >= 9.0.0 < 10.0.0): the providers use
+  ruby_aem 4.1.0, which requires Ruby 4.0 or later, and only OpenVox 9 agents ship it
+* Amazon Linux 2023 or Rocky Linux 10
+* A libcurl built against OpenVox's OpenSSL in `/opt/puppetlabs/puppet` (see
+  [libcurl for OpenVox](#libcurl-for-openvox)): ruby_aem's HTTP client loads libcurl
+  when a provider is loaded
+* The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
+  [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks) and
+  [puppetlabs/stdlib](https://forge.puppet.com/modules/puppetlabs/stdlib) modules,
+  installed automatically as dependencies
+
+The [bstopp/aem](https://forge.puppet.com/modules/bstopp/aem) module is no longer
+required. The parts of it this module used are included as the defines
+`aem_resources::instance_config` (from `aem::config`, writes an AEM instance's start
+scripts, OSGI configurations and CRX packages), `aem_resources::osgi_config_file`
+(from `aem::osgi::config::file`) and `aem_resources::crx_package_file` (from
+`aem::crx::package::file`); see [NOTICE](NOTICE).
+
+Install the module using the `puppet` command:
 
     puppet module install shinesolutions-aem_resources
 
@@ -36,12 +55,50 @@ If you want to use the `main` version:
 And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module.
 
     package { 'ruby_aem':
-      ensure   => '3.8.0',
+      ensure   => '4.1.0',
       provider => 'puppet_gem',
     }
 
-Configuration
--------------
+### libcurl for OpenVox
+
+ruby_aem calls AEM through Typhoeus, which loads libcurl with FFI as soon as a provider is
+loaded. OpenVox 9 ships its own OpenSSL (`libssl.so.3` and `libcrypto.so.3` in
+`/opt/puppetlabs/puppet/lib`) but no libcurl, so the system libcurl is loaded instead.
+Its Kerberos dependency then binds to OpenVox's OpenSSL, and the Puppet run fails with:
+
+    Could not open library 'libcurl.so.4': /lib64/libk5crypto.so.3: undefined symbol: EVP_camellia_256_cbc, version OPENSSL_3.0.0
+
+Build libcurl against OpenVox's OpenSSL into `/opt/puppetlabs/puppet` on every host that
+applies this module's types, e.g. when baking the AMI. These are the steps
+[the-works-buildenv](https://github.com/shinesolutions/the-works-buildenv) uses (it
+needs `gcc`, `make` and `perl`):
+
+    CURL_VERSION=8.12.1
+    curl -LO https://curl.se/download/curl-${CURL_VERSION}.tar.gz
+    tar xzf curl-${CURL_VERSION}.tar.gz && cd curl-${CURL_VERSION}
+    ./configure --prefix=/opt/puppetlabs/puppet \
+      --with-openssl=/opt/puppetlabs/puppet \
+      --without-gssapi --without-libpsl --disable-ldap --disable-ntlm \
+      LDFLAGS="-Wl,-rpath,/opt/puppetlabs/puppet/lib"
+    make && make install
+
+The aem-platform-buildenv container used for this module's tests already has it. The
+file-only defines (`instance_config`, `osgi_config_file`, `crx_package_file`) don't load
+ruby_aem and don't need it.
+
+### Notice
+
+`aem_resources::instance_config`, `aem_resources::osgi_config_file`,
+`aem_resources::crx_package_file` and their templates are derived from the
+Puppet AEM Module [bstopp/aem](https://github.com/bstopp/puppet-aem) 3.0.0,
+Copyright (C) 2015-2016 Bryan Stopp (<bryan.stopp@gmail.com>), licensed under the
+Apache License, Version 2.0. See [NOTICE](NOTICE). This section repeats it
+because the Forge package only contains the files puppet-modulebuilder allows,
+which don't include NOTICE.
+
+## Usage
+
+### Configuration
 
 AEM username, password, protocol, host, port, and debug can be set via environment variables or a configuration file.
 
@@ -79,8 +136,7 @@ It is also possible to specify username and password at invocation level by spec
       ...
     }
 
-Usage
------
+### Types and Defines
 
 AEM
 
@@ -471,8 +527,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via idp_cert_alias parameter':
@@ -504,8 +560,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -569,8 +625,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided via serial number':
@@ -602,8 +658,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -667,8 +723,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
     }
 
     aem_saml { 'Create SAML configuration for AEM 6.4 with certificate provided as a file':
@@ -700,8 +756,8 @@ Saml
       sp_private_key_alias       => '',
       use_encryption             => false,
       name_id_format             => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
-      digest_method 	           => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      signature_method	         => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+      digest_method              => 'http://www.w3.org/2001/04/xmlenc#sha256',
+      signature_method           => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
       user_intermediate_path     => '',
       assertion_consumer_service_url => ''
     }
@@ -951,7 +1007,7 @@ Enable CRXDE:
     }
 
 Create OSGI Configuration:
-  Setting the OSGI configuration in the manifest `set_osgi_config` is done by using the class `aem::osgi::config` from the puppet-module `bstopp/aem`.
+  Setting the OSGI configuration in the manifest `set_osgi_config` is done by the define `aem_resources::osgi_config_file`, which writes an OSGI configuration file to the AEM install folder.
 
     aem_resources::set_osgi_config {"Author-Primary set OSGI configuration":
       aem_home_dir   => '/opt/aem/author',
@@ -988,12 +1044,11 @@ Disable Development bundles:
       run_mode => 'author',
     }
 
-Multi AEM Instances
--------------------
+### Multi AEM Instances
 
 Starting from version 2.0.0, it is possible to use Puppet AEM Resources to provision multiple AEM instances on the same machine.
 
-Let's say you have an AEM author instance at http://localhost:4502 and an AEM publish instance at https://localhost:5433 . Set up the following configuration files:
+Let's say you have an AEM author instance at <http://localhost:4502> and an AEM publish instance at <https://localhost:5433> . Set up the following configuration files:
 
 `<puppet-config-dir>/myaemauthor.yaml`
 
@@ -1033,13 +1088,13 @@ Then specify `aem_id` attribute on resource invocation in Puppet manifest:
 
 The above example will stop webdav bundle on both your AEM author instance and AEM publish instance.
 
-Multi AEM Versions
-------------------
+### Multi AEM Versions
 
 Some types support multiple AEM versions due to differences how particular features are implemented between those AEM versions.
 
 For example, AEM Author Standby configuration package was `org.apache.jackrabbit.oak.plugins.segment` in AEM <= 6.2, and it was changed to `org.apache.jackrabbit.oak.segment` in AEM >= 6.3 .
 
+<!-- TODO: author_standby_set_config has no install_dir parameter, use aem_home_dir -->
 Starting version 2.1.1, `aem_version` attribute was added to the corresponding types:
 
     aem_resources::author_standby_set_config { 'Set author standby config':
@@ -1048,28 +1103,26 @@ Starting version 2.1.1, `aem_version` attribute was added to the corresponding t
       aem_version  => '6.3',
     }
 
-Alias
------
+### Alias
 
 Due to the need to change the state of some resources from within the same manifest, both `aem_bundle` and `aem_user` have alias resources named `aem_bundle_alias` and `aem_user_alias` .
 
 For example, this allows you to stop and start a bundle from within the same manifest:
 
-  aem_bundle { 'Stop webdav bundle':
-    ensure => stopped,
-    name   => 'org.apache.sling.jcr.webdav',
-  }
+    aem_bundle { 'Stop webdav bundle':
+      ensure => stopped,
+      name   => 'org.apache.sling.jcr.webdav',
+    }
 
-  # Do other things here
-  ...
+    # Do other things here
+    ...
 
-  aem_bundle_alias { 'Start webdav bundle':
-    ensure => started,
-    name   => 'org.apache.sling.jcr.webdav',
-  }
+    aem_bundle_alias { 'Start webdav bundle':
+      ensure => started,
+      name   => 'org.apache.sling.jcr.webdav',
+    }
 
-Upgrade
--------
+### Upgrade
 
 Upgrading to 2.x.x:
 
@@ -1087,11 +1140,127 @@ Upgrading to 2.x.x:
       run_mode => 'author',
     }
 
-Testing
--------
+## Result Model
+
+The module has two kinds of resources:
+
+* The `aem_*` types change a running AEM instance through its HTTP APIs, using
+  [ruby_aem](https://github.com/shinesolutions/ruby_aem); they don't write local
+  files. Most `aem_resources::*` defines, e.g. `create_system_users`,
+  `deploy_packages` and `enable_saml`, declare these types.
+* The defines below only write local files:
+
+| Define | Files |
+| --- | --- |
+| `author_primary_set_config`, `author_standby_set_config`, `publish_set_config` (via `instance_config`) | `crx-quickstart/bin/start-env` and `start` in `aem_home_dir` (the original `start` is kept as `start.orig`) and `crx-quickstart/install` |
+| `set_osgi_config` (via `osgi_config_file`) | A `.config` file for each `osgi_configs` entry in `crx-quickstart/install` |
+| `author_dispatcher_set_config` and `publish_dispatcher_set_config` | `dispatcher.farms.any` in `dispatcher_conf_dir` and `1-puppet-aem-resources.conf` in `virtual_hosts_dir` |
+| `puppet_aem_resources_set_config` | `<conf_dir>/<aem_id>.yaml`, the configuration file described in [Configuration](#configuration) |
+
+`crx-quickstart/install` in `aem_home_dir` gets a `.config` file for each
+`osgi_configs` entry and, from `instance_config`, a copy of each
+`aem_crx_packages` file.
+
+Each ruby_aem call returns a
+[RubyAem::Result](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Result.html).
+Most providers log the result's message at info level, and the HTTP status
+code, headers and the start of the response body at debug level (`--debug`).
+The intended `[puppet-aem-resources]` prefix is missing (see the TODO in
+`lib/puppet_x/shinesolutions/puppet_aem_resources.rb`). The `aem_aem`,
+`aem_bundle`, `aem_bundle_alias`, `aem_path` and `aem_repository` providers
+don't log their results.
+
+Whether a type changes AEM on a Puppet run depends on how it checks AEM's
+current state:
+
+* `aem_authorizable_keystore`, `aem_certificate`, `aem_certificate_chain`,
+  `aem_flush_agent`, `aem_group`, `aem_node`, `aem_outbox_replication_agent`,
+  `aem_package` (installed or not), `aem_path`, `aem_replication_agent`,
+  `aem_saml` (IdP certificate alias set or not), `aem_ssl` (enabled or not),
+  `aem_truststore`, `aem_user` and `aem_user_alias` ask AEM first and only
+  change it when its state differs from `ensure`. Those with a `force`
+  parameter skip that check when `force` is `true`.
+* `aem_aem`, `aem_bundle`, `aem_bundle_alias`, `aem_config_property` and
+  `aem_repository` don't check AEM's state: they act, and report a change, on
+  every Puppet run.
+
+## Error Handling
+
+A failing resource fails the Puppet run, and Puppet skips the resources that
+depend on it. A resource fails when:
+
+* An AEM API call fails or returns a status code that ruby_aem doesn't expect
+  for that call; ruby_aem raises
+  [RubyAem::Error](https://shinesolutions.github.io/ruby_aem/api/master/RubyAem/Error.html).
+* A wait doesn't succeed within `retries_max_tries` attempts: the `aem_aem`
+  `ensure` values (e.g. `login_page_is_ready`, `aem_health_check_is_ok`), the
+  package upload, install and build waits, and the Package Manager readiness
+  check that most providers run before their call.
+* `crx-quickstart/bin/start` doesn't exist in `aem_home_dir`, as
+  `instance_config` copies it to `start.orig`.
+
+Puppet stops before changing anything when:
+
+* A type parameter is invalid, e.g. an empty `name`.
+
+* `osgi_config_file` or `crx_package_file` get an `ensure` other than
+  `present` or `absent`, a `home` (or a `present` `source`) that isn't an
+  absolute path, or `properties` that aren't a Hash.
+* An `osgi_configs` property value is undef.
+* `deploy_packages` gets a `replicate`, `activate` or `force` value that
+  `str2bool` can't turn into a boolean.
+* `author_publish_enable_ssl` gets an `ssl_method` that matches neither
+  `granite` nor `jetty`.
+
+What isn't checked:
+
+* The providers don't read AEM's configuration back after a change.
+* The file-only defines don't check that AEM is installed in `aem_home_dir`,
+  and don't restart AEM.
+* Without a connection setting, ruby_aem's default is used (see
+  [Configuration](#configuration)).
+
+## Testing
+
+Run the commands below in
+[aem-platform-buildenv](https://github.com/shinesolutions/aem-platform-buildenv),
+as CI does. Install the Ruby gems first:
+
+    make deps
+
+| Command | Runs |
+| --- | --- |
+| `make test` | Lint, syntax and `metadata.json` checks, unit specs and static checks |
+| `make lint` | Puppet lint, syntax, `metadata.json` lint and the `make lint-extra` checks only |
+| `make lint-extra` | The `make lint` checks that `make test` doesn't run: RuboCop, the misplaced files and UTF-8 checks, yamllint and markdownlint on every YAML and Markdown file, and the `.rtk.json` check |
+| `make acceptance` | Acceptance tests with Beaker on every nodeset in `spec/acceptance/nodesets` (Amazon Linux 2023 and Rocky Linux 10), in Docker containers. They apply the `spec/acceptance/manifests` scenarios that don't need AEM |
+| `make ci` | Everything CI runs, cheapest first: deps, `make lint-extra`, `make test`, acceptance tests and packaging |
+| `make docs` | Generate the HTML reference in `docs/` |
+| `make test-integration` | Apply every `spec/acceptance/manifests` and `spec/acceptance/resources` scenario against a running AEM instance on the same host |
 
 If you run AEM on a non default port `4502`, then you need to specify the port number as environment variable:
 
     aem_port=45622 author_port=45622 make test-integration
 
 The `aem_port` environment variable is used by provisioning steps that use default `aem_id`. `author_port` is used by the ones that specify `author` `aem_id`.
+
+## Versions History
+
+See [CHANGELOG.md](CHANGELOG.md) for the changes in each version.
+
+Releases are published to the [Puppet Forge](https://forge.puppet.com/modules/shinesolutions/aem_resources)
+and tagged `<version>` in git. Between releases, `metadata.json` holds the next
+pre-release version, e.g. `7.11.1-pre.0`. To release:
+
+1. Check that the `## [Unreleased]` entries in CHANGELOG.md on `main` describe
+   everything in this release.
+2. In GitHub Actions, run the **Release Major**, **Release Minor** or **Release
+   Patch** workflow. It uses [RTK](https://github.com/cliffano/rtk), configured
+   in `.rtk.json`, to set the release version in `metadata.json` and CHANGELOG.md,
+   commit and tag it `<version>`, commit the next pre-release version, and push
+   the commits and the tag. To do the same locally, run `make release` in
+   aem-platform-buildenv, then push the commits and the tag.
+3. The pushed tag triggers the **Publish Puppet Module** workflow, which builds
+   the module and runs `make publish`: `make publish-check` checks the module is
+   ready, then the package is pushed to the Forge. Publishing needs a Forge API
+   key in `BLACKSMITH_FORGE_API_KEY`.

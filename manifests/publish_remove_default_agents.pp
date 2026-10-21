@@ -1,9 +1,8 @@
-define aem_resources::publish_remove_default_agents(
+define aem_resources::publish_remove_default_agents (
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   aem_flush_agent { "[${aem_id}] Delete publish flush agent - flush":
     ensure       => absent,
     name         => 'flush',

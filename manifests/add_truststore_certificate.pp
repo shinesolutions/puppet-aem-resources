@@ -1,15 +1,14 @@
-define aem_resources::add_truststore_certificate(
+define aem_resources::add_truststore_certificate (
   $aem_id          = 'aem',
   $force           = true,
   $aem_username    = undef,
   $aem_password    = undef,
   $file            = undef,
 ) {
-
   $params_add_certificate = {
     aem_certificate => {
-      file => $file
-    }
+      file => $file,
+    },
   }
 
   $default_params_add_certificate = {

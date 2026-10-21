@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Documented the libcurl OpenVox 9 hosts need for ruby_aem (built against OpenVox's OpenSSL, as in the-works-buildenv)
+- Added Makefile targets for unit tests, acceptance tests and docs
+- Added unit and acceptance tests to GitHub CI
+- Added Puppet Forge publish targets with a pre-publish check
+- Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint on every YAML file, markdownlint on every Markdown file except CHANGELOG.md (rtk release rewrites it), and the `.rtk.json` check
+- Added unit tests for all 20 providers and their base class, with a stubbed ruby_aem client
+
+### Changed
+- Upgraded to Ruby 4.0.7 and OpenVox 9 with Vox Pupuli tooling, replacing PDK
+- Upgrade ruby_aem to 4.1.0, which sends the request parameters swagger_aem 4 renamed (4.0.2 silently dropped them)
+- Require Puppet/OpenVox >= 9.0.0 < 10.0.0, as ruby_aem 4 requires Ruby 4, which only OpenVox 9 agents ship
+- Pass ruby_aem's default `alias_update` (false) when creating a flush agent, as ruby_aem 4 requires it
+- Limited OS support to Amazon Linux 2023 and Rocky Linux 10
+- Changed the Forge dependencies to version ranges
+- Replaced the bstopp/aem dependency with the internal defines `aem_resources::instance_config`, `aem_resources::osgi_config_file` and `aem_resources::crx_package_file`, ported from bstopp/aem 3.0.0, which is unmaintained and incompatible with OpenVox 9
+- Replaced the removed stdlib function validate_bool with assert_type in deploy_packages and allowed puppetlabs/stdlib >= 8.0.0 < 11.0.0
+- Moved the integration test manifests and fixtures from test/ to spec/acceptance
+- Upgraded GitHub CI to actions/checkout v7
+- Simplify CI workflow to not use action files anymore
+- Simplify release and publish workflows to use cliffano/release-action and cliffano/command-docker-action
+- Upgrade aem-platform-buildenv to 6.4.1
+- Restructured the README into Installation, Usage, Result Model, Error Handling, Testing and Versions History
+
+### Removed
+- Removed `.pdkignore`, which nothing reads since PDK was dropped
 
 ## [7.11.0] - 2024-07-31
 ### Changed

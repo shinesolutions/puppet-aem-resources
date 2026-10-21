@@ -15,14 +15,12 @@ define aem_resources::deploy_packages (
   $aem_health_check_is_ok_retries_base_sleep_seconds = 5,
   $aem_health_check_is_ok_retries_max_sleep_seconds  = 5,
 ) {
-
   $packages.each | Integer $index, Hash $package| {
-
     $_aem_id = pick(
       $package[aem_id],
       $aem_id,
       'author'
-      )
+    )
 
     $final_sleep_seconds = pick(
       $package['sleep_seconds'],
@@ -38,9 +36,10 @@ define aem_resources::deploy_packages (
     $activate = str2bool($package[activate])
     $force = str2bool($package[force])
 
-    validate_bool($replicate)
-    validate_bool($activate)
-    validate_bool($force)
+    # assert_type replaces stdlib validate_bool, which was removed in stdlib 9
+    assert_type(Boolean, $replicate)
+    assert_type(Boolean, $activate)
+    assert_type(Boolean, $force)
 
     aem_aem { "${_aem_id}: Wait until CRX Package Manager is ready before deploying package ${package['group']}/${package['name']}-${package['version']}":
       ensure                     => aem_package_manager_is_ready,
@@ -87,7 +86,5 @@ define aem_resources::deploy_packages (
       aem_password               => $aem_password,
       aem_id                     => $_aem_id,
     }
-
   }
-
 }

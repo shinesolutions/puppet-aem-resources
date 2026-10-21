@@ -1,4 +1,4 @@
-define aem_resources::disable_saml(
+define aem_resources::disable_saml (
   $aem_id       = 'aem',
   $aem_username = undef,
   $aem_password = undef,

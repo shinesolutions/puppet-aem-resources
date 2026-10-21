@@ -21,11 +21,13 @@ module PuppetX
     # Puppet AEM Resources provider
     # This class uses https://github.com/shinesolutions/ruby_aem to interact with AEM
     class PuppetAemResources < Puppet::Provider
+      # TODO: @label is an instance variable of this class only, so the provider subclasses and the
+      # instance methods (e.g. handle) read nil and log without the '[puppet-aem-resources]' prefix
       @label = '[puppet-aem-resources]'
 
       def self.client(opts = nil)
         aem_id = opts[:aem_id] || 'aem'
-        config_file = File.join([File.dirname(Puppet.settings[:config]), format('%<aem_id>s.yaml', aem_id: aem_id)])
+        config_file = File.join([File.dirname(Puppet.settings[:config]), '%{aem_id}.yaml' % { aem_id: aem_id }])
         config = YAML.load_file(config_file) if File.exist?(config_file)
 
         # Set RubyAem::Aem parameters in order of priority:
@@ -36,9 +38,9 @@ module PuppetX
         #   e.g. if aem_id is aem, then file name is aem.yaml
         # - otherwise, use RubyAem::Aem's default configuration values
         params = {}
-        %w[username password protocol host port debug timeout verify_ssl].each { |field|
-          opt_field = format('aem_%<field>s', field: field)
-          env_field = format('%<aem_id>s_%<field>s', aem_id: aem_id, field: field)
+        ['username', 'password', 'protocol', 'host', 'port', 'debug', 'timeout', 'verify_ssl'].each do |field|
+          opt_field = 'aem_%{field}' % { field: field }
+          env_field = '%{aem_id}_%{field}' % { aem_id: aem_id, field: field }
           if !opts.nil? && !opts[opt_field.to_sym].nil?
             params[field.to_sym] = opts[opt_field.to_sym]
           elsif !ENV[env_field].nil?
@@ -48,7 +50,7 @@ module PuppetX
           else
             Puppet.debug("#{@label} AEM #{field} field is not specified, using default value from ruby_aem")
           end
-        }
+        end
 
         RubyAem::Aem.new(params)
       end
@@ -57,7 +59,7 @@ module PuppetX
         self.class.client(
           aem_id: resource[:aem_id],
           aem_username: resource[:aem_username],
-          aem_password: resource[:aem_password]
+          aem_password: resource[:aem_password],
         )
       end
 

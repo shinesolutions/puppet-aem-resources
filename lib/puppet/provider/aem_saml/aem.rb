@@ -55,7 +55,7 @@ Puppet::Type.type(:aem_saml).provide(:aem, parent: PuppetX::ShineSolutions::Pupp
     property_params = {}
     propertylist = []
     resource.to_hash.each do |(key, value)|
-      property_list_item = key.to_s.gsub(/_[a-z]/) { Regexp.last_match(0).upcase }.delete('_') unless key.to_s.eql?('service_ranking')
+      property_list_item = key.to_s.gsub(%r{_[a-z]}) { Regexp.last_match(0).upcase }.delete('_') unless key.to_s.eql?('service_ranking')
       property_list_item = key.to_s.tr('_', '.') if key.to_s.eql?('service_ranking')
       property_list_item = property_list_item.gsub('Url', 'URL') if key.to_s.eql?('assertion_consumer_service_url')
 

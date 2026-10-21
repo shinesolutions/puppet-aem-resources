@@ -1,9 +1,8 @@
-define aem_resources::publish_set_osgi_config(
+define aem_resources::publish_set_osgi_config (
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   # Security - CSRF attacks prevention
   aem_node { "[${aem_id}] Create Apache Sling Referrer Filter config node":
     ensure       => present,
@@ -75,5 +74,4 @@ define aem_resources::publish_set_osgi_config(
     aem_password     => $aem_password,
     aem_id           => $aem_id,
   }
-
 }

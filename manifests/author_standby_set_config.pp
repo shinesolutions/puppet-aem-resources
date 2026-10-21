@@ -1,4 +1,4 @@
-define aem_resources::author_standby_set_config(
+define aem_resources::author_standby_set_config (
   $aem_home_dir,
   $primary_host,
   $aem_context_root      = undef,
@@ -25,7 +25,7 @@ define aem_resources::author_standby_set_config(
           'name'                                             => 'Oak-Tar',
           'service.ranking'                                  => 100,
           'standby'                                          => true,
-          'customBlobStore'                                  => false
+          'customBlobStore'                                  => false,
         },
         'org.apache.jackrabbit.oak.plugins.segment.standby.store.StandbyStoreService' => {
           'org.apache.sling.installer.configuration.persist' => false,
@@ -33,8 +33,8 @@ define aem_resources::author_standby_set_config(
           'primary.host'                                     => $primary_host,
           'port'                                             => 8023,
           'secure'                                           => true,
-          'interval'                                         => 5
-        }
+          'interval'                                         => 5,
+        },
       }
     } else {
       $_osgi_configs = {
@@ -43,7 +43,7 @@ define aem_resources::author_standby_set_config(
           'name'                                             => 'Oak-Tar',
           'service.ranking'                                  => 100,
           'standby'                                          => true,
-          'customBlobStore'                                  => true
+          'customBlobStore'                                  => true,
         },
         'org.apache.jackrabbit.oak.segment.standby.store.StandbyStoreService' => {
           'org.apache.sling.installer.configuration.persist' => false,
@@ -51,13 +51,13 @@ define aem_resources::author_standby_set_config(
           'primary.host'                                     => $primary_host,
           'port'                                             => 8023,
           'secure'                                           => true,
-          'interval'                                         => 5
+          'interval'                                         => 5,
         },
         'org.apache.jackrabbit.oak.plugins.blob.datastore.FileDataStore' => {
           'org.apache.sling.installer.configuration.persist' => false,
           'path'                                             => './crx-quickstart/repository/datastore',
-          'minRecordLength'                                  => 16384
-        }
+          'minRecordLength'                                  => 16384,
+        },
       }
     }
   }
@@ -68,7 +68,8 @@ define aem_resources::author_standby_set_config(
     $_runmodes = $aem_runmodes
   }
 
-  aem::config { 'Configure AEM Author-Standby':
+  # Internal port of aem::config: bstopp/aem is unmaintained and incompatible with OpenVox 9
+  aem_resources::instance_config { 'Configure AEM Author-Standby':
     context_root   => $aem_context_root,
     debug_port     => $aem_debug_port,
     group          => $aem_user_group,

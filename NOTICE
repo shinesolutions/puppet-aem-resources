@@ -1,0 +1,28 @@
+shinesolutions-aem_resources
+Copyright 2016-2026 Shine Solutions Group
+
+This product includes software derived from Puppet AEM Module (bstopp/aem 3.0.0,
+https://github.com/bstopp/puppet-aem), ported because that module is unmaintained and
+incompatible with OpenVox 9:
+
+- manifests/instance_config.pp, from manifests/config.pp
+- manifests/osgi_config_file.pp, from manifests/osgi/config/file.pp
+- manifests/crx_package_file.pp, from manifests/crx/package/file.pp
+- templates/start-env.epp and templates/start.epp, from templates/start-env.erb and templates/start.erb
+- templates/osgi.config.epp, from templates/osgi.config.epp
+
+Puppet AEM Module - Manage your AEM Instances.
+
+Copyright (C) 2015-2016 Bryan Stopp (bryan.stopp@gmail.com)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

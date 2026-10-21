@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Check that the module is ready to publish to the Puppet Forge.
+# Reports every missing item and exits non-zero if any are found; uploads nothing.
+set -o nounset
+
+FORGE_API=${BLACKSMITH_FORGE_URL:-https://forgeapi.puppet.com}
+missing=0
+
+ok() { echo "  [ok]      $1"; }
+fail() { echo "  [missing] $1"; missing=$((missing + 1)); }
+
+metadata() { ruby -rjson -e "puts JSON.parse(File.read('metadata.json'))['$1']"; }
+
+name=$(metadata name)
+version=$(metadata version)
+package="pkg/${name}-${version}.tar.gz"
+
+echo "Publish check for ${name} ${version}"
+
+for file in metadata.json README.md LICENSE CHANGELOG.md; do
+  if [ -f "$file" ]; then ok "$file present"; else fail "$file not found"; fi
+done
+
+if bundle exec rake metadata_lint >/dev/null 2>&1; then
+  ok "metadata.json passes metadata_lint"
+else
+  fail "metadata.json fails metadata_lint (run: bundle exec rake metadata_lint)"
+fi
+
+if [[ "$version" == *-* ]]; then
+  fail "version ${version} is a pre-release; set the release version in metadata.json"
+else
+  ok "version ${version} is a release version"
+fi
+
+if grep -q "^## \[${version}\]" CHANGELOG.md 2>/dev/null; then
+  ok "CHANGELOG.md has a [${version}] section"
+else
+  fail "CHANGELOG.md has no [${version}] section; move the Unreleased entries to it"
+fi
+
+status=$(curl -s -o /dev/null -w '%{http_code}' "${FORGE_API}/v3/releases/${name}-${version}")
+case "$status" in
+  404) ok "${version} is not on the Forge yet" ;;
+  200) fail "${name} ${version} is already published on the Forge; bump the version" ;;
+  *) fail "could not check the Forge for ${version} (HTTP ${status})" ;;
+esac
+
+if [ -z "$(git status --porcelain --untracked-files=no)" ]; then
+  ok "git working tree is clean"
+else
+  fail "git working tree has uncommitted changes"
+fi
+
+if [ "$(git rev-list -n 1 "${version}" 2>/dev/null)" = "$(git rev-parse HEAD)" ]; then
+  ok "git tag ${version} points at HEAD"
+else
+  fail "git tag ${version} does not point at HEAD"
+fi
+
+if [ -f "$package" ]; then
+  ok "${package} built"
+else
+  fail "${package} not built (run: make package)"
+fi
+
+if [ -n "${BLACKSMITH_FORGE_API_KEY:-}${BLACKSMITH_FORGE_TOKEN:-}" ] || [ -f .puppetforge.yml ] || [ -f ~/.puppetforge.yml ]; then
+  ok "Forge credentials found"
+else
+  fail "no Forge credentials; set BLACKSMITH_FORGE_API_KEY to a Forge API key"
+fi
+
+if [ "$missing" -gt 0 ]; then
+  echo "${missing} item(s) missing; not ready to publish"
+  exit 1
+fi
+echo "Ready to publish: make publish"

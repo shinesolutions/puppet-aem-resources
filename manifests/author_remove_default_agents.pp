@@ -1,9 +1,8 @@
-define aem_resources::author_remove_default_agents(
+define aem_resources::author_remove_default_agents (
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   aem_replication_agent { "[${aem_id}] Delete author replication agent - publish":
     ensure       => absent,
     name         => 'publish',

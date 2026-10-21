@@ -18,6 +18,8 @@ require_relative '../../../puppet_x/shinesolutions/puppet_aem_resources'
 
 Puppet::Type.type(:aem_config_property).provide(:aem, parent: PuppetX::ShineSolutions::PuppetAemResources) do
   # Create a config property.
+  # TODO: run_mode is accepted but not used: ruby_aem 4's ConfigProperty#create has no run mode, so the property is
+  # set on config_node_name for every run mode
   def create
     config_property = client(resource).config_property(resource[:name], resource[:type], resource[:value])
     result = call_with_readiness_check(config_property, 'create', [resource[:config_node_name]], resource)

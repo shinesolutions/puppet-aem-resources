@@ -1,0 +1,44 @@
+<%- |
+  $context_root,
+  $debug_port,
+  $jvm_mem_opts,
+  $jvm_opts,
+  $port,
+  $runmodes,
+  $sample_content,
+  $type
+| -%>
+<%# Ported from bstopp/aem 3.0.0 (Apache-2.0, Copyright (C) 2015-2016 Bryan Stopp) because that module is unmaintained
+    and incompatible with OpenVox 9; see NOTICE. ERB tags became EPP tags, the rendered output is unchanged. -%>
+#!/bin/bash
+#
+# ************************************
+# Managed by Puppet AEM Module
+# ************************************
+#
+# This file manages the configuration of the run script.
+#
+
+TYPE='<%= $type %>'
+PORT=<%= $port %>
+RUNMODES='<% if $runmodes { %><%= $runmodes.join(",") %><% } %>'
+SAMPLE_CONTENT='<% if $sample_content == false { %>nosamplecontent<% } %>'
+DEBUG_PORT=<%= $debug_port %>
+
+<% if $context_root { %>
+CONTEXT_ROOT='<%= $context_root %>'
+<% } %>
+
+JVM_MEM_OPTS='<%= $jvm_mem_opts %>'
+
+DEFAULT_JVM_OPTS='-server -Djava.awt.headless=true'
+JVM_OPTS='<%= $jvm_opts %>'
+
+SLING_PROPS='conf/sling.properties'
+
+# Do we ever implement these?
+#HOST=
+#FILE_SIZE_LIMIT
+
+# This doesn't ever seem to work
+#LOG_LEVEL=

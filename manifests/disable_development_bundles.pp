@@ -1,10 +1,9 @@
-define aem_resources::disable_development_bundles(
+define aem_resources::disable_development_bundles (
   $run_mode,
   $aem_username = undef,
   $aem_password = undef,
   $aem_id = 'aem',
 ) {
-
   # # Note: com.adobe.granite.crxde-support is commented out since it doesn't exist on AEM 6.5 but it's still listed on AEM 6.5 security guideline
   # aem_bundle { "[${aem_id}] Stop Adobe CRXDE Support bundle":
   #   ensure       => stopped,
@@ -29,5 +28,4 @@ define aem_resources::disable_development_bundles(
     aem_password => $aem_password,
     aem_id       => $aem_id,
   }
-
 }

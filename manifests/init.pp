@@ -1,3 +1,3 @@
-class aem_resources(
+class aem_resources (
 ) {
 }

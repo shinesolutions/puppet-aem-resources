@@ -49,7 +49,7 @@ Puppet::Type.newtype(:aem_certificate) do
   end
 
   def self.title_patterns
-    [[/^(.*)$/, [[:name, ->(x) { x }]]]]
+    [[%r{^(.*)$}, [[:name, ->(x) { x }]]]]
   end
 
   newparam :name do
