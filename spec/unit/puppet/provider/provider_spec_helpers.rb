@@ -18,6 +18,16 @@ module ProviderSpecHelpers
     result
   end
 
+  # Content of a spec/acceptance/fixtures file, which the acceptance setup copies to /tmp/shinesolutions/puppet-aem-resources
+  def acceptance_fixture(name)
+    File.read(File.expand_path("../../../acceptance/fixtures/#{name}", __dir__))
+  end
+
+  # The _retries options the providers build from retries_* parameters that a scenario doesn't set
+  def unset_retries
+    { _retries: { max_tries: nil, base_sleep_seconds: nil, max_sleep_seconds: nil } }
+  end
+
   # The %{...} keys ruby_aem's conf/spec.yaml interpolates for an action. ruby_aem raises KeyError
   # when the call params miss one, which is how the flush agent alias_update bug showed up
   def ruby_aem_spec_keys(resource_name, action)
