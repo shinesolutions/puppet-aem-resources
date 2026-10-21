@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [8.0.0] - 2026-10-21
 ### Added
 - Documented the libcurl OpenVox 9 hosts need for ruby_aem (built against OpenVox's OpenSSL, as in the-works-buildenv)
@@ -465,6 +467,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
 [#101]: https://github.com/shinesolutions/puppet-aem-resources/issues/101
 
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/8.0.0...HEAD
 [8.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.11.0...8.0.0
 [7.11.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.2...7.11.0
 [7.10.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.1...7.10.2
