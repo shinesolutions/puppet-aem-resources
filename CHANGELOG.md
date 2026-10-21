@@ -1,11 +1,10 @@
 # Changelog
-
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [8.0.0] - 2026-10-21
 ### Added
 - Documented the libcurl OpenVox 9 hosts need for ruby_aem (built against OpenVox's OpenSSL, as in the-works-buildenv)
 - Added Makefile targets for unit tests, acceptance tests and docs
@@ -438,7 +437,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix package not overwriting existing one when force param is set to true [#2]
 
-## 0.9.0 - 2017-01-17
+## [0.9.0] - 2017-01-17
 ### Added
 - Initial version
 
@@ -466,7 +465,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
 [#101]: https://github.com/shinesolutions/puppet-aem-resources/issues/101
 
-[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.11.0...HEAD
+[8.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.11.0...8.0.0
 [7.11.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.2...7.11.0
 [7.10.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.1...7.10.2
 [7.10.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.0...7.10.1
@@ -531,3 +530,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.9.3]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.2...0.9.3
 [0.9.2]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.1...0.9.2
 [0.9.1]: https://github.com/shinesolutions/puppet-aem-resources/compare/0.9.0...0.9.1
+[0.9.0]: https://github.com/shinesolutions/puppet-aem-resources/releases/tag/0.9.0
