@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added unit and acceptance tests to GitHub CI
 - Added Puppet Forge publish targets with a pre-publish check
 - Added `make lint-extra`, run first by `make ci`: RuboCop, the misplaced files and UTF-8 checks, yamllint on every YAML file, markdownlint on every Markdown file except CHANGELOG.md (rtk release rewrites it), and the `.rtk.json` check
-- Added provider unit tests with a stubbed ruby_aem client for aem_flush_agent, aem_replication_agent, aem_outbox_replication_agent, aem_truststore, aem_authorizable_keystore, aem_user and aem_aem's readiness checks
+- Added unit tests for all 20 providers and their base class, with a stubbed ruby_aem client
 
 ### Changed
 - Upgraded to Ruby 4.0.7 and OpenVox 9 with Vox Pupuli tooling, replacing PDK
