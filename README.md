@@ -23,7 +23,7 @@ Puppet AEM Resources is part of [AEM OpenCloud](https://aemopencloud.io) platfor
 Requirements:
 
 * OpenVox 9 (`metadata.json` requires Puppet >= 9.0.0 < 10.0.0): the providers use
-  ruby_aem 4.0.2, which requires Ruby 4.0 or later, and only OpenVox 9 agents ship it
+  ruby_aem 4.1.0, which requires Ruby 4.0 or later, and only OpenVox 9 agents ship it
 * Amazon Linux 2023 or Rocky Linux 10
 * The [puppet/archive](https://forge.puppet.com/modules/puppet/archive),
   [puppetlabs/java_ks](https://forge.puppet.com/modules/puppetlabs/java_ks) and
@@ -52,7 +52,7 @@ If you want to use the `main` version:
 And because [PUP-3386](https://tickets.puppetlabs.com/browse/PUP-3386) hasn't been implemented, you have to install [ruby_aem](https://github.com/shinesolutions/ruby_aem) prior to using aem_resource Puppet module.
 
     package { 'ruby_aem':
-      ensure   => '4.0.2',
+      ensure   => '4.1.0',
       provider => 'puppet_gem',
     }
 
@@ -1184,12 +1184,7 @@ Puppet stops before changing anything when:
 
 What isn't checked:
 
-<!-- TODO: drop the ruby_aem 4.0.2 sentences below once ruby_aem is pinned to the fixed release (4.0.3) -->
-* The providers don't read AEM's configuration back after a change. ruby_aem
-  4.0.2 doesn't send some options to AEM because their names changed in
-  swagger_aem 4, e.g. the settings of `aem_flush_agent`,
-  `aem_replication_agent` and `aem_outbox_replication_agent`, the delete
-  operations, and `aem_user`'s password; the run still succeeds.
+* The providers don't read AEM's configuration back after a change.
 * The file-only defines don't check that AEM is installed in `aem_home_dir`,
   and don't restart AEM.
 * Without a connection setting, ruby_aem's default is used (see
