@@ -7,7 +7,8 @@ HOSTS:
     image: rockylinux/rockylinux:10
     hypervisor: docker
     # Keep the built image so these layers are cached between runs. The agent is
-    # baked in, so the agent install in spec_helper_acceptance.rb is a no-op.
+    # baked in, so beaker doesn't install it (BEAKER_PUPPET_COLLECTION is
+    # preinstalled in the Makefile).
     docker_preserve_image: true
     docker_image_commands:
       # yamllint disable-line rule:line-length

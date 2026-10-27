@@ -34,11 +34,12 @@ lint-extra:
 	python3 -m json.tool .rtk.json
 
 # Run acceptance tests against every nodeset; beaker only runs one per invocation.
-# BEAKER_PUPPET_COLLECTION=openvox9 because the module requires OpenVox 9 (beaker defaults to openvox8)
+# BEAKER_PUPPET_COLLECTION=preinstalled because the nodesets' images already have the
+# OpenVox 9 agent; otherwise configure_beaker installs the release repo and agent again
 acceptance:
 	set -e; for nodeset in spec/acceptance/nodesets/*.yml; do \
 		echo "== $$nodeset"; \
-		BEAKER_PUPPET_COLLECTION=openvox9 BEAKER_SETFILE=$$nodeset bundle exec rake beaker; \
+		BEAKER_PUPPET_COLLECTION=preinstalled BEAKER_SETFILE=$$nodeset bundle exec rake beaker; \
 	done
 
 # Apply every spec/acceptance scenario on a host running AEM, set aem_port to its port
