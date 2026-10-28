@@ -9,13 +9,21 @@ HOSTS:
     image: amazonlinux:2023
     hypervisor: docker
     # Keep the built image so these layers are cached between runs. The agent is
-    # baked in, so the agent install in spec_helper_acceptance.rb is a no-op.
+    # baked in, so beaker doesn't install it (BEAKER_PUPPET_COLLECTION is
+    # preinstalled in the Makefile).
     docker_preserve_image: true
     docker_image_commands:
       # amazonlinux:2023 ships without systemd, which provides /sbin/init
       - dnf install -y systemd
+      # Install the release package from yum.voxpupuli.org, or from its GWDG
+      # mirror when yum.voxpupuli.org is down, so an outage doesn't block CI
       # yamllint disable-line rule:line-length
-      - dnf install -y https://yum.voxpupuli.org/openvox9-release-amazon-2023.noarch.rpm
+      - dnf install -y https://yum.voxpupuli.org/openvox9-release-amazon-2023.noarch.rpm || dnf install -y https://ftp.gwdg.de/pub/linux/openvox/yum/openvox9-release-amazon-2023.noarch.rpm
+      # The repo file only points at yum.voxpupuli.org, so add the mirror as a
+      # second baseurl, which dnf falls back to (the GPG key is in the release
+      # package)
+      # yamllint disable-line rule:line-length
+      - sed -i 's|^baseurl=https://yum.voxpupuli.org/\(.*\)$|baseurl=https://yum.voxpupuli.org/\1 https://ftp.gwdg.de/pub/linux/openvox/yum/\1|' /etc/yum.repos.d/openvox9-release.repo
       - dnf install -y openvox-agent
     docker_cmd: '["/sbin/init"]'
     image_outer_ports:
