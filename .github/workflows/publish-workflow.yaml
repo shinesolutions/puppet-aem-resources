@@ -16,7 +16,7 @@ jobs:
           set-safe-directory: ${{ github.workspace }}
       - uses: cliffano/command-docker-action@v2.1.0
         with:
-          image: shinesolutions/aem-platform-buildenv:6.4.1
+          image: shinesolutions/aem-platform-buildenv:6.5.0
           shell: bash
           extra_args: -e BLACKSMITH_FORGE_API_KEY
           command: |
