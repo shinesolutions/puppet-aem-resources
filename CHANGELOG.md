@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Upgrade ruby_aem to 4.2.0, which uses swagger_aem 4.1.0 and swagger_aem_osgi 2.1.0 and does not follow HTTP redirects by default
 - Run acceptance tests with the OpenVox 9 agent preinstalled in the nodeset images, instead of installing the release repo and agent again
 - Fall back to the GWDG mirror of yum.voxpupuli.org for the OpenVox 9 release package and repo in the acceptance nodesets, so an outage of yum.voxpupuli.org does not block CI
 - Upgrade aem-platform-buildenv to 6.5.0, which has RTK 4.4.0
