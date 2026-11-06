@@ -24,7 +24,7 @@ group :development, :test, :system_tests do
 end
 
 # Used by the providers to call AEM
-gem "ruby_aem", "4.1.0"
+gem "ruby_aem", "4.2.0"
 
 puppet_version = ENV['PUPPET_GEM_VERSION']
 facter_version = ENV['FACTER_GEM_VERSION']
