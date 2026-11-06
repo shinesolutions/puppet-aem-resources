@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
 ## [8.1.0] - 2026-11-06
 ### Changed
 - Upgrade ruby_aem to 4.2.0, which uses swagger_aem 4.1.0 and swagger_aem_osgi 2.1.0 and does not follow HTTP redirects by default
@@ -473,6 +475,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#99]: https://github.com/shinesolutions/puppet-aem-resources/issues/99
 [#101]: https://github.com/shinesolutions/puppet-aem-resources/issues/101
 
+[Unreleased]: https://github.com/shinesolutions/puppet-aem-resources/compare/8.1.0...HEAD
 [8.1.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/8.0.0...8.1.0
 [8.0.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.11.0...8.0.0
 [7.11.0]: https://github.com/shinesolutions/puppet-aem-resources/compare/7.10.2...7.11.0
