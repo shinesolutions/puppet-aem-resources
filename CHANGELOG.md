@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Upgrade the development gems activesupport to 8.1.4.1 and nokogiri to 1.19.7, fixing Dependabot alerts GHSA-8474-xrp6-wh69, GHSA-2w9f-fxwj-w2qf, GHSA-3w22-6jfg-527w, GHSA-v995-44v6-5fqm and GHSA-4p39-36wj-23h4
 
+### Changed
+- Update the other development and test gems in Gemfile.lock to the latest versions the Gemfile allows, including OpenVox 9.3.0 and beaker 7.8.4 (json stays on 2.x, as OpenVox 9 doesn't work with json 3)
+
 ## [8.1.0] - 2026-11-06
 ### Changed
 - Upgrade ruby_aem to 4.2.0, which uses swagger_aem 4.1.0 and swagger_aem_osgi 2.1.0 and does not follow HTTP redirects by default
