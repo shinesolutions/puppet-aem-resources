@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update the other development and test gems in Gemfile.lock to the latest versions the Gemfile allows, including OpenVox 9.3.0 and beaker 7.8.4 (json stays on 2.x, as OpenVox 9 doesn't work with json 3)
+- Make the GitHub Actions workflows' GITHUB_TOKEN read-only
 
 ## [8.1.0] - 2026-11-06
 ### Changed
