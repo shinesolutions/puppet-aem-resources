@@ -396,7 +396,7 @@ GEM
       regexp_parser (>= 2.0)
       rubocop (~> 1.86, >= 1.86.2)
     ruby-progressbar (1.13.0)
-    ruby_aem (4.2.0)
+    ruby_aem (4.2.1)
       retries (= 0.0.5)
       rexml (= 3.4.4)
       swagger_aem (= 4.1.0)
@@ -528,7 +528,7 @@ PLATFORMS
 DEPENDENCIES
   json (~> 2.21)
   rubocop-performance (~> 1.27)
-  ruby_aem (= 4.2.0)
+  ruby_aem (= 4.2.1)
   voxpupuli-acceptance (~> 4.4)
   voxpupuli-release (~> 5.5)
   voxpupuli-test (~> 15.0)
@@ -701,7 +701,7 @@ CHECKSUMS
   rubocop-rake (0.7.1) sha256=3797f2b6810c3e9df7376c26d5f44f3475eda59eb1adc38e6f62ecf027cbae4d
   rubocop-rspec (3.10.2) sha256=0b3e2ecc592cd10ecbf0095bb58d1e357905276e069643523cc19eb7495f65e2
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
-  ruby_aem (4.2.0) sha256=9086e4dca082e8547121fe9db25a1c9cde763a277651cc504376de01290216e4
+  ruby_aem (4.2.1) sha256=4c664e83cccc9ccf9c078d619bd5ba09ce6b3f6155018af4a08227c605b4c552
   rubyntlm (0.6.8) sha256=054aa45ffcae40db4020d3e41da41f40427aa8733181a2b87751f04ba53ca0d5
   sawyer (0.9.3) sha256=0d0f19298408047037638639fe62f4794483fb04320269169bd41af2bdcf5e41
   scanf (1.0.0) sha256=533db7f7e5acafea1a145d6c5329cef667a58fbcb7d64379a808ff1199ee1b00
