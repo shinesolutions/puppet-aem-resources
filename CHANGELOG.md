@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade the development gems activesupport to 8.1.4.1 and nokogiri to 1.19.7, fixing Dependabot alerts GHSA-8474-xrp6-wh69, GHSA-2w9f-fxwj-w2qf, GHSA-3w22-6jfg-527w, GHSA-v995-44v6-5fqm and GHSA-4p39-36wj-23h4
 
 ### Changed
-- Upgrade AEM Platform BuildEnv to 6.6.0
+- Upgrade AEM Platform BuildEnv to 6.7.0
 - Upgrade ruby_aem to 4.2.1, which reports AEM's response when the Granite SSL setup fails, and waits for SSL to be enabled when AEM's SSL setup can't yet connect to the starting HTTPS connector (intermittent since AEM 6.5 SP26)
 - Speed up CI: skip CI for release tags, same-repo pull requests and version bump commits, cancel superseded branch runs, and add job timeouts
 - Update the other development and test gems in Gemfile.lock to the latest versions the Gemfile allows, including OpenVox 9.3.0 and beaker 7.8.4 (json stays on 2.x, as OpenVox 9 doesn't work with json 3)
