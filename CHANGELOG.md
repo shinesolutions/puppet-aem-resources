@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
+- Fix CI for Dependabot pull requests, which get no Actions secrets: check out with the workflow's read-only GITHUB_TOKEN instead of a secret token
 - Upgrade the development gems activesupport to 8.1.4.1 and nokogiri to 1.19.7, fixing Dependabot alerts GHSA-8474-xrp6-wh69, GHSA-2w9f-fxwj-w2qf, GHSA-3w22-6jfg-527w, GHSA-v995-44v6-5fqm and GHSA-4p39-36wj-23h4
 
 ### Changed
